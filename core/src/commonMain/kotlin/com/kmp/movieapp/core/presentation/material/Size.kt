@@ -9,7 +9,8 @@ import androidx.compose.ui.unit.dp
 
 data class Size(
     val movieCardHeight: Dp = 220.dp,
-    val movieCardWidth: Dp = 150.dp
+    val movieCardWidth: Dp = 150.dp,
+    val moviePosterWidth: Dp = 350.dp
 )
 
 private val LocalSize = staticCompositionLocalOf { Size() }

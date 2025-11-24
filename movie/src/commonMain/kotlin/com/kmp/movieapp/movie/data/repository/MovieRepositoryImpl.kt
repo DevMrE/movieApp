@@ -3,12 +3,15 @@ package com.kmp.movieapp.movie.data.repository
 import co.touchlab.kermit.Logger
 import com.kmp.movieapp.movie.data.model.mapper.toMovie
 import com.kmp.movieapp.movie.data.model.mapper.toMovieGenre
+import com.kmp.movieapp.movie.data.model.mapper.toMovieListCategory
 import com.kmp.movieapp.movie.data.service.MovieService
 import com.kmp.movieapp.movie.domain.model.Movie
+import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.model.MovieGenre
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
@@ -19,7 +22,7 @@ class MovieRepositoryImpl(
 ) : MovieRepository {
 
     val genresState: StateFlow<List<MovieGenre>> = flow {
-        movieService.getMovieGenres("de")
+        movieService.fetchMovieGenres("de")
             .onSuccess { dto ->
                 val genreList = dto.genres?.map {
                     it.toMovieGenre()
@@ -36,12 +39,24 @@ class MovieRepositoryImpl(
         initialValue = emptyList()
     )
 
-    override suspend fun getMovies(): List<Movie> {
-        return movieService.getPopularMovies("de", 1)
-            ?.movieList?.mapNotNull { movieDto ->
+    override fun getMovies(
+        language: String,
+        movieCategory: MovieCategory
+    ): Flow<List<Movie>> = flow {
+        movieService.fetchMoviesForCategory(
+            language = language,
+            page = 1,
+            movieListCategory = movieCategory.toMovieListCategory()
+        ).onSuccess { data ->
+            val movieList = data.movieList?.mapNotNull { movieDto ->
                 movieDto?.toMovie()?.copy(
-                    genres = genresState.value.filter { movieDto.genreIds?.contains(it.id) == true  }
+                    genres = genresState.value.filter { movieDto.genreIds?.contains(it.id) == true }
                 )
             } ?: emptyList()
+
+            emit(movieList)
+        }.onFailure {
+
+        }
     }
 }

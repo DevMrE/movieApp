@@ -2,7 +2,9 @@ package com.kmp.movieapp.movie.presentation.action
 
 import com.kmp.movieapp.core.presentation.action.Action
 
-sealed interface MovieAction {
+sealed interface MovieAction : Action {
 
-    data class OnNavigateToDetailScreen(val id: Int) : Action
+    data class OnNavigateToDetailScreen(val id: Int) : MovieAction
+
+    data class OnStartTrailer(val id: Int) : MovieAction
 }

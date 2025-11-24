@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MovieApp</string>
+    <string name="movie_genres">Genres</string>
+    <string name="movie_runtime">%d min</string>
+    <string name="movie_rating">Rating: %.1f</string>
+    <string name="popular">Beliebte Filme</string>
+    <string name="top_rated">Top Bewerted</string>
+</resources>

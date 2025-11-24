@@ -20,37 +20,43 @@ class MovieServiceImpl(
     private val httpClient: HttpClient
 ) : MovieService {
 
-    override suspend fun getPopularMovies(language: String, page: Int): ApiResponseDto<MovieDto>? =
+    override suspend fun fetchMoviesForCategory(
+        language: String,
+        page: Int,
+        movieListCategory: MovieListCategory
+    ): Result<ApiResponseDto<MovieDto>> =
         withContext(Dispatchers.IO) {
             try {
                 val response = httpClient.get(
                     resource = MovieListRequestDto(
                         page = page,
                         language = language,
-                        movieListCategory = MovieListCategory.NOW_PLAYING.category
+                        movieListCategory = movieListCategory.category
                     )
                 )
-                return@withContext if (response.status == HttpStatusCode.OK) {
-                    response.body()
-                } else null
+
+                if (response.status == HttpStatusCode.OK) {
+                    Result.success(response.body())
+                } else Result.failure(MovieNotFoundException())
+
             } catch (e: Exception) {
                 Logger.e(messageString = e.message.toString())
 
-                null
+                Result.failure(e)
             }
         }
 
-    override suspend fun getMovieGenres(language: String): Result<MovieGenreResponseDto> {
+    override suspend fun fetchMovieGenres(language: String): Result<MovieGenreResponseDto> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = httpClient.get(
-                    resource = MovieGenreRequestDto(
-                        language = language,
-                    )
+                    resource = MovieGenreRequestDto(language = language)
                 )
-                return@withContext if (response.status == HttpStatusCode.OK) {
+
+                if (response.status == HttpStatusCode.OK) {
                     Result.success(response.body())
                 } else Result.failure(MovieNotFoundException())
+
             } catch (e: Exception) {
                 Logger.e(messageString = e.message.toString())
                 Result.failure(e)

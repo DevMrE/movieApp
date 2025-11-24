@@ -77,6 +77,7 @@ kotlin {
             implementation(project(":core"))
             implementation(project(":navigation"))
             implementation(project(":movie"))
+            implementation(project(":series"))
         }
 
         androidMain.dependencies {

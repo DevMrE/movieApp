@@ -21,6 +21,8 @@ kotlin {
         namespace = "com.kmp.movieapp.movie"
         compileSdk = 36
         minSdk = 35
+
+        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
     }
 
     // Desktop - Windows + MacOS

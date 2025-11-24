@@ -1,5 +1,6 @@
 package com.kmp.movieapp.movie.presentation.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,17 +23,25 @@ import com.kmp.movieapp.core.presentation.imageloader.ImageLoader
 import com.kmp.movieapp.core.presentation.material.gradient
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
 
 fun LazyListScope.movieCardComponent(
-    movieList: List<UiMovie>
+    bigCard: Boolean,
+    movieList: List<UiMovie>,
+    onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->
+        val width =
+            if (bigCard) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
         Card(
             modifier = Modifier
                 .height(MaterialTheme.size.movieCardHeight)
-                .width(MaterialTheme.size.movieCardWidth)
-                .clip(MaterialTheme.shapes.extraLarge),
+                .width(width)
+                .clip(MaterialTheme.shapes.extraLarge)
+                .clickable {
+                    onAction(MovieAction.OnNavigateToDetailScreen(movie.id))
+                },
             shape = CardDefaults.elevatedShape
         ) {
             Box(

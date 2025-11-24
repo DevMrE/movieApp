@@ -3,38 +3,48 @@ package com.kmp.movieapp.movie.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.presentation.action.Action
-import com.kmp.movieapp.movie.domain.repository.MovieRepository
+import com.kmp.movieapp.core.presentation.viewmodel.stateInLazily
+import com.kmp.movieapp.movie.domain.model.MovieCategory
+import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
 import com.kmp.movieapp.movie.presentation.action.MovieAction
-import com.kmp.movieapp.movie.presentation.mapper.toUiMovie
-import com.kmp.movieapp.movie.presentation.model.UiMovie
+import com.kmp.movieapp.movie.presentation.mapper.toUiMovieList
+import com.kmp.movieapp.movie.presentation.model.UiMovieScreen
 import com.kmp.movieapp.movie.presentation.route.MovieDetailDestination
 import com.kmp.navigation.navigation.Navigation
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 
 class MovieScreenViewModel(
     private val navigation: Navigation,
-    private val movieRepository: MovieRepository
+    private val getMoviesForCategoryUseCase: GetMoviesForCategoryUseCase
 ) : ViewModel() {
 
-    private val _moviesState = MutableStateFlow<List<UiMovie>>(emptyList())
-    val movieState = _moviesState.asStateFlow()
+    private val _movieScreenState = MutableStateFlow<UiMovieScreen?>(null)
 
-    init {
-        viewModelScope.launch {
-            val list = movieRepository.getMovies().map {
-                it.toUiMovie()
+    val movieScreenState = _movieScreenState.onStart {
+        combine(
+            getMoviesForCategoryUseCase(movieCategory = MovieCategory.POPULAR),
+            getMoviesForCategoryUseCase(movieCategory = MovieCategory.TOP_RATED),
+            getMoviesForCategoryUseCase(movieCategory = MovieCategory.NOW_PLAYING)
+        ) { popular, topRated, nowPlaying ->
+            _movieScreenState.update {
+                UiMovieScreen(
+                    isLoading = popular.isEmpty() || topRated.isEmpty() || nowPlaying.isEmpty(),
+                    nowPlaying = nowPlaying.toUiMovieList(category = MovieCategory.NOW_PLAYING),
+                    popularMovie = popular.toUiMovieList(category = MovieCategory.POPULAR),
+                    topRatedMovies = topRated.toUiMovieList(category = MovieCategory.TOP_RATED)
+                )
             }
-            _moviesState.update { list }
-        }
-    }
+        }.launchIn(viewModelScope)
+    }.stateInLazily(_movieScreenState.value)
 
     fun onAction(action: Action) {
         when (action) {
             is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.id)
-            else -> Unit
+            is MovieAction.OnStartTrailer -> Unit
         }
     }
 

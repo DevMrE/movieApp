@@ -13,7 +13,8 @@ data class Padding(
     val fifteen: Dp = 15.dp,
     val twenty: Dp = 20.dp,
     val twentyFive: Dp = 25.dp,
-    val thirty: Dp = 30.dp
+    val thirty: Dp = 30.dp,
+    val thirtySix: Dp = 36.dp
 )
 
 private val LocalPadding = staticCompositionLocalOf { Padding() }
