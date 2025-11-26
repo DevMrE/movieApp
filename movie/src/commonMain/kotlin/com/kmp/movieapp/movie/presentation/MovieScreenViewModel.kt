@@ -55,7 +55,7 @@ class MovieScreenViewModel(
     }
 
     private fun navigateToDetailScreen(id: Int) {
-        navigation.navigateTo(MovieDetailDestination(id = id), options = {})
+        navigation.navigateTo(MovieDetailDestination(id = id))
     }
 
 }

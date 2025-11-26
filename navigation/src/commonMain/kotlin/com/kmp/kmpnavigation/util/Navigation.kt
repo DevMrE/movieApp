@@ -32,7 +32,7 @@ interface Navigation {
      * @param navDestination The [NavDestination] to navigate
      */
     context(viewModel: ViewModel)
-    fun <D : NavDestination> navigateTo(navDestination: D, options: NavOptions.() -> Unit = {})
+    fun <D : NavDestination> navigateTo(navDestination: D, options: NavOptions? = null)
 
     /**
      * Switch to a different tab destination.

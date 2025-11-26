@@ -2,14 +2,11 @@ package com.kmp.kmpnavigation.compose_interface
 
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.serialization.generateHashCode
 import co.touchlab.kermit.Logger
 import com.kmp.kmpnavigation.util.DefaultRouteIdProvider
 import com.kmp.kmpnavigation.util.NavDestination
 import com.kmp.kmpnavigation.util.NavOptions
 import com.kmp.kmpnavigation.util.RouteIdProvider
-import kotlinx.serialization.InternalSerializationApi
-import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
 /**
@@ -47,7 +44,7 @@ internal object HandleNavigation {
 
     fun <D : NavDestination> handleNavigateTo(
         navDestination: D,
-        options: NavOptions.() -> Unit
+        options: NavOptions? = NavOptions()
     ) {
         val controller = navController ?: return
 
@@ -57,28 +54,29 @@ internal object HandleNavigation {
         if (currentId == targetId) return
 
         try {
-            val opts = NavOptions().apply(options)
 
             controller.navigate(navDestination) {
-                launchSingleTop = opts.singleTop
-                if (opts.restoreState) restoreState = true
+                options?.let {
+                    launchSingleTop = options.singleTop
+                    if (options.restoreState) restoreState = true
 
-                when (val backstack = opts.backstack) {
-                    is NavOptions.Backstack.PopTo -> {
-                        popUpTo(backstack.navDestination) {
-                            inclusive = backstack.inclusive
-                            saveState = backstack.saveState
+                    when (val backstack = options.backstack) {
+                        is NavOptions.Backstack.PopTo -> {
+                            popUpTo(backstack.navDestination) {
+                                inclusive = backstack.inclusive
+                                saveState = backstack.saveState
+                            }
                         }
-                    }
 
-                    is NavOptions.Backstack.Clear -> {
-                        // Clear the entire back stack (up to the graph root)
-                        controller.graph.id.let { graphId ->
-                            popUpTo(graphId) { inclusive = false }
+                        is NavOptions.Backstack.Clear -> {
+                            // Clear the entire back stack (up to the graph root)
+                            controller.graph.id.let { graphId ->
+                                popUpTo(graphId) { inclusive = false }
+                            }
                         }
-                    }
 
-                    NavOptions.Backstack.None -> Unit
+                        NavOptions.Backstack.None -> Unit
+                    }
                 }
             }
 

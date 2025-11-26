@@ -34,7 +34,7 @@ class BottomBarViewModel(
 
     fun onScreenChanged(navDestination: NavDestination) {
         with(navigation) {
-            switchTab(navDestination)
+            switchTab(navDestination,)
         }
     }
 }

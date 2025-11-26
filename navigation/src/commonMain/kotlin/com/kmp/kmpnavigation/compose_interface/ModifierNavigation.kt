@@ -2,8 +2,8 @@ package com.kmp.kmpnavigation.compose_interface
 
 import androidx.compose.foundation.clickable
 import androidx.compose.ui.Modifier
-import com.kmp.kmpnavigation.util.NavOptions
 import com.kmp.kmpnavigation.util.NavDestination
+import com.kmp.kmpnavigation.util.NavOptions
 
 /**
  * Navigate up in the navigation stack.
@@ -20,7 +20,7 @@ fun Modifier.navigateUp(): Modifier = this.then(
  */
 fun <D : NavDestination> Modifier.navigateTo(
     navDestination: D,
-    options: NavOptions.() -> Unit = {}
+    options: NavOptions?
 ): Modifier = this.then(
     Modifier.clickable {
         HandleNavigation.handleNavigateTo(navDestination, options)

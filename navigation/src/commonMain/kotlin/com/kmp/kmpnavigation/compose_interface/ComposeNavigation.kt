@@ -2,9 +2,8 @@ package com.kmp.kmpnavigation.compose_interface
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
-import com.kmp.kmpnavigation.util.NavOptions
 import com.kmp.kmpnavigation.util.NavDestination
-import com.kmp.kmpnavigation.util.RouteIdProvider
+import com.kmp.kmpnavigation.util.NavOptions
 
 /**
  * Compose-backed implementation of the `Navigation` API.
@@ -29,7 +28,7 @@ internal class ComposeNavigation(
     context(viewModel: ViewModel)
     override fun <D : NavDestination> navigateTo(
         navDestination: D,
-        options: NavOptions.() -> Unit
+        options: NavOptions?
     ) {
         handleNavigateTo(navDestination, options)
     }
@@ -54,7 +53,7 @@ internal class ComposeNavigation(
 
     private fun <D : NavDestination> handleNavigateTo(
         navDestination: D,
-        options: NavOptions.() -> Unit
+        options: NavOptions?
     ) {
         handleNavigation.handleNavigateTo(navDestination, options)
     }
