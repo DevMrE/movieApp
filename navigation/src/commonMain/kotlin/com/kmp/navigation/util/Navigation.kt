@@ -1,7 +1,8 @@
-package com.kmp.navigation.navigation
+package com.kmp.navigation.util
 
 import androidx.lifecycle.ViewModel
-import com.eu.de.mre.movieapp.util.navigation.NavOptions
+import com.kmp.navigation.di.navigationModule
+import org.koin.dsl.module
 
 /**
  * Application-facing navigation API used by `ViewModel`s.
@@ -13,7 +14,8 @@ import com.eu.de.mre.movieapp.util.navigation.NavOptions
  *
  * Implementation:
  * - The default Compose-backed implementation is provided by `ComposeNavigation`,
- *   which is exposed as `Navigation` through DI (see `di/navigationModule.kt`).
+ *   which is exposed as `Navigation` through DI (see [navigationModule]`).
+ *   Make sure to add the [navigationModule] into your koinModules [module]
  *
  * Basic usage from a ViewModel:
  * ```kotlin

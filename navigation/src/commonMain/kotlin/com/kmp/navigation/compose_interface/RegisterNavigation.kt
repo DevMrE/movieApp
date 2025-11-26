@@ -6,18 +6,71 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.kmp.navigation.navigation.LocalNavigator
-import com.kmp.navigation.navigation.NavDestination
+import com.kmp.navigation.util.LocalNavigator
+import com.kmp.navigation.util.NavDestination
 
 /**
- * Installs a `NavHost` and provides a `Navigation` instance to the composition.
+ * Sets up a typed `RegisterNavigation` and provides the app navigator to the composition.
  *
- * - `startNavDestination`: the initial destination instance.
- * - `content`: build the typed graph using e.g. `screen<Dest> { ... }` or `install(graph)`.
+ * You MUST return a [TypedGraph] from [content] using the typed entry
+ * point `navGraph { ... }`. Inside that block register destinations with
+ * [TypedGraphBuilder.screen] or nested graphs with [TypedGraphBuilder.section].
  *
- * Internally:
+ * Parameters
+ * - `startNavDestination`: initial typed destination instance (your `NavDestination`).
+ * - `modifier`: optional modifier passed to `RegisterNavigation`.
+ * - `content`: a builder that returns a [TypedGraph] via `navGraph { ... }`.
+ *
+ * Usage — single screen
+ * ```kotlin
+ * @kotlinx.serialization.Serializable
+ * data object Settings : NavDestination
+ *
+ * @Composable
+ * fun App() {
+ *     RegisterNavigation(startNavDestination = Settings) {
+ *         // Build and return a TypedGraph
+ *         navGraph {
+ *             screen<Settings> {
+ *                 SettingsScreen()
+ *             }
+ *         }
+ *     }
+ * }
+ * ```
+ *
+ * Usage — section (nested navigation)
+ * ```kotlin
+ * @kotlinx.serialization.Serializable
+ * data object Home : NavDestination              // parent graph route
+ *
+ * @kotlinx.serialization.Serializable
+ * data object Movies : NavDestination            // child A (start)
+ *
+ * @kotlinx.serialization.Serializable
+ * data object Series : NavDestination            // child B
+ *
+ * @Composable
+ * fun App() {
+ *     RegisterNavigation(startNavDestination = Home) {
+ *         navGraph {
+ *             section<Home, Movies> { // startDestination = Movies
+ *                 screen<Movies> { MoviesScreen() }
+ *                 screen<Series> { SeriesScreen() }
+ *             }
+ *
+ *             // if you want to combine it with a single screen:
+ *             screen<Settings> {
+ *                  SettingsScreen()
+ *             }
+ *         }
+ *     }
+ * }
+ * ```
+ *
+ * Internals
  * - Creates a `NavHostController` and wires it to `MutableComposeNavigation`.
- * - Exposes the navigator via `LocalNavigator` for child composables.
+ * - Provides the navigator via [LocalNavigator] for child composables to use.
  */
 @Composable
 fun RegisterNavigation(

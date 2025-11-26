@@ -2,12 +2,8 @@ package com.kmp.navigation.compose_interface
 
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.serialization.generateHashCode
-import com.kmp.navigation.navigation.NavDestination
-import com.eu.de.mre.movieapp.util.navigation.NavOptions
-import kotlinx.serialization.InternalSerializationApi
-import kotlinx.serialization.serializer
-import kotlin.reflect.KClass
+import com.kmp.navigation.util.NavOptions
+import com.kmp.navigation.util.NavDestination
 
 /**
  * Compose-backed implementation of the `Navigation` API.
@@ -15,20 +11,16 @@ import kotlin.reflect.KClass
  * Responsibilities:
  * - Holds a reference to a `NavHostController` (attached/detached via `MutableComposeNavigation`).
  * - Implements typed navigation calls (`navigateTo`, `switchTab`, `navigateUp`, `popBackTo`).
- * - Applies `NavOptions` flags when navigating.
- *
- * Obtained via DI in `di/navigationModule.kt` and wired to a `NavHost` by `RegisterNavigation`.
+ * - Merkt sich pro "Root-Tab" (section<G, S>) automatisch die zuletzt besuchte Destination.
  */
-class ComposeNavigation : MutableComposeNavigation {
-
-    private var navController: NavHostController? = null
+internal class ComposeNavigation : MutableComposeNavigation {
 
     override fun attach(controller: NavHostController) {
-        navController = controller
+        HandleNavigation.attach(controller)
     }
 
     override fun detach() {
-        navController = null
+        HandleNavigation.detach()
     }
 
     context(viewModel: ViewModel)
@@ -36,57 +28,17 @@ class ComposeNavigation : MutableComposeNavigation {
         navDestination: D,
         options: NavOptions.() -> Unit
     ) {
-        val opts = NavOptions().apply(options).copy(restoreState = true)
-        navController?.navigate(navDestination) {
-            launchSingleTop = opts.singleTop
-            if (opts.restoreState) restoreState = true
-
-            when (val backstack = opts.backstack) {
-                is NavOptions.Backstack.PopTo -> {
-                    popUpTo(backstack.navDestination) {
-                        inclusive = backstack.inclusive
-                        saveState = backstack.saveState
-                    }
-                }
-
-                is NavOptions.Backstack.Clear -> {
-                    navController?.graph?.id?.let {
-                        popUpTo(it) { inclusive = false }
-                    }
-                }
-
-                is NavOptions.Backstack.None -> Unit
-            }
-        }
+        handleNavigateTo(navDestination, options)
     }
 
     context(viewModel: ViewModel)
     override fun <D : NavDestination> switchTab(navDestination: D) {
-        val opts = NavOptions(singleTop = true, restoreState = true)
-        navController?.navigate(navDestination) {
-            launchSingleTop = opts.singleTop
-            if (opts.restoreState) restoreState = true
-
-            when (val backstack = opts.backstack) {
-                is NavOptions.Backstack.PopTo -> {
-                    popUpTo(backstack.navDestination) {
-                        inclusive = backstack.inclusive
-                        saveState = backstack.saveState
-                    }
-                }
-
-                else -> {
-                    navController?.graph?.id?.let {
-                        popUpTo(it) { inclusive = false }
-                    }
-                }
-            }
-        }
+        handleSwitchTo(navDestination)
     }
 
     context(viewModel: ViewModel)
     override fun navigateUp() {
-        navController?.navigateUp()
+        HandleNavigation.navigateUp()
     }
 
     context(viewModel: ViewModel)
@@ -94,13 +46,17 @@ class ComposeNavigation : MutableComposeNavigation {
         navDestination: D?,
         inclusive: Boolean
     ) {
-        if (navDestination == null) navController?.popBackStack()
-        else {
-            val ok = navController?.popBackStack(navDestination, inclusive = inclusive)
-            ok?.let { if (!it) navController?.popBackStack() }
-        }
+        HandleNavigation.handlePopBackTo(navDestination, inclusive)
+    }
+
+    private fun <D : NavDestination> handleNavigateTo(
+        navDestination: D,
+        options: NavOptions.() -> Unit
+    ) {
+        HandleNavigation.handleNavigateTo(navDestination, options)
+    }
+
+    private fun <D : NavDestination> handleSwitchTo(navDestination: D) {
+        HandleNavigation.handleSwitchTo(navDestination)
     }
 }
-
-@OptIn(InternalSerializationApi::class)
-private fun KClass<*>.routeId(): Int = this.serializer().generateHashCode()

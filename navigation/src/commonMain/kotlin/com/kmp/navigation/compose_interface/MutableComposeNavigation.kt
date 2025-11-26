@@ -1,7 +1,7 @@
 package com.kmp.navigation.compose_interface
 
 import androidx.navigation.NavHostController
-import com.kmp.navigation.navigation.Navigation
+import com.kmp.navigation.util.Navigation
 
 /**
  * Extension of `Navigation` that can be wired to a `NavHostController`.
@@ -12,7 +12,7 @@ import com.kmp.navigation.navigation.Navigation
  * Used by `RegisterNavigation` via `rememberMutableComposeNavigation()` to
  * provide a Compose-bound navigation implementation to the UI tree.
  */
-interface MutableComposeNavigation : Navigation {
+internal interface MutableComposeNavigation : Navigation {
     fun attach(controller: NavHostController)
     fun detach()
 }

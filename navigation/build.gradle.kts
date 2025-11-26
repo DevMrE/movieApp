@@ -42,6 +42,7 @@ kotlin {
                 implementation(libs.composeNavigation)
 
                 implementation(libs.koinCore)
+                implementation(libs.logger)
             }
         }
     }

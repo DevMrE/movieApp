@@ -7,7 +7,7 @@ class GetMoviesForCategoryUseCase(
     private val movieRepository: MovieRepository
 ) {
 
-     operator fun invoke(movieCategory: MovieCategory) =
+     suspend operator fun invoke(movieCategory: MovieCategory) =
         movieRepository.getMovies(language = "", movieCategory = movieCategory)
 
 }

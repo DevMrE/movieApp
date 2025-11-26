@@ -16,15 +16,16 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.movie.presentation.route.MovieScreenDestination
 import com.kmp.movieapp.movie.presentation.screen.mobile.MobileMovieScreenComponent
-import com.kmp.navigation.compose_interface.RegisterNavigation
-import com.kmp.navigation.compose_interface.navGraph
-import com.kmp.navigation.destination.SeriesScreenDestination
-import com.kmp.series.SeriesComponent
+import com.kmp.navigation.util.NavDestination
+import com.kmp.series.presentation.SeriesComponent
+import com.kmp.series.presentation.destination.SeriesScreenDestination
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun HomeScreenComponent() {
+fun HomeScreenTabComponent(
+    selectedDestination: NavDestination
+) {
     val viewModel = koinViewModel<HomeScreenViewModel>()
     val tab by viewModel.tabState.collectAsStateWithLifecycle()
 
@@ -36,8 +37,8 @@ fun HomeScreenComponent() {
             space = MaterialTheme.padding.thirtySix
         ) {
             SegmentedButton(
-                selected = tab.selectedTab == MovieScreenDestination,
-                onClick = viewModel::onTabChanged,
+                selected = selectedDestination == MovieScreenDestination,
+                onClick = { viewModel.onTabChanged(MovieScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {}
             ) {
@@ -45,8 +46,8 @@ fun HomeScreenComponent() {
             }
 
             SegmentedButton(
-                selected = tab.selectedTab == SeriesScreenDestination,
-                onClick = viewModel::onTabChanged,
+                selected = selectedDestination == SeriesScreenDestination,
+                onClick = { viewModel.onTabChanged(SeriesScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {}
             ) {
@@ -54,18 +55,10 @@ fun HomeScreenComponent() {
             }
         }
 
-        RegisterNavigation(
-            startNavDestination = MovieScreenDestination
-        ) {
-            navGraph {
-                screen<MovieScreenDestination> { navParameter ->
-                    MobileMovieScreenComponent()
-                }
-
-                screen<SeriesScreenDestination> { data ->
-                    SeriesComponent()
-                }
-            }
+        when (selectedDestination) {
+            MovieScreenDestination -> MobileMovieScreenComponent()
+            SeriesScreenDestination -> SeriesComponent()
+            else -> Unit
         }
     }
 }

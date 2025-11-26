@@ -1,4 +1,4 @@
-package com.kmp.navigation.navigation
+package com.kmp.navigation.util
 
 /**
  * Marker interface for typed navigation destinations.

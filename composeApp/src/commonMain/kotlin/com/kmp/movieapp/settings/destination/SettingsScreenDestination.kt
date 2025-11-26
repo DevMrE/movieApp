@@ -1,7 +1,7 @@
-package com.kmp.movieapp.homescreen.destination
+package com.kmp.movieapp.settings.destination
 
 import com.kmp.navigation.util.NavDestination
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object HomeScreenDestination : NavDestination
+data object SettingsScreenDestination : NavDestination

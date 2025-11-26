@@ -1,4 +1,4 @@
-package com.kmp.series
+package com.kmp.series.presentation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

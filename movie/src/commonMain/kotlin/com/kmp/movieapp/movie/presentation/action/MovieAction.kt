@@ -1,6 +1,6 @@
 package com.kmp.movieapp.movie.presentation.action
 
-import com.kmp.movieapp.core.presentation.action.Action
+import com.kmp.movieapp.core.util.action.Action
 
 sealed interface MovieAction : Action {
 

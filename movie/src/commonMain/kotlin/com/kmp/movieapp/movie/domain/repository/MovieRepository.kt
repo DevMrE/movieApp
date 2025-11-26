@@ -7,5 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository: Repository {
 
-     fun getMovies(language: String, movieCategory: MovieCategory): Flow<List<Movie>>
+     suspend fun getMovies(language: String, movieCategory: MovieCategory): Flow<List<Movie>>
 }

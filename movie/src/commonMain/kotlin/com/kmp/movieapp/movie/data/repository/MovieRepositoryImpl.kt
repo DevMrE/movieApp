@@ -39,7 +39,7 @@ class MovieRepositoryImpl(
         initialValue = emptyList()
     )
 
-    override fun getMovies(
+    override suspend fun getMovies(
         language: String,
         movieCategory: MovieCategory
     ): Flow<List<Movie>> = flow {
@@ -55,8 +55,10 @@ class MovieRepositoryImpl(
             } ?: emptyList()
 
             emit(movieList)
-        }.onFailure {
-
+        }.onFailure { error ->
+            error.message?.let { message ->
+                Logger.e(throwable = error, tag = "Movies", messageString = message)
+            }
         }
     }
 }
