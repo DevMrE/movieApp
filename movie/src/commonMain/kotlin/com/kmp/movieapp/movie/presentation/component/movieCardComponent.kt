@@ -19,10 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import com.kmp.movieapp.core.presentation.composable.gradientOverlay
-import com.kmp.movieapp.core.util.imageloader.ImageLoader
 import com.kmp.movieapp.core.presentation.material.gradient
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.core.util.imageloader.ImageLoader
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
 

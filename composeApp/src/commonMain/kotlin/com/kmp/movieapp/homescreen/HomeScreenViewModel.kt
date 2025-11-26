@@ -1,9 +1,9 @@
 package com.kmp.movieapp.homescreen
 
 import androidx.lifecycle.ViewModel
+import com.kmp.kmpnavigation.util.NavDestination
+import com.kmp.kmpnavigation.util.Navigation
 import com.kmp.movieapp.homescreen.model.UiTabState
-import com.kmp.navigation.util.NavDestination
-import com.kmp.navigation.util.Navigation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import movieapp.composeapp.generated.resources.Res

@@ -1,57 +1,45 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.androidLibrary)
+    // alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.androidLint)
     alias(libs.plugins.serialization)
 }
 
 kotlin {
-
     compilerOptions {
         freeCompilerArgs.add("-Xcontext-parameters")
     }
 
-    androidLibrary {
-        namespace = "com.kmp.navigation"
-        compileSdk = getPropertyInt("android.compileSdk")
-        minSdk = getPropertyInt("android.mobile.minSdk")
-
-    }
-
-    jvm("desktop") {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-        }
-    }
-
-    // iOS -> iPhone + iPad implementation
+    androidTarget()
+    jvm("desktop")
     iosArm64()
     iosSimulatorArm64()
 
     sourceSets {
-        commonMain {
-            dependencies {
-                implementation(libs.kotlin.stdlib)
-                implementation(libs.androidx.lifecycle.viewmodelCompose)
-                implementation(libs.androidx.lifecycle.runtimeCompose)
-                implementation(compose.material3AdaptiveNavigationSuite)
-                implementation(libs.composeNavigation)
+        commonMain.dependencies {
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.ui)
+            implementation(compose.components.uiToolingPreview)
+            implementation(libs.androidx.lifecycle.viewmodelCompose)
+            implementation(libs.androidx.lifecycle.runtimeCompose)
 
-                implementation(libs.koinCore)
-                implementation(libs.logger)
-            }
+            implementation(libs.composeNavigation)
+            implementation(libs.koinCore)
+            implementation(libs.logger)
         }
     }
 }
 
-fun getPropertyString(string: String): String {
-    return providers.gradleProperty(string).get()
-}
-
-fun getPropertyInt(string: String): Int {
-    return providers.gradleProperty(string).get().toInt()
+android {
+    namespace = "com.kmp.navigation"
+    compileSdk = 36
+    defaultConfig {
+        minSdk = 24
+    }
 }

@@ -1,8 +1,8 @@
 package com.kmp.movieapp.app.navigation
 
+import com.kmp.kmpnavigation.compose_interface.TypedGraphBuilder
 import com.kmp.movieapp.settings.SettingsScreenComponent
 import com.kmp.movieapp.settings.destination.SettingsScreenDestination
-import com.kmp.navigation.compose_interface.TypedGraphBuilder
 
 fun TypedGraphBuilder.settingsGraph() {
     screen<SettingsScreenDestination> {
