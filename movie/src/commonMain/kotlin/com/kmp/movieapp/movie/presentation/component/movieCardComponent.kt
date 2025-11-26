@@ -32,8 +32,8 @@ fun LazyListScope.movieCardComponent(
     onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->
-        val width =
-            if (bigCard) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
+        val width = if (bigCard) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
+
         Card(
             modifier = Modifier
                 .height(MaterialTheme.size.movieCardHeight)
