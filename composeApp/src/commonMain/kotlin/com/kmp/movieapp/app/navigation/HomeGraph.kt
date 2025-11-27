@@ -5,11 +5,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.kmp.kmpnavigation.compose_interface.TypedGraphBuilder
 import com.kmp.movieapp.homescreen.HomeScreenTabComponent
 import com.kmp.movieapp.homescreen.destination.HomeScreenDestination
-import com.kmp.movieapp.movie.presentation.route.MovieDetailDestination
-import com.kmp.movieapp.movie.presentation.route.MovieScreenDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieScreenDestination
+import com.kmp.navigation.TypedGraphBuilder
 import com.kmp.series.presentation.destination.SeriesDetailScreenDestination
 import com.kmp.series.presentation.destination.SeriesScreenDestination
 

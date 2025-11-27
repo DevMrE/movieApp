@@ -9,8 +9,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.kmp.kmpnavigation.compose_interface.navigateUp
 import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.navigation.compose_interface.navigateUp
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.app_name
 import movieapp.composeapp.generated.resources.back_arrow

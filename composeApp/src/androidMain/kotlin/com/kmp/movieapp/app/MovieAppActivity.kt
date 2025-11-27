@@ -11,7 +11,7 @@ class MovieAppActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MovieAppComponent()
+            MovieAppScreenComponent()
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.kmp.series.presentation.destination
 
-import com.kmp.kmpnavigation.util.NavDestination
+import com.kmp.navigation.NavDestination
 import kotlinx.serialization.Serializable
 
 @Serializable

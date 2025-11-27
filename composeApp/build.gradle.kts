@@ -74,8 +74,10 @@ kotlin {
 
             implementation(libs.bundles.commainMainKoin)
 
+            // kmp navigation
+            implementation(libs.kmpNavigation)
+
             implementation(project(":core"))
-            implementation(project(":navigation"))
             implementation(project(":movie"))
             implementation(project(":series"))
         }

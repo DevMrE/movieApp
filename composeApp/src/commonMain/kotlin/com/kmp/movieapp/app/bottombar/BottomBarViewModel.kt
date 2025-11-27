@@ -1,11 +1,11 @@
 package com.kmp.movieapp.app.bottombar
 
 import androidx.lifecycle.ViewModel
-import com.kmp.kmpnavigation.util.NavDestination
-import com.kmp.kmpnavigation.util.Navigation
 import com.kmp.movieapp.app.bottombar.model.BottomBarItem
 import com.kmp.movieapp.homescreen.destination.HomeScreenDestination
 import com.kmp.movieapp.settings.destination.SettingsScreenDestination
+import com.kmp.navigation.NavDestination
+import com.kmp.navigation.Navigation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import movieapp.composeapp.generated.resources.Res

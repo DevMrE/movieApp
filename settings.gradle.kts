@@ -25,6 +25,15 @@ dependencyResolutionManagement {
             }
         }
         mavenCentral()
+
+        maven {
+            url = uri("https://maven.pkg.github.com/DevMrE/kmpNavigation")
+
+            credentials {
+                username = providers.gradleProperty("gpr.user").orNull
+                password = providers.gradleProperty("gpr.token").orNull
+            }
+        }
     }
 }
 
@@ -33,7 +42,6 @@ plugins {
 }
 
 include(":composeApp")
-include(":navigation")
 include(":core")
 include(":movie")
 include(":series")

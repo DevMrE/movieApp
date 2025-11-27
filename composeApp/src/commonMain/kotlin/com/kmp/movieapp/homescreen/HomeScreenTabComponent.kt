@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.kmpnavigation.util.NavDestination
 import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.movie.presentation.route.MovieScreenDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieScreenDestination
 import com.kmp.movieapp.movie.presentation.screen.mobile.MobileMovieScreenComponent
+import com.kmp.navigation.NavDestination
 import com.kmp.series.presentation.SeriesComponent
 import com.kmp.series.presentation.destination.SeriesScreenDestination
 import org.jetbrains.compose.resources.stringResource

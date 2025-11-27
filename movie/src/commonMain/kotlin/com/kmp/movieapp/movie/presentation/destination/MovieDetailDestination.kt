@@ -1,6 +1,6 @@
-package com.kmp.movieapp.movie.presentation.route
+package com.kmp.movieapp.movie.presentation.destination
 
-import com.kmp.kmpnavigation.util.NavDestination
+import com.kmp.navigation.NavDestination
 import kotlinx.serialization.Serializable
 
 @Serializable

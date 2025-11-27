@@ -2,14 +2,14 @@ package com.kmp.movieapp.movie.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kmp.kmpnavigation.util.Navigation
 import com.kmp.movieapp.core.util.action.Action
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
 import com.kmp.movieapp.movie.presentation.action.MovieAction
+import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
 import com.kmp.movieapp.movie.presentation.mapper.toUiMovieList
 import com.kmp.movieapp.movie.presentation.model.UiMovieScreen
-import com.kmp.movieapp.movie.presentation.route.MovieDetailDestination
+import com.kmp.navigation.Navigation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
