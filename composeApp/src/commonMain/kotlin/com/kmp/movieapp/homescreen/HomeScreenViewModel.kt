@@ -23,6 +23,6 @@ class HomeScreenViewModel(
     val tabState = _tabState.asStateFlow()
 
     fun onTabChanged(navDestination: NavDestination) {
-        navigation.navigateTo(navDestination)
+        navigation.navigateTo(navDestination, options = { clearStack() })
     }
 }

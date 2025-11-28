@@ -38,7 +38,7 @@ fun HomeScreenTabComponent(
         ) {
             SegmentedButton(
                 selected = navDestination == MovieScreenDestination,
-                onClick = { viewModel.onTabChanged(MovieScreenDestination) },
+                onClick = { viewModel.onTabChanged(navDestination = MovieScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {}
             ) {
@@ -47,7 +47,7 @@ fun HomeScreenTabComponent(
 
             SegmentedButton(
                 selected = navDestination == SeriesScreenDestination,
-                onClick = { viewModel.onTabChanged(SeriesScreenDestination) },
+                onClick = { viewModel.onTabChanged(navDestination = SeriesScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {}
             ) {
