@@ -24,7 +24,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreenTabComponent(
-    selectedDestination: NavDestination
+    navDestination: NavDestination
 ) {
     val viewModel = koinViewModel<HomeScreenViewModel>()
     val tab by viewModel.tabState.collectAsStateWithLifecycle()
@@ -37,7 +37,7 @@ fun HomeScreenTabComponent(
             space = MaterialTheme.padding.thirtySix
         ) {
             SegmentedButton(
-                selected = selectedDestination == MovieScreenDestination,
+                selected = navDestination == MovieScreenDestination,
                 onClick = { viewModel.onTabChanged(MovieScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {}
@@ -46,7 +46,7 @@ fun HomeScreenTabComponent(
             }
 
             SegmentedButton(
-                selected = selectedDestination == SeriesScreenDestination,
+                selected = navDestination == SeriesScreenDestination,
                 onClick = { viewModel.onTabChanged(SeriesScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {}
@@ -55,7 +55,7 @@ fun HomeScreenTabComponent(
             }
         }
 
-        when (selectedDestination) {
+        when (navDestination) {
             MovieScreenDestination -> MobileMovieScreenComponent()
             SeriesScreenDestination -> SeriesComponent()
             else -> Unit

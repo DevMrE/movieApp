@@ -23,11 +23,11 @@ import com.kmp.series.presentation.destination.SeriesScreenDestination
 fun TypedGraphBuilder.homeGraph() {
     section<HomeScreenDestination, MovieScreenDestination> {
         screen<MovieScreenDestination> {
-            HomeScreenTabComponent(MovieScreenDestination)
+            HomeScreenTabComponent(navDestination = MovieScreenDestination)
         }
 
         screen<SeriesScreenDestination> {
-            HomeScreenTabComponent(SeriesScreenDestination)
+            HomeScreenTabComponent(navDestination = SeriesScreenDestination)
         }
 
         screen<MovieDetailDestination> { detail ->
