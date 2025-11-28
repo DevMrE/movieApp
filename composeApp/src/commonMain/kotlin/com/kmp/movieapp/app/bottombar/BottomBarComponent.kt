@@ -4,24 +4,41 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.homescreen.destination.HomeScreenDestination
+import com.kmp.movieapp.settings.destination.SettingsScreenDestination
+import com.kmp.navigation.compose.rememberNavDestination
+import movieapp.composeapp.generated.resources.Res
+import movieapp.composeapp.generated.resources.movie
+import movieapp.composeapp.generated.resources.settings
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun BottomBarComponent() {
     val viewModel = koinViewModel<BottomBarViewModel>()
-    val list by viewModel.currentScreen.collectAsStateWithLifecycle()
+    val navDestination = rememberNavDestination(initialDestination = HomeScreenDestination)
 
     NavigationBar {
-        list.forEach { bottomBarItem ->
-            NavigationBarItem(
-                selected = bottomBarItem.navDestination == HomeScreenDestination,
-                onClick = { viewModel.onScreenChanged(bottomBarItem.navDestination) },
-                icon = { Icon(vectorResource(bottomBarItem.icon), contentDescription = null) },
-            )
-        }
+        NavigationBarItem(
+            selected = navDestination != SettingsScreenDestination,
+            onClick = { viewModel.onScreenChanged(navDestination = HomeScreenDestination) },
+            icon = {
+                Icon(
+                    imageVector = vectorResource(resource = Res.drawable.movie),
+                    contentDescription = null
+                )
+            },
+        )
+
+        NavigationBarItem(
+            selected = navDestination == SettingsScreenDestination,
+            onClick = { viewModel.onScreenChanged(navDestination = SettingsScreenDestination) },
+            icon = {
+                Icon(
+                    imageVector = vectorResource(resource = Res.drawable.settings),
+                    contentDescription = null
+                )
+            },
+        )
     }
 }
