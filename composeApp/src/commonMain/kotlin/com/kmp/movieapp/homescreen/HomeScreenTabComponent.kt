@@ -1,7 +1,6 @@
 package com.kmp.movieapp.homescreen
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
@@ -14,10 +13,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.movie.presentation.MovieScreen
 import com.kmp.movieapp.movie.presentation.destination.MovieScreenDestination
-import com.kmp.movieapp.movie.presentation.screen.mobile.MobileMovieScreenComponent
 import com.kmp.navigation.NavDestination
-import com.kmp.series.presentation.SeriesComponent
+import com.kmp.series.presentation.SeriesScreen
 import com.kmp.series.presentation.destination.SeriesScreenDestination
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
@@ -29,7 +28,7 @@ fun HomeScreenTabComponent(
     val viewModel = koinViewModel<HomeScreenViewModel>()
     val tab by viewModel.tabState.collectAsStateWithLifecycle()
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column {
         SingleChoiceSegmentedButtonRow(
             modifier = Modifier
                 .fillMaxWidth()
@@ -56,8 +55,8 @@ fun HomeScreenTabComponent(
         }
 
         when (navDestination) {
-            MovieScreenDestination -> MobileMovieScreenComponent()
-            SeriesScreenDestination -> SeriesComponent()
+            MovieScreenDestination -> MovieScreen()
+            SeriesScreenDestination -> SeriesScreen()
             else -> Unit
         }
     }

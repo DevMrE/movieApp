@@ -4,24 +4,24 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
-import com.kmp.movieapp.homescreen.destination.HomeScreenDestination
-import com.kmp.movieapp.settings.destination.SettingsScreenDestination
+import com.kmp.movieapp.homescreen.destination.HomeScreenSection
+import com.kmp.movieapp.settings.destination.SettingsSection
 import com.kmp.navigation.compose.rememberNavDestination
+import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.movie
 import movieapp.composeapp.generated.resources.settings
 import org.jetbrains.compose.resources.vectorResource
-import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun BottomBarComponent() {
-    val viewModel = koinViewModel<BottomBarViewModel>()
-    val navDestination = rememberNavDestination(initialDestination = HomeScreenDestination)
+    val navigation = rememberNavigation()
+    val navDestination = rememberNavDestination()
 
     NavigationBar {
         NavigationBarItem(
-            selected = navDestination != SettingsScreenDestination,
-            onClick = { viewModel.onScreenChanged(navDestination = HomeScreenDestination) },
+            selected = navDestination != HomeScreenSection,
+            onClick = { navigation.switchTo(HomeScreenSection) },
             icon = {
                 Icon(
                     imageVector = vectorResource(resource = Res.drawable.movie),
@@ -31,8 +31,8 @@ fun BottomBarComponent() {
         )
 
         NavigationBarItem(
-            selected = navDestination == SettingsScreenDestination,
-            onClick = { viewModel.onScreenChanged(navDestination = SettingsScreenDestination) },
+            selected = navDestination == SettingsSection,
+            onClick = { navigation.switchTo(SettingsSection) },
             icon = {
                 Icon(
                     imageVector = vectorResource(resource = Res.drawable.settings),

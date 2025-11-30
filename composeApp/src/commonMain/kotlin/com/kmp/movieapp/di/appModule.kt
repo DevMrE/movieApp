@@ -1,6 +1,5 @@
 package com.kmp.movieapp.di
 
-import com.kmp.movieapp.app.bottombar.BottomBarViewModel
 import com.kmp.movieapp.homescreen.HomeScreenViewModel
 import com.kmp.movieapp.settings.SettingsScreenViewModel
 import org.koin.core.module.dsl.viewModelOf
@@ -9,6 +8,5 @@ import org.koin.dsl.module
 val appModule = module {
 
     viewModelOf(::HomeScreenViewModel)
-    viewModelOf(::BottomBarViewModel)
     viewModelOf(::SettingsScreenViewModel)
 }

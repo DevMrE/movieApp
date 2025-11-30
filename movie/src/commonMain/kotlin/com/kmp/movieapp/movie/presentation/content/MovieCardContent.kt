@@ -1,5 +1,6 @@
-package com.kmp.movieapp.movie.presentation.component
+package com.kmp.movieapp.movie.presentation.content
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,16 +24,20 @@ import com.kmp.movieapp.core.presentation.material.gradient
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.core.util.imageloader.ImageLoader
+import com.kmp.movieapp.movie.Res
+import com.kmp.movieapp.movie.movie_not_found
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
+import org.jetbrains.compose.resources.painterResource
 
-fun LazyListScope.movieCardComponent(
+fun LazyListScope.movieCardContent(
     bigCard: Boolean,
     movieList: List<UiMovie>,
     onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->
-        val width = if (bigCard) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
+        val width =
+            if (bigCard) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
 
         Card(
             modifier = Modifier
@@ -48,11 +53,18 @@ fun LazyListScope.movieCardComponent(
                 modifier = Modifier.fillMaxSize()
             ) {
 
-                ImageLoader(
-                    url = movie.posterPath,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.gradientOverlay(MaterialTheme.gradient.card)
-                )
+                if (movie.posterPath != null) {
+                    ImageLoader(
+                        url = movie.posterPath,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier.gradientOverlay(MaterialTheme.gradient.card)
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(Res.drawable.movie_not_found),
+                        contentDescription = null
+                    )
+                }
 
                 Column(
                     modifier = Modifier

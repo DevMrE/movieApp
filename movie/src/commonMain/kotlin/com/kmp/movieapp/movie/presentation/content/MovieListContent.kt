@@ -1,4 +1,4 @@
-package com.kmp.movieapp.movie.presentation.component
+package com.kmp.movieapp.movie.presentation.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,11 +14,13 @@ import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.movie.Res
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovieList
+import com.kmp.movieapp.movie.see_all
 import org.jetbrains.compose.resources.stringResource
 
-fun LazyListScope.movieListComponent(
+fun LazyListScope.movieListContent(
     uiMovieList: UiMovieList,
     onAction: (MovieAction) -> Unit
 ) {
@@ -27,7 +29,7 @@ fun LazyListScope.movieListComponent(
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.ten),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            uiMovieList.titleRes?.let { titleRes ->
+            uiMovieList.title?.let {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -37,7 +39,7 @@ fun LazyListScope.movieListComponent(
                 ) {
 
                     Text(
-                        text = stringResource(titleRes),
+                        text = it,
                         style = MaterialTheme.typography.headlineMedium
                     )
 
@@ -46,7 +48,7 @@ fun LazyListScope.movieListComponent(
 
                         },
                     ) {
-                        Text("See All")
+                        Text(stringResource(Res.string.see_all))
                     }
                 }
             }
@@ -57,8 +59,8 @@ fun LazyListScope.movieListComponent(
                 contentPadding = PaddingValues(horizontal = MaterialTheme.padding.thirty)
             ) {
 
-                movieCardComponent(
-                    bigCard = uiMovieList.titleRes == null,
+                movieCardContent(
+                    bigCard = uiMovieList.title == null,
                     movieList = uiMovieList.movies,
                     onAction = onAction
                 )

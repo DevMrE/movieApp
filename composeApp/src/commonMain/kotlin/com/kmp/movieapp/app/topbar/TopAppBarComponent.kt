@@ -2,7 +2,7 @@ package com.kmp.movieapp.app.topbar
 
 import androidx.compose.runtime.Composable
 import com.kmp.movieapp.app.topbar.component.TopAppBarContent
-import com.kmp.movieapp.homescreen.destination.HomeScreenDestination
+import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
 import com.kmp.movieapp.settings.destination.SettingsScreenDestination
 import com.kmp.navigation.compose.rememberNavDestination
@@ -14,7 +14,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun TopAppBarComponent() {
-    val navDestination = rememberNavDestination(initialDestination = HomeScreenDestination)
+    val navDestination = rememberNavDestination()
 
     val screenStringResource = when (navDestination) {
         is SettingsScreenDestination -> Res.string.settings_screen_title
@@ -23,13 +23,10 @@ fun TopAppBarComponent() {
 
     val enableBackNavigation = when (navDestination) {
         is MovieDetailDestination,
-        is SeriesDetailScreenDestination -> true
+        is SeriesDetailScreenDestination -> false
 
-        else -> false
+        else -> true
     }
 
-    TopAppBarContent(
-        title = stringResource(screenStringResource),
-        navigationIconEnabled = enableBackNavigation
-    )
+    if (enableBackNavigation.isTrue) TopAppBarContent(title = stringResource(screenStringResource))
 }

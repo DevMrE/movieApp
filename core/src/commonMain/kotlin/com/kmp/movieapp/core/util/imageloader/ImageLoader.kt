@@ -1,13 +1,16 @@
 package com.kmp.movieapp.core.util.imageloader
 
+import androidx.compose.foundation.Image
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import com.kmp.movieapp.core.Res
+import com.kmp.movieapp.core.movie_not_found
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun ImageLoader(
@@ -29,9 +32,9 @@ fun ImageLoader(
         },
         onFailure = { exception ->
             // Optional: Fallback, Error-Icon, Logging, ...
-            Text(
-                text = "Fehler beim Laden",
-                modifier = Modifier.align(Alignment.Center)
+            Image(
+                painter = painterResource(Res.drawable.movie_not_found),
+                contentDescription = null
             )
         }
     )

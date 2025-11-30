@@ -7,6 +7,7 @@ import com.kmp.movieapp.movie.popular
 import com.kmp.movieapp.movie.presentation.model.UiMovie
 import com.kmp.movieapp.movie.presentation.model.UiMovieList
 import com.kmp.movieapp.movie.top_rated
+import org.jetbrains.compose.resources.getString
 
 fun Movie.toUiMovie() = UiMovie(
     id = id,
@@ -15,10 +16,10 @@ fun Movie.toUiMovie() = UiMovie(
     posterPath = posterPath,
 )
 
-fun List<Movie>.toUiMovieList(category: MovieCategory): UiMovieList = UiMovieList(
-    titleRes = when (category) {
-        MovieCategory.POPULAR -> Res.string.popular
-        MovieCategory.TOP_RATED -> Res.string.top_rated
+suspend fun List<Movie>.toUiMovieList(category: MovieCategory): UiMovieList = UiMovieList(
+    title = when (category) {
+        MovieCategory.POPULAR -> getString(Res.string.popular)
+        MovieCategory.TOP_RATED -> getString(Res.string.top_rated)
         else -> null
     },
     movies = this.map { it.toUiMovie() }

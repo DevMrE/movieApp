@@ -1,36 +1,46 @@
 [versions]
+# Build
 agp = "8.13.1"
-androidx-activity = "1.11.0"
-androidx-appcompat = "1.7.1"
-androidx-core = "1.17.0"
-androidx-lifecycle = "2.9.6"
-composeHotReload = "1.0.0-rc02"
-composeMultiplatform = "1.9.3"
+# Kotlin
 kotlin = "2.2.21"
-kotlinx-coroutines = "1.10.2"
-kotlinStdlib = "2.2.21"
-comoseNavigationVersion = "2.9.1"
+# AndroidX Basis
+androidx-activity = "1.12.0"
+androidx-appcompat = "1.7.1"
+# Compose Multiplatform 1.10.0-beta02 Stack
+composeMultiplatform = "1.9.3"
+# JetBrains-AndroidX (KMP Jetpack-Ports)
+androidx-lifecycle = "2.10.0-alpha05"
+savedStateVersion = "1.4.0-rc01"
+slf4jSimple = "2.0.17"
+windowCoreVersion = "1.5.0"
+composeHotReload = "1.0.0-rc02"
+# other
 koinVersion = "4.1.1"
-ktorVersion = "3.3.2"
+ktorVersion = "3.3.3"
 loggerVersion = "2.0.8"
 kamelVersion = "1.0.8"
-kotlinTest = "2.2.21"
-runner = "1.5.2"
-core = "1.5.0"
-junit = "1.3.0"
-kmpNavigationVersion = "0.2.2"
+kmpNavigationVersion = "0.5.5"
 
 [libraries]
+# Kotlin
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+# AndroidX / Jetpack
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+# JetBrains AndroidX Lifecycle
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
-kotlinx-coroutinesSwing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "kotlinx-coroutines" }
-kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlinStdlib" }
-composeNavigation = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "comoseNavigationVersion" }
+# SavedState & Window
+savedState = { module = "org.jetbrains.androidx.savedstate:savedstate", version.ref = "savedStateVersion" }
+window-core = { module = "org.jetbrains.androidx.window:window-core", version.ref = "windowCoreVersion" }
+# SLF
+slf4j = { module = "org.slf4j:slf4j-simple", version.ref = "slf4jSimple" }
+# Koin
 koinCore = { group = "io.insert-koin", name = "koin-core", version.ref = "koinVersion" }
 koinCompose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koinVersion" }
 koinCoreViewModel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koinVersion" }
 koinCoreNavigation = { group = "io.insert-koin", name = "koin-compose-viewmodel-navigation", version.ref = "koinVersion" }
+# Ktor
 ktorCore = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorVersion" }
 ktorLogging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktorVersion" }
 ktorNegotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktorVersion" }
@@ -40,26 +50,30 @@ ktorAuth = { group = "io.ktor", name = "ktor-client-auth", version.ref = "ktorVe
 ktorOkHttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktorVersion" }
 ktorDarwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktorVersion" }
 ktorResource = { group = "io.ktor", name = "ktor-client-resources", version.ref = "ktorVersion" }
+# Logging
 logger = { group = "co.touchlab", name = "kermit", version.ref = "loggerVersion" }
+# Image Loading
 kamel = { module = "media.kamel:kamel-image-default", version.ref = "kamelVersion" }
-kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlinTest" }
-androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
-androidx-core = { group = "androidx.test", name = "core", version.ref = "core" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+# KmpNavigation
 kmpNavigation = { module = "com.kmp.navigation:navigation", version.ref = "kmpNavigationVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
-composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
+androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
+androidLint = { id = "com.android.lint", version.ref = "agp" }
+# Compose Multiplatform Gradle Plugin
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+# Compose Compiler Plugin (K2)
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+# Kotlin Multiplatform & Co.
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
-androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
-androidLint = { id = "com.android.lint", version.ref = "agp" }
+# Compose Hot Reload
+composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
 
 [bundles]
+lifecycle = ["androidx-lifecycle-runtimeCompose", "androidx-lifecycle-viewmodelCompose"]
 commainMainKoin = ["koinCore", "koinCoreViewModel", "koinCoreNavigation", "koinCompose"]
 commonMainKtor = ["ktorCore", "ktorLogging", "ktorNegotiation", "ktorAuth", "ktorResource", "ktorGson", "ktorBomRemover"]

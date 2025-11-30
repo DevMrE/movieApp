@@ -1,4 +1,4 @@
-package com.kmp.movieapp.movie.presentation.screen.mobile
+package com.kmp.movieapp.movie.presentation.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -6,20 +6,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.movie.presentation.MovieScreenViewModel
-import com.kmp.movieapp.movie.presentation.component.movieListComponent
-import org.koin.compose.viewmodel.koinViewModel
+import com.kmp.movieapp.core.util.action.Action
+import com.kmp.movieapp.movie.presentation.model.UiMovieScreen
 
 @Composable
-fun MobileMovieScreenComponent() {
-    val viewModel = koinViewModel<MovieScreenViewModel>()
-    val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
-
+fun MovieScreenContent(
+    movieScreenState: UiMovieScreen?,
+    onAction: (Action) -> Unit
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -27,19 +24,19 @@ fun MobileMovieScreenComponent() {
         contentPadding = PaddingValues(vertical = MaterialTheme.padding.thirty)
     ) {
         movieScreenState?.let { screen ->
-            movieListComponent(
+            movieListContent(
                 uiMovieList = screen.nowPlaying,
-                onAction = viewModel::onAction
+                onAction = onAction
             )
 
-            movieListComponent(
+            movieListContent(
                 uiMovieList = screen.popularMovie,
-                onAction = viewModel::onAction
+                onAction = onAction
             )
 
-            movieListComponent(
+            movieListContent(
                 uiMovieList = screen.topRatedMovies,
-                onAction = viewModel::onAction
+                onAction = onAction
             )
         }
     }
