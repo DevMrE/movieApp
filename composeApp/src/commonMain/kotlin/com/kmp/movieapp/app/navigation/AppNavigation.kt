@@ -23,7 +23,7 @@ import org.jetbrains.compose.resources.vectorResource
 
 fun registerAppNavigation() {
     registerNavigation(startDestination = MovieScreenDestination) {
-        section<HomeScreenSection>(root = MovieScreenDestination) {
+        section(section = HomeScreenSection, root = MovieScreenDestination) {
             screen<MovieScreenDestination> { navDestination ->
                 HomeScreenTabComponent(navDestination)
             }
@@ -46,7 +46,7 @@ fun registerAppNavigation() {
             }
         }
 
-        section<SettingsSection>(root = SettingsScreenDestination) {
+        section(section = SettingsSection, root = SettingsScreenDestination) {
             screen<SettingsScreenDestination> {
                 SettingsScreenComponent()
             }

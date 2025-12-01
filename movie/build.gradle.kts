@@ -39,11 +39,12 @@ kotlin {
 
                 implementation(compose.ui)
                 implementation(compose.runtime)
+                implementation(compose.material)
                 implementation(compose.material3)
                 implementation(compose.foundation)
                 implementation(compose.components.resources)
-                implementation(compose.materialIconsExtended)
-                implementation(compose.components.uiToolingPreview)
+                implementation(libs.savedState)
+                implementation(libs.window.core)
 
                 implementation(libs.bundles.lifecycle)
 

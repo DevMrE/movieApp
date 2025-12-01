@@ -6,7 +6,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
 import com.kmp.movieapp.settings.destination.SettingsSection
-import com.kmp.navigation.compose.rememberNavDestination
+import com.kmp.navigation.compose.rememberNavSection
 import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.movie
@@ -16,11 +16,11 @@ import org.jetbrains.compose.resources.vectorResource
 @Composable
 fun BottomBarComponent() {
     val navigation = rememberNavigation()
-    val navDestination = rememberNavDestination()
+    val navSection = rememberNavSection(initialSection = HomeScreenSection)
 
     NavigationBar {
         NavigationBarItem(
-            selected = navDestination != HomeScreenSection,
+            selected = navSection == HomeScreenSection,
             onClick = { navigation.switchTo(HomeScreenSection) },
             icon = {
                 Icon(
@@ -31,7 +31,7 @@ fun BottomBarComponent() {
         )
 
         NavigationBarItem(
-            selected = navDestination == SettingsSection,
+            selected = navSection == SettingsSection,
             onClick = { navigation.switchTo(SettingsSection) },
             icon = {
                 Icon(

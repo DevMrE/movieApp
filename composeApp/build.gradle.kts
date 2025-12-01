@@ -63,15 +63,18 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.ui)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.kotlin.stdlib)
 
+            implementation(compose.ui)
+            implementation(compose.runtime)
+            implementation(compose.material)
+            implementation(compose.material3)
+            implementation(compose.foundation)
+            implementation(compose.components.resources)
+            implementation(libs.savedState)
+            implementation(libs.window.core)
+
+            implementation(libs.bundles.lifecycle)
             implementation(libs.bundles.commainMainKoin)
 
             // kmp navigation
