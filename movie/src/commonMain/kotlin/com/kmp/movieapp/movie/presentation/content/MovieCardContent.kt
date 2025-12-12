@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.core.presentation.composable.gradientOverlay
 import com.kmp.movieapp.core.presentation.material.gradient
 import com.kmp.movieapp.core.presentation.material.padding
@@ -43,21 +44,24 @@ fun LazyListScope.movieCardContent(
             modifier = Modifier
                 .height(MaterialTheme.size.movieCardHeight)
                 .width(width)
-                .clip(MaterialTheme.shapes.extraLarge)
                 .clickable {
                     onAction(MovieAction.OnNavigateToDetailScreen(movie.id))
                 },
-            shape = CardDefaults.elevatedShape
+            shape = MaterialTheme.shapes.extraLarge,
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 10.dp,
+            ),
         ) {
             Box(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .clip(shape = MaterialTheme.shapes.extraLarge)
             ) {
-
                 if (movie.posterPath != null) {
                     ImageLoader(
                         url = movie.posterPath,
                         contentScale = ContentScale.Crop,
-                        modifier = Modifier.gradientOverlay(MaterialTheme.gradient.card)
+                        modifier = Modifier.gradientOverlay(brush = MaterialTheme.gradient.card)
                     )
                 } else {
                     Image(
@@ -77,14 +81,12 @@ fun LazyListScope.movieCardContent(
                 ) {
                     Text(
                         text = movie.title,
-                        color = MaterialTheme.colorScheme.surface,
                         maxLines = 2,
                         style = MaterialTheme.typography.headlineSmall
                     )
 
                     Text(
                         text = movie.genre,
-                        color = MaterialTheme.colorScheme.surface,
                         maxLines = 1,
                         style = MaterialTheme.typography.labelSmall
                     )

@@ -1,5 +1,6 @@
 package com.kmp.movieapp.core.presentation.theme
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
@@ -40,6 +41,7 @@ fun AppTypography(): Typography {
             fontSize = 18.sp,
             lineHeight = 24.sp,
             hyphens = Hyphens.Auto,
+            color = MaterialTheme.colorScheme.surface
         ),
         titleMedium = TextStyle(
             fontSize = 18.sp,
@@ -64,6 +66,7 @@ fun AppTypography(): Typography {
             fontWeight = FontWeight.ExtraLight,
             fontFamily = jakartaFamily,
             lineHeight = 14.sp,
+            color = MaterialTheme.colorScheme.surface
         )
     )
 }

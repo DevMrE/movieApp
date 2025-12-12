@@ -39,7 +39,14 @@ fun HomeScreenTabComponent(
                 selected = navDestination == MovieScreenDestination,
                 onClick = { viewModel.onTabChanged(navDestination = MovieScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
-                icon = {}
+                icon = {},
+                colors = SegmentedButtonDefaults.colors(
+                    activeBorderColor = MaterialTheme.colorScheme.primary,
+                    activeContainerColor = MaterialTheme.colorScheme.primary,
+                    activeContentColor = MaterialTheme.colorScheme.background,
+                    inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    inactiveBorderColor = MaterialTheme.colorScheme.background
+                )
             ) {
                 Text(text = stringResource(resource = tab.movieTabResource))
             }
@@ -48,7 +55,14 @@ fun HomeScreenTabComponent(
                 selected = navDestination == SeriesScreenDestination,
                 onClick = { viewModel.onTabChanged(navDestination = SeriesScreenDestination) },
                 shape = SegmentedButtonDefaults.baseShape,
-                icon = {}
+                icon = {},
+                colors = SegmentedButtonDefaults.colors(
+                    activeBorderColor = MaterialTheme.colorScheme.primary,
+                    activeContainerColor = MaterialTheme.colorScheme.primary,
+                    activeContentColor = MaterialTheme.colorScheme.background,
+                    inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    inactiveBorderColor = MaterialTheme.colorScheme.background
+                )
             ) {
                 Text(text = stringResource(resource = tab.seriesTabResource))
             }
