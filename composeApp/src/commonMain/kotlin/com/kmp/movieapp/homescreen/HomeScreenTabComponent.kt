@@ -45,8 +45,8 @@ fun HomeScreenTabComponent(
                     activeContainerColor = MaterialTheme.colorScheme.primary,
                     activeContentColor = MaterialTheme.colorScheme.background,
                     inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-                    inactiveBorderColor = MaterialTheme.colorScheme.background
-                )
+                    inactiveBorderColor = MaterialTheme.colorScheme.background,
+                ),
             ) {
                 Text(text = stringResource(resource = tab.movieTabResource))
             }

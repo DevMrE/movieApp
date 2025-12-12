@@ -19,7 +19,7 @@ koinVersion = "4.1.1"
 ktorVersion = "3.3.3"
 loggerVersion = "2.0.8"
 kamelVersion = "1.0.8"
-kmpNavigationVersion = "0.6.1"
+kmpNavigationVersion = "0.6.4"
 
 [libraries]
 # Kotlin
