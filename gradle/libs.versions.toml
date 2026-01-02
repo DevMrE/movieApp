@@ -2,9 +2,9 @@
 # Build
 agp = "8.13.2"
 # Kotlin
-kotlin = "2.2.21"
+kotlin = "2.3.0"
 # AndroidX Basis
-androidx-activity = "1.12.1"
+androidx-activity = "1.12.2"
 androidx-appcompat = "1.7.1"
 # Compose Multiplatform 1.10.0-beta02 Stack
 composeMultiplatform = "1.9.3"
@@ -19,7 +19,7 @@ koinVersion = "4.1.1"
 ktorVersion = "3.3.3"
 loggerVersion = "2.0.8"
 kamelVersion = "1.0.8"
-kmpNavigationVersion = "0.6.4"
+kmpNavigationVersion = "0.7.2"
 
 [libraries]
 # Kotlin

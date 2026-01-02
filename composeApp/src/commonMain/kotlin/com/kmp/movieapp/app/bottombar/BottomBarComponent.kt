@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
 import com.kmp.movieapp.settings.destination.SettingsSection
-import com.kmp.navigation.compose.rememberNavSection
 import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.home
@@ -21,7 +20,6 @@ import org.jetbrains.compose.resources.vectorResource
 @Composable
 fun BottomBarComponent() {
     val navigation = rememberNavigation()
-    val navSection = rememberNavSection(initialSection = HomeScreenSection)
 
     Column {
         HorizontalDivider(
@@ -33,7 +31,7 @@ fun BottomBarComponent() {
             containerColor = MaterialTheme.colorScheme.background
         ) {
             NavigationBarItem(
-                selected = navSection == HomeScreenSection,
+                selected = true,
                 onClick = { navigation.switchTo(HomeScreenSection) },
                 icon = {
                     Icon(
@@ -48,7 +46,7 @@ fun BottomBarComponent() {
             )
 
             NavigationBarItem(
-                selected = navSection == SettingsSection,
+                selected = false,
                 onClick = { navigation.switchTo(SettingsSection) },
                 icon = {
                     Icon(

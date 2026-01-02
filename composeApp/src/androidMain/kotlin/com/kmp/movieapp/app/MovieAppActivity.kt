@@ -14,7 +14,7 @@ class MovieAppActivity : ComponentActivity() {
         registerAppNavigation()
 
         setContent {
-            MovieAppScreenComponent()
+            AppContent()
         }
     }
 }

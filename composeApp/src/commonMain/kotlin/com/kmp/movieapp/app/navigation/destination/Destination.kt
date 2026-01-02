@@ -1,11 +1,12 @@
-package com.kmp.series.presentation.destination
+package com.kmp.movieapp.app.navigation.destination
 
 import com.kmp.navigation.NavDestination
 import com.kmp.navigation.NavSection
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object SeriesScreenSection: NavSection
+data object AppRootDestination: NavDestination
 
 @Serializable
-data object SeriesScreenDestination : NavDestination
+object BottomBarSection : NavSection
+

@@ -13,31 +13,36 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.movie.presentation.MovieScreen
-import com.kmp.movieapp.movie.presentation.destination.MovieScreenDestination
-import com.kmp.navigation.NavDestination
-import com.kmp.series.presentation.SeriesScreen
-import com.kmp.series.presentation.destination.SeriesScreenDestination
+import com.kmp.movieapp.homescreen.destination.HomeScreenSection
+import com.kmp.movieapp.movie.presentation.destination.MovieScreenSection
+import com.kmp.navigation.compose.NavChildSectionsHost
+import com.kmp.navigation.compose.rememberActiveChildSection
+import com.kmp.navigation.compose.rememberNavigation
+import com.kmp.series.presentation.destination.SeriesScreenSection
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun HomeScreenTabComponent(
-    navDestination: NavDestination
-) {
+fun HomeScreen() {
     val viewModel = koinViewModel<HomeScreenViewModel>()
     val tab by viewModel.tabState.collectAsStateWithLifecycle()
+    val navigation = rememberNavigation()
+    val activeSection = rememberActiveChildSection(
+        parentSection = HomeScreenSection,
+        initialChild = MovieScreenSection
+    )
 
     Column {
         SingleChoiceSegmentedButtonRow(
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
                 .padding(horizontal = MaterialTheme.padding.twentyFive),
             space = MaterialTheme.padding.thirtySix
         ) {
             SegmentedButton(
-                selected = navDestination == MovieScreenDestination,
-                onClick = { viewModel.onTabChanged(navDestination = MovieScreenDestination) },
+                selected = activeSection == MovieScreenSection,
+                onClick = {
+                    navigation.switchTo(MovieScreenSection)
+                },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {},
                 colors = SegmentedButtonDefaults.colors(
@@ -52,8 +57,10 @@ fun HomeScreenTabComponent(
             }
 
             SegmentedButton(
-                selected = navDestination == SeriesScreenDestination,
-                onClick = { viewModel.onTabChanged(navDestination = SeriesScreenDestination) },
+                selected = activeSection == SeriesScreenSection,
+                onClick = {
+                    navigation.switchTo(SeriesScreenSection)
+                },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {},
                 colors = SegmentedButtonDefaults.colors(
@@ -68,10 +75,11 @@ fun HomeScreenTabComponent(
             }
         }
 
-        when (navDestination) {
-            MovieScreenDestination -> MovieScreen()
-            SeriesScreenDestination -> SeriesScreen()
-            else -> Unit
-        }
+//        when (destination) {
+//            MovieScreenDestination -> MovieScreen()
+//            SeriesScreenDestination -> SeriesScreen()
+//        }
+
+        NavChildSectionsHost(parentSection = HomeScreenSection)
     }
 }

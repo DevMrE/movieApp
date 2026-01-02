@@ -77,8 +77,11 @@ kotlin {
             implementation(libs.bundles.lifecycle)
             implementation(libs.bundles.commainMainKoin)
 
+            implementation(libs.logger)
+
             // kmp navigation
             implementation(libs.kmpNavigation)
+            // implementation(libs.navigation3)
 
             implementation(project(":core"))
             implementation(project(":movie"))

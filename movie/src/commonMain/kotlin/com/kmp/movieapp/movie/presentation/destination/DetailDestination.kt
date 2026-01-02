@@ -4,6 +4,6 @@ import com.kmp.navigation.NavDestination
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDetailDestination(
+data class DetailDestination(
     val id: Int
 ) : NavDestination
