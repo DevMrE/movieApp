@@ -30,7 +30,7 @@ class MovieServiceImpl(
                 val response = httpClient.get(
                     resource = MovieListRequestDto(
                         page = page,
-                        language = language,
+                        language = "de",
                         movieListCategory = movieListCategory.category
                     )
                 )

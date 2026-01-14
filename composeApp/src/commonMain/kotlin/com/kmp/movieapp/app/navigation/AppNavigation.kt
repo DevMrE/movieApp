@@ -48,11 +48,11 @@ fun registerAppNavigation() {
             tabletLandscape(
                 strategy = ScreenStrategy(
                     navBarPosition = NavigationBarPosition.Left,
-                    navBarFraction = 0.10f,
+                    navBarFraction = 0.1f,
                     twoPane = TwoPaneConfig(
                         enabled = true,
                         primaryPaneFraction = 1f,
-                        minWidthDp = 840f
+                        minWidthDp = 1024f
                     )
                 )
             )

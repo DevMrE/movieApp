@@ -61,6 +61,7 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.ktorOkHttp)
+            implementation(libs.android.conscrypt)
         }
 
         iosMain.dependencies {

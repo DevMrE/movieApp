@@ -81,7 +81,6 @@ kotlin {
 
             // kmp navigation
             implementation(libs.kmpNavigation)
-            // implementation(libs.navigation3)
 
             implementation(project(":core"))
             implementation(project(":movie"))
@@ -91,6 +90,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.android.conscrypt)
         }
 
         // iOS
