@@ -40,7 +40,8 @@ fun HomeScreen() {
 
     Column {
         SingleChoiceSegmentedButtonRow(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
                 .padding(horizontal = MaterialTheme.padding.twentyFive),
             space = MaterialTheme.padding.thirtySix
         ) {
