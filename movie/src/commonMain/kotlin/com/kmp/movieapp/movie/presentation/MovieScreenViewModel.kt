@@ -13,7 +13,6 @@ import com.kmp.navigation.Navigation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -28,13 +27,7 @@ class MovieScreenViewModel(
 
     init {
         viewModelScope.launch {
-            combine(
-                getMoviesForCategoryUseCase(movieCategory = MovieCategory.POPULAR),
-                getMoviesForCategoryUseCase(movieCategory = MovieCategory.TOP_RATED),
-                getMoviesForCategoryUseCase(movieCategory = MovieCategory.NOW_PLAYING)
-            ) { popular, topRated, nowPlaying ->
-                Triple(popular, topRated, nowPlaying)
-            }.collectLatest { (popular, topRated, nowPlaying) ->
+            getMoviesForCategoryUseCase().collectLatest { (popular, topRated, nowPlaying) ->
                 _movieScreenState.update {
                     UiMovieScreen(
                         isLoading = popular.isEmpty() || topRated.isEmpty() || nowPlaying.isEmpty(),
