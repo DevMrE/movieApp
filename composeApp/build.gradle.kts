@@ -2,7 +2,7 @@
 
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -10,55 +10,45 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
-    alias(libs.plugins.kotlinCocoapods)
     alias(libs.plugins.serialization)
 }
 
 kotlin {
-
     compilerOptions {
         freeCompilerArgs.add("-Xcontext-parameters")
     }
 
-    // Desktop - Windows + MacOS
+    // Desktop - Windows + macOS
     jvm("desktop")
 
-    // Android implementation
+    // Android
     androidTarget()
 
-    // iOS -> iPhone + iPad implementation
-    iosArm64()
-    iosSimulatorArm64()
+    // iOS (Framework + XCFramework)
+    val frameworkName = "ComposeApp"
+    val xcf = XCFramework(frameworkName)
 
-    // iOS Framework config
-    cocoapods {
-        val moduleName = "ComposeApp"
-        version = getPropertyString("app.version")
-        summary = "Some description for a Kotlin/Native module"
-        homepage = "Link to a Kotlin/Native module homepage"
+    val basePackage = getPropertyString("app.basePackagePath")
+    val frameworkBundleId = "$basePackage.${frameworkName.lowercase()}"
 
-        name = moduleName
+    listOf(
+        iosArm64(),
+        iosSimulatorArm64(),
+        // iosX64(),
+    ).forEach { target ->
+        target.binaries.framework {
+            baseName = frameworkName
 
-        ios.deploymentTarget = getPropertyString("ios.deploymentTarget")
+            // CFBundleIdentifier im Framework-Info.plist
+            binaryOption("bundleId", frameworkBundleId)
 
-        podfile = project.file("../iosApp/Podfile")
-
-        framework {
-            baseName = moduleName/*
-             * Do not confuse this static with the one from the Podfile.
-             * In the Podfile, we define whether the Podfile aggregator
-             * itself should be static or dynamic. Here, we define whether
-             * the ComposeApp framework should be passed dynamically to CocoaPods.
-             * In short, we want ComposeApp to be passed dynamically,
-             * but the PodAggregator should be static.
-             */
-            isStatic = false
+            // Wenn Swift auch APIs von exportierten Dependencies sehen soll:
+            // export(project(":core"))
             transitiveExport = true
-        }
 
-        // Maps custom Xcode configuration to NativeBuildType
-        xcodeConfigurationToNativeBuildType["CUSTOM_DEBUG"] = NativeBuildType.DEBUG
-        xcodeConfigurationToNativeBuildType["CUSTOM_RELEASE"] = NativeBuildType.RELEASE
+            isStatic = false
+            xcf.add(this)
+        }
     }
 
     sourceSets {
