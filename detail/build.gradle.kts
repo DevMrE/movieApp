@@ -1,7 +1,11 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeHotReload)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
@@ -14,14 +18,6 @@ kotlin {
         compileSdk = 36
         minSdk = 35
 
-        withHostTestBuilder {
-        }
-
-        withDeviceTestBuilder {
-            sourceSetTreeName = "test"
-        }.configure {
-            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        }
     }
 
     // For iOS targets, this is also where you should
@@ -60,13 +56,28 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
-            }
-        }
 
-        commonTest {
-            dependencies {
-                implementation(libs.kotlin.test)
+                implementation(compose.ui)
+                implementation(compose.runtime)
+                implementation(compose.material)
+                implementation(compose.material3)
+                implementation(compose.foundation)
+                implementation(compose.components.resources)
+                implementation(libs.savedState)
+                implementation(libs.window.core)
+
+                implementation(libs.bundles.lifecycle)
+
+                implementation(libs.logger)
+
+                // Add KMP dependencies here
+                implementation(libs.bundles.commainMainKoin)
+                implementation(libs.bundles.commonMainKtor)
+
+                // kmp navigation
+                implementation(libs.kmpNavigation)
+
+                implementation(project(":core"))
             }
         }
 
@@ -75,14 +86,6 @@ kotlin {
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
-            }
-        }
-
-        getByName("androidDeviceTest") {
-            dependencies {
-                implementation(libs.androidx.runner)
-                implementation(libs.androidx.core)
-                implementation(libs.androidx.junit)
             }
         }
 

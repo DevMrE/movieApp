@@ -5,16 +5,19 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
-import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteType
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
+import com.kmp.movieapp.movie.presentation.destination.MovieScreenSection
 import com.kmp.movieapp.settings.destination.SettingsSection
 import com.kmp.navigation.compose.rememberNavSection
 import com.kmp.navigation.compose.rememberNavigation
+import com.kmp.series.presentation.destination.SeriesScreenSection
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.ic_home
 import movieapp.composeapp.generated.resources.ic_settings
@@ -26,6 +29,20 @@ fun BottomBarWithAppContent(
 ) {
     val navigation = rememberNavigation()
     val section = rememberNavSection(initialSection = HomeScreenSection)
+
+    val homeScreenSelected = section in listOf(
+        MovieScreenSection, SeriesScreenSection,
+        HomeScreenSection
+    )
+
+    val settingsScreenSelected = section == SettingsSection
+
+    val itemColors = NavigationSuiteDefaults.itemColors(
+        navigationBarItemColors = NavigationBarItemDefaults.colors(
+            indicatorColor = Color.Transparent,
+            selectedIconColor = MaterialTheme.colorScheme.primary,
+        ),
+    )
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -39,7 +56,7 @@ fun BottomBarWithAppContent(
         NavigationSuiteScaffold(
             navigationSuiteItems = {
                 item(
-                    selected = section == HomeScreenSection,
+                    selected = homeScreenSelected,
                     onClick = {
                         navigation.switchTo(HomeScreenSection)
                     },
@@ -49,10 +66,11 @@ fun BottomBarWithAppContent(
                             contentDescription = null,
                         )
                     },
+                    colors = itemColors
                 )
 
                 item(
-                    selected = section == SettingsSection,
+                    selected = settingsScreenSelected,
                     onClick = {
                         navigation.switchTo(SettingsSection)
                     },
@@ -62,13 +80,12 @@ fun BottomBarWithAppContent(
                             contentDescription = null,
                         )
                     },
+                    colors = itemColors
                 )
             },
-            layoutType = NavigationSuiteType.ShortNavigationBarMedium,
             navigationSuiteColors = NavigationSuiteDefaults.colors(
-                navigationBarContainerColor = MaterialTheme.colorScheme.background,
-                shortNavigationBarContainerColor = MaterialTheme.colorScheme.background
-            ),
+                navigationBarContainerColor = MaterialTheme.colorScheme.background
+            )
         ) {
             content()
         }
