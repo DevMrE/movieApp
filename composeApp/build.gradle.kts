@@ -61,6 +61,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.foundation)
             implementation(compose.components.resources)
+            implementation(compose.material3AdaptiveNavigationSuite)
             implementation(libs.savedState)
             implementation(libs.window.core)
 

@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
-import com.kmp.movieapp.app.AppScreen
-import com.kmp.movieapp.app.navigation.destination.AppRootDestination
-import com.kmp.movieapp.app.navigation.destination.BottomBarSection
+import com.kmp.movieapp.app.BottomBarTypeComponent
+import com.kmp.movieapp.app.navigation.destination.AppRootSection
+import com.kmp.movieapp.app.navigation.destination.BottomBarDestination
 import com.kmp.movieapp.homescreen.HomeScreen
 import com.kmp.movieapp.homescreen.destination.HomeScreenDestination
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
@@ -29,12 +29,12 @@ import com.kmp.series.presentation.destination.SeriesScreenSection
 
 fun registerAppNavigation() {
     registerNavigation(
-        startDestination = AppRootDestination,
+        startDestination = BottomBarDestination,
         screenStrategies = {
             mobile(
                 strategy = ScreenStrategy(
                     navBarPosition = NavigationBarPosition.Bottom,
-                    navBarFraction = 0.12f
+                    navBarFraction = 0.1f
                 )
             )
 
@@ -71,8 +71,9 @@ fun registerAppNavigation() {
         }
     ) {
 
-        section(section = BottomBarSection, root = AppRootDestination) {
-            screen<AppRootDestination> { AppScreen() }
+        // The start point is the bottom bar himself and is therefore the root section of this app.
+        section(section = AppRootSection, root = BottomBarDestination) {
+            screen<BottomBarDestination> { BottomBarTypeComponent() }
 
             // BottomBar Children
             section(section = HomeScreenSection, root = HomeScreenDestination) {

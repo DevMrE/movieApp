@@ -4,7 +4,7 @@ import androidx.compose.material3.NavigationRail
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import com.kmp.movieapp.app.navigation.destination.BottomBarSection
+import com.kmp.movieapp.app.navigation.destination.AppRootSection
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
 import com.kmp.movieapp.settings.destination.SettingsSection
 import com.kmp.navigation.compose.rememberActiveChildSection
@@ -18,7 +18,7 @@ import org.jetbrains.compose.resources.stringResource
 fun SideBar() {
     val navigation = rememberNavigation()
     val active = rememberActiveChildSection(
-        parentSection = BottomBarSection, initialChild = HomeScreenSection
+        parentSection = AppRootSection, initialChild = HomeScreenSection
     )
 
     NavigationRail {
@@ -27,7 +27,7 @@ fun SideBar() {
             onClick = { navigation.switchTo(HomeScreenSection) },
             icon = {
 //                Icon(
-//                    painter = painterResource(Res.drawable.home), contentDescription = null
+//                    painter = painterResource(Res.drawable.ic_home), contentDescription = null
 //                )
             },
             label = { Text(stringResource(Res.string.home_screen)) }

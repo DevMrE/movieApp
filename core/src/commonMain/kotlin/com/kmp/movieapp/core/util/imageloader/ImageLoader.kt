@@ -1,6 +1,8 @@
 package com.kmp.movieapp.core.util.imageloader
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,9 +28,13 @@ fun ImageLoader(
         modifier = modifier,
         contentScale = contentScale,
         onLoading = { progress ->
-            loadingContent?.let {
-                it()
-            } ?: CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            if (loadingContent == null) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
+            } else {
+                loadingContent()
+            }
         },
         onFailure = { exception ->
             // Optional: Fallback, Error-Icon, Logging, ...

@@ -5,8 +5,8 @@ import com.kmp.navigation.NavSection
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object AppRootDestination: NavDestination
+data object BottomBarDestination: NavDestination
 
 @Serializable
-object BottomBarSection : NavSection
+object AppRootSection : NavSection
 

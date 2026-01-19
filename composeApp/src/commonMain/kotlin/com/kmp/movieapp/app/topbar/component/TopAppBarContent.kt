@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import com.kmp.movieapp.core.presentation.material.padding
 import movieapp.composeapp.generated.resources.Res
-import movieapp.composeapp.generated.resources.movie
+import movieapp.composeapp.generated.resources.ic_movie
 import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -27,7 +27,7 @@ fun TopAppBarContent(
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.five)
             ) {
                 Icon(
-                    imageVector = vectorResource(Res.drawable.movie),
+                    imageVector = vectorResource(Res.drawable.ic_movie),
                     contentDescription = null
                 )
 
