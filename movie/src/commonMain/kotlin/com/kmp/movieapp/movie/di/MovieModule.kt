@@ -6,6 +6,7 @@ import com.kmp.movieapp.movie.data.service.MovieServiceImpl
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
 import com.kmp.movieapp.movie.presentation.MovieScreenViewModel
+import com.kmp.movieapp.movie.presentation.movieList.MovieListViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -23,4 +24,6 @@ val movieModule = module {
     }
 
     viewModelOf(::MovieScreenViewModel)
+
+    viewModelOf(::MovieListViewModel)
 }

@@ -7,4 +7,6 @@ sealed interface MovieAction : Action {
     data class OnNavigateToDetailScreen(val id: Int) : MovieAction
 
     data class OnStartTrailer(val id: Int) : MovieAction
+
+    data object OnSeeAllClicked : MovieAction
 }

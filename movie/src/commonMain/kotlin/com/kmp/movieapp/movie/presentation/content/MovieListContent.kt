@@ -45,7 +45,7 @@ fun LazyListScope.movieListContent(
 
                     TextButton(
                         onClick = {
-
+                            onAction(MovieAction.OnSeeAllClicked)
                         },
                     ) {
                         Text(stringResource(Res.string.see_all))

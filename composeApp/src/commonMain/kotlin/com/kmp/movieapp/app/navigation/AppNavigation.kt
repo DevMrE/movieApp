@@ -2,18 +2,19 @@ package com.kmp.movieapp.app.navigation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.kmp.detail.presentation.DetailScreen
+import com.kmp.detail.presentation.destination.DetailNavDestination
 import com.kmp.movieapp.homescreen.HomeScreen
 import com.kmp.movieapp.homescreen.destination.HomeScreenDestination
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
 import com.kmp.movieapp.movie.presentation.MovieScreen
-import com.kmp.movieapp.movie.presentation.destination.DetailDestination
+import com.kmp.movieapp.movie.presentation.content.destination.PopularMovieDestination
 import com.kmp.movieapp.movie.presentation.destination.MovieScreenDestination
 import com.kmp.movieapp.movie.presentation.destination.MovieScreenSection
+import com.kmp.movieapp.movie.presentation.movieList.PopularMovieListScreen
 import com.kmp.movieapp.settings.destination.SettingsScreenDestination
 import com.kmp.movieapp.settings.destination.SettingsSection
 import com.kmp.navigation.ScreenRole
@@ -46,18 +47,12 @@ fun registerAppNavigation() {
                 }
             }
 
-            screen<DetailDestination>(role = ScreenRole.Detail) { detail ->
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ) { paddingValues ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(paddingValues)
-                    ) {
-                        Text("Detail for: ${detail.id}", modifier = Modifier.align(Alignment.Center))
-                    }
-                }
+            screen<DetailNavDestination>(role = ScreenRole.Detail) { detail ->
+                DetailScreen(detail.movieId)
+            }
+
+            screen<PopularMovieDestination> {
+                PopularMovieListScreen()
             }
         }
 

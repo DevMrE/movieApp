@@ -12,14 +12,18 @@ import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.updateAndGet
 
 class MovieRepositoryImpl(
     private val movieService: MovieService
 ) : MovieRepository {
+
+    private val _movieList: MutableStateFlow<List<Movie>> = MutableStateFlow(emptyList())
 
     val genresState: StateFlow<List<MovieGenre>> = flow {
         movieService.fetchMovieGenres("de")
@@ -41,11 +45,12 @@ class MovieRepositoryImpl(
 
     override suspend fun getMovies(
         language: String,
+        page: Int,
         movieCategory: MovieCategory
     ): Flow<List<Movie>> = flow {
         movieService.fetchMoviesForCategory(
             language = language,
-            page = 1,
+            page = page,
             movieListCategory = movieCategory.toMovieListCategory()
         ).onSuccess { data ->
             val movieList = data.movieList?.mapNotNull { movieDto ->
@@ -54,7 +59,8 @@ class MovieRepositoryImpl(
                 )
             } ?: emptyList()
 
-            emit(movieList)
+            val updatedList = _movieList.updateAndGet { it + movieList }.distinct()
+            emit(updatedList)
         }.onFailure { error ->
             error.message?.let { message ->
                 Logger.e(throwable = error, tag = "Movies", messageString = message)

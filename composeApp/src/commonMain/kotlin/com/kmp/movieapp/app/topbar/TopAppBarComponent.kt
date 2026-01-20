@@ -1,10 +1,10 @@
 package com.kmp.movieapp.app.topbar
 
 import androidx.compose.runtime.Composable
+import com.kmp.detail.presentation.destination.DetailNavDestination
 import com.kmp.movieapp.app.topbar.component.TopAppBarContent
 import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
-import com.kmp.movieapp.movie.presentation.destination.DetailDestination
 import com.kmp.movieapp.settings.destination.SettingsSection
 import com.kmp.navigation.compose.rememberNavSection
 import movieapp.composeapp.generated.resources.Res
@@ -22,7 +22,7 @@ fun TopAppBarComponent() {
     }
 
     val enableBackNavigation = when (navSection) {
-        DetailDestination -> false
+        DetailNavDestination -> false
         else -> true
     }
 

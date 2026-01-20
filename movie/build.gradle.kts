@@ -57,6 +57,7 @@ kotlin {
                 // kmp navigation
                 implementation(libs.kmpNavigation)
 
+                implementation(project(":detail"))
                 implementation(project(":core"))
             }
         }
