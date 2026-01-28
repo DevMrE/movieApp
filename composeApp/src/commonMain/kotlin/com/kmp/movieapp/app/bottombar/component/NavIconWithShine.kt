@@ -28,11 +28,11 @@ internal fun NavIconWithShine(
     label: String,
 ) {
     val glowAlpha = if (selected) 1f else 0f
-    val glowColor = LocalContentColor.current // <- nimmt selectedIconColor (z.B. primary)
+    val glowColor = LocalContentColor.current
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.ten)
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.two)
     ) {
         Box(
             modifier = Modifier.size(52.dp),
