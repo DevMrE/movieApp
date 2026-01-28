@@ -44,8 +44,8 @@ internal fun NavIconWithShine(
                     .graphicsLayer(alpha = glowAlpha)
                     .blur(20.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
                     .drawBehind {
-                        val r = size.minDimension * 0.30f      // Ring-Radius
-                        val w = size.minDimension * 0.22f      // Ring-Dicke
+                        val r = size.minDimension * 0.30f      // Ring-radius
+                        val w = size.minDimension * 0.22f      // Ring-thickness
                         drawCircle(
                             color = glowColor.copy(alpha = 0.85f),
                             radius = r,
