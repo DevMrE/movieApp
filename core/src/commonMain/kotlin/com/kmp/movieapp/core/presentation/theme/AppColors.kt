@@ -19,6 +19,7 @@ val LightColorScheme = lightColorScheme(
     surfaceVariant = Color(0xE4BBBBBB),
     onSurfaceVariant = Color(0xFF212121),
 
+    tertiary = Color(0xFF03DAC6),
     outline = Color(0xFF757575),
 )
 
@@ -37,5 +38,6 @@ val DarkColorScheme = darkColorScheme(
     surfaceVariant = Color(0xFF2C2C2C),
     onSurfaceVariant = Color(0xFFE0E0E0),
 
+    tertiary = Color(0xFF395886),
     outline = Color(0xFFB0B0B0),
 )

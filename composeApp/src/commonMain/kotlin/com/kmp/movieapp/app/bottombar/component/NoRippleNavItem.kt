@@ -1,0 +1,55 @@
+package com.kmp.movieapp.app.bottombar.component
+
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun NoRippleNavItem(
+    selected: Boolean,
+    onClick: () -> Unit,
+    icon: ImageVector,
+    label: String,
+    colors: NavigationBarItemColors,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    val interactionSource = remember { MutableInteractionSource() }
+
+    Box(
+        modifier = modifier
+            .selectable(
+                selected = selected,
+                enabled = enabled,
+                role = Role.Tab,
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            )
+            .padding(vertical = 6.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        // Icon + Text bekommen ihre Farben, dein Glow kann weiterhin LocalContentColor nutzen
+        CompositionLocalProvider(LocalContentColor provides colors.selectedIconColor) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                NavIconWithShine(
+                    selected = selected,
+                    icon = icon,
+                    label = label,
+                )
+            }
+        }
+    }
+}
