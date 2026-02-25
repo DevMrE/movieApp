@@ -36,7 +36,7 @@ import com.kmp.movieapp.core.jakarta_semi_bold_italic
 import org.jetbrains.compose.resources.Font
 
 @Composable
-fun JakartaFontFamily() = FontFamily(
+fun jakartaFontFamily() = FontFamily(
     Font(
         resource = Res.font.jakarta_light,
         weight = FontWeight.Light,
@@ -105,7 +105,7 @@ fun JakartaFontFamily() = FontFamily(
 )
 
 @Composable
-fun GenosFontFamily() = FontFamily(
+fun genosFontFamily() = FontFamily(
     Font(
         resource = Res.font.genos_light,
         weight = FontWeight.Light,

@@ -10,9 +10,9 @@ import androidx.compose.ui.text.style.LineBreak
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun AppTypography(): Typography {
-    val jakartaFamily = JakartaFontFamily()
-    val genosFamily = GenosFontFamily()
+fun appTypography(): Typography {
+    val jakartaFamily = jakartaFontFamily()
+    val genosFamily = genosFontFamily()
 
     return Typography(
         displayLarge = TextStyle(
