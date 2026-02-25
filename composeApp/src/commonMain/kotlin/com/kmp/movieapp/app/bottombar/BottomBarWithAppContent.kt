@@ -1,5 +1,8 @@
 package com.kmp.movieapp.app.bottombar
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -22,11 +25,12 @@ import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.app.bottombar.component.NoRippleNavItem
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeScreenSection
-import com.kmp.movieapp.movie.presentation.destination.MovieScreenSection
+import com.kmp.movieapp.movie.presentation.destination.MovieScreenDestination
+import com.kmp.movieapp.settings.destination.SettingsScreenDestination
 import com.kmp.movieapp.settings.destination.SettingsSection
-import com.kmp.navigation.compose.rememberNavSection
+import com.kmp.navigation.compose.rememberNavDestination
 import com.kmp.navigation.compose.rememberNavigation
-import com.kmp.series.presentation.destination.SeriesScreenSection
+import com.kmp.series.presentation.destination.SeriesScreenDestination
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.home_screen
 import movieapp.composeapp.generated.resources.ic_home
@@ -38,13 +42,13 @@ import org.jetbrains.compose.resources.vectorResource
 @Composable
 internal fun BottomBarWithAppContent() {
     val navigation = rememberNavigation()
-    val section = rememberNavSection(initialSection = HomeScreenSection)
+    val navDestination = rememberNavDestination(initialDestination = MovieScreenDestination)
 
-    val homeScreenSelected = section in listOf(
-        MovieScreenSection, SeriesScreenSection, HomeScreenSection
+    val homeScreenSelected = navDestination in listOf(
+        MovieScreenDestination, SeriesScreenDestination
     )
 
-    val settingsScreenSelected = section == SettingsSection
+    val settingsScreenSelected = navDestination == SettingsScreenDestination
 
     val itemColors = NavigationSuiteDefaults.itemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
@@ -58,50 +62,56 @@ internal fun BottomBarWithAppContent() {
 
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
-    Box(
-        Modifier
-            .fillMaxWidth()
-            .navigationBarsPadding()
-            .padding(horizontal = MaterialTheme.padding.sixteen)
-            .clip(MaterialTheme.shapes.large)
+    AnimatedVisibility(
+        visible = homeScreenSelected || settingsScreenSelected,
+        enter = fadeIn(),
+        exit = fadeOut()
     ) {
-        Surface(
-            modifier = Modifier
+        Box(
+            Modifier
                 .fillMaxWidth()
-                .background(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f))
-                .border(
-                    width = 2.dp,
-                    color = borderColor,
-                    shape = MaterialTheme.shapes.large
-                ),
-            color = Color.Transparent,
-            tonalElevation = 0.dp,
+                .navigationBarsPadding()
+                .padding(horizontal = MaterialTheme.padding.sixteen)
+                .clip(MaterialTheme.shapes.large)
         ) {
-            Row(
-                modifier = Modifier.padding(vertical = MaterialTheme.padding.five),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f))
+                    .border(
+                        width = 2.dp,
+                        color = borderColor,
+                        shape = MaterialTheme.shapes.large
+                    ),
+                color = Color.Transparent,
+                tonalElevation = 0.dp,
             ) {
+                Row(
+                    modifier = Modifier.padding(vertical = MaterialTheme.padding.five),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
 
-                NoRippleNavItem(
-                    selected = homeScreenSelected,
-                    onClick = {
-                        navigation.switchTo(HomeScreenSection)
-                    },
-                    icon = vectorResource(Res.drawable.ic_home),
-                    label = stringResource(Res.string.home_screen),
-                    colors = itemColors.navigationBarItemColors
-                )
+                    NoRippleNavItem(
+                        selected = homeScreenSelected,
+                        onClick = {
+                            navigation.switchTo(HomeScreenSection)
+                        },
+                        icon = vectorResource(Res.drawable.ic_home),
+                        label = stringResource(Res.string.home_screen),
+                        colors = itemColors.navigationBarItemColors
+                    )
 
-                NoRippleNavItem(
-                    selected = settingsScreenSelected,
-                    onClick = {
-                        navigation.switchTo(SettingsSection)
-                    },
-                    icon = vectorResource(Res.drawable.ic_settings),
-                    label = stringResource(Res.string.settings_screen_title),
-                    colors = itemColors.navigationBarItemColors
-                )
+                    NoRippleNavItem(
+                        selected = settingsScreenSelected,
+                        onClick = {
+                            navigation.switchTo(SettingsSection)
+                        },
+                        icon = vectorResource(Res.drawable.ic_settings),
+                        label = stringResource(Res.string.settings_screen_title),
+                        colors = itemColors.navigationBarItemColors
+                    )
+                }
             }
         }
     }
