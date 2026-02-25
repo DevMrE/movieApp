@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 data class Padding(
     val two: Dp = 2.dp,
     val five: Dp = 5.dp,
+    val six: Dp = 6.dp,
     val ten: Dp = 10.dp,
     val twelfth: Dp = 12.dp,
     val fifteen: Dp = 15.dp,

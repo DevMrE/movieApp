@@ -59,22 +59,26 @@ internal fun BottomBarWithAppContent() {
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
     Box(
-        Modifier.fillMaxWidth().navigationBarsPadding().padding(
-            horizontal = MaterialTheme.padding.sixteen, vertical = MaterialTheme.padding.twelfth
-        ).clip(MaterialTheme.shapes.large)
+        Modifier
+            .fillMaxWidth()
+            .navigationBarsPadding()
+            .padding(horizontal = MaterialTheme.padding.sixteen)
+            .clip(MaterialTheme.shapes.large)
     ) {
         Surface(
-            modifier = Modifier.fillMaxWidth()
-                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.98f)).border(
-                    width = 2.dp, color = borderColor, shape = MaterialTheme.shapes.large
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f))
+                .border(
+                    width = 2.dp,
+                    color = borderColor,
+                    shape = MaterialTheme.shapes.large
                 ),
             color = Color.Transparent,
             tonalElevation = 0.dp,
         ) {
             Row(
-                modifier = Modifier.padding(
-                    vertical = MaterialTheme.padding.five,
-                ),
+                modifier = Modifier.padding(vertical = MaterialTheme.padding.five),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {

@@ -63,10 +63,9 @@ fun AppTypography(): Typography {
         ),
         labelSmall = TextStyle(
             fontSize = 14.sp,
-            fontWeight = FontWeight.ExtraLight,
+            fontWeight = FontWeight.Black,
             fontFamily = jakartaFamily,
             lineHeight = 14.sp,
-            color = MaterialTheme.colorScheme.surface
         )
     )
 }

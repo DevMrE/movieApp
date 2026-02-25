@@ -1,8 +1,8 @@
 package com.kmp.movieapp.app.bottombar.component
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.core.presentation.material.size
 
 @Composable
 internal fun NavIconWithShine(
@@ -32,20 +33,21 @@ internal fun NavIconWithShine(
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.two)
     ) {
         Box(
-            modifier = Modifier.size(52.dp),
+            modifier = Modifier
+                .size(52.dp)
+                .padding(vertical = MaterialTheme.padding.ten),
             contentAlignment = Alignment.Center
         ) {
             Box(
                 modifier = Modifier
                     .matchParentSize()
                     .graphicsLayer(alpha = glowAlpha)
-                    .blur(20.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
+                    .blur(radius = 20.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
                     .drawBehind {
                         val r = size.minDimension * 0.30f      // Ring-radius
-                        val w = size.minDimension * 0.22f      // Ring-thickness
+                        val w = size.minDimension * 0.30f      // Ring-thickness
                         drawCircle(
                             color = glowColor.copy(alpha = 0.85f),
                             radius = r,
@@ -55,7 +57,11 @@ internal fun NavIconWithShine(
                     }
             )
 
-            Icon(imageVector = icon, contentDescription = null)
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(MaterialTheme.size.iconSize)
+            )
         }
 
         Text(

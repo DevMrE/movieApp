@@ -14,6 +14,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.movie.Res
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovieList
@@ -53,6 +54,8 @@ fun LazyListScope.movieListContent(
                 }
             }
 
+            val cardSize = if (uiMovieList.title == null) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
+
             LazyRow(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
@@ -60,7 +63,7 @@ fun LazyListScope.movieListContent(
             ) {
 
                 movieCardContent(
-                    bigCard = uiMovieList.title == null,
+                    width = cardSize,
                     movieList = uiMovieList.movies,
                     onAction = onAction
                 )

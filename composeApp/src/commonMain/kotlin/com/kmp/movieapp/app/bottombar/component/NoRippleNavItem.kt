@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import com.kmp.movieapp.core.presentation.material.padding
 
 @Composable
 fun NoRippleNavItem(
@@ -38,18 +40,15 @@ fun NoRippleNavItem(
                 indication = null,
                 onClick = onClick
             )
-            .padding(vertical = 6.dp),
+            .padding(vertical = MaterialTheme.padding.six),
         contentAlignment = Alignment.Center
     ) {
-        // Icon + Text bekommen ihre Farben, dein Glow kann weiterhin LocalContentColor nutzen
         CompositionLocalProvider(LocalContentColor provides colors.selectedIconColor) {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                NavIconWithShine(
-                    selected = selected,
-                    icon = icon,
-                    label = label,
-                )
-            }
+            NavIconWithShine(
+                selected = selected,
+                icon = icon,
+                label = label,
+            )
         }
     }
 }

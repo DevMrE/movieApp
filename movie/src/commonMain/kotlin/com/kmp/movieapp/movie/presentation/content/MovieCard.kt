@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.core.presentation.composable.gradientOverlay
 import com.kmp.movieapp.core.presentation.material.gradient
@@ -30,17 +31,16 @@ import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MovieCard(
-    bigCard: Boolean = false,
+    width: Dp,
     movieTitle: String,
     moviePosterPath: String?,
+    height: Dp = MaterialTheme.size.movieCardHeight,
     onClick: () -> Unit,
 ) {
-    val width =
-        if (bigCard) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
 
     Card(
         modifier = Modifier
-            .height(MaterialTheme.size.movieCardHeight)
+            .height(height)
             .width(width)
             .clickable {
                 onClick()
