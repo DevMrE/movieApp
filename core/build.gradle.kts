@@ -42,12 +42,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
             // Add KMP dependencies here
-            implementation(compose.ui)
-            implementation(compose.runtime)
-            implementation(compose.material)
-            implementation(compose.material3)
-            implementation(compose.foundation)
-            implementation(compose.components.resources)
+            implementation(libs.bundles.commonMainCompose)
 
             implementation(libs.logger)
 

@@ -7,7 +7,7 @@ import com.kmp.movieapp.movie.presentation.content.MovieScreenContent
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun MovieScreen() {
+fun MovieContent() {
     val viewModel = koinViewModel<MovieScreenViewModel>()
     val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
 

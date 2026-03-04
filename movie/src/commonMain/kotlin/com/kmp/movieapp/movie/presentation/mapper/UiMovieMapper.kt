@@ -10,7 +10,7 @@ import com.kmp.movieapp.movie.top_rated
 import org.jetbrains.compose.resources.getString
 
 fun Movie.toUiMovie() = UiMovie(
-    id = id,
+    id = id.toString(),
     title = title,
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,

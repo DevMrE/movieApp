@@ -11,17 +11,20 @@ import com.kmp.movieapp.movie.domain.model.MovieGenre
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.updateAndGet
+import kotlinx.coroutines.flow.*
 
 class MovieRepositoryImpl(
     private val movieService: MovieService
 ) : MovieRepository {
+
+    private val dummyData: List<Movie> = (0..100).map {
+        Movie(
+            id = it,
+            title = "movie $it",
+            posterPath = "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+            genres = emptyList(),
+        )
+    }
 
     private val _movieList: MutableStateFlow<List<Movie>> = MutableStateFlow(emptyList())
 
@@ -65,6 +68,7 @@ class MovieRepositoryImpl(
             error.message?.let { message ->
                 Logger.e(throwable = error, tag = "Movies", messageString = message)
             }
+            emit(dummyData)
         }
     }
 }

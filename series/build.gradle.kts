@@ -37,15 +37,10 @@ kotlin {
             dependencies {
                 implementation(libs.kotlin.stdlib)
 
-                implementation(compose.ui)
-                implementation(compose.runtime)
-                implementation(compose.material)
-                implementation(compose.material3)
-                implementation(compose.foundation)
-                implementation(compose.components.resources)
+                implementation(libs.bundles.commonMainCompose)
+
                 implementation(libs.savedState)
                 implementation(libs.window.core)
-
 
                 implementation(libs.bundles.lifecycle)
 
@@ -64,7 +59,7 @@ kotlin {
 
         androidMain {
             dependencies {
-                implementation("org.slf4j:slf4j-simple:2.0.16")
+                implementation(libs.slf4j)
             }
         }
 

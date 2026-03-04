@@ -2,24 +2,24 @@ package com.kmp.movieapp.app.topbar.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res
+import movieapp.composeapp.generated.resources.ic_back_arrow
 import movieapp.composeapp.generated.resources.ic_movie
 import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarContent(
-    title: String
+    title: String,
+    showBackButton: Boolean = false,
 ) {
+    val navigation = rememberNavigation()
+
     TopAppBar(
         title = {
             Row(
@@ -35,6 +35,16 @@ fun TopAppBarContent(
                     text = title,
                     style = MaterialTheme.typography.headlineMedium
                 )
+            }
+        },
+        navigationIcon = {
+            if (showBackButton) {
+                IconButton(onClick = { navigation.navigateUp() }) {
+                    Icon(
+                        imageVector = vectorResource(Res.drawable.ic_back_arrow),
+                        contentDescription = null,
+                    )
+                }
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(

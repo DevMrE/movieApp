@@ -55,13 +55,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
 
-            implementation(compose.ui)
-            implementation(compose.runtime)
-            implementation(compose.material)
-            implementation(compose.material3)
-            implementation(compose.foundation)
-            implementation(compose.components.resources)
-            implementation(compose.material3AdaptiveNavigationSuite)
+            implementation(libs.bundles.commonMainCompose)
             implementation(libs.savedState)
             implementation(libs.window.core)
 
@@ -80,7 +74,6 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.android.conscrypt)
         }

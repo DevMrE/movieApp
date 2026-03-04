@@ -1,11 +1,11 @@
 package com.kmp.movieapp.homescreen.destination
 
 import com.kmp.navigation.NavDestination
-import com.kmp.navigation.NavSection
+import com.kmp.navigation.NavTabs
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object HomeScreenSection : NavSection
+data object HomeDestination : NavDestination
 
 @Serializable
-data object HomeScreenDestination: NavDestination
+data object HomeTabs: NavTabs

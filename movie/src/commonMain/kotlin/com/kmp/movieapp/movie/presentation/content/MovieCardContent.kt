@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.ui.unit.Dp
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
+import com.kmp.navigation.compose.rememberNavigation
 
 fun LazyListScope.movieCardContent(
     width: Dp,
@@ -12,6 +13,7 @@ fun LazyListScope.movieCardContent(
     onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->
+        val navigation = rememberNavigation()
         MovieCard(
             width = width,
             movieTitle = movie.title,

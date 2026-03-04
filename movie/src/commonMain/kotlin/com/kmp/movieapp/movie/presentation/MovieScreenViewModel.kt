@@ -2,7 +2,7 @@ package com.kmp.movieapp.movie.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kmp.detail.presentation.destination.DetailNavDestination
+import com.kmp.detail.presentation.destination.DetailDestination
 import com.kmp.movieapp.core.util.action.Action
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
@@ -49,8 +49,8 @@ class MovieScreenViewModel(
         }
     }
 
-    private fun navigateToDetailScreen(id: Int) {
-        navigation.navigateTo(DetailNavDestination(movieId = id))
+    private fun navigateToDetailScreen(id: String) {
+        navigation.navigateTo(DetailDestination(id))
     }
 
     private fun onSeeAll() {

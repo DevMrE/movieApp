@@ -8,4 +8,4 @@ import kotlinx.serialization.Serializable
 data object SeriesScreenSection: NavSection
 
 @Serializable
-data object SeriesScreenDestination : NavDestination
+data object SeriesDestination : NavDestination

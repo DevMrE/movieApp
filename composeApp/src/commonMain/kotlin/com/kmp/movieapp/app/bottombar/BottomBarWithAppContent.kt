@@ -6,12 +6,7 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Surface
@@ -22,33 +17,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import co.touchlab.kermit.Logger
 import com.kmp.movieapp.app.bottombar.component.NoRippleNavItem
+import com.kmp.movieapp.app.navigation.destination.BottomBarTabs
+import com.kmp.movieapp.app.navigation.destination.DiscoverMoviesDestination
 import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.homescreen.destination.HomeScreenSection
-import com.kmp.movieapp.movie.presentation.destination.MovieScreenDestination
-import com.kmp.movieapp.settings.destination.SettingsScreenDestination
-import com.kmp.movieapp.settings.destination.SettingsSection
-import com.kmp.navigation.compose.rememberNavDestination
+import com.kmp.movieapp.homescreen.destination.HomeDestination
+import com.kmp.movieapp.settings.destination.SettingsDestination
+import com.kmp.navigation.compose.rememberActiveTabIn
+import com.kmp.navigation.compose.rememberIsTabsActive
 import com.kmp.navigation.compose.rememberNavigation
-import com.kmp.series.presentation.destination.SeriesScreenDestination
-import movieapp.composeapp.generated.resources.Res
-import movieapp.composeapp.generated.resources.home_screen
-import movieapp.composeapp.generated.resources.ic_home
-import movieapp.composeapp.generated.resources.ic_settings
-import movieapp.composeapp.generated.resources.settings_screen_title
+import movieapp.composeapp.generated.resources.*
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
 @Composable
 internal fun BottomBarWithAppContent() {
     val navigation = rememberNavigation()
-    val navDestination = rememberNavDestination(initialDestination = MovieScreenDestination)
+    val navDestination = rememberActiveTabIn<BottomBarTabs>()
+    val isActive = rememberIsTabsActive<BottomBarTabs>()
 
-    val homeScreenSelected = navDestination in listOf(
-        MovieScreenDestination, SeriesScreenDestination
-    )
+    Logger.i(tag = "KmpNavigation", messageString = "BottomBarWithAppContent: $navDestination")
+    Logger.i(tag = "KmpNavigation", messageString = "BottomBarWithAppContent isActive: $isActive")
 
-    val settingsScreenSelected = navDestination == SettingsScreenDestination
 
     val itemColors = NavigationSuiteDefaults.itemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
@@ -63,7 +54,7 @@ internal fun BottomBarWithAppContent() {
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
     AnimatedVisibility(
-        visible = homeScreenSelected || settingsScreenSelected,
+        visible = isActive,
         enter = fadeIn(),
         exit = fadeOut()
     ) {
@@ -93,9 +84,9 @@ internal fun BottomBarWithAppContent() {
                 ) {
 
                     NoRippleNavItem(
-                        selected = homeScreenSelected,
+                        selected = navDestination == HomeDestination,
                         onClick = {
-                            navigation.switchTo(HomeScreenSection)
+                            navigation.navigateTo(HomeDestination)
                         },
                         icon = vectorResource(Res.drawable.ic_home),
                         label = stringResource(Res.string.home_screen),
@@ -103,12 +94,22 @@ internal fun BottomBarWithAppContent() {
                     )
 
                     NoRippleNavItem(
-                        selected = settingsScreenSelected,
+                        selected = navDestination == SettingsDestination,
                         onClick = {
-                            navigation.switchTo(SettingsSection)
+                            navigation.navigateTo(SettingsDestination)
                         },
                         icon = vectorResource(Res.drawable.ic_settings),
                         label = stringResource(Res.string.settings_screen_title),
+                        colors = itemColors.navigationBarItemColors
+                    )
+
+                    NoRippleNavItem(
+                        selected = navDestination == DiscoverMoviesDestination,
+                        onClick = {
+                            navigation.navigateTo(DiscoverMoviesDestination)
+                        },
+                        icon = vectorResource(Res.drawable.ic_settings),
+                        label = "Movies",
                         colors = itemColors.navigationBarItemColors
                     )
                 }

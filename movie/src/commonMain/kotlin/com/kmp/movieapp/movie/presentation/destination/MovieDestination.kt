@@ -5,8 +5,4 @@ import com.kmp.navigation.NavSection
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object MovieScreenSection : NavSection
-
-
-@Serializable
-data object MovieScreenDestination : NavDestination
+data object MovieDestination : NavDestination
