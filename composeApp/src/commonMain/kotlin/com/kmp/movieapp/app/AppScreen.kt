@@ -15,7 +15,7 @@ import com.kmp.movieapp.movie.presentation.content.destination.PopularMovieDesti
 import com.kmp.navigation.compose.NavigationContent
 import com.kmp.navigation.compose.NavigationRoot
 import com.kmp.navigation.compose.NavigationTabs
-import com.kmp.navigation.compose.rememberCurrentDestination
+import com.kmp.navigation.compose.rememberNavDestination
 
 @Composable
 fun MobileAppScreen() {
@@ -28,7 +28,7 @@ fun MobileAppScreen() {
 
 @Composable
 fun AppContent() {
-    val navDestination = rememberCurrentDestination()
+    val navDestination = rememberNavDestination()
     Scaffold(
         topBar = {
             TopAppBarComponent()

@@ -1,5 +1,7 @@
 package com.kmp.movieapp.app.navigation
 
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,7 +31,14 @@ fun registerAppNavigation() {
         content<SettingsDestination> { SettingsContent() }
         content<MovieDestination> { MovieContent() }
         content<SeriesDestination> { SeriesContent() }
-        content<PopularMovieDestination> { PopularMovieListScreen() }
+        content<PopularMovieDestination>(
+            enterTransition = {
+                scaleIn()
+            },
+            exitTransition = {
+                scaleOut()
+            }
+        ) { PopularMovieListScreen() }
 
         content<DiscoverMoviesDestination> {
             Box(
