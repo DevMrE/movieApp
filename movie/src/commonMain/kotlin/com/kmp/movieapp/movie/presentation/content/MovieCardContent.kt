@@ -2,10 +2,11 @@ package com.kmp.movieapp.movie.presentation.content
 
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.Dp
+import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
-import com.kmp.navigation.compose.rememberNavigation
 
 fun LazyListScope.movieCardContent(
     width: Dp,
@@ -13,11 +14,10 @@ fun LazyListScope.movieCardContent(
     onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->
-        val navigation = rememberNavigation()
         MovieCard(
             width = width,
             movieTitle = movie.title,
-            moviePosterPath = movie.posterPath,
+            moviePosterPath = if (width > MaterialTheme.size.movieCardWidth) movie.backdropPath else movie.posterPath,
             onClick = {
                 onAction(MovieAction.OnNavigateToDetailScreen(movie.id))
             }

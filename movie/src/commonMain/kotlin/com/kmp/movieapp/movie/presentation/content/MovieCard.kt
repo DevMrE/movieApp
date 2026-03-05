@@ -2,13 +2,7 @@ package com.kmp.movieapp.movie.presentation.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -41,10 +35,7 @@ fun MovieCard(
     Card(
         modifier = Modifier
             .height(height)
-            .width(width)
-            .clickable {
-                onClick()
-            },
+            .width(width),
         shape = MaterialTheme.shapes.extraLarge,
         elevation = CardDefaults.cardElevation(
             defaultElevation = 10.dp,
@@ -54,6 +45,9 @@ fun MovieCard(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(shape = MaterialTheme.shapes.extraLarge)
+                .clickable {
+                    onClick()
+                }
         ) {
             if (moviePosterPath != null) {
                 ImageLoader(
@@ -68,27 +62,18 @@ fun MovieCard(
                 )
             }
 
-            Column(
+            Text(
+                text = movieTitle,
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(
                         horizontal = MaterialTheme.padding.fifteen,
                         vertical = MaterialTheme.padding.twentyFive
                     ),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.five)
-            ) {
-                Text(
-                    text = movieTitle,
-                    maxLines = 2,
-                    style = MaterialTheme.typography.headlineSmall
-                )
-
-                Text(
-                    text = movieTitle,
-                    maxLines = 1,
-                    style = MaterialTheme.typography.labelSmall
-                )
-            }
+                maxLines = 2,
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.tertiary,
+            )
         }
     }
 }

@@ -46,7 +46,14 @@ fun AppContent() {
         )
 
         Logger.i("KmpNavigation", message = { "Destination: $navDestination" })
-        NavigationTabs<BottomBarTabs>(Modifier.fillMaxSize().padding(paddingWithoutBottom))
-        NavigationContent<PopularMovieDestination>(Modifier.padding(paddingValues))
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingWithoutBottom)
+        ) {
+            NavigationTabs<BottomBarTabs>()
+            NavigationContent<PopularMovieDestination>()
+        }
     }
 }

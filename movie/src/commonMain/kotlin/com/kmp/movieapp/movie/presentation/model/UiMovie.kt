@@ -11,4 +11,5 @@ data class UiMovie(
     val title: String,
     val genre: String,
     val posterPath: String?,
+    val backdropPath: String?,
 )

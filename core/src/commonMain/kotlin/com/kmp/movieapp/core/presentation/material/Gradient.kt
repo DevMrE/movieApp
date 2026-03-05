@@ -11,7 +11,8 @@ data class Gradient(
     val card: Brush = Brush.verticalGradient(
         colors = listOf(
             Color.Transparent,
-            Color(0xFF212121).copy(alpha = 1f)
+            Color.Black.copy(alpha = 0.4f),
+            Color.Black.copy(0.9f),
         )
     )
 )

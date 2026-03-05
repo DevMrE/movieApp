@@ -9,7 +9,6 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItemDefaults
-import androidx.compose.material3.Surface
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -55,65 +54,55 @@ internal fun BottomBarWithAppContent() {
 
     AnimatedVisibility(
         visible = isActive,
+        modifier = Modifier.background(Color.Transparent),
         enter = fadeIn(),
         exit = fadeOut()
     ) {
-        Box(
-            Modifier
+        Row(
+            modifier = Modifier
                 .fillMaxWidth()
-                .navigationBarsPadding()
                 .padding(horizontal = MaterialTheme.padding.sixteen)
+                .navigationBarsPadding()
+                .border(
+                    width = 2.dp,
+                    color = borderColor,
+                    shape = MaterialTheme.shapes.large
+                )
                 .clip(MaterialTheme.shapes.large)
+                .background(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f)),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(color = MaterialTheme.colorScheme.surface.copy(alpha = 0.95f))
-                    .border(
-                        width = 2.dp,
-                        color = borderColor,
-                        shape = MaterialTheme.shapes.large
-                    ),
-                color = Color.Transparent,
-                tonalElevation = 0.dp,
-            ) {
-                Row(
-                    modifier = Modifier.padding(vertical = MaterialTheme.padding.five),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
 
-                    NoRippleNavItem(
-                        selected = navDestination == HomeDestination,
-                        onClick = {
-                            navigation.navigateTo(HomeDestination)
-                        },
-                        icon = vectorResource(Res.drawable.ic_home),
-                        label = stringResource(Res.string.home_screen),
-                        colors = itemColors.navigationBarItemColors
-                    )
+            NoRippleNavItem(
+                selected = navDestination == HomeDestination,
+                onClick = {
+                    navigation.navigateTo(HomeDestination)
+                },
+                icon = vectorResource(Res.drawable.ic_home),
+                label = stringResource(Res.string.home_screen),
+                colors = itemColors.navigationBarItemColors
+            )
 
-                    NoRippleNavItem(
-                        selected = navDestination == SettingsDestination,
-                        onClick = {
-                            navigation.navigateTo(SettingsDestination)
-                        },
-                        icon = vectorResource(Res.drawable.ic_settings),
-                        label = stringResource(Res.string.settings_screen_title),
-                        colors = itemColors.navigationBarItemColors
-                    )
+            NoRippleNavItem(
+                selected = navDestination == SettingsDestination,
+                onClick = {
+                    navigation.navigateTo(SettingsDestination)
+                },
+                icon = vectorResource(Res.drawable.ic_settings),
+                label = stringResource(Res.string.settings_screen_title),
+                colors = itemColors.navigationBarItemColors
+            )
 
-                    NoRippleNavItem(
-                        selected = navDestination == DiscoverMoviesDestination,
-                        onClick = {
-                            navigation.navigateTo(DiscoverMoviesDestination)
-                        },
-                        icon = vectorResource(Res.drawable.ic_settings),
-                        label = "Movies",
-                        colors = itemColors.navigationBarItemColors
-                    )
-                }
-            }
+            NoRippleNavItem(
+                selected = navDestination == DiscoverMoviesDestination,
+                onClick = {
+                    navigation.navigateTo(DiscoverMoviesDestination)
+                },
+                icon = vectorResource(Res.drawable.ic_settings),
+                label = "Movies",
+                colors = itemColors.navigationBarItemColors
+            )
         }
     }
 }

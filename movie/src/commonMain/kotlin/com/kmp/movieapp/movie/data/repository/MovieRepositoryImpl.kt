@@ -17,15 +17,6 @@ class MovieRepositoryImpl(
     private val movieService: MovieService
 ) : MovieRepository {
 
-    private val dummyData: List<Movie> = (0..100).map {
-        Movie(
-            id = it,
-            title = "movie $it",
-            posterPath = "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
-            genres = emptyList(),
-        )
-    }
-
     private val _movieList: MutableStateFlow<List<Movie>> = MutableStateFlow(emptyList())
 
     val genresState: StateFlow<List<MovieGenre>> = flow {
@@ -68,7 +59,6 @@ class MovieRepositoryImpl(
             error.message?.let { message ->
                 Logger.e(throwable = error, tag = "Movies", messageString = message)
             }
-            emit(dummyData)
         }
     }
 }

@@ -14,6 +14,7 @@ fun Movie.toUiMovie() = UiMovie(
     title = title,
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
+    backdropPath = backDropPath,
 )
 
 suspend fun List<Movie>.toUiMovieList(category: MovieCategory): UiMovieList = UiMovieList(

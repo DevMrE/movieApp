@@ -14,4 +14,5 @@ fun MovieDto.toMovie() = Movie(
     id = id ?: 0,
     title = title ?: "",
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
+    backDropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
 )
