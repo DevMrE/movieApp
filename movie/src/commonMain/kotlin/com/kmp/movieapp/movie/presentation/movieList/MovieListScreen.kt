@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.detail.presentation.destination.DetailDestination
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.movie.presentation.content.MovieCard
+import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
 import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -52,7 +52,7 @@ fun PopularMovieListScreen() {
                 movieTitle = movie.title,
                 moviePosterPath = movie.posterPath,
                 onClick = {
-                    navigation.navigateTo(DetailDestination(id = movie.id.toString()))
+                    navigation.navigateTo(MovieDetailDestination(id = movie.id.toString()))
                 }
             )
         }

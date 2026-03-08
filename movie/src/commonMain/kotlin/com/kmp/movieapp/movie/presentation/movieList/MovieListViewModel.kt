@@ -28,7 +28,7 @@ class MovieListViewModel(
     }
 
     @OptIn(ExperimentalAtomicApi::class)
-    fun loadMovies() {
+    private fun loadMovies() {
         currentPage.store(currentPage.load() + 1)
 
         viewModelScope.launch {

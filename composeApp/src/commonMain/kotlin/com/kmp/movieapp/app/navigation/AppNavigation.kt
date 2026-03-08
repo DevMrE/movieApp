@@ -8,22 +8,23 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.kmp.detail.presentation.DetailScreen
-import com.kmp.detail.presentation.destination.DetailDestination
 import com.kmp.movieapp.app.navigation.destination.BottomBarTabs
 import com.kmp.movieapp.app.navigation.destination.DiscoverMoviesDestination
+import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
 import com.kmp.movieapp.homescreen.HomeContent
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.homescreen.destination.HomeTabs
 import com.kmp.movieapp.movie.presentation.MovieContent
 import com.kmp.movieapp.movie.presentation.content.destination.PopularMovieDestination
 import com.kmp.movieapp.movie.presentation.destination.MovieDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
 import com.kmp.movieapp.movie.presentation.movieList.PopularMovieListScreen
 import com.kmp.movieapp.settings.SettingsContent
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.registerNavigation
 import com.kmp.series.presentation.SeriesContent
 import com.kmp.series.presentation.destination.SeriesDestination
+import com.kmp.series.presentation.destination.SeriesDetailDestination
 
 fun registerAppNavigation() {
     registerNavigation(startDestination = HomeDestination) {
@@ -49,7 +50,13 @@ fun registerAppNavigation() {
             }
         }
 
-        screen<DetailDestination> { dest -> DetailScreen(dest.id) }
+        screen<MovieDetailDestination> { dest ->
+            ContentDetailScreen(dest.id)
+        }
+
+         screen<SeriesDetailDestination> { dest ->
+            ContentDetailScreen(dest.id)
+        }
 
         tabs<HomeTabs>(
             startDestination = MovieDestination,

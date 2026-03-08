@@ -12,4 +12,9 @@ interface MovieRepository : Repository {
         page: Int,
         movieCategory: MovieCategory
     ): Flow<List<Movie>>
+
+    suspend fun getAllMovies(
+        language: String,
+        page: Int
+    ): Flow<List<Movie>>
 }

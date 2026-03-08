@@ -4,11 +4,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ApiResponseDto<T>(
+data class ApiResponseDto<DTO: Dto>(
     @SerialName("page")
     val page: Int? = null,
     @SerialName("results")
-    val movieList: List<T?>? = null,
+    val results: List<DTO?>? = null,
     @SerialName("total_pages")
     val totalPages: Int? = null,
     @SerialName("total_results")

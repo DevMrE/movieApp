@@ -11,4 +11,8 @@ object UrlHelper {
 
     const val MOVIE_ENDPOINT = "/movie"
     const val MOVIE_GENRE_ENDPOINT = "/genre$MOVIE_ENDPOINT/list"
+
+    const val MOVIE_DISCOVER_ENDPOINT = "/discover"
+
+    const val SERIES_ENDPOINT = "/tv"
 }

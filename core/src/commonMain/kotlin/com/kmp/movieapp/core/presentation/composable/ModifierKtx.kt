@@ -5,7 +5,7 @@ import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.graphics.Brush
 
 /**
- * Adds an gradient overlay over the actual content.
+ * Adds a gradient overlay over the actual content.
  */
 fun Modifier.gradientOverlay(brush: Brush) = this.then(
     other = Modifier.drawWithCache {

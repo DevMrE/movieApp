@@ -5,3 +5,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data object SeriesDestination : NavDestination
+
+
+@Serializable
+data class SeriesDetailDestination(
+    val id: String
+) : NavDestination

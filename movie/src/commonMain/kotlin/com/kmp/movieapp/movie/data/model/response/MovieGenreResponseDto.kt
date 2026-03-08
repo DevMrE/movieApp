@@ -1,5 +1,6 @@
 package com.kmp.movieapp.movie.data.model.response
 
+import com.kmp.movieapp.core.data.model.Dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -7,4 +8,4 @@ import kotlinx.serialization.Serializable
 data class MovieGenreResponseDto(
     @SerialName("genres")
     val genres: List<GenreDto>? = emptyList()
-)
+) : Dto

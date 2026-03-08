@@ -70,7 +70,7 @@ kotlin {
             implementation(project(":core"))
             implementation(project(":movie"))
             implementation(project(":series"))
-            implementation(project(":detail"))
+            implementation(project(":content_detail"))
         }
 
         androidMain.dependencies {
