@@ -4,7 +4,9 @@
     <string name="movie_genres">Genres</string>
     <string name="movie_runtime">%d min</string>
     <string name="movie_rating">Rating: %.1f</string>
-    <string name="popular">Popular Movies</string>
-    <string name="top_rated">Top Rated Movies</string>
     <string name="see_all">See All</string>
+    <string name="movie_category_list_title">%1$s Movies</string>
+    <string name="movie_category_popular">Popular</string>
+    <string name="movie_category_top_rated">Top Rated</string>
+    <string name="movie_category_now_playing">Current</string>
 </resources>

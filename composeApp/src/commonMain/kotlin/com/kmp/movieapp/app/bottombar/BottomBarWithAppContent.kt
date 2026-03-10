@@ -26,9 +26,11 @@ import com.kmp.movieapp.app.navigation.destination.BottomBarTabs
 import com.kmp.movieapp.app.navigation.destination.DiscoverMoviesDestination
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberIsTabsActive
+import com.kmp.navigation.compose.rememberNavDestination
 import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.home_screen
@@ -61,7 +63,8 @@ private val bottomBarItemList = listOf(
 @Composable
 internal fun BottomBarWithAppContent() {
     val navigation = rememberNavigation()
-    val navDestination = rememberActiveTabIn<BottomBarTabs>()
+    val navDestination = rememberNavDestination()
+    val activeTabs = rememberActiveTabIn<BottomBarTabs>()
     val isActive = rememberIsTabsActive<BottomBarTabs>()
 
     val itemColors = NavigationSuiteDefaults.itemColors(
@@ -77,7 +80,7 @@ internal fun BottomBarWithAppContent() {
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
     AnimatedVisibility(
-        visible = isActive,
+        visible = isActive && (navDestination !is MovieCategoryListDestination),
         modifier = Modifier.background(Color.Transparent),
         enter = fadeIn(),
         exit = fadeOut()
@@ -100,7 +103,7 @@ internal fun BottomBarWithAppContent() {
 
             bottomBarItemList.forEach { navItem ->
                 NavItem(
-                    selected = navDestination == navItem.navDestination,
+                    selected = activeTabs == navItem.navDestination,
                     onClick = {
                         navigation.navigateTo(navItem.navDestination)
                     },

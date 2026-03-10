@@ -5,4 +5,8 @@
     <string name="series_tab">Serien</string>
     <string name="settings_screen_title">Einstellungen</string>
     <string name="discover_movies_title">Entdecken</string>
+    <string name="movie_category_list_title">%1$s Filme</string>
+    <string name="movie_category_popular">Beliebte</string>
+    <string name="movie_category_top_rated">Bestbewertete</string>
+    <string name="movie_category_now_playing">Aktuelle</string>
 </resources>

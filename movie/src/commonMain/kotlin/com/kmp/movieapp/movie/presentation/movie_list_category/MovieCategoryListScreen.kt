@@ -26,7 +26,6 @@ import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
-@Suppress("FrequentlyChangingValue")
 @Composable
 fun MovieCategoryListScreen(movieCategory: MovieCategory) {
 

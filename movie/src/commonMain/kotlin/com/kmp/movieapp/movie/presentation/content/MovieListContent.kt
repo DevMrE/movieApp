@@ -16,6 +16,10 @@ import androidx.compose.ui.Modifier
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.movie.Res
+import com.kmp.movieapp.movie.domain.model.MovieCategory
+import com.kmp.movieapp.movie.movie_category_list_title
+import com.kmp.movieapp.movie.movie_category_popular
+import com.kmp.movieapp.movie.movie_category_top_rated
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovieList
 import com.kmp.movieapp.movie.see_all
@@ -26,11 +30,20 @@ fun LazyListScope.movieListContent(
     onAction: (MovieAction) -> Unit
 ) {
     item {
+        val categoryTitle = when (uiMovieList.category) {
+            MovieCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
+            MovieCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
+            else -> null
+        }
+        val title: String? = if (categoryTitle != null) {
+            stringResource(Res.string.movie_category_list_title, categoryTitle)
+        } else null
+
         Column(
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.ten),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            uiMovieList.title?.let {
+            title?.let {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -55,7 +68,7 @@ fun LazyListScope.movieListContent(
                 }
             }
 
-            val cardSize = if (uiMovieList.title == null) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
+            val cardSize = if (title == null) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
 
             LazyRow(
                 verticalAlignment = Alignment.CenterVertically,
