@@ -1,6 +1,11 @@
 package com.kmp.movieapp.movie.presentation.content
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.MaterialTheme
@@ -42,7 +47,7 @@ fun LazyListScope.movieListContent(
 
                     TextButton(
                         onClick = {
-                            onAction(MovieAction.OnSeeAllClicked)
+                            onAction(MovieAction.OnSeeAllClicked(movieCategory = uiMovieList.category))
                         },
                     ) {
                         Text(stringResource(Res.string.see_all))
@@ -57,7 +62,6 @@ fun LazyListScope.movieListContent(
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
                 contentPadding = PaddingValues(horizontal = MaterialTheme.padding.thirty)
             ) {
-
                 movieCardContent(
                     width = cardSize,
                     movieList = uiMovieList.movies,

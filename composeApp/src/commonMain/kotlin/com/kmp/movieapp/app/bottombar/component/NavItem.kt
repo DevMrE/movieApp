@@ -17,7 +17,7 @@ import androidx.compose.ui.semantics.Role
 import com.kmp.movieapp.core.presentation.material.padding
 
 @Composable
-fun NoRippleNavItem(
+fun NavItem(
     selected: Boolean,
     onClick: () -> Unit,
     icon: ImageVector,

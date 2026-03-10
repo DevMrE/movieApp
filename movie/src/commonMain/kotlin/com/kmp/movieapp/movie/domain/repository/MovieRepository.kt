@@ -7,13 +7,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository : Repository {
 
-    suspend fun getMovies(
+    fun getMovies(
         language: String,
         page: Int,
         movieCategory: MovieCategory
     ): Flow<List<Movie>>
 
-    suspend fun getAllMovies(
+    fun getAllMovies(
         language: String,
         page: Int
     ): Flow<List<Movie>>

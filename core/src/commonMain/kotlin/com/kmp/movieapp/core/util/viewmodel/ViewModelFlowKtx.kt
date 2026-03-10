@@ -24,3 +24,12 @@ fun <T> Flow<T>.stateInEagerly(initialData: T): StateFlow<T> {
         initialValue = initialData
     )
 }
+
+context(viewModel: ViewModel)
+fun <T> Flow<T>.stateInSubscribed(initialData: T, subscriptionDuration: Long = 2000): StateFlow<T> {
+    return stateIn(
+        viewModel.viewModelScope,
+        started = SharingStarted.WhileSubscribed(subscriptionDuration),
+        initialValue = initialData
+    )
+}

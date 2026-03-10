@@ -15,31 +15,31 @@ import com.kmp.movieapp.homescreen.HomeContent
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.homescreen.destination.HomeTabs
 import com.kmp.movieapp.movie.presentation.MovieContent
-import com.kmp.movieapp.movie.presentation.content.destination.PopularMovieDestination
-import com.kmp.movieapp.movie.presentation.destination.MovieDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieContentDestination
 import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
-import com.kmp.movieapp.movie.presentation.movieList.PopularMovieListScreen
+import com.kmp.movieapp.movie.presentation.movie_list_category.MovieCategoryListScreen
 import com.kmp.movieapp.settings.SettingsContent
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.registerNavigation
 import com.kmp.series.presentation.SeriesContent
-import com.kmp.series.presentation.destination.SeriesDestination
+import com.kmp.series.presentation.destination.SeriesContentDestination
 import com.kmp.series.presentation.destination.SeriesDetailDestination
 
 fun registerAppNavigation() {
     registerNavigation(startDestination = HomeDestination) {
         content<HomeDestination> { HomeContent() }
         content<SettingsDestination> { SettingsContent() }
-        content<MovieDestination> { MovieContent() }
-        content<SeriesDestination> { SeriesContent() }
-        content<PopularMovieDestination>(
+        content<MovieContentDestination> { MovieContent() }
+        content<SeriesContentDestination> { SeriesContent() }
+        content<MovieCategoryListDestination>(
             enterTransition = {
                 scaleIn()
             },
             exitTransition = {
                 scaleOut()
             }
-        ) { PopularMovieListScreen() }
+        ) { data -> MovieCategoryListScreen(data.movieCategory) }
 
         content<DiscoverMoviesDestination> {
             Box(
@@ -54,13 +54,13 @@ fun registerAppNavigation() {
             ContentDetailScreen(dest.id)
         }
 
-         screen<SeriesDetailDestination> { dest ->
+        screen<SeriesDetailDestination> { dest ->
             ContentDetailScreen(dest.id)
         }
 
         tabs<HomeTabs>(
-            startDestination = MovieDestination,
-            MovieDestination, SeriesDestination
+            startDestination = MovieContentDestination,
+            MovieContentDestination, SeriesContentDestination
         )
 
         tabs<BottomBarTabs>(

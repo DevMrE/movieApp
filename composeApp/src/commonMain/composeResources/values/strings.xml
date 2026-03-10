@@ -4,4 +4,6 @@
     <string name="movie_tab">Movies</string>
     <string name="series_tab">Series</string>
     <string name="settings_screen_title">Settings</string>
+    <string name="discover_movies_title">Discover</string>
+
 </resources>

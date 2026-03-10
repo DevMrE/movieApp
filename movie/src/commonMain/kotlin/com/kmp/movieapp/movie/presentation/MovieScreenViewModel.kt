@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.util.action.Action
 import com.kmp.movieapp.movie.domain.model.MovieCategory
-import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
+import com.kmp.movieapp.movie.domain.usecase.GetInitialMoviesUseCase
 import com.kmp.movieapp.movie.presentation.action.MovieAction
-import com.kmp.movieapp.movie.presentation.content.destination.PopularMovieDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
 import com.kmp.movieapp.movie.presentation.mapper.toUiMovieList
 import com.kmp.movieapp.movie.presentation.model.UiMovieScreen
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class MovieScreenViewModel(
     private val navigation: Navigation,
-    private val getMoviesForCategoryUseCase: GetMoviesForCategoryUseCase
+    private val getInitialMoviesUseCase: GetInitialMoviesUseCase
 ) : ViewModel() {
 
     private val _movieScreenState = MutableStateFlow<UiMovieScreen?>(null)
@@ -28,7 +28,7 @@ class MovieScreenViewModel(
 
     init {
         viewModelScope.launch {
-            getMoviesForCategoryUseCase().collectLatest { (popular, topRated, nowPlaying) ->
+            getInitialMoviesUseCase().collectLatest { (popular, topRated, nowPlaying) ->
                 _movieScreenState.update {
                     UiMovieScreen(
                         isLoading = popular.isEmpty() || topRated.isEmpty() || nowPlaying.isEmpty(),
@@ -45,7 +45,7 @@ class MovieScreenViewModel(
         when (action) {
             is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.id)
             is MovieAction.OnStartTrailer -> Unit
-            is MovieAction.OnSeeAllClicked -> onSeeAll()
+            is MovieAction.OnSeeAllClicked -> onSeeAll(action.movieCategory)
         }
     }
 
@@ -53,7 +53,7 @@ class MovieScreenViewModel(
         navigation.navigateTo(MovieDetailDestination(id))
     }
 
-    private fun onSeeAll() {
-        navigation.navigateTo(PopularMovieDestination)
+    private fun onSeeAll(movieCategory: MovieCategory) {
+        navigation.navigateTo(destination = MovieCategoryListDestination(movieCategory))
     }
 }

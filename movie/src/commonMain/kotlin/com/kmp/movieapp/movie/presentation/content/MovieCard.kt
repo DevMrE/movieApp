@@ -2,7 +2,11 @@ package com.kmp.movieapp.movie.presentation.content
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -31,7 +35,6 @@ fun MovieCard(
     height: Dp = MaterialTheme.size.movieCardHeight,
     onClick: () -> Unit,
 ) {
-
     Card(
         modifier = Modifier
             .height(height)

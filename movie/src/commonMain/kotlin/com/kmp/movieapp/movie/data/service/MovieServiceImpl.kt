@@ -27,6 +27,7 @@ class MovieServiceImpl(
         movieListCategory: MovieListCategory
     ): Result<ApiResponseDto<MovieDto>, ApiError> =
         try {
+            Logger.i(tag = "MovieCategory", messageString = "loading movie category: ${movieListCategory.category}")
             val response = httpClient.get(
                 resource = MovieListRequestDto(
                     page = page,

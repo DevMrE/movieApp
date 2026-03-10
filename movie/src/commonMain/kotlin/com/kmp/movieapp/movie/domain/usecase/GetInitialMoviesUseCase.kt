@@ -5,11 +5,11 @@ import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.combine
 
-class GetMoviesForCategoryUseCase(
+class GetInitialMoviesUseCase(
     private val movieRepository: MovieRepository
 ) {
 
-    suspend operator fun invoke() = combine(
+    operator fun invoke() = combine(
         movieRepository.getMovies(language = "", page = 1, movieCategory = MovieCategory.POPULAR),
         movieRepository.getMovies(language = "", page = 1, movieCategory = MovieCategory.TOP_RATED),
         movieRepository.getMovies(language = "", page = 1, movieCategory = MovieCategory.NOW_PLAYING)

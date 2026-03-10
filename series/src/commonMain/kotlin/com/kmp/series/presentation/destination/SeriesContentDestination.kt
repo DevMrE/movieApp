@@ -4,7 +4,7 @@ import com.kmp.navigation.NavDestination
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object SeriesDestination : NavDestination
+data object SeriesContentDestination : NavDestination
 
 
 @Serializable

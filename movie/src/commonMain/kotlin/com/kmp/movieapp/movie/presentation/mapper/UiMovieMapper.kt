@@ -23,6 +23,7 @@ suspend fun List<Movie>.toUiMovieList(category: MovieCategory): UiMovieList = Ui
         MovieCategory.TOP_RATED -> getString(Res.string.top_rated)
         else -> null
     },
+    category = category,
     movies = this.map { it.toUiMovie() }
 )
 

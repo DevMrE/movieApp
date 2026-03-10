@@ -3,21 +3,24 @@ package com.kmp.movieapp.homescreen
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedButton
+import androidx.compose.material3.SegmentedButtonDefaults
+import androidx.compose.material3.SingleChoiceSegmentedButtonRow
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import co.touchlab.kermit.Logger
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeTabs
 import com.kmp.movieapp.homescreen.model.UiTabState
-import com.kmp.movieapp.movie.presentation.destination.MovieDestination
+import com.kmp.movieapp.movie.presentation.destination.MovieContentDestination
 import com.kmp.navigation.compose.NavigationTabs
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavigation
-import com.kmp.series.presentation.destination.SeriesDestination
+import com.kmp.series.presentation.destination.SeriesContentDestination
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.movie_tab
 import movieapp.composeapp.generated.resources.series_tab
@@ -25,16 +28,12 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun HomeContent() {
-    Logger.i(tag = "KmpNavigation", messageString = "HomeScreen")
-
     val tab by remember {
         mutableStateOf(UiTabState(movieTabResource = Res.string.movie_tab, seriesTabResource = Res.string.series_tab))
     }
 
     val navigation = rememberNavigation()
     val navDestination = rememberActiveTabIn<HomeTabs>()
-
-    Logger.i(tag = "KmpNavigation", messageString = "HomeContent destination: $navDestination")
 
     Column {
         SingleChoiceSegmentedButtonRow(
@@ -44,9 +43,9 @@ fun HomeContent() {
             space = MaterialTheme.padding.thirtySix
         ) {
             SegmentedButton(
-                selected = navDestination == MovieDestination,
+                selected = navDestination == MovieContentDestination,
                 onClick = {
-                    navigation.navigateTo(MovieDestination)
+                    navigation.navigateTo(MovieContentDestination)
                 },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {},
@@ -62,9 +61,9 @@ fun HomeContent() {
             }
 
             SegmentedButton(
-                selected = navDestination == SeriesDestination,
+                selected = navDestination == SeriesContentDestination,
                 onClick = {
-                    navigation.navigateTo(SeriesDestination)
+                    navigation.navigateTo(SeriesContentDestination)
                 },
                 shape = SegmentedButtonDefaults.baseShape,
                 icon = {},

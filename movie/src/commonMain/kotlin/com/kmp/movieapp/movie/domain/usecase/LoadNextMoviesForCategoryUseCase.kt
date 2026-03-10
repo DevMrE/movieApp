@@ -1,0 +1,16 @@
+package com.kmp.movieapp.movie.domain.usecase
+
+import com.kmp.movieapp.movie.domain.model.MovieCategory
+import com.kmp.movieapp.movie.domain.repository.MovieRepository
+
+class LoadNextMoviesForCategoryUseCase(
+    private val movieRepository: MovieRepository
+) {
+
+    operator fun invoke(page: Int, movieCategory: MovieCategory) = movieRepository
+        .getMovies(
+            language = "de",
+            page = page,
+            movieCategory = movieCategory
+        )
+}
