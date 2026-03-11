@@ -36,7 +36,6 @@ import movieapp.composeapp.generated.resources.ic_back_arrow
 import movieapp.composeapp.generated.resources.ic_close
 import movieapp.composeapp.generated.resources.ic_movie
 import movieapp.composeapp.generated.resources.ic_search
-import movieapp.composeapp.generated.resources.ic_settings
 import movieapp.composeapp.generated.resources.search
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -64,7 +63,7 @@ fun TopAppBarContent(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(MaterialTheme.padding.sixteen)
+                    .padding(all = MaterialTheme.padding.sixteen)
             ) {
                 Row(
                     modifier = Modifier
@@ -169,16 +168,6 @@ fun SearchText(
                     .clickable { onCloseClicked() },
                 contentDescription = null,
                 tint = Color.Blue
-            )
-        },
-        suffix = {
-            Icon(
-                imageVector = vectorResource(Res.drawable.ic_settings),
-                modifier = Modifier
-                    .size(MaterialTheme.size.iconSize)
-                    .clickable { onCloseClicked() },
-                contentDescription = null,
-                tint = Color.Black
             )
         },
         colors = OutlinedTextFieldDefaults.colors(
