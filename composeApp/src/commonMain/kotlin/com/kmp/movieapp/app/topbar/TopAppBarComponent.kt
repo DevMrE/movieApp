@@ -33,7 +33,6 @@ fun TopAppBarComponent() {
         SettingsDestination -> Res.string.settings_screen_title
         DiscoverMoviesDestination -> Res.string.discover_movies_title
         else -> Res.string.app_name
-
     }
 
     val title = when (navDestination) {

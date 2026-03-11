@@ -43,7 +43,8 @@ fun registerAppNavigation() {
 
         content<DiscoverMoviesDestination> {
             Box(
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
                     .background(Color.Black)
             ) {
                 Text("Another Movie List", color = Color.White)

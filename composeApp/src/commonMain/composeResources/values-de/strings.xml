@@ -9,4 +9,5 @@
     <string name="movie_category_popular">Beliebte</string>
     <string name="movie_category_top_rated">Bestbewertete</string>
     <string name="movie_category_now_playing">Aktuelle</string>
+    <string name="search">Suche...</string>
 </resources>
