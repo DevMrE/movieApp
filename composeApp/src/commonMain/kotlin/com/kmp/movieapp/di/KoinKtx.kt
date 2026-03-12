@@ -15,7 +15,8 @@ fun KoinApplication.initModules() {
             coreModule,
             movieModule,
             settingsModule,
-            contentDetailModule
+            contentDetailModule,
+            // searchModule
         )
     )
 }

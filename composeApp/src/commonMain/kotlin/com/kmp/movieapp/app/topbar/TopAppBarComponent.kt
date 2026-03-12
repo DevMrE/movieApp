@@ -2,7 +2,7 @@ package com.kmp.movieapp.app.topbar
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.kmp.movieapp.app.navigation.destination.BottomBarTabs
+import com.kmp.movieapp.app.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app.navigation.destination.DiscoverMoviesDestination
 import com.kmp.movieapp.app.topbar.component.TopAppBarContent
 import com.kmp.movieapp.movie.domain.model.MovieCategory
@@ -24,6 +24,7 @@ import org.jetbrains.compose.resources.stringResource
 fun TopAppBarComponent() {
     val navSection = rememberActiveTabIn<BottomBarTabs>()
     val navDestination = rememberNavDestination()
+
     val showBack = when (navDestination) {
         is MovieCategoryListDestination -> true
         else -> false
@@ -58,5 +59,8 @@ fun TopAppBarComponent() {
 @Preview
 @Composable
 private fun TopAppBarComponentPreview() {
-    TopAppBarContent(title = "MovieApp", showBackButton = true)
+    TopAppBarContent(
+        title = "MovieApp",
+        showBackButton = true
+    )
 }

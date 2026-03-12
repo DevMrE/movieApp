@@ -13,7 +13,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import co.touchlab.kermit.Logger
 import com.kmp.movieapp.app.bottombar.BottomBarWithAppContent
-import com.kmp.movieapp.app.navigation.destination.BottomBarTabs
+import com.kmp.movieapp.app.bottombar.destination.BottomBarTabs
+import com.kmp.movieapp.app.search.destination.SearchScreenDestination
 import com.kmp.movieapp.app.topbar.TopAppBarComponent
 import com.kmp.movieapp.core.presentation.theme.AppTheme
 import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
@@ -59,6 +60,7 @@ fun AppContent() {
         ) {
             NavigationTabs<BottomBarTabs>()
             NavigationContent<MovieCategoryListDestination>()
+            NavigationContent<SearchScreenDestination>()
         }
     }
 }

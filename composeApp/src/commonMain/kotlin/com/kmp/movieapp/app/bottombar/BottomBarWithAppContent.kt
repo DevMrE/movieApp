@@ -21,8 +21,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.app.bottombar.component.NavItem
+import com.kmp.movieapp.app.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app.bottombar.model.BottomBarItem
-import com.kmp.movieapp.app.navigation.destination.BottomBarTabs
 import com.kmp.movieapp.app.navigation.destination.DiscoverMoviesDestination
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeDestination

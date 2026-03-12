@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.kmp.movieapp.app.navigation.destination.BottomBarTabs
+import com.kmp.movieapp.app.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app.navigation.destination.DiscoverMoviesDestination
+import com.kmp.movieapp.app.search.SearchContent
+import com.kmp.movieapp.app.search.destination.SearchScreenDestination
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
 import com.kmp.movieapp.homescreen.HomeContent
 import com.kmp.movieapp.homescreen.destination.HomeDestination
@@ -57,6 +59,10 @@ fun registerAppNavigation() {
 
         screen<SeriesDetailDestination> { dest ->
             ContentDetailScreen(dest.id)
+        }
+
+        content<SearchScreenDestination> {
+            SearchContent()
         }
 
         tabs<HomeTabs>(
