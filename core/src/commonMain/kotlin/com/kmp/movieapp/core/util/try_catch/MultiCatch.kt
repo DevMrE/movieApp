@@ -1,0 +1,34 @@
+package com.kmp.movieapp.core.util.try_catch
+
+import kotlin.coroutines.cancellation.CancellationException
+import kotlin.reflect.KClass
+
+/**
+ * Safely executes a suspend block and maps exceptions to values.
+ *
+ * @param T The type of the successful return value.
+ * @param block The suspend block to execute.
+ * @param handlers A map of exception classes to lambdas that produce a fallback value for that exception.
+ * @return The result of [block] if successful, otherwise the mapped value from [handlers].
+ */
+suspend fun <T> multiCatch(
+    tryBlock: suspend () -> T,
+    handlers: Map<List<KClass<out Throwable>>, suspend (Throwable) -> T>
+): T {
+    return try {
+        tryBlock()
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Throwable) {
+        // Suche den ersten passenden Handler
+        val matchingHandler = handlers.entries.firstOrNull { (keys, _) ->
+            keys.any { it.isInstance(e) }
+        }?.value
+
+        if (matchingHandler != null) {
+            matchingHandler(e) // Typisierte Exception hier im Lambda
+        } else {
+            throw e // Keine Übereinstimmung → Exception weiterwerfen
+        }
+    }
+}
