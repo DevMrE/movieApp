@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.presentation.navigation.MediaDetailDestination
 import com.kmp.movieapp.core.util.action.Action
+import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.usecase.GetInitialMoviesUseCase
 import com.kmp.movieapp.movie.presentation.action.MovieAction
@@ -11,10 +12,13 @@ import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestinat
 import com.kmp.movieapp.movie.presentation.mapper.toUiMovieList
 import com.kmp.movieapp.movie.presentation.model.UiMovieScreen
 import com.kmp.navigation.Navigation
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 
 class MovieScreenViewModel(
@@ -24,7 +28,20 @@ class MovieScreenViewModel(
 
     private val _movieScreenState = MutableStateFlow<UiMovieScreen?>(null)
 
-    val movieScreenState = _movieScreenState.asStateFlow()
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val movieScreenState = _movieScreenState
+        .flatMapLatest {
+            getInitialMoviesUseCase()
+        }.map { (popular, topRated, nowPlaying) ->
+            _movieScreenState.updateAndGet {
+                UiMovieScreen(
+                    isLoading = popular.isEmpty() || topRated.isEmpty() || nowPlaying.isEmpty(),
+                    nowPlaying = nowPlaying.toUiMovieList(category = MovieCategory.NOW_PLAYING),
+                    popularMovie = popular.toUiMovieList(category = MovieCategory.POPULAR),
+                    topRatedMovies = topRated.toUiMovieList(category = MovieCategory.TOP_RATED)
+                )
+            }
+        }.stateInEagerly(_movieScreenState.value)
 
     init {
         viewModelScope.launch {

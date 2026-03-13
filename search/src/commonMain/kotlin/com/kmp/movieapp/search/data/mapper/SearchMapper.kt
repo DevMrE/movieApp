@@ -7,6 +7,9 @@ import com.kmp.movieapp.search.domain.model.MediaImages
 import com.kmp.movieapp.search.domain.model.Rating
 import com.kmp.movieapp.search.domain.model.Search
 
+/**
+ * Maps a single object [SearchDto] to [Search]
+ */
 internal fun SearchDto.toSearch() = Search(
     titleInfo = Info(
         originalTitle = originalTitle ?: "",
@@ -27,5 +30,9 @@ internal fun SearchDto.toSearch() = Search(
     genres = genreIds?.map { it } ?: emptyList()
 )
 
+/**
+ * Maps a sequence of [SearchDto] to a [List] of [Search]
+ * objects.
+ */
 internal fun Iterable<SearchDto>?.mapToSearch(): List<Search> =
     this?.map { it.toSearch() } ?: emptyList()

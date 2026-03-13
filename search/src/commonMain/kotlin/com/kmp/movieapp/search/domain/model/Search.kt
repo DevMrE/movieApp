@@ -1,6 +1,6 @@
 package com.kmp.movieapp.search.domain.model
 
-data class Search(
+internal data class Search(
     val titleInfo: Info,
     val media: MediaImages,
     val releaseDate: String?,

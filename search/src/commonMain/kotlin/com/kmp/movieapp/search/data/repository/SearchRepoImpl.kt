@@ -8,7 +8,7 @@ import com.kmp.movieapp.search.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class SearchRepoImpl(
+internal class SearchRepoImpl(
     private val searchApiService: SearchApiService
 ) : SearchRepository {
 

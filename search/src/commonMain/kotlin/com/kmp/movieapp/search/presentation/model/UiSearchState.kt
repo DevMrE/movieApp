@@ -1,6 +1,6 @@
 package com.kmp.movieapp.search.presentation.model
 
-data class UiSearchState(
+internal data class UiSearchState(
     val search: String = "",
     val isSearchActive: Boolean = false,
     val searchResults: List<UiSearch> = emptyList()

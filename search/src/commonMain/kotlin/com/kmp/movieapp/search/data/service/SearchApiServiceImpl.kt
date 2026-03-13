@@ -11,7 +11,7 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.resources.get
 import io.ktor.http.HttpStatusCode
 
-class SearchApiServiceImpl(
+internal class SearchApiServiceImpl(
     private val httpClient: HttpClient
 ) : SearchApiService {
 
