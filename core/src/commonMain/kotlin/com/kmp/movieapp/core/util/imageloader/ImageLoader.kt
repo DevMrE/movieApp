@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import com.kmp.movieapp.core.Res
-import com.kmp.movieapp.core.movie_not_found
+import com.kmp.movieapp.core.media_item_not_found
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 import org.jetbrains.compose.resources.painterResource
@@ -39,7 +39,7 @@ fun ImageLoader(
         onFailure = { exception ->
             // Optional: Fallback, Error-Icon, Logging, ...
             Image(
-                painter = painterResource(Res.drawable.movie_not_found),
+                painter = painterResource(Res.drawable.media_item_not_found),
                 contentDescription = null
             )
         }

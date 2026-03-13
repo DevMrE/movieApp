@@ -5,7 +5,7 @@ import com.kmp.movieapp.movie.domain.model.MovieCategory
 
 sealed interface MovieAction : Action {
 
-    data class OnNavigateToDetailScreen(val id: String) : MovieAction
+    data class OnNavigateToDetailScreen(val title: String) : MovieAction
 
     data class OnStartTrailer(val id: Int) : MovieAction
 

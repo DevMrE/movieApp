@@ -17,11 +17,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kmp.movieapp.core.presentation.content.MediaItemCard
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.core.presentation.navigation.MediaDetailDestination
 import com.kmp.movieapp.movie.domain.model.MovieCategory
-import com.kmp.movieapp.movie.presentation.content.MovieCard
-import com.kmp.movieapp.movie.presentation.destination.MovieDetailDestination
 import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -69,13 +69,13 @@ fun MovieCategoryListScreen(movieCategory: MovieCategory) {
         ),
     ) {
         items(items = movieList.value, key = { it.id }) { movie ->
-            MovieCard(
+            MediaItemCard(
                 width = MaterialTheme.size.movieCardWidth,
                 height = MaterialTheme.size.movieCardLstHeight,
                 movieTitle = movie.title,
                 moviePosterPath = movie.posterPath,
                 onClick = {
-                    navigation.navigateTo(MovieDetailDestination(id = movie.id.toString()))
+                    navigation.navigateTo(MediaDetailDestination(title = movie.title))
                 }
             )
         }

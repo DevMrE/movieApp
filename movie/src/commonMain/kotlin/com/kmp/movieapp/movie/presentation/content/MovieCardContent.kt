@@ -4,6 +4,7 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.Dp
+import com.kmp.movieapp.core.presentation.content.MediaItemCard
 import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
@@ -14,12 +15,12 @@ fun LazyListScope.movieCardContent(
     onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->
-        MovieCard(
+        MediaItemCard(
             width = width,
             movieTitle = movie.title,
             moviePosterPath = if (width > MaterialTheme.size.movieCardWidth) movie.backdropPath else movie.posterPath,
             onClick = {
-                onAction(MovieAction.OnNavigateToDetailScreen(movie.id))
+                onAction(MovieAction.OnNavigateToDetailScreen(movie.title))
             }
         )
     }

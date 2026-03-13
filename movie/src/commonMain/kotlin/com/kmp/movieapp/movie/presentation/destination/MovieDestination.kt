@@ -11,9 +11,3 @@ data object MovieContentDestination : NavDestination
 data class MovieCategoryListDestination(
     val movieCategory: MovieCategory
 ) : NavDestination
-
-
-@Serializable
-data class MovieDetailDestination(
-    val id: String
-) : NavDestination

@@ -52,6 +52,7 @@ kotlin {
 
             implementation(libs.kamel)
 
+            implementation(libs.kmpNavigation)
         }
 
         androidMain.dependencies {

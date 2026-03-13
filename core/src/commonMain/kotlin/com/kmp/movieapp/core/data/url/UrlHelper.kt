@@ -15,4 +15,6 @@ object UrlHelper {
     const val MOVIE_DISCOVER_ENDPOINT = "/discover"
 
     const val SERIES_ENDPOINT = "/tv"
+
+    const val SEARCH_ENDPOINT = "/search"
 }
