@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 
-class MovieRepositoryImpl(
+internal class MovieRepositoryImpl(
     private val movieService: MovieService
 ) : MovieRepository {
 

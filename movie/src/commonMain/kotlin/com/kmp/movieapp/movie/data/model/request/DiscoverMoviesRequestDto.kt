@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.MOVIE_DISCOVER_ENDPOINT}${UrlHelper.MOVIE_ENDPOINT}")
-data class DiscoverMoviesRequestDto(
+internal data class DiscoverMoviesRequestDto(
     @SerialName("language")
     val language: String = "en",
     @SerialName("sort_by")

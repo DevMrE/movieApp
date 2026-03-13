@@ -9,7 +9,7 @@ import com.kmp.movieapp.core.presentation.material.size
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
 
-fun LazyListScope.movieCardContent(
+internal fun LazyListScope.movieCardContent(
     width: Dp,
     movieList: List<UiMovie>,
     onAction: (MovieAction) -> Unit

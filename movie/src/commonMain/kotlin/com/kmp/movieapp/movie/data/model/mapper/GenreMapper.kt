@@ -7,7 +7,7 @@ import com.kmp.movieapp.movie.domain.model.MovieGenre
  * Mapper for transforming an [GenreDto] into
  * [MovieGenre].
  */
-fun GenreDto.toMovieGenre(): MovieGenre = MovieGenre(
+internal fun GenreDto.toMovieGenre(): MovieGenre = MovieGenre(
     id = id,
     name = name
 )

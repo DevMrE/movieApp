@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 
-class MovieScreenViewModel(
+internal class MovieScreenViewModel(
     private val navigation: Navigation,
     private val getInitialMoviesUseCase: GetInitialMoviesUseCase
 ) : ViewModel() {

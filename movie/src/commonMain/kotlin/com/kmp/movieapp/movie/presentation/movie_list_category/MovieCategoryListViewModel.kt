@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 @OptIn(ExperimentalCoroutinesApi::class)
-class MovieCategoryListViewModel(
+internal class MovieCategoryListViewModel(
     private val loadNextMoviesForCategoryUseCase: LoadNextMoviesForCategoryUseCase,
     private val movieCategory: MovieCategory
 ) : ViewModel() {

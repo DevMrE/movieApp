@@ -1,6 +1,6 @@
 package com.kmp.movieapp.movie.data.model.request
 
-enum class SortByRequestDto(val sortName: String) {
+internal enum class SortByRequestDto(val sortName: String) {
     TITLE_ASC("title.asc"),
     TITLE_DESC("title.desc"),
     ORIGINAL_TITLE_ASC("original_title.asc"),

@@ -5,14 +5,14 @@ import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.presentation.model.UiMovie
 import com.kmp.movieapp.movie.presentation.model.UiMovieList
 
-fun Movie.toUiMovie() = UiMovie(
+internal fun Movie.toUiMovie() = UiMovie(
     title = title,
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backDropPath,
 )
 
-fun List<Movie>.toUiMovieList(category: MovieCategory): UiMovieList {
+internal fun List<Movie>.toUiMovieList(category: MovieCategory): UiMovieList {
     return UiMovieList(
         category = category,
         movies = this.map { it.toUiMovie() }

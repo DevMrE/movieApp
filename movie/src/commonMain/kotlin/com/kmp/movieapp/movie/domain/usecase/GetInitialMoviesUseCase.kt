@@ -5,7 +5,7 @@ import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.combine
 
-class GetInitialMoviesUseCase(
+internal class GetInitialMoviesUseCase(
     private val movieRepository: MovieRepository
 ) {
 

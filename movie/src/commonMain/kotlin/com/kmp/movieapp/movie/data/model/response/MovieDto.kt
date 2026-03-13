@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDto(
+internal data class MovieDto(
     @SerialName("adult")
     val adult: Boolean? = null,
     @SerialName("backdrop_path")

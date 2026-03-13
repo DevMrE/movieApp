@@ -3,7 +3,7 @@ package com.kmp.movieapp.movie.domain.usecase
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 
-class LoadNextMoviesForCategoryUseCase(
+internal class LoadNextMoviesForCategoryUseCase(
     private val movieRepository: MovieRepository
 ) {
 

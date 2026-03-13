@@ -5,7 +5,7 @@ import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import kotlinx.coroutines.flow.Flow
 
-interface MovieRepository : Repository {
+internal interface MovieRepository : Repository {
 
     fun getMovies(
         language: String,

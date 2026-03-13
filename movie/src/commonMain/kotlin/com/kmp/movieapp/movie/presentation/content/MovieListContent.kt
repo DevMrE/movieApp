@@ -25,7 +25,7 @@ import com.kmp.movieapp.movie.presentation.model.UiMovieList
 import com.kmp.movieapp.movie.see_all
 import org.jetbrains.compose.resources.stringResource
 
-fun LazyListScope.movieListContent(
+internal fun LazyListScope.movieListContent(
     uiMovieList: UiMovieList,
     onAction: (MovieAction) -> Unit
 ) {

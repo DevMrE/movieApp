@@ -8,7 +8,7 @@ import com.kmp.movieapp.movie.domain.model.Movie
  * Mapper for transforming an [MovieDto] into
  * [Movie]
  */
-fun MovieDto.toMovie() = Movie(
+internal fun MovieDto.toMovie() = Movie(
     id = id ?: 0,
     title = title ?: "",
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
