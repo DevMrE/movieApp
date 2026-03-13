@@ -20,15 +20,14 @@ suspend fun <T> multiCatch(
     } catch (e: CancellationException) {
         throw e
     } catch (e: Throwable) {
-        // Suche den ersten passenden Handler
         val matchingHandler = handlers.entries.firstOrNull { (keys, _) ->
             keys.any { it.isInstance(e) }
         }?.value
 
         if (matchingHandler != null) {
-            matchingHandler(e) // Typisierte Exception hier im Lambda
+            matchingHandler(e)
         } else {
-            throw e // Keine Übereinstimmung → Exception weiterwerfen
+           throw e
         }
     }
 }

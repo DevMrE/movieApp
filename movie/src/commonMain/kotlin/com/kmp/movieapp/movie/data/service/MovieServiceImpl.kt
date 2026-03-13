@@ -59,21 +59,32 @@ internal class MovieServiceImpl(
     )
 
     override suspend fun fetchMovieGenres(language: String): Result<MovieGenreResponseDto?, ApiError> =
-        try {
-            val response = httpClient.get(
-                resource = MovieGenreRequestDto(language = language)
-            )
+        multiCatch(
+            tryBlock = {
+                val response = httpClient.get(
+                    resource = MovieGenreRequestDto(language = language)
+                )
 
-            if (response.status == HttpStatusCode.OK) {
                 Result.Success(response.body())
-            } else Result.Failure(value = ApiError.NotFound)
+            },
+            handlers = mapOf(
+                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
+                    val ex = e as ResponseException
+                    HandleHttpStatus.getResultForStatus(ex.response.status)
+                },
+                listOf(Exception::class) to { e ->
+                    Logger.e(
+                        tag = "ApiError",
+                        messageString = "Error during fetchMoviesForCategory",
+                        throwable = e
+                    )
+                    HandleHttpStatus.getResultForStatus(null)
+                }
+            )
+        )
 
-        } catch (e: Exception) {
-            Logger.e(messageString = e.message.toString())
-            Result.Failure(e.message)
-        }
-
-    override suspend fun fetchAllMovies(filter: Filter): Result<ApiResponseDto<DiscoverMovieDto>, ApiError> =
+    override suspend
+    fun fetchAllMovies(filter: Filter): Result<ApiResponseDto<DiscoverMovieDto>, ApiError> =
         try {
             val response = httpClient.get(
                 resource = filter.toDiscoverMoviesDto()
