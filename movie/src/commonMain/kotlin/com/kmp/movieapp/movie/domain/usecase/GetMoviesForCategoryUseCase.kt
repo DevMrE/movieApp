@@ -6,7 +6,7 @@ import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.combine
 
 internal class GetMoviesForCategoryUseCase(
-    private val movieRepository: MovieRepository
+    private val movieRepository: MovieRepository,
 ) {
 
     operator fun invoke() = combine(

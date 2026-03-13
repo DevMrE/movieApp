@@ -20,7 +20,6 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.plugins.resources.get
-import io.ktor.http.HttpStatusCode
 
 internal class MovieServiceImpl(
     private val httpClient: HttpClient
@@ -32,10 +31,11 @@ internal class MovieServiceImpl(
         movieListCategory: MovieListCategory
     ): Result<ApiResponseDto<MovieDto>, ApiError> = multiCatch(
         tryBlock = {
+            // TODO:
             val response = httpClient.get(
                 resource = MovieListRequestDto(
                     page = page,
-                    language = "de",
+                    language = language,
                     movieListCategory = movieListCategory.category
                 )
             )
@@ -83,18 +83,28 @@ internal class MovieServiceImpl(
             )
         )
 
-    override suspend
-    fun fetchAllMovies(filter: Filter): Result<ApiResponseDto<DiscoverMovieDto>, ApiError> =
-        try {
-            val response = httpClient.get(
-                resource = filter.toDiscoverMoviesDto()
+    override suspend fun fetchAllMovies(filter: Filter): Result<ApiResponseDto<DiscoverMovieDto>, ApiError> =
+        multiCatch(
+            tryBlock = {
+                val response = httpClient.get(
+                    resource = filter.toDiscoverMoviesDto()
+                )
+
+                Result.Success(response.body())
+            },
+            handlers = mapOf(
+                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
+                    val ex = e as ResponseException
+                    HandleHttpStatus.getResultForStatus(ex.response.status)
+                },
+                listOf(Exception::class) to { e ->
+                    Logger.e(
+                        tag = "ApiError",
+                        messageString = "Error during fetchMoviesForCategory",
+                        throwable = e
+                    )
+                    HandleHttpStatus.getResultForStatus(null)
+                }
             )
-
-            if (response == HttpStatusCode.OK) Result.Success(response.body())
-            else Result.Failure(value = ApiError.NotFound)
-        } catch (e: Exception) {
-            Logger.e(messageString = e.message.toString())
-            Result.Failure(e.message)
-        }
-
+        )
 }

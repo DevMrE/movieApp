@@ -27,12 +27,7 @@ dependencyResolutionManagement {
         mavenCentral()
 
         maven {
-            url = uri("https://maven.pkg.github.com/DevMrE/kmpNavigation")
-
-            credentials {
-                username = providers.gradleProperty("gpr.user").orNull
-                password = providers.gradleProperty("gpr.token").orNull
-            }
+            url = uri("https://raw.githubusercontent.com/DevMrE/maven-repo/main")
         }
     }
 }
