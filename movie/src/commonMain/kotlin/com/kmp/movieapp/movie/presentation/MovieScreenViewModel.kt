@@ -6,7 +6,7 @@ import com.kmp.movieapp.core.presentation.navigation.MediaDetailDestination
 import com.kmp.movieapp.core.util.action.Action
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.movie.domain.model.MovieCategory
-import com.kmp.movieapp.movie.domain.usecase.GetInitialMoviesUseCase
+import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.movie.presentation.mapper.toUiMovieList
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 
 internal class MovieScreenViewModel(
     private val navigation: Navigation,
-    private val getInitialMoviesUseCase: GetInitialMoviesUseCase
+    private val getMoviesForCategoryUseCase: GetMoviesForCategoryUseCase
 ) : ViewModel() {
 
     private val _movieScreenState = MutableStateFlow<UiMovieScreen?>(null)
@@ -31,7 +31,7 @@ internal class MovieScreenViewModel(
     @OptIn(ExperimentalCoroutinesApi::class)
     val movieScreenState = _movieScreenState
         .flatMapLatest {
-            getInitialMoviesUseCase()
+            getMoviesForCategoryUseCase()
         }.map { (popular, topRated, nowPlaying) ->
             _movieScreenState.updateAndGet {
                 UiMovieScreen(
@@ -45,7 +45,7 @@ internal class MovieScreenViewModel(
 
     init {
         viewModelScope.launch {
-            getInitialMoviesUseCase().collectLatest { (popular, topRated, nowPlaying) ->
+            getMoviesForCategoryUseCase().collectLatest { (popular, topRated, nowPlaying) ->
                 _movieScreenState.update {
                     UiMovieScreen(
                         isLoading = popular.isEmpty() || topRated.isEmpty() || nowPlaying.isEmpty(),

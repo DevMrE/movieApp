@@ -4,7 +4,7 @@ import com.kmp.movieapp.movie.data.repository.MovieRepositoryImpl
 import com.kmp.movieapp.movie.data.service.MovieService
 import com.kmp.movieapp.movie.data.service.MovieServiceImpl
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
-import com.kmp.movieapp.movie.domain.usecase.GetInitialMoviesUseCase
+import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
 import com.kmp.movieapp.movie.domain.usecase.LoadNextMoviesForCategoryUseCase
 import com.kmp.movieapp.movie.presentation.MovieScreenViewModel
 import com.kmp.movieapp.movie.presentation.movie_list_category.MovieCategoryListViewModel
@@ -21,8 +21,8 @@ val movieModule = module {
         MovieRepositoryImpl(get())
     }
 
-    factory<GetInitialMoviesUseCase> {
-        GetInitialMoviesUseCase(get())
+    factory<GetMoviesForCategoryUseCase> {
+        GetMoviesForCategoryUseCase(get())
     }
 
     factory<LoadNextMoviesForCategoryUseCase> {
