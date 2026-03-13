@@ -30,8 +30,8 @@ internal class MovieRepositoryImpl(
             page = page,
             movieListCategory = movieCategory.toMovieListCategory()
         ).alsoOnSuccess { data ->
-            val movieList = data.results?.mapNotNull { movieDto ->
-                movieDto?.toMovie()
+            val movieList = data.results?.map { movieDto ->
+                movieDto.toMovie()
             } ?: emptyList()
 
             _movieLists.update { currentMap ->
