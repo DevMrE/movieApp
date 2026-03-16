@@ -1,48 +1,149 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# 🎬 MovieApp
 
-* [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./composeApp/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./composeApp/src/jvmMain/kotlin)
-    folder is the appropriate location.
+> ⚠️ **This project is intended solely for application/portfolio purposes.**
+> It does not represent my full knowledge, capabilities, or potential as a developer.
+> The app is meant to provide a brief insight into my development style and way of working.
 
-* [/iosApp](./iosApp/iosApp) contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-### Build and Run Android Application
-
-To build and run the development version of the Android app, use the run configuration from the run widget
-in your IDE’s toolbar or build it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:assembleDebug
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:assembleDebug
-  ```
-
-### Build and Run Desktop (JVM) Application
-
-To build and run the development version of the desktop app, use the run configuration from the run widget
-in your IDE’s toolbar or run it directly from the terminal:
-- on macOS/Linux
-  ```shell
-  ./gradlew :composeApp:run
-  ```
-- on Windows
-  ```shell
-  .\gradlew.bat :composeApp:run
-  ```
-
-### Build and Run iOS Application
-
-To build and run the development version of the iOS app, use the run configuration from the run widget
-in your IDE’s toolbar or open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+> 💡 **The solution approaches, architectural decisions, and implementations used in this project are not final.**
+> They serve purely as an illustration of how certain problems can be approached.
+> In a real-world or production environment, solutions would be designed, reviewed, and refined more thoroughly.
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 📌 About the Project
+
+MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)**, running on **Android**, **iOS**, and **Desktop (JVM)**. The app displays movies, series, and related information fetched from an external API.
+
+---
+
+## ⚠️ Known Limitations
+
+- **Permission handling** (location, camera, microphone, gallery, notifications) is **not yet finalized** and may not work correctly on all platforms.
+- The app is under active development and is **not production-ready**.
+- Some features may be incomplete or still work in progress.
+- The approaches and patterns used throughout the codebase are **illustrative only** and should not be considered best practices or final solutions.
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Usage |
+|---|---|
+| Kotlin Multiplatform (KMP) | Cross-platform shared logic |
+| Jetpack Compose / Compose Multiplatform | UI |
+| Koin | Dependency Injection |
+| Ktor | HTTP Client |
+| Coroutines & Flow | Asynchronous programming |
+| FusedLocationProvider | Location (Android) |
+| CoreLocation | Location (iOS) |
+
+---
+
+## 📱 Supported Platforms
+
+| Platform | Minimum Version |
+|---|---|
+| Android | API 35 (Android 15) |
+| iOS | 15.0 |
+| Desktop (JVM) | Windows, macOS |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Android Studio (Hedgehog or newer)
+- Xcode 15+ (for iOS)
+- JDK 17+
+- Kotlin 1.9+
+- Android SDK 36 (compile), min SDK 35
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/DevMrE/movieapp.git
+cd movieapp
+```
+
+### Android
+
+Open the project in Android Studio and run it on a device or emulator (Android 15+ required).
+
+### iOS
+
+```bash
+cd iosApp
+pod install
+```
+
+Then open `iosApp.xcworkspace` in Xcode and run (iOS 15.0+ required).
+
+### Desktop
+
+```bash
+./gradlew :composeApp:run
+```
+
+---
+
+## 📁 Project Structure
+
+```
+movieapp/
+├── composeApp/          # Main app module (Android, iOS, Desktop entry points)
+├── iosApp/              # iOS Xcode project
+├── core/                # Shared core utilities, DI, networking
+├── movie/               # Movie feature module
+├── series/              # Series feature module
+├── search/              # Search feature module
+├── content_detail/      # Content detail feature module
+├── gradle/              # Gradle wrapper & version catalog
+├── build.gradle.kts     # Root build config
+├── gradle.properties    # Project-wide properties & versions
+└── settings.gradle.kts  # Module declarations
+```
+
+---
+
+## 🔒 Permissions
+
+The app requests the following permissions:
+
+| Permission | Platform | Purpose |
+|---|---|---|
+| `ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION` | Android | Location access |
+| `CAMERA` | Android / iOS | Camera access |
+| `RECORD_AUDIO` | Android / iOS | Microphone / speech recognition |
+| `READ_MEDIA_IMAGES` | Android / iOS | Gallery access |
+| `POST_NOTIFICATIONS` | Android / iOS | Push notifications |
+
+> ⚠️ As mentioned above, permission handling is not yet fully stable across all platforms.
+
+---
+
+## 📄 License & Terms of Use
+
+**All rights reserved.**
+
+This project is **strictly intended for application and demonstration purposes only**. Any commercial use, redistribution, duplication, or usage of the code — in whole or in part — is **expressly prohibited without the prior written consent of the author**.
+
+This includes but is not limited to:
+- Any form of commercial use
+- Selling or licensing the code
+- Using it in your own products or services
+- Publicly redistributing the source code
+
+If you are interested in a collaboration or licensing, feel free to reach out directly.
+
+---
+
+## 👤 Author
+
+**[Your Name]**
+- GitHub: [@DevMrE](https://github.com/DevMrE)
+- LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
+---
+
+> *This project does not necessarily reflect best practices or the full extent of the author's knowledge and experience. It is intended solely to illustrate development skills within the context of a job application process.*
