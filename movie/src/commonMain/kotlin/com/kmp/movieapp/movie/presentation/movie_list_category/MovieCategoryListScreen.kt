@@ -68,7 +68,7 @@ fun MovieCategoryListScreen(movieCategory: MovieCategory) {
             alignment = Alignment.CenterHorizontally
         ),
     ) {
-        items(items = movieList.value, key = { it.id }) { movie ->
+        items(items = movieList.value, key = { it.hashCode() }) { movie ->
             MediaItemCard(
                 width = MaterialTheme.size.movieCardWidth,
                 height = MaterialTheme.size.movieCardLstHeight,

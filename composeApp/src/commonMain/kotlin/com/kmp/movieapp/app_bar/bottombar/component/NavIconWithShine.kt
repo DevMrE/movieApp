@@ -21,12 +21,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.presentation.material.size
+import org.jetbrains.compose.resources.StringResource
+import org.jetbrains.compose.resources.stringResource
 
 @Composable
 internal fun NavIconWithShine(
     selected: Boolean,
     icon: ImageVector,
-    label: String,
+    label: StringResource? = null,
 ) {
     val glowAlpha = if (selected) 1f else 0f
     val glowColor = LocalContentColor.current
@@ -64,9 +66,11 @@ internal fun NavIconWithShine(
             )
         }
 
-        Text(
-            text = label,
-            fontWeight = FontWeight.ExtraBold
-        )
+        label?.let {
+            Text(
+                text = stringResource(it),
+                fontWeight = FontWeight.ExtraBold
+            )
+        }
     }
 }

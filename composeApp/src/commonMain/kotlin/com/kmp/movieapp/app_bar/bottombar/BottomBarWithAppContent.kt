@@ -23,10 +23,10 @@ import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.app_bar.bottombar.component.NavItem
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.bottombar.model.BottomBarItem
-import com.kmp.movieapp.navigation.destination.DiscoverMoviesDestination
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
+import com.kmp.movieapp.navigation.destination.DiscoverMoviesDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberIsTabsActive
@@ -35,11 +35,10 @@ import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.home_screen
 import movieapp.composeapp.generated.resources.ic_home
+import movieapp.composeapp.generated.resources.ic_more
 import movieapp.composeapp.generated.resources.ic_movie
-import movieapp.composeapp.generated.resources.ic_settings
+import movieapp.composeapp.generated.resources.more
 import movieapp.composeapp.generated.resources.movie_tab
-import movieapp.composeapp.generated.resources.settings_screen_title
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
 private val bottomBarItemList = listOf(
@@ -54,14 +53,14 @@ private val bottomBarItemList = listOf(
         navDestination = DiscoverMoviesDestination
     ),
     BottomBarItem(
-        icon = Res.drawable.ic_settings,
-        label = Res.string.settings_screen_title,
+        icon = Res.drawable.ic_more,
+        label = Res.string.more,
         navDestination = SettingsDestination
     )
 )
 
 @Composable
-internal fun BottomBarWithAppContent() {
+internal fun BottomBarComponent() {
     val navigation = rememberNavigation()
     val navDestination = rememberNavDestination()
     val activeTabs = rememberActiveTabIn<BottomBarTabs>()
@@ -108,7 +107,7 @@ internal fun BottomBarWithAppContent() {
                         navigation.navigateTo(navItem.navDestination)
                     },
                     icon = vectorResource(navItem.icon),
-                    label = stringResource(navItem.label),
+                    labelResource = navItem.label,
                     colors = itemColors.navigationBarItemColors
                 )
             }

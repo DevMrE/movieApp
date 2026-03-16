@@ -6,6 +6,6 @@ import org.jetbrains.compose.resources.StringResource
 
 data class BottomBarItem(
     val icon: DrawableResource,
-    val label: StringResource,
-    val navDestination: NavDestination
+    val navDestination: NavDestination,
+    val label: StringResource? = null
 )

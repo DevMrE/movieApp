@@ -58,6 +58,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.ktorOkHttp)
             implementation(libs.android.conscrypt)
+            implementation(libs.play.services.location)
         }
 
         iosMain.dependencies {

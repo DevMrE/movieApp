@@ -22,4 +22,6 @@ val coreModule = module {
             addDefaultRequest()
         }
     }
+
+    includes(sharedCoreModule)
 }

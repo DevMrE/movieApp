@@ -4,6 +4,7 @@
     <string name="movie_tab">Filme</string>
     <string name="series_tab">Serien</string>
     <string name="settings_screen_title">Einstellungen</string>
+    <string name="more">Mehr</string>
     <string name="discover_movies_title">Entdecken</string>
     <string name="movie_category_list_title">%1$s Filme</string>
     <string name="movie_category_popular">Beliebte</string>

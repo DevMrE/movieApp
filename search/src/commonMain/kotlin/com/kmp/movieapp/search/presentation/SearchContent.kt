@@ -45,7 +45,7 @@ fun SearchContent() {
             alignment = Alignment.CenterHorizontally
         ),
     ) {
-        items(items = results.searchResults, key = { it.title + it.posterPath }) { movie ->
+        items(items = results.searchResults, key = { it.hashCode() }) { movie ->
             MediaItemCard(
                 width = MaterialTheme.size.movieCardWidth,
                 height = MaterialTheme.size.movieCardLstHeight,

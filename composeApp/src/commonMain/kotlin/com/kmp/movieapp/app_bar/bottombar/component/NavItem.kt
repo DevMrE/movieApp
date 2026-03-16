@@ -15,13 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import com.kmp.movieapp.core.presentation.material.padding
+import org.jetbrains.compose.resources.StringResource
 
 @Composable
 fun NavItem(
     selected: Boolean,
     onClick: () -> Unit,
     icon: ImageVector,
-    label: String,
+    labelResource: StringResource?,
     colors: NavigationBarItemColors,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
@@ -45,7 +46,7 @@ fun NavItem(
             NavIconWithShine(
                 selected = selected,
                 icon = icon,
-                label = label,
+                label = labelResource,
             )
         }
     }
