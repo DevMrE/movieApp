@@ -5,10 +5,16 @@
     <string name="series_tab">Series</string>
     <string name="settings_screen_title">Settings</string>
     <string name="more">Mehr</string>
-    <string name="discover_movies_title">Discover</string>
+    <string name="discover_media_title">Discover</string>
     <string name="movie_category_list_title">%1$s Movies</string>
     <string name="movie_category_popular">Popular</string>
     <string name="movie_category_top_rated">Top Rated</string>
     <string name="movie_category_now_playing">Current</string>
     <string name="search">Search...</string>
+
+    <string name="permission_camera">Open Camera</string>
+    <string name="permission_location">Request Position</string>
+    <string name="permission_microphone">Open Microphone</string>
+    <string name="permission_notification">Allow Notification</string>
+    <string name="permission_image_gallery">Open Gallery</string>
 </resources>

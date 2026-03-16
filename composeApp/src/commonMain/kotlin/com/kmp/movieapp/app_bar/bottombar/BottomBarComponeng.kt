@@ -34,12 +34,12 @@ import com.kmp.navigation.compose.rememberIsTabsActive
 import com.kmp.navigation.compose.rememberNavDestination
 import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res
+import movieapp.composeapp.generated.resources.discover_media_title
 import movieapp.composeapp.generated.resources.home_screen
+import movieapp.composeapp.generated.resources.ic_fire
 import movieapp.composeapp.generated.resources.ic_home
 import movieapp.composeapp.generated.resources.ic_more
-import movieapp.composeapp.generated.resources.ic_movie
 import movieapp.composeapp.generated.resources.more
-import movieapp.composeapp.generated.resources.movie_tab
 import org.jetbrains.compose.resources.vectorResource
 
 private val bottomBarItemList = listOf(
@@ -49,8 +49,8 @@ private val bottomBarItemList = listOf(
         navDestination = HomeDestination
     ),
     BottomBarItem(
-        icon = Res.drawable.ic_movie,
-        label = Res.string.movie_tab,
+        icon = Res.drawable.ic_fire,
+        label = Res.string.discover_media_title,
         navDestination = DiscoverMoviesDestination
     ),
     BottomBarItem(
