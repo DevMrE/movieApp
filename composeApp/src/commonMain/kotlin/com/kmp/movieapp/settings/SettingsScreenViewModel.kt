@@ -54,8 +54,8 @@ internal class SettingsScreenViewModel(
                             Logger.i("Permission", message = { "Location?: $location" })
                             handlePermissionOnResult(
                                 PermissionDemoResult.LocationReady(
-                                    lat = location.lat,
-                                    lng = location.lng
+                                    lat = location?.lat,
+                                    lng = location?.lng
                                 )
                             )
                         }

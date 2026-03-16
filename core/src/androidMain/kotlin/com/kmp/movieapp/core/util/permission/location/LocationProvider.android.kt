@@ -13,19 +13,17 @@ import com.google.android.gms.location.Priority
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.isActive
 
 
 actual class LocationProvider(
     private val context: Context
 ) {
-    actual suspend fun getCurrentLocation(): Result<Location> {
+    actual suspend fun getCurrentLocation(): Result<Location?> {
         return try {
-            val location = locationFlow().first()
+            val location = locationFlow().firstOrNull()
             Result.success(location)
-        } catch (e: NoSuchElementException) {
-            Result.failure(Error("Location not available"))
         } catch (e: SecurityException) {
             Result.failure(Error("Location Permission not granted"))
         } catch (e: Exception) {

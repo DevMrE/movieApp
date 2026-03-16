@@ -12,7 +12,7 @@ import kotlin.coroutines.resume
 actual class LocationProvider {
 
     @OptIn(ExperimentalForeignApi::class)
-    actual suspend fun getCurrentLocation(): Result<Location> {
+    actual suspend fun getCurrentLocation(): Result<Location?> {
         return suspendCancellableCoroutine { continuation ->
             val delegate = object : NSObject(), CLLocationManagerDelegateProtocol {
                 override fun locationManager(
