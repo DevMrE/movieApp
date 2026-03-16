@@ -7,7 +7,7 @@ import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual val sharedCoreModule: Module = module {
-    factory { PermissionRequester() }
-    factory { SpeechRecognizer() }
-    factory { LocationProvider() }
+    factory<PermissionRequester> { PermissionRequester() }
+    factory<SpeechRecognizer> { SpeechRecognizer()}
+    factory<LocationProvider> { LocationProvider() }
 }

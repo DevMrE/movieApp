@@ -1,5 +1,6 @@
 package com.kmp.movieapp.core.util.permission.speech
 
+import com.kmp.movieapp.core.util.boolean.isTrue
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -40,7 +41,7 @@ actual class SpeechRecognizer {
         engine.prepare()
         engine.startAndReturnError(null)
 
-        recognitionTask = recognizer?.recognitionTaskWithRequest(
+        recognitionTask = recognizer.recognitionTaskWithRequest(
             request = request,
             resultHandler = { result, error ->
                 if (error != null) {
@@ -73,5 +74,5 @@ actual class SpeechRecognizer {
     }
 
     actual fun isAvailable(): Boolean =
-        SFSpeechRecognizer(locale = NSLocale.currentLocale)?.isAvailable() == true
+        SFSpeechRecognizer(locale = NSLocale.currentLocale).isAvailable().isTrue
 }

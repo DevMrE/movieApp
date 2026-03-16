@@ -11,6 +11,8 @@ import io.ktor.client.plugins.bomremover.BOMRemover
 import org.koin.dsl.module
 
 val coreModule = module {
+    includes(sharedCoreModule)
+
     single<HttpClient> {
         HttpClient(getHttpClientEngine()) {
             install(BOMRemover)
@@ -22,6 +24,4 @@ val coreModule = module {
             addDefaultRequest()
         }
     }
-
-    includes(sharedCoreModule)
 }

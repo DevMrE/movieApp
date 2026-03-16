@@ -5,11 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.kmp.movieapp.app_screen.mobile.MobileAppScreen
+import com.kmp.movieapp.core.util.ActivityProvider
 import com.kmp.movieapp.navigation.registerAppNavigation
 
 class MovieAppActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
+        ActivityProvider.activity = this
         super.onCreate(savedInstanceState)
 
         registerAppNavigation()
@@ -17,5 +19,10 @@ class MovieAppActivity : ComponentActivity() {
         setContent {
             MobileAppScreen()
         }
+    }
+
+    override fun onDestroy() {
+        ActivityProvider.activity = null
+        super.onDestroy()
     }
 }
