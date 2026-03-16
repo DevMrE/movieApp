@@ -93,6 +93,7 @@ movieapp/
 ├── series/              # Series feature module
 ├── search/              # Search feature module
 ├── content_detail/      # Content detail feature module
+├── discover/            # Discover feature module
 ├── gradle/              # Gradle wrapper & version catalog
 ├── build.gradle.kts     # Root build config
 ├── gradle.properties    # Project-wide properties & versions
@@ -117,6 +118,25 @@ The app requests the following permissions:
 
 ---
 
+## 🌍 Localization
+
+The app currently supports the following languages:
+
+| Language | Code |
+|---|---|
+| English | `en` |
+| German | `de` |
+
+The language is automatically selected based on the device's system language.
+
+---
+
+## 🎨 Appearance
+
+The app fully supports both **Light Mode** and **Dark Mode**, automatically adapting to the system appearance setting of the device.
+
+---
+
 ## 📄 License & Terms of Use
 
 **All rights reserved.**
@@ -135,9 +155,10 @@ If you are interested in a collaboration or licensing, feel free to reach out di
 
 ## 👤 Author
 
-**[Your Name]**
+**Emrah Cicek**
 - GitHub: [@DevMrE](https://github.com/DevMrE)
 - LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
+
 ---
 
 > *This project does not necessarily reflect best practices or the full extent of the author's knowledge and experience. It is intended solely to illustrate development skills within the context of a job application process.*
