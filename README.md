@@ -160,5 +160,3 @@ If you are interested in a collaboration or licensing, feel free to reach out di
 - LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
 
 ---
-
-> *This project does not necessarily reflect best practices or the full extent of the author's knowledge and experience. It is intended solely to illustrate development skills within the context of a job application process.*
