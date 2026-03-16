@@ -15,7 +15,7 @@ kotlin {
     }
 
     androidLibrary {
-        namespace = "com.kmp.movieapp.search"
+        namespace = "com.kmp.movieapp.discover"
         compileSdk = 36
         minSdk = 35
 
@@ -29,6 +29,11 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    // Source set declarations.
+    // Declaring a target automatically creates a source set with the same name. By default, the
+    // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
+    // common to share sources between related targets.
+    // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
         commonMain {
             dependencies {
@@ -43,7 +48,6 @@ kotlin {
 
                 implementation(libs.logger)
 
-                // Add KMP dependencies here
                 implementation(libs.bundles.commainMainKoin)
                 implementation(libs.bundles.commonMainKtor)
 
@@ -60,15 +64,13 @@ kotlin {
             }
         }
 
-
         iosMain {
             dependencies {
-
             }
         }
     }
 }
 
 compose.resources {
-    packageOfResClass = "com.kmp.movieapp.search"
+    packageOfResClass = "com.kmp.movieapp.discover"
 }

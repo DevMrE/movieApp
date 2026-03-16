@@ -25,9 +25,9 @@ import com.kmp.movieapp.app_bar.bottombar.component.NavItem
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.bottombar.model.BottomBarItem
 import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
-import com.kmp.movieapp.navigation.destination.DiscoverMoviesDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberIsTabsActive
@@ -51,7 +51,7 @@ private val bottomBarItemList = listOf(
     BottomBarItem(
         icon = Res.drawable.ic_fire,
         label = Res.string.discover_media_title,
-        navDestination = DiscoverMoviesDestination
+        navDestination = DiscoverMediaDestination
     ),
     BottomBarItem(
         icon = Res.drawable.ic_more,

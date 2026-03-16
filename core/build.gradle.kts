@@ -16,9 +16,6 @@ kotlin {
         freeCompilerArgs.add("-Xcontext-parameters")
     }
 
-    // Target declarations - add or remove as needed below. These define
-    // which platforms this KMP module supports.
-    // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
         namespace = "com.kmp.movieapp.core"
         compileSdk = 36
@@ -41,7 +38,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
-            // Add KMP dependencies here
+
             implementation(libs.bundles.commonMainCompose)
 
             implementation(libs.logger)

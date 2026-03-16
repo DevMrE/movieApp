@@ -72,6 +72,7 @@ kotlin {
             implementation(project(":series"))
             implementation(project(":content_detail"))
             implementation(project(":search"))
+            implementation(project(":discover"))
         }
 
         androidMain.dependencies {
