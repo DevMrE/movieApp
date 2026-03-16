@@ -1,0 +1,5 @@
+NSCameraUsageDescription = "Die App benötigt Zugriff auf die Kamera um Fotos aufzunehmen.";
+NSMicrophoneUsageDescription = "Die App benötigt Zugriff auf das Mikrofon für Sprachaufnahmen.";
+NSLocationWhenInUseUsageDescription = "Die App benötigt deinen Standort um dir relevante Inhalte anzuzeigen.";
+NSLocationAlwaysAndWhenInUseUsageDescription = "Die App benötigt deinen Standort auch im Hintergrund.";
+NSPhotoLibraryUsageDescription = "Die App benötigt Zugriff auf deine Fotos.";

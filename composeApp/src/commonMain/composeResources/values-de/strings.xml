@@ -12,9 +12,9 @@
     <string name="movie_category_now_playing">Aktuelle</string>
     <string name="search">Suche...</string>
 
-    <string name="permission_camera">Open Camera</string>
-    <string name="permission_location">Request Position</string>
-    <string name="permission_microphone">Open Microphone</string>
-    <string name="permission_notification">Allow Notification</string>
-    <string name="permission_image_gallery">Open Gallery</string>
+    <string name="permission_camera">Kamera Öffnen</string>
+    <string name="permission_location">Standort abfragen</string>
+    <string name="permission_microphone">Mikrofon erlauben</string>
+    <string name="permission_notification">Benachrichtigung erteilen</string>
+    <string name="permission_image_gallery">Galerie Öffnen</string>
 </resources>

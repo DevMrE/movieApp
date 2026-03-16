@@ -16,7 +16,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		53396ED8BA9C6D7CC28B913B /* Exceptions for "iosApp" folder in "iosApp" target */ = {
+		53396ED8BA9C6D7CC28B913B /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -28,15 +28,13 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9F09A9D2AD89E35FD6098F32 /* Configuration */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-			);
 			path = Configuration;
 			sourceTree = "<group>";
 		};
 		A5DBD71D40619ED8A0AB5EE7 /* iosApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				53396ED8BA9C6D7CC28B913B /* Exceptions for "iosApp" folder in "iosApp" target */,
+				53396ED8BA9C6D7CC28B913B /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";
@@ -180,6 +178,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B06B28C8CA31C64F0AC47CB3 = {
+			isa = PBXVariantGroup;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		3438CA5D70DC4F33FF8050D9 /* Debug */ = {

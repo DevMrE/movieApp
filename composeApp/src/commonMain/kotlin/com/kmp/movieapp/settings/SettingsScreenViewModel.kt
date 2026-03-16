@@ -2,6 +2,7 @@ package com.kmp.movieapp.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.touchlab.kermit.Logger
 import com.kmp.movieapp.core.util.permission.Permission
 import com.kmp.movieapp.core.util.permission.PermissionRequester
 import com.kmp.movieapp.core.util.permission.PermissionState
@@ -38,11 +39,6 @@ internal class SettingsScreenViewModel(
         viewModelScope.launch {
             when (permission) {
                 Permission.LOCATION -> handleLocationPermission()
-
-
-                Permission.CAMERA -> {
-                }
-
                 else -> {}
             }
         }
@@ -55,40 +51,44 @@ internal class SettingsScreenViewModel(
                 onGranted = {
                     locationProvider.getCurrentLocation()
                         .onSuccess { location ->
-                            _uiState.update {
-                                it.copy(
-                                    permissionDemoResult = PermissionDemoResult.LocationReady(
-                                        lat = location.lat,
-                                        lng = location.lng
-                                    )
+                            Logger.i("Permission", message = { "Location?: $location" })
+                            handlePermissionOnResult(
+                                PermissionDemoResult.LocationReady(
+                                    lat = location.lat,
+                                    lng = location.lng
                                 )
-                            }
+                            )
                         }
                         .onFailure {
-                            _uiState.update {
-                                it.copy(
-                                    permissionDemoResult = PermissionDemoResult.PermissionDenied(
-                                        Permission.LOCATION
-                                    )
+                            Logger.i(
+                                "Permission",
+                                message = { "Permission granted, but no data received" })
+                            handlePermissionOnResult(
+                                PermissionDemoResult.PermissionDenied(
+                                    Permission.LOCATION
                                 )
-                            }
+                            )
                         }
                 },
-                onDenied = { state -> handlePermissionDenied(Permission.LOCATION, state) }
+                onDenied = { state ->
+                    Logger.i("Permission", message = { "Permission denied" })
+                    val result = when (state) {
+                        PermissionState.PERMANENTLY_DENIED ->
+                            PermissionDemoResult.PermissionPermanentlyDenied(Permission.LOCATION)
+
+                        else -> PermissionDemoResult.PermissionDenied(Permission.LOCATION)
+                    }
+
+                    handlePermissionOnResult(result)
+                }
             )
         }
     }
 
-    private fun handlePermissionDenied(permission: Permission, state: PermissionState) {
+    private fun handlePermissionOnResult(result: PermissionDemoResult) {
         _uiState.update {
             it.copy(
-                permissionDemoResult = when (state) {
-                    PermissionState.PERMANENTLY_DENIED -> PermissionDemoResult.PermissionPermanentlyDenied(
-                        permission
-                    )
-
-                    else -> PermissionDemoResult.PermissionDenied(permission)
-                }
+                permissionDemoResult = result
             )
         }
     }

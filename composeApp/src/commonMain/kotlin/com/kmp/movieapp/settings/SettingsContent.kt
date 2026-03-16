@@ -15,6 +15,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.presentation.material.padding
 import com.kmp.movieapp.core.util.permission.Permission
 import com.kmp.movieapp.settings.model.PermissionDemoResult
+import movieapp.composeapp.generated.resources.Res
+import movieapp.composeapp.generated.resources.permission_camera
+import movieapp.composeapp.generated.resources.permission_image_gallery
+import movieapp.composeapp.generated.resources.permission_location
+import movieapp.composeapp.generated.resources.permission_microphone
+import movieapp.composeapp.generated.resources.permission_notification
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -35,31 +42,31 @@ private fun PermissionDemoScreen() {
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.ten)
     ) {
         PermissionButton(
-            label = "Kamera öffnen",
+            label = stringResource(Res.string.permission_camera),
             onClick = {
                 viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.CAMERA))
             }
         )
         PermissionButton(
-            label = "Standort abrufen",
+            label = stringResource(Res.string.permission_location),
             onClick = {
                 viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.LOCATION))
             }
         )
         PermissionButton(
-            label = "Mikrofon aktivieren",
+            label = stringResource(Res.string.permission_microphone),
             onClick = {
                 viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.MICROPHONE))
             }
         )
         PermissionButton(
-            label = "Benachrichtigungen erlauben",
+            label = stringResource(Res.string.permission_notification),
             onClick = {
                 viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.NOTIFICATION))
             }
         )
         PermissionButton(
-            label = "Galerie öffnen",
+            label = stringResource(Res.string.permission_image_gallery),
             onClick = {
                 viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.GALLERY))
             }

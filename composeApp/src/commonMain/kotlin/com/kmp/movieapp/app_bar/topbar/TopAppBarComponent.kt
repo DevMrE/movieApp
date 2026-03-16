@@ -12,7 +12,7 @@ import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavDestination
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.app_name
-import movieapp.composeapp.generated.resources.discover_movies_title
+import movieapp.composeapp.generated.resources.discover_media_title
 import movieapp.composeapp.generated.resources.more
 import movieapp.composeapp.generated.resources.movie_category_list_title
 import movieapp.composeapp.generated.resources.movie_category_now_playing
@@ -32,7 +32,7 @@ fun TopAppBarComponent() {
 
     val screenStringResource = when (navSection) {
         SettingsDestination -> Res.string.more
-        DiscoverMoviesDestination -> Res.string.discover_movies_title
+        DiscoverMoviesDestination -> Res.string.discover_media_title
         else -> Res.string.app_name
     }
 
