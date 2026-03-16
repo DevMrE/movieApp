@@ -12,7 +12,7 @@
 
 ## 📌 About the Project
 
-MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)**, running on **Android**, **iOS**, and **Desktop (JVM)**. The app displays movies, series, and related information fetched from an external API.
+MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)**, running on **Android** and **iOS**. The app displays movies, series, and related information fetched from an external API.
 
 ---
 
@@ -45,7 +45,7 @@ MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)
 |---|---|
 | Android | API 35 (Android 15) |
 | iOS | 15.0 |
-| Desktop (JVM) | Windows, macOS |
+
 
 ---
 
@@ -79,12 +79,6 @@ pod install
 ```
 
 Then open `iosApp.xcworkspace` in Xcode and run (iOS 15.0+ required).
-
-### Desktop
-
-```bash
-./gradlew :composeApp:run
-```
 
 ---
 
