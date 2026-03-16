@@ -13,11 +13,11 @@ import com.kmp.navigation.compose.rememberNavDestination
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.app_name
 import movieapp.composeapp.generated.resources.discover_movies_title
+import movieapp.composeapp.generated.resources.more
 import movieapp.composeapp.generated.resources.movie_category_list_title
 import movieapp.composeapp.generated.resources.movie_category_now_playing
 import movieapp.composeapp.generated.resources.movie_category_popular
 import movieapp.composeapp.generated.resources.movie_category_top_rated
-import movieapp.composeapp.generated.resources.settings_screen_title
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -31,7 +31,7 @@ fun TopAppBarComponent() {
     }
 
     val screenStringResource = when (navSection) {
-        SettingsDestination -> Res.string.settings_screen_title
+        SettingsDestination -> Res.string.more
         DiscoverMoviesDestination -> Res.string.discover_movies_title
         else -> Res.string.app_name
     }
