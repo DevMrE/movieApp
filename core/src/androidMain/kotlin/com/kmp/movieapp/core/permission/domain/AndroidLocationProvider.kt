@@ -3,6 +3,7 @@ package com.kmp.movieapp.core.permission.domain
 import android.annotation.SuppressLint
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.kmp.movieapp.core.permission.domain.model.Location
 import com.kmp.movieapp.core.permission.util.PermissionResult
 import com.kmp.movieapp.core.permission.util.createPermissionFlow
@@ -12,30 +13,29 @@ import kotlinx.coroutines.flow.Flow
 /**
  * Resolves the device location after permission has already been granted.
  *
- * This provider does not request permissions by itself. It is responsible only
- * for retrieving location data from the platform in a safe way.
+ * This provider does not request permissions by itself.
  */
 class AndroidLocationProvider {
 
     /**
-     * Returns a one-shot flow that emits the best available location result.
+     * Returns the best available one-shot location result.
      *
-     * The provider first tries the last known location. If that is not available,
-     * it falls back to a current location request.
-     *
-     * A denied result here means that location data could not be resolved, not
-     * that the permission was refused by the user.
+     * If location cannot be resolved, the provider still returns GRANTED with
+     * null data because permission is already available at this point.
      */
     @SuppressLint("MissingPermission")
-    fun getLocation(): Flow<PermissionResult<Location>> = createPermissionFlow { send ->
+    fun getLocation(): Flow<PermissionResult<Location>> = createPermissionFlow(
+        doAlso = {
+        }
+    ) { send ->
         val activity = ActivityProvider.activity
-
         if (activity == null) {
             send(PermissionResult(PermissionStatus.DENIED))
             return@createPermissionFlow
         }
 
         val client = LocationServices.getFusedLocationProviderClient(activity)
+        val cancellationTokenSource = CancellationTokenSource()
 
         try {
             client.lastLocation.addOnSuccessListener { lastKnownLocation ->
@@ -49,35 +49,44 @@ class AndroidLocationProvider {
                             )
                         )
                     )
+
                     return@addOnSuccessListener
                 }
 
-                client.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
-                    .addOnSuccessListener { currentLocation ->
-                        val result = if (currentLocation != null) {
-                            PermissionResult(
-                                status = PermissionStatus.GRANTED,
-                                data = Location(
-                                    latitude = currentLocation.latitude,
-                                    longitude = currentLocation.longitude
-                                )
+                client.getCurrentLocation(
+                    Priority.PRIORITY_HIGH_ACCURACY,
+                    cancellationTokenSource.token
+                ).addOnSuccessListener { currentLocation ->
+                    val result = if (currentLocation != null) {
+                        PermissionResult(
+                            status = PermissionStatus.GRANTED,
+                            data = Location(
+                                latitude = currentLocation.latitude,
+                                longitude = currentLocation.longitude
                             )
-                        } else {
-                            PermissionResult(
-                                status = PermissionStatus.DENIED
-                            )
-                        }
+                        )
+                    } else PermissionResult(status = PermissionStatus.GRANTED)
 
-                        send(result)
-                    }.addOnFailureListener {
-                        send(PermissionResult(PermissionStatus.DENIED))
-                    }
+                    send(result)
+                }.addOnFailureListener {
+                    send(
+                        PermissionResult(
+                            status = PermissionStatus.GRANTED,
+                            data = null
+                        )
+                    )
+                }
             }.addOnFailureListener {
-                send(PermissionResult(PermissionStatus.DENIED))
+                send(
+                    PermissionResult(
+                        status = PermissionStatus.GRANTED,
+                        data = null
+                    )
+                )
             }
 
         } catch (_: SecurityException) {
-            send(PermissionResult(PermissionStatus.DENIED))
+            send(PermissionResult(status = PermissionStatus.DENIED))
         }
     }
 }

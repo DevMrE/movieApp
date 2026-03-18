@@ -1,21 +1,23 @@
 package com.kmp.movieapp.core.permission.domain
 
-import co.touchlab.kermit.Logger
+import com.kmp.movieapp.core.permission.AndroidPermissionLauncher
+import com.kmp.movieapp.core.permission.AndroidPermissionRequestResult
 import com.kmp.movieapp.core.permission.domain.model.Location
 import com.kmp.movieapp.core.permission.domain.model.Media
 import com.kmp.movieapp.core.permission.util.PermissionResult
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 
 /**
  * Android implementation of [PermissionsController].
  *
- * This controller orchestrates permission requests and delegates feature-specific
- * work to dedicated providers. It intentionally keeps business decisions small
- * and avoids deep callback nesting.
+ * Public semantics:
+ * - GRANTED means the feature may proceed.
+ * - DENIED means the app should guide the user to system settings.
+ * - A retryable Android denial emits nothing and simply completes.
  */
 @OptIn(ExperimentalCoroutinesApi::class)
 class AndroidPermissionsController(
@@ -25,65 +27,96 @@ class AndroidPermissionsController(
 
     private var androidPermissionLauncher: AndroidPermissionLauncher? = null
 
-    fun bindLauncher(launcher: AndroidPermissionLauncher) {
-        androidPermissionLauncher = launcher
+    /**
+     * Binds the concrete Activity-bound launcher to this controller.
+     *
+     * The binding must happen from the hosting Activity after the launcher was
+     * created and registered.
+     */
+    fun bindLauncher(androidPermissionLauncher: AndroidPermissionLauncher) {
+        this.androidPermissionLauncher = androidPermissionLauncher
     }
 
     /**
-     * Requests camera permission and returns the final result.
+     * Requests camera permission.
+     *
+     * A retryable denial emits nothing.
+     * A final denial emits DENIED.
      */
     override fun camera(): Flow<PermissionResult<Unit>> {
         val launcher = androidPermissionLauncher
             ?: return flowOf(PermissionResult(PermissionStatus.DENIED))
 
         return launcher.requestCamera()
-            .map { granted ->
-                Logger.i(tag = "Permission", messageString = "camera granted?: $granted")
+            .flatMapLatest { result ->
+                when (result) {
+                    AndroidPermissionRequestResult.GRANTED ->
+                        flowOf(PermissionResult(PermissionStatus.GRANTED))
 
-                PermissionResult(
-                    status = if (granted) PermissionStatus.GRANTED else PermissionStatus.DENIED
-                )
+                    AndroidPermissionRequestResult.FINAL_DENIED ->
+                        flowOf(PermissionResult(PermissionStatus.DENIED))
+
+                    AndroidPermissionRequestResult.RETRYABLE_DENIED ->
+                        emptyFlow()
+                }
             }
+    }
+
+    /**
+     * Opens the gallery flow and returns the selected media.
+     */
+    override fun gallery(): Flow<PermissionResult<List<Media>>> {
+        return androidGalleryProvider.openGallery()
     }
 
     /**
      * Requests location permission and resolves the actual location only after
      * the permission was granted.
+     *
+     * A retryable denial emits nothing.
+     * A final denial emits DENIED.
      */
     override fun location(): Flow<PermissionResult<Location>> {
         val launcher = androidPermissionLauncher
             ?: return flowOf(PermissionResult(PermissionStatus.DENIED))
 
         return launcher.requestLocation()
-            .flatMapLatest { granted ->
-                Logger.i (tag = "Permission", messageString = "location granted?: $granted")
-                if (granted) androidLocationProvider.getLocation()
-                else flowOf(PermissionResult(PermissionStatus.DENIED))
+            .flatMapLatest { result ->
+                when (result) {
+                    AndroidPermissionRequestResult.GRANTED ->
+                        androidLocationProvider.getLocation()
+
+                    AndroidPermissionRequestResult.FINAL_DENIED ->
+                        flowOf(PermissionResult(PermissionStatus.DENIED))
+
+                    AndroidPermissionRequestResult.RETRYABLE_DENIED ->
+                        emptyFlow()
+                }
             }
     }
 
     /**
-     * Requests microphone permission and returns the final result.
+     * Requests microphone permission.
+     *
+     * A retryable denial emits nothing.
+     * A final denial emits DENIED.
      */
     override fun microphone(): Flow<PermissionResult<Unit>> {
         val launcher = androidPermissionLauncher
             ?: return flowOf(PermissionResult(PermissionStatus.DENIED))
 
         return launcher.requestMicrophone()
-            .map { granted ->
-                Logger.i(tag = "Permission", messageString = "microphone granted?: $granted")
-                PermissionResult(
-                    status = if (granted) PermissionStatus.GRANTED else PermissionStatus.DENIED
-                )
-            }
-    }
+            .flatMapLatest { result ->
+                when (result) {
+                    AndroidPermissionRequestResult.GRANTED ->
+                        flowOf(PermissionResult(PermissionStatus.GRANTED))
 
-    /**
-     * Opens the gallery picker and returns the selected media list.
-     *
-     * This implementation assumes the picker can be opened directly.
-     */
-    override fun gallery(): Flow<PermissionResult<List<Media>>> {
-        return androidGalleryProvider.openGallery()
+                    AndroidPermissionRequestResult.FINAL_DENIED ->
+                        flowOf(PermissionResult(PermissionStatus.DENIED))
+
+                    AndroidPermissionRequestResult.RETRYABLE_DENIED ->
+                        emptyFlow()
+                }
+            }
     }
 }

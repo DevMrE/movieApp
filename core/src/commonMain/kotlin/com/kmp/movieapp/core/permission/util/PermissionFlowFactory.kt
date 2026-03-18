@@ -11,7 +11,8 @@ import kotlinx.coroutines.flow.callbackFlow
  * keeping the implementation small and consistent across permission handlers.
  */
 inline fun <T> createPermissionFlow(
-    crossinline block: (send: (PermissionResult<T>) -> Unit) -> Unit
+    noinline doAlso: (() -> Unit)? = null,
+    crossinline block: (send: (PermissionResult<T>) -> Unit) -> Unit,
 ): Flow<PermissionResult<T>> = callbackFlow {
 
     val send: (PermissionResult<T>) -> Unit = { result ->

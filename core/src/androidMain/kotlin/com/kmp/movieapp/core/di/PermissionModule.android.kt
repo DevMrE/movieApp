@@ -3,7 +3,6 @@ package com.kmp.movieapp.core.di
 import com.kmp.movieapp.core.open_settings.SettingsNavigator
 import com.kmp.movieapp.core.permission.domain.AndroidGalleryProvider
 import com.kmp.movieapp.core.permission.domain.AndroidLocationProvider
-import com.kmp.movieapp.core.permission.domain.AndroidPermissionLauncher
 import com.kmp.movieapp.core.permission.domain.AndroidPermissionsController
 import com.kmp.movieapp.core.permission.domain.PermissionsController
 import org.koin.core.module.Module
@@ -17,7 +16,8 @@ actual val sharedCoreModule: Module = module {
     single {
         AndroidPermissionsController(
             androidLocationProvider = get(),
-            androidGalleryProvider = get()
+            androidGalleryProvider = get(),
+
         )
     }
 

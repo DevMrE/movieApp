@@ -5,9 +5,9 @@ import com.kmp.movieapp.core.permission.domain.PermissionStatus
 /**
  * Represents the outcome of a permission-driven operation.
  *
- * [status] describes whether the permission flow ended successfully.
+ * [status] describes whether the permission flow finished successfully.
  * [data] contains the optional payload returned by the feature after the
- * permission was granted, such as location data or selected media.
+ * permission was granted.
  */
 class PermissionResult<T>(
     val status: PermissionStatus,
@@ -15,9 +15,9 @@ class PermissionResult<T>(
 ) {
 
     /**
-     * Executes the given [block] only when the permission flow succeeded.
+     * Executes [block] only when the permission flow succeeded.
      *
-     * The payload may be null depending on the feature contract.
+     * The payload can be null depending on the feature contract.
      */
     inline fun onGranted(block: (T?) -> Unit): PermissionResult<T> {
         if (status == PermissionStatus.GRANTED) {
@@ -27,10 +27,8 @@ class PermissionResult<T>(
     }
 
     /**
-     * Executes the given [block] when the permission flow did not succeed.
-     *
-     * This includes both normal denial and cases where the user must be
-     * redirected to system settings.
+     * Executes [block] only when the permission can no longer be meaningfully
+     * requested through the system dialog and the app should offer a settings path.
      */
     inline fun onDenied(block: () -> Unit): PermissionResult<T> {
         if (status == PermissionStatus.DENIED) {

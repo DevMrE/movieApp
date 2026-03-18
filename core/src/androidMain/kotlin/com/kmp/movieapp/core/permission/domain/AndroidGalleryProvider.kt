@@ -5,9 +5,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.kmp.movieapp.core.permission.domain.model.Media
 import com.kmp.movieapp.core.permission.util.PermissionResult
-import kotlinx.coroutines.channels.awaitClose
+import com.kmp.movieapp.core.permission.util.createPermissionFlow
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 
 /**
  * Registers and launches the Android gallery picker.
@@ -29,12 +28,11 @@ class AndroidGalleryProvider {
     fun register(activity: ComponentActivity) {
         if (isRegistered) return
 
-        galleryLauncher =
-            activity.registerForActivityResult(
-                ActivityResultContracts.GetMultipleContents()
-            ) { uris ->
-                callback?.invoke(uris.map { it.toString() })
-            }
+        galleryLauncher = activity.registerForActivityResult(
+            ActivityResultContracts.GetMultipleContents()
+        ) { uris ->
+            callback?.invoke(uris.map { it.toString() })
+        }
 
         isRegistered = true
     }
@@ -42,21 +40,18 @@ class AndroidGalleryProvider {
     /**
      * Opens the gallery picker and returns the selected media.
      */
-    fun openGallery(): Flow<PermissionResult<List<Media>>> = callbackFlow {
+    fun openGallery(): Flow<PermissionResult<List<Media>>> = createPermissionFlow(
+        doAlso = { callback = null }
+    ) { send ->
         callback = { uriStrings ->
-            trySend(
+            send(
                 PermissionResult(
                     status = PermissionStatus.GRANTED,
                     data = uriStrings.map(::Media)
                 )
             )
-            close()
         }
 
         galleryLauncher.launch("image/*")
-
-        awaitClose {
-            callback = null
-        }
     }
 }
