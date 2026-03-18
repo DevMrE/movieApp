@@ -1,8 +1,8 @@
 package com.kmp.movieapp.movie.data.repository
 
 import co.touchlab.kermit.Logger
-import com.kmp.movieapp.core.util.network.alsoOnFailure
-import com.kmp.movieapp.core.util.network.alsoOnSuccess
+import com.kmp.movieapp.core.network.util.alsoOnFailure
+import com.kmp.movieapp.core.network.util.alsoOnSuccess
 import com.kmp.movieapp.movie.data.model.mapper.toMovie
 import com.kmp.movieapp.movie.data.model.mapper.toMovieListCategory
 import com.kmp.movieapp.movie.data.service.MovieService

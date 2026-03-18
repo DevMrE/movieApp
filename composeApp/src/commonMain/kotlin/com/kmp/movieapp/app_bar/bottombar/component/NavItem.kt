@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
-import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.core.ui.material.padding
 import org.jetbrains.compose.resources.StringResource
 
 @Composable

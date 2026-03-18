@@ -2,8 +2,7 @@ package com.kmp.movieapp.movie.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kmp.movieapp.core.presentation.navigation.MediaDetailDestination
-import com.kmp.movieapp.core.util.action.Action
+import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
@@ -58,7 +57,7 @@ internal class MovieScreenViewModel(
         }
     }
 
-    fun onAction(action: Action) {
+    fun onAction(action: MovieAction) {
         when (action) {
             is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.title)
             is MovieAction.OnStartTrailer -> Unit

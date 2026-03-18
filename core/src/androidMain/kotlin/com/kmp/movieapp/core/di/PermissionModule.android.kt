@@ -1,18 +1,29 @@
 package com.kmp.movieapp.core.di
 
-import com.kmp.movieapp.core.util.ActivityProvider
-import com.kmp.movieapp.core.util.permission.PermissionRequester
-import com.kmp.movieapp.core.util.permission.location.LocationProvider
-import com.kmp.movieapp.core.util.permission.speech.SpeechRecognizer
-import org.koin.android.ext.koin.androidContext
+import com.kmp.movieapp.core.open_settings.SettingsNavigator
+import com.kmp.movieapp.core.permission.domain.AndroidGalleryProvider
+import com.kmp.movieapp.core.permission.domain.AndroidLocationProvider
+import com.kmp.movieapp.core.permission.domain.AndroidPermissionLauncher
+import com.kmp.movieapp.core.permission.domain.AndroidPermissionsController
+import com.kmp.movieapp.core.permission.domain.PermissionsController
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 actual val sharedCoreModule: Module = module {
-    factory {
-        PermissionRequester(ActivityProvider.activity ?: error("No Activity available"))
+    single { AndroidLocationProvider() }
+
+    single { AndroidGalleryProvider() }
+
+    single {
+        AndroidPermissionsController(
+            androidLocationProvider = get(),
+            androidGalleryProvider = get()
+        )
     }
 
-    factory { SpeechRecognizer(androidContext()) }
-    factory { LocationProvider(androidContext()) }
+    single<PermissionsController> { get<AndroidPermissionsController>() }
+
+    factory<SettingsNavigator> {
+        SettingsNavigator()
+    }
 }

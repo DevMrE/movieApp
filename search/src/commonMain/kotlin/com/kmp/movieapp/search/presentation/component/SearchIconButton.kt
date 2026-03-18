@@ -7,7 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.core.ui.material.size
 
 @Composable
 internal fun SearchIconButton(

@@ -1,6 +1,6 @@
 package com.kmp.movieapp.search.data.model.api.request
 
-import com.kmp.movieapp.core.data.url.UrlHelper
+import com.kmp.movieapp.core.network.url.UrlHelper
 import io.ktor.resources.Resource
 import kotlinx.serialization.Serializable
 

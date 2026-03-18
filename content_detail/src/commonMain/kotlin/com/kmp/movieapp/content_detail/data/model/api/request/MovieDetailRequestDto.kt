@@ -1,6 +1,6 @@
 package com.kmp.movieapp.content_detail.data.model.api.request
 
-import com.kmp.movieapp.core.data.url.UrlHelper
+import com.kmp.movieapp.core.network.url.UrlHelper
 import io.ktor.resources.Resource
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

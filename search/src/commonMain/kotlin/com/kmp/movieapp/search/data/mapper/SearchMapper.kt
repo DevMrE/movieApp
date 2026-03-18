@@ -1,6 +1,6 @@
 package com.kmp.movieapp.search.data.mapper
 
-import com.kmp.movieapp.core.data.url.UrlHelper
+import com.kmp.movieapp.core.network.url.UrlHelper
 import com.kmp.movieapp.search.data.model.api.response.SearchDto
 import com.kmp.movieapp.search.domain.model.Info
 import com.kmp.movieapp.search.domain.model.MediaImages

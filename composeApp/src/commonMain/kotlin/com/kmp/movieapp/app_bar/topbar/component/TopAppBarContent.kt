@@ -16,7 +16,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.search.presentation.AnimatedSearchButtonWithInputField
 import com.kmp.navigation.compose.rememberNavigation
 import movieapp.composeapp.generated.resources.Res

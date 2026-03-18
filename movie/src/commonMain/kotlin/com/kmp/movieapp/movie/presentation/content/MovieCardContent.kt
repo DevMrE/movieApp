@@ -4,8 +4,8 @@ import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.Dp
-import com.kmp.movieapp.core.presentation.content.MediaItemCard
-import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.core.ui.content.MediaItemCard
+import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.movie.presentation.action.MovieAction
 import com.kmp.movieapp.movie.presentation.model.UiMovie
 

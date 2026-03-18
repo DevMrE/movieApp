@@ -1,6 +1,6 @@
 package com.kmp.movieapp.search.data.model.api.response
 
-import com.kmp.movieapp.core.data.model.Dto
+import com.kmp.movieapp.core.network.model.Dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -1,5 +1,6 @@
 package com.kmp.movieapp.core.util.permission.speech
 
+import com.kmp.movieapp.core.permission.speech.SpeechResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

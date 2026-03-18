@@ -5,7 +5,7 @@ import com.kmp.movieapp.content_detail.data.service.api.MovieService
 import com.kmp.movieapp.content_detail.data.service.api.SeriesService
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
 import com.kmp.movieapp.content_detail.domain.repository.ContentDetailRepository
-import com.kmp.movieapp.core.util.network.alsoOnSuccess
+import com.kmp.movieapp.core.network.util.alsoOnSuccess
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

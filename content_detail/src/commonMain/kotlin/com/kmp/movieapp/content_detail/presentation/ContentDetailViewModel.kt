@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetail
 import com.kmp.movieapp.content_detail.presentation.mapper.toUiData
 import com.kmp.movieapp.content_detail.presentation.model.ContentDetailUi
-import com.kmp.movieapp.core.domain.model.ContentDetailType
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.util.viewmodel.stateInLazily
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -26,7 +26,6 @@ class ContentDetailViewModel(
     )
 
     fun uiState(id: String): StateFlow<ContentDetailUi> = _uiState.onStart {
-        //val contentID = savedStateHandle.get<String>(Constants.CONTENT_DETAIL_KEY) ?: return@onStart
         getContentDetail(
             contentType = ContentDetailType.MOVIE,
             contentId = id

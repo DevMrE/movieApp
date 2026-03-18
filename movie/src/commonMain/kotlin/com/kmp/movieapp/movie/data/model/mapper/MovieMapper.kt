@@ -1,6 +1,6 @@
 package com.kmp.movieapp.movie.data.model.mapper
 
-import com.kmp.movieapp.core.data.url.UrlHelper
+import com.kmp.movieapp.core.network.url.UrlHelper
 import com.kmp.movieapp.movie.data.model.response.MovieDto
 import com.kmp.movieapp.movie.domain.model.Movie
 

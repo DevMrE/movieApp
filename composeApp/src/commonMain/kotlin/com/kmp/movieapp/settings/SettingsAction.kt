@@ -1,6 +1,6 @@
 package com.kmp.movieapp.settings
 
-import com.kmp.movieapp.core.util.permission.Permission
+import com.kmp.movieapp.core.permission.domain.Permission
 
 internal interface SettingsAction {
 

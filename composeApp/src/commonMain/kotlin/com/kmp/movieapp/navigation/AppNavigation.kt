@@ -4,7 +4,7 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
-import com.kmp.movieapp.core.presentation.navigation.MediaDetailDestination
+import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.movieapp.discover.presentation.DiscoverMediaScreen
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.homescreen.HomeContent

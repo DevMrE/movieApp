@@ -24,7 +24,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.util.focus_requester.requestFocusWithRetry
 import com.kmp.movieapp.search.Res
 import com.kmp.movieapp.search.ic_search

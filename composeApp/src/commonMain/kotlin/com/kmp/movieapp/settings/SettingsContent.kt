@@ -12,15 +12,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.core.util.permission.Permission
+import com.kmp.movieapp.core.permission.domain.Permission
+import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.settings.model.PermissionDemoResult
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.permission_camera
 import movieapp.composeapp.generated.resources.permission_image_gallery
 import movieapp.composeapp.generated.resources.permission_location
 import movieapp.composeapp.generated.resources.permission_microphone
-import movieapp.composeapp.generated.resources.permission_notification
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -59,12 +58,7 @@ private fun PermissionDemoScreen() {
                 viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.MICROPHONE))
             }
         )
-        PermissionButton(
-            label = stringResource(Res.string.permission_notification),
-            onClick = {
-                viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.NOTIFICATION))
-            }
-        )
+
         PermissionButton(
             label = stringResource(Res.string.permission_image_gallery),
             onClick = {
@@ -79,7 +73,7 @@ private fun PermissionDemoScreen() {
             }
 
             is PermissionDemoResult.LocationReady -> {
-                Text("Standort: ${result.lat}, ${result.lng}")
+                Text("Standort: ${result.latitude}, ${result.longitude}")
             }
 
             is PermissionDemoResult.MicrophoneReady -> {

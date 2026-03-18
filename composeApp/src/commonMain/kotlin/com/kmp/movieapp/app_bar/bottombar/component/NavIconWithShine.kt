@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.material.size
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 

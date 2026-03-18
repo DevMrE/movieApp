@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.kmp.movieapp.core.presentation.material.padding
+import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeTabs
 import com.kmp.movieapp.homescreen.model.UiTabState
 import com.kmp.movieapp.movie.presentation.destination.MovieContentDestination

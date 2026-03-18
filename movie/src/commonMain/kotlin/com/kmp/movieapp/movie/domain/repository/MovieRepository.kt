@@ -1,11 +1,10 @@
 package com.kmp.movieapp.movie.domain.repository
 
-import com.kmp.movieapp.core.domain.repository.Repository
 import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import kotlinx.coroutines.flow.Flow
 
-internal interface MovieRepository : Repository {
+internal interface MovieRepository {
 
     fun getMovies(
         language: String,

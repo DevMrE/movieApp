@@ -1,10 +1,10 @@
 package com.kmp.movieapp.movie.data.service
 
 import co.touchlab.kermit.Logger
-import com.kmp.movieapp.core.data.http.HandleHttpStatus
-import com.kmp.movieapp.core.data.model.ApiError
-import com.kmp.movieapp.core.data.model.ApiResponseDto
-import com.kmp.movieapp.core.util.network.Result
+import com.kmp.movieapp.core.network.http.HandleHttpStatus
+import com.kmp.movieapp.core.network.model.ApiError
+import com.kmp.movieapp.core.network.model.ApiResponseDto
+import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.try_catch.multiCatch
 import com.kmp.movieapp.movie.data.model.mapper.toDiscoverMoviesDto
 import com.kmp.movieapp.movie.data.model.request.MovieGenreRequestDto

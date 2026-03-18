@@ -31,7 +31,14 @@ internal fun CustomSearchField(
 ) {
 
     val borderColor =
-        if (query.isNotEmpty()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
+        if (query.isNotEmpty() || focusRequester.captureFocus()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
+
+    val icon = if (query.isNotEmpty()) vectorResource(Res.drawable.ic_close)
+    else vectorResource(Res.drawable.ic_mic)
+
+    val iconClick = {
+        if (query.isNotEmpty()) onQueryChange("") else onMicActive()
+    }
 
     Surface(
         modifier = modifier.height(48.dp),
@@ -58,15 +65,10 @@ internal fun CustomSearchField(
                     .weight(1f)
                     .focusRequester(focusRequester),
                 singleLine = true,
-                textStyle = MaterialTheme.typography.bodyLarge
+                textStyle = MaterialTheme.typography.bodyLarge.copy(
+                    color = MaterialTheme.colorScheme.onBackground
+                ),
             )
-
-            val icon = if (query.isNotEmpty()) vectorResource(Res.drawable.ic_close)
-            else vectorResource(Res.drawable.ic_mic)
-
-            val iconClick = {
-                if (query.isNotEmpty()) onQueryChange("") else onMicActive()
-            }
 
             SearchIconButton(
                 icon = icon

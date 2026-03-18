@@ -12,8 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.movie.presentation.content.movieListContent
 import org.koin.compose.viewmodel.koinViewModel
 

@@ -13,8 +13,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.kmp.movieapp.core.presentation.material.padding
-import com.kmp.movieapp.core.presentation.material.size
+import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.movie.Res
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.movie_category_list_title

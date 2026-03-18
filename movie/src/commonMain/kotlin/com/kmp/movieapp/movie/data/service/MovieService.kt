@@ -1,8 +1,8 @@
 package com.kmp.movieapp.movie.data.service
 
-import com.kmp.movieapp.core.data.model.ApiError
-import com.kmp.movieapp.core.data.model.ApiResponseDto
-import com.kmp.movieapp.core.util.network.Result
+import com.kmp.movieapp.core.network.model.ApiError
+import com.kmp.movieapp.core.network.model.ApiResponseDto
+import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.movie.data.model.request.MovieListCategory
 import com.kmp.movieapp.movie.data.model.response.DiscoverMovieDto
 import com.kmp.movieapp.movie.data.model.response.MovieDto

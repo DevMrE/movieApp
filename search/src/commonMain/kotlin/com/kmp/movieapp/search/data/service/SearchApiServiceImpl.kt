@@ -1,9 +1,9 @@
 package com.kmp.movieapp.search.data.service
 
 import co.touchlab.kermit.Logger
-import com.kmp.movieapp.core.data.model.ApiError
-import com.kmp.movieapp.core.data.model.ApiResponseDto
-import com.kmp.movieapp.core.util.network.Result
+import com.kmp.movieapp.core.network.model.ApiError
+import com.kmp.movieapp.core.network.model.ApiResponseDto
+import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.search.data.model.api.request.SearchRequestDto
 import com.kmp.movieapp.search.data.model.api.response.SearchDto
 import io.ktor.client.HttpClient

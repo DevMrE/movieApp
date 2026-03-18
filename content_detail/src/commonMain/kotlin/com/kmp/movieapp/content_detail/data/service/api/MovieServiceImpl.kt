@@ -3,7 +3,7 @@ package com.kmp.movieapp.content_detail.data.service.api
 import co.touchlab.kermit.Logger
 import com.kmp.movieapp.content_detail.data.model.api.request.MovieDetailRequestDto
 import com.kmp.movieapp.content_detail.data.model.api.response.ContentDetailDto
-import com.kmp.movieapp.core.util.network.Result
+import com.kmp.movieapp.core.network.util.Result
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.resources.get
