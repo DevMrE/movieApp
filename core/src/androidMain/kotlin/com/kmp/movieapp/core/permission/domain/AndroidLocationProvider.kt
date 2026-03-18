@@ -5,6 +5,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.kmp.movieapp.core.permission.domain.model.Location
+import com.kmp.movieapp.core.permission.domain.provider.LocationProvider
 import com.kmp.movieapp.core.permission.util.PermissionResult
 import com.kmp.movieapp.core.permission.util.createPermissionFlow
 import com.kmp.movieapp.core.util.ActivityProvider
@@ -15,7 +16,7 @@ import kotlinx.coroutines.flow.Flow
  *
  * This provider does not request permissions by itself.
  */
-class AndroidLocationProvider {
+class AndroidLocationProvider: LocationProvider {
 
     /**
      * Returns the best available one-shot location result.
@@ -24,10 +25,7 @@ class AndroidLocationProvider {
      * null data because permission is already available at this point.
      */
     @SuppressLint("MissingPermission")
-    fun getLocation(): Flow<PermissionResult<Location>> = createPermissionFlow(
-        doAlso = {
-        }
-    ) { send ->
+    override fun getLocation(): Flow<PermissionResult<Location>> = createPermissionFlow { send ->
         val activity = ActivityProvider.activity
         if (activity == null) {
             send(PermissionResult(PermissionStatus.DENIED))

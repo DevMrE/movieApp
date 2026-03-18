@@ -67,37 +67,24 @@ private fun PermissionDemoScreen() {
         )
 
         // Ergebnis anzeigen
-        when (val result = state.permissionDemoResult) {
-            is PermissionDemoResult.CameraReady -> {
-                Text("Kamera bereit!")
-            }
+        val text = when (val result = state.permissionDemoResult) {
+            is PermissionDemoResult.CameraReady -> "Kamera bereit!"
 
-            is PermissionDemoResult.LocationReady -> {
-                Text("Standort: ${result.latitude}, ${result.longitude}")
-            }
+            is PermissionDemoResult.LocationReady -> "Standort: ${result.latitude}, ${result.longitude}"
 
-            is PermissionDemoResult.MicrophoneReady -> {
-                Text("️Mikrofon aktiv!")
-            }
+            is PermissionDemoResult.MicrophoneReady -> "️Mikrofon aktiv!"
 
-            is PermissionDemoResult.NotificationReady -> {
-                Text("Benachrichtigungen aktiviert!")
-            }
+            is PermissionDemoResult.NotificationReady -> "Benachrichtigungen aktiviert!"
 
-            is PermissionDemoResult.GalleryReady -> {
-                Text("️Galerie geöffnet!")
-            }
+            is PermissionDemoResult.GalleryReady -> "️Galerie geöffnet!"
 
-            is PermissionDemoResult.PermissionDenied -> {
-                Text("Permission verweigert: ${result.permission}")
-            }
+            is PermissionDemoResult.PermissionDenied -> "Permission verweigert: ${result.permission}"
 
-            is PermissionDemoResult.PermissionPermanentlyDenied -> {
-                Text("Bitte in Einstellungen erlauben: ${result.permission}")
-            }
+            is PermissionDemoResult.PermissionPermanentlyDenied -> "Bitte in Einstellungen erlauben: ${result.permission}"
 
-            null -> Unit
+            null -> ""
         }
+        Text(text, color = MaterialTheme.colorScheme.onBackground)
     }
 }
 

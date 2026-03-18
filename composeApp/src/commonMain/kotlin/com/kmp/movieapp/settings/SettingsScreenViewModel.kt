@@ -48,6 +48,7 @@ internal class SettingsScreenViewModel(
             permissionsController.location().collectLatest { result ->
                 result.onGranted { data ->
                     Logger.i(tag = "Permission", messageString = "viewModel onGranted")
+                    Logger.i(tag = "Permission", messageString = "viewModel granted?: $data")
 
                     _uiState.update {
                         it.copy(

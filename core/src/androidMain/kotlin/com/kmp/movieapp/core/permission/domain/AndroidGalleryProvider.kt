@@ -41,7 +41,7 @@ class AndroidGalleryProvider {
      * Opens the gallery picker and returns the selected media.
      */
     fun openGallery(): Flow<PermissionResult<List<Media>>> = createPermissionFlow(
-        doAlso = { callback = null }
+        awaitClose = { callback = null }
     ) { send ->
         callback = { uriStrings ->
             send(

@@ -7,25 +7,17 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import kotlinx.coroutines.channels.awaitClose
+import co.touchlab.kermit.Logger
+import com.kmp.movieapp.core.permission.domain.AndroidPermissionState
+import com.kmp.movieapp.core.permission.util.createPermissionFlow
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
 
 /**
  * Registers and launches Android runtime permission requests.
  *
- * This launcher is bound to a concrete [ComponentActivity] instance and must be
- * registered from the Activity, typically in `onCreate`, before the Activity
- * reaches the STARTED state.
- *
- * Public behavior:
- * - GRANTED: the permission is available.
- * - RETRYABLE_DENIED: the user denied once, but Android may still show the
- *   permission dialog again on a future request.
- * - FINAL_DENIED: the system is no longer expected to show the permission
- *   dialog in a meaningful way and the app should route the user to settings.
+ * This launcher is bound to a concrete [ComponentActivity] instance.
  */
-class AndroidPermissionLauncher(
+internal class AndroidPermissionLauncher(
     private val activity: ComponentActivity
 ) {
 
@@ -40,78 +32,52 @@ class AndroidPermissionLauncher(
     private lateinit var microphoneLauncher: ActivityResultLauncher<Array<String>>
 
     private val callbacks =
-        mutableMapOf<String, (AndroidPermissionRequestResult) -> Unit>()
+        mutableMapOf<String, (AndroidPermissionState) -> Unit>()
 
-    /**
-     * Tracks whether a permission request was already launched at least once.
-     *
-     * On Android, `shouldShowRequestPermissionRationale()` returns false both
-     * before the first request and after a final denial, so this state is needed
-     * to distinguish those cases.
-     */
     private val requestedPermissions = mutableSetOf<String>()
 
     private var isRegistered = false
 
-    /**
-     * Registers all permission launchers.
-     *
-     * This function is idempotent and safe to call multiple times.
-     */
     fun register() {
         if (isRegistered) return
 
-        cameraLauncher =
-            activity.registerForActivityResult(
-                ActivityResultContracts.RequestMultiplePermissions()
-            ) { result ->
-                handleSinglePermissionResult(
-                    key = CAMERA_KEY,
-                    permission = Manifest.permission.CAMERA,
-                    result = result
-                )
-            }
+        cameraLauncher = activity.registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { result ->
+            handleSinglePermissionResult(
+                key = CAMERA_KEY,
+                permission = Manifest.permission.CAMERA,
+                result = result
+            )
+        }
 
-        locationLauncher =
-            activity.registerForActivityResult(
-                ActivityResultContracts.RequestMultiplePermissions()
-            ) { result ->
-                handleLocationPermissionResult(result)
-            }
+        locationLauncher = activity.registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { result ->
+            handleLocationPermissionResult(result)
+        }
 
-        microphoneLauncher =
-            activity.registerForActivityResult(
-                ActivityResultContracts.RequestMultiplePermissions()
-            ) { result ->
-                handleSinglePermissionResult(
-                    key = MICROPHONE_KEY,
-                    permission = Manifest.permission.RECORD_AUDIO,
-                    result = result
-                )
-            }
+        microphoneLauncher = activity.registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { result ->
+            handleSinglePermissionResult(
+                key = MICROPHONE_KEY,
+                permission = Manifest.permission.RECORD_AUDIO,
+                result = result
+            )
+        }
 
         isRegistered = true
     }
 
-    /**
-     * Requests camera permission.
-     */
-    fun requestCamera(): Flow<AndroidPermissionRequestResult> =
+    fun requestCamera(): Flow<AndroidPermissionState> =
         request(
             key = CAMERA_KEY,
             launcher = cameraLauncher,
-            permissions = arrayOf(
-                Manifest.permission.CAMERA
-            )
+            permissions = arrayOf(Manifest.permission.CAMERA)
         )
 
-    /**
-     * Requests location permission.
-     *
-     * Fine and coarse location are requested together. The request is considered
-     * granted when at least one of them is granted.
-     */
-    fun requestLocation(): Flow<AndroidPermissionRequestResult> =
+    fun requestLocation(): Flow<AndroidPermissionState> =
         request(
             key = LOCATION_KEY,
             launcher = locationLauncher,
@@ -121,60 +87,47 @@ class AndroidPermissionLauncher(
             )
         )
 
-    /**
-     * Requests microphone permission.
-     */
-    fun requestMicrophone(): Flow<AndroidPermissionRequestResult> =
+    fun requestMicrophone(): Flow<AndroidPermissionState> =
         request(
             key = MICROPHONE_KEY,
             launcher = microphoneLauncher,
-            permissions = arrayOf(
-                Manifest.permission.RECORD_AUDIO
-            )
+            permissions = arrayOf(Manifest.permission.RECORD_AUDIO)
         )
 
-    /**
-     * Launches a one-shot Android permission request.
-     *
-     * If at least one required permission is already granted, the flow emits
-     * [AndroidPermissionRequestResult.GRANTED] immediately and does not show
-     * a system dialog.
-     */
     private fun request(
         key: String,
         launcher: ActivityResultLauncher<Array<String>>,
         permissions: Array<String>
-    ): Flow<AndroidPermissionRequestResult> = callbackFlow {
+    ): Flow<AndroidPermissionState> = createPermissionFlow(
+        awaitClose = { callbacks.remove(key) }
+    ) { send ->
 
         val alreadyGranted = permissions.any { permission ->
-            ContextCompat.checkSelfPermission(
+            val granted = ContextCompat.checkSelfPermission(
                 activity,
                 permission
             ) == PackageManager.PERMISSION_GRANTED
+
+            Logger.i(
+                tag = "Permission",
+                messageString = "Requested permission: $permission, granted?: $granted"
+            )
+            granted
         }
 
         if (alreadyGranted) {
-            trySend(AndroidPermissionRequestResult.GRANTED)
-            close()
-            return@callbackFlow
+            send(AndroidPermissionState.GRANTED)
+            return@createPermissionFlow
         }
 
         callbacks[key] = { result ->
-            trySend(result)
-            close()
+            send(result)
         }
 
         permissions.forEach(requestedPermissions::add)
         launcher.launch(permissions)
-
-        awaitClose {
-            callbacks.remove(key)
-        }
     }
 
-    /**
-     * Maps a single-permission result such as camera or microphone.
-     */
     private fun handleSinglePermissionResult(
         key: String,
         permission: String,
@@ -184,17 +137,14 @@ class AndroidPermissionLauncher(
 
         val mappedResult =
             when {
-                granted -> AndroidPermissionRequestResult.GRANTED
-                shouldRouteToSettings(permission) -> AndroidPermissionRequestResult.FINAL_DENIED
-                else -> AndroidPermissionRequestResult.RETRYABLE_DENIED
+                granted -> AndroidPermissionState.GRANTED
+                shouldRouteToSettings(permission) -> AndroidPermissionState.FINAL_DENIED
+                else -> AndroidPermissionState.RETRYABLE_DENIED
             }
 
         callbacks[key]?.invoke(mappedResult)
     }
 
-    /**
-     * Maps the combined location permission result.
-     */
     private fun handleLocationPermissionResult(
         result: Map<String, Boolean>
     ) {
@@ -203,22 +153,17 @@ class AndroidPermissionLauncher(
 
         val mappedResult =
             when {
-                fineGranted || coarseGranted -> AndroidPermissionRequestResult.GRANTED
-
+                fineGranted || coarseGranted -> AndroidPermissionState.GRANTED
                 shouldRouteToSettings(Manifest.permission.ACCESS_FINE_LOCATION) &&
                         shouldRouteToSettings(Manifest.permission.ACCESS_COARSE_LOCATION) ->
-                    AndroidPermissionRequestResult.FINAL_DENIED
+                    AndroidPermissionState.FINAL_DENIED
 
-                else -> AndroidPermissionRequestResult.RETRYABLE_DENIED
+                else -> AndroidPermissionState.RETRYABLE_DENIED
             }
 
         callbacks[LOCATION_KEY]?.invoke(mappedResult)
     }
 
-    /**
-     * Returns true when Android is no longer expected to show a meaningful
-     * permission dialog for the given permission.
-     */
     private fun shouldRouteToSettings(permission: String): Boolean {
         val wasRequestedBefore = requestedPermissions.contains(permission)
         val shouldShowRationale =
@@ -226,15 +171,4 @@ class AndroidPermissionLauncher(
 
         return wasRequestedBefore && !shouldShowRationale
     }
-}
-
-/**
- * Internal Android-only permission request state.
- *
- * This type is intentionally kept out of the public app-layer API.
- */
-enum class AndroidPermissionRequestResult {
-    GRANTED,
-    RETRYABLE_DENIED,
-    FINAL_DENIED
 }
