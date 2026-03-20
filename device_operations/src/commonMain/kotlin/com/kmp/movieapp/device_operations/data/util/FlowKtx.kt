@@ -16,15 +16,7 @@ import kotlinx.coroutines.flow.map
 /**
  * Continues with the given [provider] only when permission is granted.
  *
- * Behaviour:
- * - GRANTED -> emits provider results as [OperationResult.Success]
- * - FINAL_DENIED -> emits [OperationResult.Denied]
- * - RETRYABLE_DENIED -> emits nothing
- */
-/**
- * Continues with the given [provider] only when permission is granted.
- *
- * Behaviour:
+ * Behavior:
  * - GRANTED -> emits provider results as [OperationResult.Success]
  * - FINAL_DENIED -> emits [OperationResult.Denied]
  * - RETRYABLE_DENIED -> emits nothing
@@ -71,31 +63,6 @@ internal inline fun <T> createOneShotFlow(
     }
 
     block(send)
-
-    awaitClose(onClose)
-}
-
-/**
- * Creates a callback-based Flow that supports multiple emissions.
- *
- * The flow remains active until [close] is called or the collector is cancelled.
- * Use this for streaming operations such as continuous location updates,
- * bluetooth scans, or recording state updates.
- */
-internal inline fun <T> createCallbackFlow(
-    crossinline block: (send: (T) -> Unit, close: () -> Unit) -> Unit,
-    noinline onClose: () -> Unit = {}
-): Flow<T> = callbackFlow {
-
-    val send: (T) -> Unit = { value ->
-        trySend(value).isSuccess
-    }
-
-    val closeFlow: () -> Unit = {
-        close()
-    }
-
-    block(send, closeFlow)
 
     awaitClose(onClose)
 }
