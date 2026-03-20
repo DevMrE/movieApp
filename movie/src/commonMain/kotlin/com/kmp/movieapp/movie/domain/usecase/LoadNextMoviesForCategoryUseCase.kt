@@ -7,7 +7,7 @@ internal class LoadNextMoviesForCategoryUseCase(
     private val movieRepository: MovieRepository
 ) {
 
-    operator fun invoke(page: Int, movieCategory: MovieCategory) = movieRepository
+    suspend operator fun invoke(page: Int, movieCategory: MovieCategory) = movieRepository
         .getMovies(
             language = "de",
             page = page,

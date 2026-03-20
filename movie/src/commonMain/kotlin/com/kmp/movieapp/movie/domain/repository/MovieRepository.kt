@@ -6,13 +6,13 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface MovieRepository {
 
-    fun getMovies(
+    suspend fun getMovies(
         language: String,
         page: Int,
         movieCategory: MovieCategory
     ): Flow<List<Movie>>
 
-    fun getAllMovies(
+    suspend fun getAllMovies(
         language: String,
         page: Int
     ): Flow<List<Movie>>

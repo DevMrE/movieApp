@@ -20,7 +20,7 @@ internal class MovieRepositoryImpl(
 
     private val _movieLists = MutableStateFlow<Map<MovieCategory, List<Movie>>>(emptyMap())
 
-    override fun getMovies(
+    override suspend fun getMovies(
         language: String,
         page: Int,
         movieCategory: MovieCategory
@@ -46,7 +46,7 @@ internal class MovieRepositoryImpl(
         }
     }
 
-    override fun getAllMovies(language: String, page: Int): Flow<List<Movie>> {
+    override suspend fun getAllMovies(language: String, page: Int): Flow<List<Movie>> {
         TODO("Not yet implemented")
     }
 }

@@ -4,8 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.touchlab.kermit.Logger
 import com.kmp.movieapp.core.open_settings.SettingsNavigator
-import com.kmp.movieapp.core.permission.domain.Permission
-import com.kmp.movieapp.core.permission.domain.PermissionsController
+import com.kmp.movieapp.device_operations.domain.controller.DeviceOperationsController
+import com.kmp.movieapp.device_operations.domain.result.OperationResult
+import com.kmp.movieapp.device_operations.domain.result.onCancelled
+import com.kmp.movieapp.device_operations.domain.result.onDenied
+import com.kmp.movieapp.device_operations.domain.result.onGranted
+import com.kmp.movieapp.settings.model.Permission
 import com.kmp.movieapp.settings.model.PermissionDemoResult
 import com.kmp.movieapp.settings.model.UiSettingsData
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -16,7 +20,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 internal class SettingsScreenViewModel(
-    private val permissionsController: PermissionsController,
+    private val deviceOperationsController: DeviceOperationsController,
     private val settingsNavigator: SettingsNavigator
 ) : ViewModel() {
 
@@ -36,54 +40,78 @@ internal class SettingsScreenViewModel(
     private fun checkPermission(permission: Permission) {
         viewModelScope.launch {
             when (permission) {
-                Permission.LOCATION -> handleLocationPermission()
-                Permission.CAMERA -> handleCameraPermission()
+                Permission.LOCATION -> handleLocationFeature()
+                Permission.CAMERA -> handleCameraFeature()
+                Permission.GALLERY -> handleGalleryFeature()
                 else -> Unit
             }
         }
     }
 
-    private fun handleLocationPermission() {
+    private fun handleLocationFeature() {
         viewModelScope.launch {
-            permissionsController.location().collectLatest { result ->
+            deviceOperationsController.getCurrentLocation().collectLatest { result ->
                 result.onGranted { data ->
-                    Logger.i(tag = "Permission", messageString = "viewModel onGranted")
-                    Logger.i(tag = "Permission", messageString = "viewModel granted?: $data")
+                    Logger.i(
+                        tag = "Permission",
+                        messageString = "viewModel getCurrentLocation granted"
+                    )
 
                     _uiState.update {
                         it.copy(
                             permissionDemoResult = PermissionDemoResult.LocationReady(
-                                data?.latitude,
-                                data?.longitude
+                                data.latitude,
+                                data.longitude
                             )
                         )
                     }
                 }.onDenied {
                     Logger.i(tag = "Permission", messageString = "viewModel onDenied")
+                }.onCancelled {
+                    Logger.i(tag = "Permission", messageString = "viewModel onCancelled")
 
-                    _uiState.update {
-                        it.copy(
-                            permissionDemoResult = PermissionDemoResult.PermissionDenied(
-                                Permission.LOCATION
-                            )
-                        )
+                }
+            }
+        }
+    }
+
+    private fun handleCameraFeature() {
+        viewModelScope.launch {
+            deviceOperationsController.capturePhoto().collectLatest { result ->
+                when (result) {
+                    is OperationResult.Success -> {
+                        Logger.i(tag = "Permission", messageString = "capture photo granted")
+
+                    }
+
+                    is OperationResult.Denied -> {
+                        Logger.i(tag = "Permission", messageString = "viewModel onDenied")
+                    }
+
+                    is OperationResult.Cancelled -> {
+
                     }
                 }
             }
         }
     }
 
-    private fun handleCameraPermission() {
+    private fun handleGalleryFeature() {
         viewModelScope.launch {
-            permissionsController.camera().collectLatest { result ->
-                result.onGranted {
-                    _uiState.update {
-                        it.copy(
-                            permissionDemoResult = PermissionDemoResult.CameraReady
-                        )
-                    }
-                }.onDenied {
+            deviceOperationsController.pickImages().collectLatest { result ->
+                when (result) {
+                    is OperationResult.Success -> {
+                        Logger.i(tag = "Permission", messageString = "capture photo granted")
 
+                    }
+
+                    is OperationResult.Denied -> {
+                        Logger.i(tag = "Permission", messageString = "viewModel onDenied")
+                    }
+
+                    is OperationResult.Cancelled -> {
+
+                    }
                 }
             }
         }

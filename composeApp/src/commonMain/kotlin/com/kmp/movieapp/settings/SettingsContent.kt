@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.core.permission.domain.Permission
 import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.settings.model.Permission
 import com.kmp.movieapp.settings.model.PermissionDemoResult
 import movieapp.composeapp.generated.resources.Res
 import movieapp.composeapp.generated.resources.permission_camera
