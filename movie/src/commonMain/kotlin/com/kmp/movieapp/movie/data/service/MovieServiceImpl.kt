@@ -31,7 +31,6 @@ internal class MovieServiceImpl(
         movieListCategory: MovieListCategory
     ): Result<ApiResponseDto<MovieDto>, ApiError> = multiCatch(
         tryBlock = {
-            // TODO:
             val response = httpClient.get(
                 resource = MovieListRequestDto(
                     page = page,

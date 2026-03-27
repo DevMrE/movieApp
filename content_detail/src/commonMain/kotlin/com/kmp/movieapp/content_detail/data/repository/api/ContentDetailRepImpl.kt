@@ -5,7 +5,7 @@ import com.kmp.movieapp.content_detail.data.service.api.MovieService
 import com.kmp.movieapp.content_detail.data.service.api.SeriesService
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
 import com.kmp.movieapp.content_detail.domain.repository.ContentDetailRepository
-import com.kmp.movieapp.core.network.util.alsoOnSuccess
+import com.kmp.movieapp.core.network.util.mapOnSuccess
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -16,14 +16,14 @@ internal class ContentDetailRepImpl(
 
     override suspend fun getMovieDetail(contentId: String): Flow<ContentDetail> = flow {
         movieService.fetchMovieDetail(contentId)
-            .alsoOnSuccess {
+            .mapOnSuccess {
                 emit(it.toContentDetail())
             }
     }
 
     override suspend fun getSeriesDetail(contentId: String): Flow<ContentDetail> = flow {
         seriesService.fetchSeriesDetail(contentId)
-            .alsoOnSuccess {
+            .mapOnSuccess {
                 emit(it.toContentDetail())
             }
     }

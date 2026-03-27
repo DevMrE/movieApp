@@ -1,8 +1,9 @@
 package com.kmp.movieapp.movie.data.repository
 
 import co.touchlab.kermit.Logger
-import com.kmp.movieapp.core.network.util.alsoOnFailure
-import com.kmp.movieapp.core.network.util.alsoOnSuccess
+import com.kmp.movieapp.core.network.util.mapOnSuccess
+import com.kmp.movieapp.core.network.util.onError
+import com.kmp.movieapp.core.network.util.onFailure
 import com.kmp.movieapp.movie.data.model.mapper.toMovie
 import com.kmp.movieapp.movie.data.model.mapper.toMovieListCategory
 import com.kmp.movieapp.movie.data.service.MovieService
@@ -29,7 +30,7 @@ internal class MovieRepositoryImpl(
             language = language,
             page = page,
             movieListCategory = movieCategory.toMovieListCategory()
-        ).alsoOnSuccess { data ->
+        ).mapOnSuccess { data ->
             val movieList = data.results?.map { movieDto ->
                 movieDto.toMovie()
             } ?: emptyList()
@@ -41,8 +42,11 @@ internal class MovieRepositoryImpl(
             }
 
             emit(_movieLists.value[movieCategory] ?: emptyList())
-        }.alsoOnFailure {
-            Logger.e("Error: ${it.value}")
+        }.onError {
+            Logger.e("Error: $it")
+        }.onFailure {
+            // Placeholder for loading movies from an database.
+            emit(listOf(Movie(0,"Movie", "", "")))
         }
     }
 
