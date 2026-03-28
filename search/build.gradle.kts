@@ -23,7 +23,7 @@ kotlin {
     }
 
     // Desktop - Windows + MacOS
-    jvm("desktop")
+    jvm()
 
     // iOS -> iPhone + iPad implementation
     iosArm64()

@@ -70,7 +70,7 @@ internal inline fun <T> createOneShotFlow(
 /**
  * Creates a callback-based Flow that supports multiple emissions.
  *
- * The flow remains active until [close] is called or the collector is cancelled.
+ * The flow remains active until [onClose] is called or the collector is cancelled.
  * Use this for streaming operations such as continuous location updates,
  * bluetooth scans, or recording state updates.
  */

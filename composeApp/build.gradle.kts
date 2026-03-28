@@ -19,7 +19,7 @@ kotlin {
     }
 
     // Desktop - Windows + macOS
-    jvm("desktop")
+    jvm()
 
     // Android
     androidTarget()

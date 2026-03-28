@@ -21,7 +21,7 @@ kotlin {
         experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
     }
 
-    jvm("desktop")
+    jvm()
 
     iosArm64()
     iosSimulatorArm64()
