@@ -1,9 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
-    alias(libs.plugins.composeMultiplatform)
-    alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.composeHotReload)
     alias(libs.plugins.androidLint)
     alias(libs.plugins.serialization)
 }
@@ -40,8 +37,6 @@ kotlin {
             }
         }
 
-
-
         androidMain {
             dependencies {
                 implementation(libs.coroutines.android)
@@ -58,5 +53,4 @@ kotlin {
             }
         }
     }
-
 }

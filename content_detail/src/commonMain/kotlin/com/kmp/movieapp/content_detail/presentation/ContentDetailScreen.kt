@@ -2,6 +2,7 @@ package com.kmp.movieapp.content_detail.presentation
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -22,9 +23,10 @@ fun ContentDetailScreen(
 
     Scaffold(
         modifier = Modifier.fillMaxSize()
-    ) {
+    ) { paddingValues ->
         Box(
             modifier = Modifier.fillMaxSize()
+                .padding(paddingValues)
         ) {
             Text(
                 text = "Detail id: ${currentId.title}",

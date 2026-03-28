@@ -66,3 +66,28 @@ internal inline fun <T> createOneShotFlow(
 
     awaitClose(onClose)
 }
+
+/**
+ * Creates a callback-based Flow that supports multiple emissions.
+ *
+ * The flow remains active until [close] is called or the collector is cancelled.
+ * Use this for streaming operations such as continuous location updates,
+ * bluetooth scans, or recording state updates.
+ */
+internal inline fun <T> createCallbackFlow(
+    crossinline block: (send: (T) -> Unit, close: () -> Unit) -> Unit,
+    noinline onClose: () -> Unit = {}
+): Flow<T> = callbackFlow {
+
+    val send: (T) -> Unit = { value ->
+        trySend(value).isSuccess
+    }
+
+    val closeFlow: () -> Unit = {
+        close()
+    }
+
+    block(send, closeFlow)
+
+    awaitClose(onClose)
+}

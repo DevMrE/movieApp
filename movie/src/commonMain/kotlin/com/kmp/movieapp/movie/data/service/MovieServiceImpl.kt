@@ -49,8 +49,7 @@ internal class MovieServiceImpl(
             listOf(Exception::class) to { e ->
                 Logger.e(
                     tag = "ApiError",
-                    messageString = "Error during fetchMoviesForCategory",
-                    throwable = e
+                    messageString = "Error during fetchMoviesForCategory: ${e.message}"
                 )
                 HandleHttpStatus.getResultForStatus(null)
             }
@@ -72,11 +71,7 @@ internal class MovieServiceImpl(
                     HandleHttpStatus.getResultForStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    Logger.e(
-                        tag = "ApiError",
-                        messageString = "Error during fetchMoviesForCategory",
-                        throwable = e
-                    )
+                    Logger.e(tag = "ApiError", messageString = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleHttpStatus.getResultForStatus(null)
                 }
             )
@@ -92,15 +87,17 @@ internal class MovieServiceImpl(
                 Result.Success(response.body())
             },
             handlers = mapOf(
-                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
+                listOf(
+                    ClientRequestException::class,
+                    ServerResponseException::class
+                ) to { e ->
                     val ex = e as ResponseException
                     HandleHttpStatus.getResultForStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
                     Logger.e(
                         tag = "ApiError",
-                        messageString = "Error during fetchMoviesForCategory",
-                        throwable = e
+                        messageString = "Error during fetchMoviesForCategory: ${e.message}"
                     )
                     HandleHttpStatus.getResultForStatus(null)
                 }
