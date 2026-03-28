@@ -27,9 +27,7 @@ actual fun deviceModule(): Module = module {
     }
 
     single {
-        IOSGalleryProvider(
-            iosDeviceOperationsBinder = get()
-        )
+        IOSGalleryProvider()
     }
 
     single {

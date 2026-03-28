@@ -6,12 +6,11 @@ import com.kmp.movieapp.device_operations.platform.IOSDeviceOperationsBinder
 import platform.UIKit.UIViewController
 
 fun MainViewController(): UIViewController {
-
-    val viewController = ComposeUIViewController {
+    val uiViewController = ComposeUIViewController {
         MobileAppScreen()
     }
 
-    IOSDeviceOperationsBinder.bind(viewController)
+    IOSDeviceOperationsBinder.bind(uiViewController)
 
-    return viewController
+    return uiViewController
 }

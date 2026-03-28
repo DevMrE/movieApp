@@ -33,7 +33,7 @@ internal class AndroidGalleryProvider : GalleryProvider {
         if (isRegistered) return
 
         pickMultipleMediaLauncher = activity.registerForActivityResult(
-            ActivityResultContracts.PickMultipleVisualMedia()
+            contract = ActivityResultContracts.PickMultipleVisualMedia()
         ) { uris ->
             callback?.invoke(uris)
             callback = null
@@ -56,7 +56,7 @@ internal class AndroidGalleryProvider : GalleryProvider {
             }
 
             pickMultipleMediaLauncher.launch(
-                PickVisualMediaRequest(
+                input = PickVisualMediaRequest(
                     mediaType = ActivityResultContracts.PickVisualMedia.ImageOnly
                 )
             )
