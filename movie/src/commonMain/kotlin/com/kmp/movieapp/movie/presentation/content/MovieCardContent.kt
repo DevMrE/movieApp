@@ -11,7 +11,7 @@ import com.kmp.movieapp.movie.presentation.model.UiMovie
 
 internal fun LazyListScope.movieCardContent(
     width: Dp,
-    movieList: List<UiMovie>,
+    movieList: List<UiMovie> = emptyList(),
     onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->

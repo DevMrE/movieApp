@@ -8,5 +8,7 @@ internal sealed interface MovieAction {
 
     data class OnStartTrailer(val id: Int) : MovieAction
 
-    data class OnSeeAllClicked(val movieCategory: MovieCategory) : MovieAction
+    data class OnSeeAllClicked(val movieCategory: MovieCategory?) : MovieAction
+
+    data object OnRefresh : MovieAction
 }

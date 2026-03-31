@@ -42,8 +42,35 @@ internal class MovieScreenViewModel(
             }
         }.stateInEagerly(_movieScreenState.value)
 
-    init {
+    fun onAction(action: MovieAction) {
+        when (action) {
+            is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.title)
+            is MovieAction.OnStartTrailer -> Unit
+            is MovieAction.OnSeeAllClicked -> onSeeAll(action.movieCategory)
+            is MovieAction.OnRefresh -> onRefresh()
+        }
+    }
+
+    private fun navigateToDetailScreen(title: String) {
+        navigation.navigateTo(MediaDetailDestination(title))
+    }
+
+    private fun onSeeAll(movieCategory: MovieCategory?) {
+        if (movieCategory == null) return
+        navigation.navigateTo(destination = MovieCategoryListDestination(movieCategory))
+    }
+
+    private fun onRefresh() {
         viewModelScope.launch {
+            _movieScreenState.update {
+                UiMovieScreen(
+                    isLoading = true,
+                    nowPlaying = _movieScreenState.value?.nowPlaying,
+                    popularMovie = _movieScreenState.value?.popularMovie,
+                    topRatedMovies = _movieScreenState.value?.topRatedMovies,
+                )
+            }
+
             getMoviesForCategoryUseCase().collectLatest { (popular, topRated, nowPlaying) ->
                 _movieScreenState.update {
                     UiMovieScreen(
@@ -55,21 +82,5 @@ internal class MovieScreenViewModel(
                 }
             }
         }
-    }
-
-    fun onAction(action: MovieAction) {
-        when (action) {
-            is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.title)
-            is MovieAction.OnStartTrailer -> Unit
-            is MovieAction.OnSeeAllClicked -> onSeeAll(action.movieCategory)
-        }
-    }
-
-    private fun navigateToDetailScreen(title: String) {
-        navigation.navigateTo(MediaDetailDestination(title))
-    }
-
-    private fun onSeeAll(movieCategory: MovieCategory) {
-        navigation.navigateTo(destination = MovieCategoryListDestination(movieCategory))
     }
 }

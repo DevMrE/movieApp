@@ -26,11 +26,11 @@ import com.kmp.movieapp.movie.see_all
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.movieListContent(
-    uiMovieList: UiMovieList,
+    uiMovieList: UiMovieList?,
     onAction: (MovieAction) -> Unit
 ) {
     item {
-        val categoryTitle = when (uiMovieList.category) {
+        val categoryTitle = when (uiMovieList?.category) {
             MovieCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
             MovieCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
             else -> null
@@ -60,7 +60,7 @@ internal fun LazyListScope.movieListContent(
 
                     TextButton(
                         onClick = {
-                            onAction(MovieAction.OnSeeAllClicked(movieCategory = uiMovieList.category))
+                            onAction(MovieAction.OnSeeAllClicked(movieCategory = uiMovieList?.category))
                         },
                     ) {
                         Text(stringResource(Res.string.see_all))
@@ -68,18 +68,21 @@ internal fun LazyListScope.movieListContent(
                 }
             }
 
-            val cardSize = if (title == null) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
+            val cardSize =
+                if (title == null) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
 
             LazyRow(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
                 contentPadding = PaddingValues(horizontal = MaterialTheme.padding.thirty)
             ) {
-                movieCardContent(
-                    width = cardSize,
-                    movieList = uiMovieList.movies,
-                    onAction = onAction
-                )
+                uiMovieList?.movies?.let {
+                    movieCardContent(
+                        width = cardSize,
+                        movieList = it,
+                        onAction = onAction
+                    )
+                }
             }
         }
     }
