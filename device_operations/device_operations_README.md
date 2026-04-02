@@ -33,7 +33,7 @@ sealed interface OperationResult<out T> {
 ```kotlin
 viewModelScope.launch {
     deviceOperationsController.getCurrentLocation().collectLatest { result ->
-        result.onGranted { data ->
+        result.onGranted { location ->
             
         }.onDenied {
             
@@ -43,17 +43,6 @@ viewModelScope.launch {
     }
 }
 ```
----
-
-## Architecture Diagram
-
-graph TD
-VM --> Controller
-Controller --> Permission
-Controller --> Provider
-Provider --> Android
-Provider --> iOS
-
 ---
 
 ## ADR
