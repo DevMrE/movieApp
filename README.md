@@ -16,12 +16,52 @@ MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)
 
 ---
 
-## ⚠️ Known Limitations
+## 📌 Overview
 
-- **Permission handling** (location, camera, microphone, gallery, notifications) is **not yet finalized** and may not work correctly on all platforms.
-- The app is under active development and is **not production-ready**.
-- Some features may be incomplete or still work in progress.
-- The approaches and patterns used throughout the codebase are **illustrative only** and should not be considered best practices or final solutions.
+MovieApp is a Kotlin Multiplatform (KMP) application targeting Android and iOS.
+
+The project demonstrates:
+- Modular architecture
+- Clean Architecture principles
+- Shared business logic
+- Platform abstraction (device operations)
+
+---
+
+## 🏗️ Architecture
+
+Layers:
+- Presentation (Compose + ViewModels)
+- Domain (contracts, models)
+- Data (repositories, providers)
+- Platform (Android / iOS)
+
+---
+
+## 🧭 Architecture Diagram
+
+graph TD
+UI --> ViewModel
+ViewModel --> UseCase
+UseCase --> Repository
+Repository --> Provider
+Provider --> Android
+Provider --> iOS
+
+---
+
+## 📁 Project Structure
+
+movieapp/
+- composeApp/
+- iosApp/
+- core/
+- device_operations/
+- movie/
+- series/
+- search/
+- content_detail/
+- discover/
 
 ---
 
@@ -39,82 +79,29 @@ MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)
 
 ---
 
-## 📱 Supported Platforms
+## 🔐 Permissions
 
-| Platform | Minimum Version |
-|---|---|
-| Android | API 35 (Android 15) |
-| iOS | 15.0 |
-
+Permissions handled via abstraction layer.
 
 ---
 
-## 🚀 Getting Started
+## 🔒 Device Operations
 
-### Prerequisites
+Encapsulates:
+- Camera
+- Image picker
+- Location
 
-- Android Studio (Hedgehog or newer)
-- Xcode 15+ (for iOS)
-- JDK 17+
-- Kotlin 1.9+
-- Android SDK 36 (compile), min SDK 35
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/DevMrE/movieapp.git
-cd movieapp
-```
-
-### Android
-
-Open the project in Android Studio and run it on a device or emulator (Android 15+ required).
-
-### iOS
-
-```bash
-cd iosApp
-pod install
-```
-
-Then open `iosApp.xcworkspace` in Xcode and run (iOS 15.0+ required).
+See device_operations/README.md
 
 ---
 
-## 📁 Project Structure
+## 🧠 Architectural Decisions
 
-```
-movieapp/
-├── composeApp/          # Main app module (Android, iOS, Desktop entry points)
-├── iosApp/              # iOS Xcode project
-├── core/                # Shared core utilities, DI, networking
-├── movie/               # Movie feature module
-├── series/              # Series feature module
-├── search/              # Search feature module
-├── content_detail/      # Content detail feature module
-├── discover/            # Discover feature module
-├── gradle/              # Gradle wrapper & version catalog
-├── build.gradle.kts     # Root build config
-├── gradle.properties    # Project-wide properties & versions
-└── settings.gradle.kts  # Module declarations
-```
-
----
-
-## 🔒 Permissions
-
-The app requests the following permissions:
-
-| Permission | Platform | Purpose |
-|---|---|---|
-| `ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION` | Android | Location access |
-| `CAMERA` | Android / iOS | Camera access |
-| `RECORD_AUDIO` | Android / iOS | Microphone / speech recognition |
-| `READ_MEDIA_IMAGES` | Android / iOS | Gallery access |
-| `POST_NOTIFICATIONS` | Android / iOS | Push notifications |
-
-> ⚠️ As mentioned above, permission handling is not yet fully stable across all platforms.
+- Flow instead of callbacks
+- ViewModel driven execution
+- No UI-driven permission logic
+- Platform isolation
 
 ---
 
@@ -131,9 +118,10 @@ The language is automatically selected based on the device's system language.
 
 ---
 
-## 🎨 Appearance
+## 🎨 UI
 
-The app fully supports both **Light Mode** and **Dark Mode**, automatically adapting to the system appearance setting of the device.
+- Compose Multiplatform
+- Light/Dark support
 
 ---
 
@@ -159,4 +147,3 @@ If you are interested in a collaboration or licensing, feel free to reach out di
 - GitHub: [@DevMrE](https://github.com/DevMrE)
 - LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
 
----
