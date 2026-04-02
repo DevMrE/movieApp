@@ -8,7 +8,8 @@ import com.kmp.movieapp.content_detail.data.service.api.SeriesServiceImpl
 import com.kmp.movieapp.content_detail.domain.repository.ContentDetailRepository
 import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetail
 import com.kmp.movieapp.content_detail.presentation.ContentDetailViewModel
-import org.koin.core.module.dsl.viewModelOf
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
 val contentDetailModule = module {
@@ -29,5 +30,11 @@ val contentDetailModule = module {
         GetContentDetail(get())
     }
 
-    viewModelOf(::ContentDetailViewModel)
+    viewModel<ContentDetailViewModel> { (id: String, contentType: ContentDetailType) ->
+        ContentDetailViewModel(
+            getContentDetail = get(),
+            id = id,
+            contentType = contentType
+        )
+    }
 }

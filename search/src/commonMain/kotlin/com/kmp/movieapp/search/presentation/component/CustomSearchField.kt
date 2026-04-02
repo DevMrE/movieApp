@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.search.Res
 import com.kmp.movieapp.search.ic_close
@@ -68,6 +69,7 @@ internal fun CustomSearchField(
                 textStyle = MaterialTheme.typography.bodyLarge.copy(
                     color = MaterialTheme.colorScheme.onBackground
                 ),
+                cursorBrush = SolidColor(MaterialTheme.colorScheme.primary)
             )
 
             SearchIconButton(

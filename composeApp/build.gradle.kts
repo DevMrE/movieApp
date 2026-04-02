@@ -6,7 +6,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidKmpLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
@@ -22,8 +22,17 @@ kotlin {
     jvm()
 
     // Android
-    androidTarget()
+    android {
+        // Use a unique namespace to avoid collisions with the androidApp module
+        namespace = "${getPropertyString("app.basePackagePath")}.composeApp"
+        compileSdk = getPropertyInt("android.compileSdk")
+        minSdk = getPropertyInt("android.mobile.minSdk")
 
+        androidResources {
+            enable = true
+        }
+    }
+    
     // iOS (Framework + XCFramework)
     val frameworkName = "ComposeApp"
     val xcf = XCFramework(frameworkName)
@@ -34,18 +43,11 @@ kotlin {
     listOf(
         iosArm64(),
         iosSimulatorArm64(),
-        // iosX64(),
     ).forEach { target ->
         target.binaries.framework {
             baseName = frameworkName
-
-            // CFBundleIdentifier im Framework-Info.plist
             binaryOption("bundleId", frameworkBundleId)
-
-            // Wenn Swift auch APIs von exportierten Dependencies sehen soll:
-            // export(project(":core"))
             transitiveExport = true
-
             isStatic = false
             xcf.add(this)
         }
@@ -54,17 +56,12 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
-
             implementation(libs.bundles.commonMainCompose)
             implementation(libs.savedState)
             implementation(libs.window.core)
-
             implementation(libs.bundles.lifecycle)
             implementation(libs.bundles.commainMainKoin)
-
             implementation(libs.logger)
-
-            // kmp navigation
             implementation(libs.kmpNavigation)
 
             implementation(project(":core"))
@@ -81,52 +78,10 @@ kotlin {
             implementation(libs.android.conscrypt)
         }
 
-        // iOS
-        iosMain.dependencies {
-
-        }
-
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
         }
-
     }
-}
-
-android {
-    namespace = getPropertyString("app.basePackagePath")
-    compileSdk = getPropertyInt("android.compileSdk")
-
-    defaultConfig {
-        applicationId = getPropertyString("app.basePackagePath")
-
-        minSdk = getPropertyInt("android.mobile.minSdk")
-        targetSdk = getPropertyInt("android.mobile.targedSdk")
-
-        versionCode = 1
-        versionName = getPropertyString("app.version")
-    }
-
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-}
-
-dependencies {
-    debugImplementation(libs.composePreview)
 }
 
 compose.desktop {
@@ -139,6 +94,11 @@ compose.desktop {
             )
         }
     }
+}
+
+compose.resources {
+    // Explicitly set the package name for the generated Res class
+    packageOfResClass = "com.kmp.movieapp.composeApp"
 }
 
 fun getPropertyString(string: String): String {

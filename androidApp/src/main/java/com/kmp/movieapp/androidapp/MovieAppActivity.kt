@@ -1,4 +1,4 @@
-package com.kmp.movieapp.app_bar
+package com.kmp.movieapp.androidapp
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

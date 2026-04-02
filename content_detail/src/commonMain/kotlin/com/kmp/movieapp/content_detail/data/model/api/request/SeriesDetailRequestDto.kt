@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 @Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.SERIES_ENDPOINT}/{series_id}")
 data class SeriesDetailRequestDto(
     @SerialName("series_id")
-    val movieId: Int,
+    val seriesId: Int,
     @SerialName("language")
     val language: String? = "en",
     @SerialName("append_to_response")

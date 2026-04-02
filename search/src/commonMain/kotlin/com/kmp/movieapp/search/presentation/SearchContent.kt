@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.content.MediaItemCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
@@ -37,11 +38,11 @@ fun SearchContent() {
         state = gridState,
         contentPadding = PaddingValues(all = MaterialTheme.padding.five),
         verticalArrangement = Arrangement.spacedBy(
-            space = MaterialTheme.padding.ten,
+            space = MaterialTheme.padding.defaultContentPadding,
             alignment = Alignment.Top
         ),
         horizontalArrangement = Arrangement.spacedBy(
-            space = MaterialTheme.padding.ten,
+            space = MaterialTheme.padding.defaultContentPadding,
             alignment = Alignment.CenterHorizontally
         ),
     ) {
@@ -49,10 +50,16 @@ fun SearchContent() {
             MediaItemCard(
                 width = MaterialTheme.size.movieCardWidth,
                 height = MaterialTheme.size.movieCardLstHeight,
-                movieTitle = movie.title,
+                movieTitle = "",
+                enableGradient = false,
                 moviePosterPath = movie.posterPath,
                 onClick = {
-                    navigation.navigateTo(destination = MediaDetailDestination(title = movie.title))
+                    navigation.navigateTo(
+                        destination = MediaDetailDestination(
+                            id = movie.id,
+                            contentDetailType = ContentDetailType.NONE
+                        )
+                    )
                 }
             )
         }

@@ -36,9 +36,9 @@ fun appTypography(): Typography {
             fontFamily = jakartaFamily,
         ),
         headlineSmall = TextStyle(
-            fontFamily = jakartaFamily,
+            fontFamily = genosFamily,
             fontWeight = FontWeight.Black,
-            fontSize = 18.sp,
+            fontSize = 26.sp,
             lineHeight = 24.sp,
             hyphens = Hyphens.Auto,
             color = MaterialTheme.colorScheme.surface
@@ -48,6 +48,13 @@ fun appTypography(): Typography {
             fontWeight = FontWeight.SemiBold,
             fontFamily = jakartaFamily,
             lineHeight = 24.sp,
+        ),
+        titleLarge = TextStyle(
+            fontSize = 38.sp,
+            fontWeight = FontWeight.Black,
+            fontFamily = genosFamily,
+            lineHeight = 32.sp,
+            color = MaterialTheme.colorScheme.tertiary
         ),
         bodyLarge = TextStyle(
             fontSize = 16.sp,
@@ -62,10 +69,11 @@ fun appTypography(): Typography {
             lineHeight = 20.sp,
         ),
         labelSmall = TextStyle(
-            fontSize = 14.sp,
+            fontSize = 28.sp,
             fontWeight = FontWeight.Black,
-            fontFamily = jakartaFamily,
+            fontFamily = genosFamily,
             lineHeight = 14.sp,
+            color = MaterialTheme.colorScheme.outline
         )
     )
 }

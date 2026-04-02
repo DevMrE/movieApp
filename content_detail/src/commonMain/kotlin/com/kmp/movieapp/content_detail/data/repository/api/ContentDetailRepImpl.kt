@@ -15,14 +15,14 @@ internal class ContentDetailRepImpl(
 ) : ContentDetailRepository {
 
     override suspend fun getMovieDetail(contentId: String): Flow<ContentDetail> = flow {
-        movieService.fetchMovieDetail(contentId)
+        movieService.fetchMovieDetail(movieId = contentId.toInt())
             .mapOnSuccess {
                 emit(it.toContentDetail())
             }
     }
 
     override suspend fun getSeriesDetail(contentId: String): Flow<ContentDetail> = flow {
-        seriesService.fetchSeriesDetail(contentId)
+        seriesService.fetchSeriesDetail(contentId.toInt())
             .mapOnSuccess {
                 emit(it.toContentDetail())
             }

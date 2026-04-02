@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
-import com.kmp.movieapp.core.util.boolean.isFalse
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
@@ -36,7 +35,7 @@ internal class MovieScreenViewModel(
         }.map { (popular, topRated, nowPlaying) ->
             _movieScreenState.updateAndGet {
                 UiMovieScreen(
-                    isLoading = popular?.isEmpty().isFalse || topRated?.isEmpty().isFalse || nowPlaying?.isEmpty().isFalse,
+                    isLoading = popular == null && topRated == null && nowPlaying == null,
                     nowPlaying = nowPlaying?.toUiMovieList(category = MovieCategory.NOW_PLAYING),
                     popularMovie = popular?.toUiMovieList(category = MovieCategory.POPULAR),
                     topRatedMovies = topRated?.toUiMovieList(category = MovieCategory.TOP_RATED)
@@ -81,7 +80,7 @@ internal class MovieScreenViewModel(
             getMoviesForCategoryUseCase().collectLatest { (popular, topRated, nowPlaying) ->
                 _movieScreenState.update {
                     UiMovieScreen(
-                        isLoading = popular?.isEmpty().isFalse || topRated?.isEmpty().isFalse || nowPlaying?.isEmpty().isFalse,
+                        isLoading = popular == null && topRated == null && nowPlaying == null,
                         nowPlaying = nowPlaying?.toUiMovieList(category = MovieCategory.NOW_PLAYING),
                         popularMovie = popular?.toUiMovieList(category = MovieCategory.POPULAR),
                         topRatedMovies = topRated?.toUiMovieList(category = MovieCategory.TOP_RATED)

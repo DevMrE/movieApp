@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.content.MediaItemCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
@@ -60,11 +61,11 @@ fun MovieCategoryListScreen(movieCategory: MovieCategory) {
         state = gridState,
         contentPadding = PaddingValues(horizontal = MaterialTheme.padding.five),
         verticalArrangement = Arrangement.spacedBy(
-            space = MaterialTheme.padding.ten,
+            space = MaterialTheme.padding.defaultContentPadding,
             alignment = Alignment.CenterVertically
         ),
         horizontalArrangement = Arrangement.spacedBy(
-            space = MaterialTheme.padding.ten,
+            space = MaterialTheme.padding.defaultContentPadding,
             alignment = Alignment.CenterHorizontally
         ),
     ) {
@@ -75,7 +76,12 @@ fun MovieCategoryListScreen(movieCategory: MovieCategory) {
                 movieTitle = movie.title,
                 moviePosterPath = movie.posterPath,
                 onClick = {
-                    navigation.navigateTo(MediaDetailDestination(title = movie.title))
+                    navigation.navigateTo(
+                        destination = MediaDetailDestination(
+                            id = movie.id.toString(),
+                            contentDetailType = ContentDetailType.MOVIE
+                        )
+                    )
                 }
             )
         }

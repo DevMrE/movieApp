@@ -1,44 +1,53 @@
 package com.kmp.movieapp.content_detail.presentation
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.kmp.movieapp.content_detail.presentation.component.header.detailHeader
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ContentDetailScreen(
-    id: String
+    id: String,
+    contentType: ContentDetailType
 ) {
-    val viewModel = koinViewModel<ContentDetailViewModel>()
-    val currentId by viewModel.uiState(id).collectAsState()
+    val viewModel = koinViewModel<ContentDetailViewModel>(
+        parameters = { parametersOf(id, contentType) },
+        key = id
+    )
+    val uiState by viewModel.uiState.collectAsState()
+    val navigation = rememberNavigation()
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize()
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier.fillMaxSize()
-                .padding(paddingValues)
-        ) {
-            Text(
-                text = "Detail id: ${currentId.title}",
-                modifier = Modifier.align(Alignment.Center),
-                color = MaterialTheme.colorScheme.primary
-            )
-        }
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+    ) {
+        detailHeader(
+            title = uiState?.title ?: "",
+            mediaInfo = uiState?.mediaInfo,
+            posterPath = uiState?.posterPath ?: "",
+            onBackClicked = {
+                navigation.navigateUp()
+            },
+            onDetailAction = {
+
+            }
+        )
     }
 }
 
 @Preview
 @Composable
 private fun ContentDetailScreenPreview() {
-    ContentDetailScreen("4546")
+    ContentDetailScreen(id = "4546", ContentDetailType.MOVIE)
 }

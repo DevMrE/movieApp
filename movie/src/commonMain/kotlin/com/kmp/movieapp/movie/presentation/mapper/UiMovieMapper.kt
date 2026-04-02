@@ -6,6 +6,7 @@ import com.kmp.movieapp.movie.presentation.model.UiMovie
 import com.kmp.movieapp.movie.presentation.model.UiMovieList
 
 internal fun Movie.toUiMovie() = UiMovie(
+    id = id.toString(),
     title = title,
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
