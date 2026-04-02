@@ -25,115 +25,106 @@ The application demonstrates:
 
 ---
 
+## ⚠️ Known Limitations
+
+- **Permission handling** (location, camera, microphone, gallery, notifications) is **not yet finalized** and may not work correctly on all platforms.
+- The app is under active development and is **not production-ready**.
+- Some features may be incomplete or still work in progress.
+- The approaches and patterns used throughout the codebase are **illustrative only** and should not be considered best practices or final solutions.
+
+---
+
 ## 🛠️ Tech Stack
 
 | Technology | Usage |
 |---|---|
-| Kotlin Multiplatform (KMP) | Shared business logic |
-| Compose Multiplatform | UI |
+| Kotlin Multiplatform (KMP) | Cross-platform shared logic |
+| Jetpack Compose / Compose Multiplatform | UI |
 | Koin | Dependency Injection |
-| Ktor | Networking |
-| Coroutines & Flow | Async & reactive streams |
-| FusedLocationProvider | Android location |
-| CoreLocation | iOS location |
+| Ktor | HTTP Client |
+| Coroutines & Flow | Asynchronous programming |
+| FusedLocationProvider | Location (Android) |
+| CoreLocation | Location (iOS) |
 
 ---
 
 ## 📱 Supported Platforms
 
-| Platform | Version |
+| Platform | Minimum Version |
 |---|---|
-| Android | API 35 |
+| Android | API 35 (Android 15) |
 | iOS | 15.0 |
 
 ---
 
 ## 📁 Project Structure
 
-movieapp/
-- composeApp/
-- iosApp/
-- core/
-- device_operations/
-- movie/
-- series/
-- search/
-- content_detail/
-- discover/
-
----
-
-## 🏗️ Architecture
-
-Layers:
-- Presentation (Compose, ViewModel)
-- Domain (UseCases)
-- Data (Repositories)
-- Platform (Android / iOS)
-
----
-
-## 🧭 Architecture Diagram
-
-```mermaid
-flowchart TD
-UI --> ViewModel
-ViewModel --> UseCase
-UseCase --> Repository
-Repository --> Provider
-Provider --> Android
-Provider --> iOS
 ```
+movieapp/
+├── composeApp/          # Main app module (Android, iOS, Desktop entry points)
+├── iosApp/              # iOS Xcode project
+├── core/                # Shared core utilities, DI, networking
+├── movie/               # Movie feature module
+├── series/              # Series feature module
+├── search/              # Search feature module
+├── content_detail/      # Content detail feature module
+├── discover/            # Discover feature module
+├── device_operations/   # hardware-related module
 
----
-
+```
 ## 🔒 Device Operations
+
+The `device_operations` module abstracts all hardware-related functionality such as:
 
 - Camera
 - Gallery
 - Location
 - Microphone
+- Notifications
 
----
-
-## 🔄 State & Flow Handling
-
+It is designed to be:
+- Platform-agnostic
 - Flow-based
-- Cold streams
-- ViewModel controlled
+- ViewModel-driven
+- Fully decoupled from UI
+
+👉 **Detailed documentation and usage examples:**  
+[Device Operations README](./device_operations_README.md)
 
 ---
 
-## 📱 Platform Integration
+## 🔒 Permissions
 
-Android:
-- ActivityResult APIs
+The app requests the following permissions:
 
-iOS:
-- PHPicker
-- CoreLocation
+| Permission | Platform | Purpose |
+|---|---|---|
+| `ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION` | Android | Location access |
+| `CAMERA` | Android / iOS | Camera access |
+| `RECORD_AUDIO` | Android / iOS | Microphone / speech recognition |
+| `READ_MEDIA_IMAGES` | Android / iOS | Gallery access |
+| `POST_NOTIFICATIONS` | Android / iOS | Push notifications |
 
----
-
-## 🧠 Architectural Decisions
-
-- Flow over callbacks
-- ViewModel driven
-- Platform abstraction
+> ⚠️ As mentioned above, permission handling is not yet fully stable across all platforms.
 
 ---
 
 ## 🌍 Localization
 
-- en
-- de
+The app currently supports the following languages:
+
+| Language | Code |
+|---|---|
+| English | `en` |
+| German | `de` |
+
+The language is automatically selected based on the device's system language.
 
 ---
 
-## 🎨 UI
+## 🎨 Appearance
 
-- Compose Multiplatform
-- Light/Dark mode
+The app fully supports both **Light Mode** and **Dark Mode**, automatically adapting to the system appearance setting of the device.
 
 ---
 
@@ -157,5 +148,5 @@ If you are interested in a collaboration or licensing, feel free to reach out di
 
 **Emrah Cicek**
 - GitHub: [@DevMrE](https://github.com/DevMrE)
-- LinkedIn: [linkedin.com/in/your-profile](https://linkedin.com/in/your-profile)
 
+---
