@@ -10,7 +10,7 @@ internal interface MovieRepository {
         language: String,
         page: Int,
         movieCategory: MovieCategory
-    ): Flow<List<Movie>>
+    ): Flow<List<Movie>?>
 
     suspend fun getAllMovies(
         language: String,

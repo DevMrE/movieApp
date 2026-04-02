@@ -2,7 +2,9 @@ package com.kmp.movieapp.movie.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
+import com.kmp.movieapp.core.util.boolean.isFalse
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.domain.usecase.GetMoviesForCategoryUseCase
@@ -34,25 +36,30 @@ internal class MovieScreenViewModel(
         }.map { (popular, topRated, nowPlaying) ->
             _movieScreenState.updateAndGet {
                 UiMovieScreen(
-                    isLoading = popular.isEmpty() || topRated.isEmpty() || nowPlaying.isEmpty(),
-                    nowPlaying = nowPlaying.toUiMovieList(category = MovieCategory.NOW_PLAYING),
-                    popularMovie = popular.toUiMovieList(category = MovieCategory.POPULAR),
-                    topRatedMovies = topRated.toUiMovieList(category = MovieCategory.TOP_RATED)
+                    isLoading = popular?.isEmpty().isFalse || topRated?.isEmpty().isFalse || nowPlaying?.isEmpty().isFalse,
+                    nowPlaying = nowPlaying?.toUiMovieList(category = MovieCategory.NOW_PLAYING),
+                    popularMovie = popular?.toUiMovieList(category = MovieCategory.POPULAR),
+                    topRatedMovies = topRated?.toUiMovieList(category = MovieCategory.TOP_RATED)
                 )
             }
         }.stateInEagerly(_movieScreenState.value)
 
     fun onAction(action: MovieAction) {
         when (action) {
-            is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.title)
+            is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.id)
             is MovieAction.OnStartTrailer -> Unit
             is MovieAction.OnSeeAllClicked -> onSeeAll(action.movieCategory)
             is MovieAction.OnRefresh -> onRefresh()
         }
     }
 
-    private fun navigateToDetailScreen(title: String) {
-        navigation.navigateTo(MediaDetailDestination(title))
+    private fun navigateToDetailScreen(id: String) {
+        navigation.navigateTo(
+            MediaDetailDestination(
+                id = id,
+                contentDetailType = ContentDetailType.MOVIE
+            )
+        )
     }
 
     private fun onSeeAll(movieCategory: MovieCategory?) {
@@ -74,10 +81,10 @@ internal class MovieScreenViewModel(
             getMoviesForCategoryUseCase().collectLatest { (popular, topRated, nowPlaying) ->
                 _movieScreenState.update {
                     UiMovieScreen(
-                        isLoading = popular.isEmpty() || topRated.isEmpty() || nowPlaying.isEmpty(),
-                        nowPlaying = nowPlaying.toUiMovieList(category = MovieCategory.NOW_PLAYING),
-                        popularMovie = popular.toUiMovieList(category = MovieCategory.POPULAR),
-                        topRatedMovies = topRated.toUiMovieList(category = MovieCategory.TOP_RATED)
+                        isLoading = popular?.isEmpty().isFalse || topRated?.isEmpty().isFalse || nowPlaying?.isEmpty().isFalse,
+                        nowPlaying = nowPlaying?.toUiMovieList(category = MovieCategory.NOW_PLAYING),
+                        popularMovie = popular?.toUiMovieList(category = MovieCategory.POPULAR),
+                        topRatedMovies = topRated?.toUiMovieList(category = MovieCategory.TOP_RATED)
                     )
                 }
             }

@@ -55,7 +55,7 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *     Result.Success(RemoteModel("raw"))
  *
  * val result: Result<DomainModel, Unit> =
- *     loadRemote().map { remote ->
+ *     loadRemote().mapOnSuccess { remote ->
  *         DomainModel(remote.raw)
  *     }
  * ```
@@ -94,7 +94,7 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * ## Remote → Local fallback example
  *
- * Both operations must use the same [FallbackData] type before [fallbackOnError]
+ * Both operations must use the same [FallbackData] type before [mapOnError]
  * can be used in a single chain.
  *
  * ```kotlin
@@ -119,9 +119,9 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * val result: Result<DomainModel, DataError> =
  *     loadRemote()
- *         .map { it.toDomain() }
+ *         .mapOnSuccess { it.toDomain() }
  *         .fallbackOnError {
- *             loadLocal().map { it.toDomain() }
+ *             loadLocal().mapOnSuccess { it.toDomain() }
  *         }
  * ```
  *
@@ -137,10 +137,10 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * suspend fun emitData(emit: suspend (RepositoryData<String>) -> Unit) {
  *     loadRemote()
- *         .map { it.value }
+ *         .mapOnSuccess { it.value }
  *         .onError { it } // optional mapping
  *         .fallbackOnError {
- *             loadLocal().map { it.value }
+ *             loadLocal().mapOnSuccess { it.value }
  *         }
  *         .onSuccess { value ->
  *             emit(RepositoryData(data = value))
@@ -273,7 +273,7 @@ inline fun <SuccessData, FallbackData, MappedFallbackData> Result<SuccessData, F
  *
  * Both operations must use the same [FallbackData] type.
  */
-inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.fallbackOnError(
+inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.mapOnError(
     block: (Failure<FallbackData>) -> Result<SuccessData, FallbackData>
 ): Result<SuccessData, FallbackData> {
     return when (this) {
