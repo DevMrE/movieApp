@@ -27,7 +27,6 @@ The application demonstrates:
 
 ## ⚠️ Known Limitations
 
-- **Permission handling** (location, camera, microphone, gallery, notifications) is **not yet finalized** and may not work correctly on all platforms.
 - The app is under active development and is **not production-ready**.
 - Some features may be incomplete or still work in progress.
 - The approaches and patterns used throughout the codebase are **illustrative only** and should not be considered best practices or final solutions.
