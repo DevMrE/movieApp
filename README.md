@@ -1,3 +1,4 @@
+
 # 🎬 MovieApp
 
 > ⚠️ **This project is intended solely for application/portfolio purposes.**
@@ -12,41 +13,38 @@
 
 ## 📌 About the Project
 
-MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)**, running on **Android** and **iOS**. The app displays movies, series, and related information fetched from an external API.
+MovieApp is a cross-platform application built with **Kotlin Multiplatform (KMP)**, running on **Android** and **iOS**.
+
+The application demonstrates:
+
+- Clean Architecture in a KMP environment
+- Cross-platform state handling with Flow
+- ViewModel-driven business logic
+- Platform abstraction (Android / iOS)
+- Hardware & permission handling via a shared module
 
 ---
 
-## 📌 Overview
+## 🛠️ Tech Stack
 
-MovieApp is a Kotlin Multiplatform (KMP) application targeting Android and iOS.
-
-The project demonstrates:
-- Modular architecture
-- Clean Architecture principles
-- Shared business logic
-- Platform abstraction (device operations)
-
----
-
-## 🏗️ Architecture
-
-Layers:
-- Presentation (Compose + ViewModels)
-- Domain (contracts, models)
-- Data (repositories, providers)
-- Platform (Android / iOS)
+| Technology | Usage |
+|---|---|
+| Kotlin Multiplatform (KMP) | Shared business logic |
+| Compose Multiplatform | UI |
+| Koin | Dependency Injection |
+| Ktor | Networking |
+| Coroutines & Flow | Async & reactive streams |
+| FusedLocationProvider | Android location |
+| CoreLocation | iOS location |
 
 ---
 
-## 🧭 Architecture Diagram
+## 📱 Supported Platforms
 
-graph TD
-UI --> ViewModel
-ViewModel --> UseCase
-UseCase --> Repository
-Repository --> Provider
-Provider --> Android
-Provider --> iOS
+| Platform | Version |
+|---|---|
+| Android | API 35 |
+| iOS | 15.0 |
 
 ---
 
@@ -65,63 +63,77 @@ movieapp/
 
 ---
 
-## 🛠️ Tech Stack
+## 🏗️ Architecture
 
-| Technology | Usage |
-|---|---|
-| Kotlin Multiplatform (KMP) | Cross-platform shared logic |
-| Jetpack Compose / Compose Multiplatform | UI |
-| Koin | Dependency Injection |
-| Ktor | HTTP Client |
-| Coroutines & Flow | Asynchronous programming |
-| FusedLocationProvider | Location (Android) |
-| CoreLocation | Location (iOS) |
+Layers:
+- Presentation (Compose, ViewModel)
+- Domain (UseCases)
+- Data (Repositories)
+- Platform (Android / iOS)
 
 ---
 
-## 🔐 Permissions
+## 🧭 Architecture Diagram
 
-Permissions handled via abstraction layer.
+```mermaid
+flowchart TD
+UI --> ViewModel
+ViewModel --> UseCase
+UseCase --> Repository
+Repository --> Provider
+Provider --> Android
+Provider --> iOS
+```
 
 ---
 
 ## 🔒 Device Operations
 
-Encapsulates:
 - Camera
-- Image picker
+- Gallery
 - Location
+- Microphone
 
-See device_operations/README.md
+---
+
+## 🔄 State & Flow Handling
+
+- Flow-based
+- Cold streams
+- ViewModel controlled
+
+---
+
+## 📱 Platform Integration
+
+Android:
+- ActivityResult APIs
+
+iOS:
+- PHPicker
+- CoreLocation
 
 ---
 
 ## 🧠 Architectural Decisions
 
-- Flow instead of callbacks
-- ViewModel driven execution
-- No UI-driven permission logic
-- Platform isolation
+- Flow over callbacks
+- ViewModel driven
+- Platform abstraction
 
 ---
 
 ## 🌍 Localization
 
-The app currently supports the following languages:
-
-| Language | Code |
-|---|---|
-| English | `en` |
-| German | `de` |
-
-The language is automatically selected based on the device's system language.
+- en
+- de
 
 ---
 
 ## 🎨 UI
 
 - Compose Multiplatform
-- Light/Dark support
+- Light/Dark mode
 
 ---
 
