@@ -92,22 +92,6 @@ It is designed to be:
 
 ---
 
-## 🔒 Permissions
-
-The app requests the following permissions:
-
-| Permission | Platform | Purpose |
-|---|---|---|
-| `ACCESS_FINE_LOCATION` / `ACCESS_COARSE_LOCATION` | Android | Location access |
-| `CAMERA` | Android / iOS | Camera access |
-| `RECORD_AUDIO` | Android / iOS | Microphone / speech recognition |
-| `READ_MEDIA_IMAGES` | Android / iOS | Gallery access |
-| `POST_NOTIFICATIONS` | Android / iOS | Push notifications |
-
-> ⚠️ As mentioned above, permission handling is not yet fully stable across all platforms.
-
----
-
 ## 🌍 Localization
 
 The app currently supports the following languages:
