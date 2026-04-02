@@ -88,7 +88,7 @@ It is designed to be:
 - Fully decoupled from UI
 
 👉 **Detailed documentation and usage examples:**  
-[Device Operations README](./device_operations/device_operations_README.md)
+[Device Operations README](./device_operations/README.md)
 
 ---
 
