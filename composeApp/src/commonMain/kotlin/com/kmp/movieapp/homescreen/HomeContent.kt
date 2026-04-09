@@ -65,7 +65,10 @@ fun HomeContent() {
                         inactiveBorderColor = MaterialTheme.colorScheme.background,
                     ),
                 ) {
-                    Text(text = stringResource(resource = tabs.tabResource))
+                    Text(
+                        text = stringResource(resource = tabs.tabResource),
+                        style = MaterialTheme.typography.bodyLarge
+                    )
                 }
             }
         }

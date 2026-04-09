@@ -1,4 +1,4 @@
-package com.kmp.movieapp.content_detail.presentation.component.header
+package com.kmp.movieapp.content_detail.presentation.component.title
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.padding
@@ -25,7 +25,7 @@ internal fun BackButton(
             .systemBarsPadding()
             .padding(start = MaterialTheme.padding.defaultContentPadding)
             .background(
-                color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.5f),
+                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.5f),
                 shape = MaterialTheme.shapes.extraLarge
             ),
         onClick = onBackClicked,

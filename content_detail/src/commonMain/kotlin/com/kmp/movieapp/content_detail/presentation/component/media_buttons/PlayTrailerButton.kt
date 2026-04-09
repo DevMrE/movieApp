@@ -1,4 +1,4 @@
-package com.kmp.movieapp.content_detail.presentation.component.header
+package com.kmp.movieapp.content_detail.presentation.component.media_buttons
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

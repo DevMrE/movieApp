@@ -22,24 +22,22 @@ fun appTypography(): Typography {
             lineHeight = 38.sp,
             lineBreak = LineBreak.Paragraph
         ),
-
         headlineLarge = TextStyle(
             fontSize = 28.sp,
             fontWeight = FontWeight.SemiBold,
             fontFamily = jakartaFamily,
             lineHeight = 32.sp,
         ),
-
         headlineMedium = TextStyle(
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
             fontFamily = jakartaFamily,
         ),
         headlineSmall = TextStyle(
-            fontFamily = genosFamily,
+            fontFamily = jakartaFamily,
             fontWeight = FontWeight.Black,
             fontSize = 26.sp,
-            lineHeight = 24.sp,
+            lineHeight = 28.sp,
             hyphens = Hyphens.Auto,
             color = MaterialTheme.colorScheme.surface
         ),
@@ -52,27 +50,35 @@ fun appTypography(): Typography {
         titleLarge = TextStyle(
             fontSize = 38.sp,
             fontWeight = FontWeight.Black,
-            fontFamily = genosFamily,
-            lineHeight = 32.sp,
+            fontFamily = jakartaFamily,
+            lineHeight = 40.sp,
             color = MaterialTheme.colorScheme.tertiary
         ),
         bodyLarge = TextStyle(
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Normal,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.ExtraBold,
             fontFamily = jakartaFamily,
             lineHeight = 22.sp,
         ),
         bodyMedium = TextStyle(
-            fontSize = 14.sp,
+            fontSize = 18.sp,
             fontWeight = FontWeight.Normal,
             fontFamily = jakartaFamily,
             lineHeight = 20.sp,
+            color = MaterialTheme.colorScheme.outline
+        ),
+        bodySmall = TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.Normal,
+            fontFamily = jakartaFamily,
+            lineHeight = 18.sp,
+            color = MaterialTheme.colorScheme.outline
         ),
         labelSmall = TextStyle(
-            fontSize = 28.sp,
+            fontSize = 16.sp,
             fontWeight = FontWeight.Black,
-            fontFamily = genosFamily,
-            lineHeight = 14.sp,
+            fontFamily = jakartaFamily,
+            lineHeight = 18.sp,
             color = MaterialTheme.colorScheme.outline
         )
     )

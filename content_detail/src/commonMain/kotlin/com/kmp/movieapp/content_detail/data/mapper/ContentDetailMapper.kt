@@ -9,5 +9,6 @@ fun ContentDetailDto.toContentDetail() = ContentDetail(
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
     backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
     runtime = runtime,
-    releaseDate = releaseDate
+    releaseDate = releaseDate,
+    overview = overview
 )
