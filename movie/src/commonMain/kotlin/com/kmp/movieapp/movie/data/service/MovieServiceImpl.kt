@@ -1,6 +1,6 @@
 package com.kmp.movieapp.movie.data.service
 
-import com.kmp.movieapp.core.network.http.HandleHttpStatus
+import com.kmp.movieapp.core.network.http.HandleError
 import com.kmp.movieapp.core.network.model.ApiError
 import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
@@ -46,11 +46,11 @@ internal class MovieServiceImpl(
         handlers = mapOf(
             listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
                 val ex = e as ResponseException
-                HandleHttpStatus.getResultForStatus(ex.response.status)
+                HandleError.getResultForHttpStatus(ex.response.status)
             },
             listOf(Exception::class) to { e ->
                 logE<MovieService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                HandleHttpStatus.getResultForStatus(null)
+                HandleError.getResultForHttpStatus(null)
             }
         )
     )
@@ -67,11 +67,11 @@ internal class MovieServiceImpl(
             handlers = mapOf(
                 listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
                     val ex = e as ResponseException
-                    HandleHttpStatus.getResultForStatus(ex.response.status)
+                    HandleError.getResultForHttpStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
                     logE<MovieService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                    HandleHttpStatus.getResultForStatus(null)
+                    HandleError.getResultForHttpStatus(null)
                 }
             )
         )
@@ -91,11 +91,11 @@ internal class MovieServiceImpl(
                     ServerResponseException::class
                 ) to { e ->
                     val ex = e as ResponseException
-                    HandleHttpStatus.getResultForStatus(ex.response.status)
+                    HandleError.getResultForHttpStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
                     logE<MovieService>(message  = "Error during fetchMoviesForCategory: ${e.message}")
-                    HandleHttpStatus.getResultForStatus(null)
+                    HandleError.getResultForHttpStatus(null)
                 }
             )
         )
@@ -115,11 +115,11 @@ internal class MovieServiceImpl(
             handlers = mapOf(
                 listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
                     val ex = e as ResponseException
-                    HandleHttpStatus.getResultForStatus(ex.response.status)
+                    HandleError.getResultForHttpStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
                     logE<MovieService>(message  = "Error during findMovieForId: ${e.message}")
-                    HandleHttpStatus.getResultForStatus(null)
+                    HandleError.getResultForHttpStatus(null)
                 }
             )
         )

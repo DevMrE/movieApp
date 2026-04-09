@@ -8,4 +8,5 @@ data class Series(
     val posterPath: String? = null,
     val firstAirDate: String? = null,
     val backdropPath: String? = null,
+    val genres: List<Genre>? = null
 )

@@ -2,20 +2,22 @@ package com.kmp.series.data.model.response
 
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class SeriesDto(
     @SerialName("adult")
-    val adult: Boolean? = null,
+    val adult: Boolean? = false,
     @SerialName("backdrop_path")
     val backdropPath: String? = null,
     @SerialName("created_by")
-    val createdBy: List<CreatedByDto?>? = null,
+    val createdBy: List<CreatedByDto>? = null,
     @SerialName("episode_run_time")
-    val episodeRunTime: List<Int?>? = null,
+    val episodeRunTime: List<Int>? = null,
     @SerialName("first_air_date")
     val firstAirDate: String? = null,
     @SerialName("genres")
-    val genres: List<GenreDto?>? = null,
+    val genres: List<GenreDto>? = null,
     @SerialName("homepage")
     val homepage: String? = null,
     @SerialName("id")
@@ -23,7 +25,7 @@ data class SeriesDto(
     @SerialName("in_production")
     val inProduction: Boolean? = null,
     @SerialName("languages")
-    val languages: List<String?>? = null,
+    val languages: List<String>? = null,
     @SerialName("last_air_date")
     val lastAirDate: String? = null,
     @SerialName("last_episode_to_air")
@@ -39,7 +41,7 @@ data class SeriesDto(
     @SerialName("number_of_seasons")
     val numberOfSeasons: Int? = null,
     @SerialName("origin_country")
-    val originCountry: List<String?>? = null,
+    val originCountry: List<String>? = null,
     @SerialName("original_language")
     val originalLanguage: String? = null,
     @SerialName("original_name")
@@ -51,13 +53,13 @@ data class SeriesDto(
     @SerialName("poster_path")
     val posterPath: String? = null,
     @SerialName("production_companies")
-    val productionCompanies: List<ProductionCompanyDto?>? = null,
+    val productionCompanies: List<ProductionCompanyDto>? = null,
     @SerialName("production_countries")
-    val productionCountries: List<ProductionCountryDto?>? = null,
+    val productionCountries: List<ProductionCountryDto>? = null,
     @SerialName("seasons")
-    val seasons: List<SeasonDto?>? = null,
+    val seasons: List<SeasonDto>? = null,
     @SerialName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguageDto?>? = null,
+    val spokenLanguages: List<SpokenLanguageDto>? = null,
     @SerialName("status")
     val status: String? = null,
     @SerialName("tagline")

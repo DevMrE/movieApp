@@ -2,7 +2,9 @@ package com.kmp.series.data.model.response
 
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ProductionCompanyDto(
     @SerialName("id")
     val id: Int? = null,

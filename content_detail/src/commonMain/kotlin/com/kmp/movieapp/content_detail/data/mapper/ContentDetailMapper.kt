@@ -22,6 +22,11 @@ fun Series.toContentDetail() = ContentDetail(
     title = name ?: "",
     adult = adult ?: false,
     overview = overview,
-    releaseDate = firstAirDate
+    releaseDate = firstAirDate,
+    posterPath = posterPath,
+    backdropPath = backdropPath,
+    genres = genres?.map {
+        Genre(name = it.name)
+    }
 )
 
