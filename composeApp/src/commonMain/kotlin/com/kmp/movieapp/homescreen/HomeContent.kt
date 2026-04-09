@@ -9,9 +9,6 @@ import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.movie_tab
@@ -26,11 +23,20 @@ import com.kmp.navigation.compose.rememberNavigation
 import com.kmp.series.presentation.destination.SeriesContentDestination
 import org.jetbrains.compose.resources.stringResource
 
+
+private val homeSectionTabs = listOf(
+    UiTabState(
+        tabResource = Res.string.movie_tab,
+        destination = MovieContentDestination
+    ),
+    UiTabState(
+        tabResource = Res.string.series_tab,
+        destination = SeriesContentDestination
+    )
+)
+
 @Composable
 fun HomeContent() {
-    val tab by remember {
-        mutableStateOf(UiTabState(movieTabResource = Res.string.movie_tab, seriesTabResource = Res.string.series_tab))
-    }
 
     val navigation = rememberNavigation()
     val navDestination = rememberActiveTabIn<HomeTabs>()
@@ -42,40 +48,25 @@ fun HomeContent() {
                 .padding(horizontal = MaterialTheme.padding.twentyFive),
             space = MaterialTheme.padding.thirtySix
         ) {
-            SegmentedButton(
-                selected = navDestination == MovieContentDestination,
-                onClick = {
-                    navigation.navigateTo(MovieContentDestination)
-                },
-                shape = SegmentedButtonDefaults.baseShape,
-                icon = {},
-                colors = SegmentedButtonDefaults.colors(
-                    activeBorderColor = MaterialTheme.colorScheme.primary,
-                    activeContainerColor = MaterialTheme.colorScheme.primary,
-                    activeContentColor = MaterialTheme.colorScheme.background,
-                    inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-                    inactiveBorderColor = MaterialTheme.colorScheme.background,
-                ),
-            ) {
-                Text(text = stringResource(resource = tab.movieTabResource))
-            }
 
-            SegmentedButton(
-                selected = navDestination == SeriesContentDestination,
-                onClick = {
-                    navigation.navigateTo(SeriesContentDestination)
-                },
-                shape = SegmentedButtonDefaults.baseShape,
-                icon = {},
-                colors = SegmentedButtonDefaults.colors(
-                    activeBorderColor = MaterialTheme.colorScheme.primary,
-                    activeContainerColor = MaterialTheme.colorScheme.primary,
-                    activeContentColor = MaterialTheme.colorScheme.background,
-                    inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-                    inactiveBorderColor = MaterialTheme.colorScheme.background
-                )
-            ) {
-                Text(text = stringResource(resource = tab.seriesTabResource))
+            homeSectionTabs.forEach { tabs ->
+                SegmentedButton(
+                    selected = navDestination == tabs.destination,
+                    onClick = {
+                        navigation.navigateTo(tabs.destination)
+                    },
+                    shape = SegmentedButtonDefaults.baseShape,
+                    icon = {},
+                    colors = SegmentedButtonDefaults.colors(
+                        activeBorderColor = MaterialTheme.colorScheme.primary,
+                        activeContainerColor = MaterialTheme.colorScheme.primary,
+                        activeContentColor = MaterialTheme.colorScheme.background,
+                        inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        inactiveBorderColor = MaterialTheme.colorScheme.background,
+                    ),
+                ) {
+                    Text(text = stringResource(resource = tabs.tabResource))
+                }
             }
         }
 
