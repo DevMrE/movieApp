@@ -8,7 +8,7 @@ plugins {
 kotlin {
 
     compilerOptions {
-        freeCompilerArgs.add("-Xcontext-parameters")
+        freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
     }
 
     // Android

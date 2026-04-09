@@ -10,7 +10,7 @@ plugins {
 kotlin {
 
     compilerOptions {
-        freeCompilerArgs.add("-Xcontext-parameters")
+        freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
     }
 
     android {
@@ -21,6 +21,7 @@ kotlin {
 
         androidResources {
             enable = true
+
         }
     }
 
@@ -71,7 +72,7 @@ dependencies {
 }
 
 compose.resources {
-    packageOfResClass = "com.kmp.movieapp.content_detail"
+    packageOfResClass = "${getPropertyString("app.basePackagePath")}.content_detail"
 }
 
 fun getPropertyString(string: String): String {
