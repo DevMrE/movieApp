@@ -1,16 +1,43 @@
 package com.kmp.movieapp.movie.data.model.request.discover
 
-internal enum class SortByRequestDto(val sortName: String) {
-    TITLE_ASC("id.asc"),
-    TITLE_DESC("id.desc"),
-    ORIGINAL_TITLE_ASC("original_title.asc"),
-    ORIGINAL_TITLE_DESC("original_title.desc"),
-    POPULARITY_ASC("popularity.asc"),
-    POPULARITY_DESC("popularity.desc"),
-    REVENUE_ASC("revenue.asc"),
-    REVENUE_DESC("revenue.desc"),
-    PRIMARY_RELEASE_DATE_ASC("primary_release_date.asc"),
-    PRIMARY_RELEASE_DATE_DESC("primary_release_date.desc"),
-    VOTE_AVERAGE_ASC("vote_average.asc"),
-    VOTE_AVERAGE_DESC("vote_average.desc"),
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
+internal enum class SortByRequestDto {
+    @SerialName("id.asc")
+    TITLE_ASC,
+
+    @SerialName("id.desc")
+    TITLE_DESC,
+
+    @SerialName("original_title.asc")
+    ORIGINAL_TITLE_ASC,
+
+    @SerialName("original_title.desc")
+    ORIGINAL_TITLE_DESC,
+
+    @SerialName("popularity.asc")
+    POPULARITY_ASC,
+
+    @SerialName("popularity.desc")
+    POPULARITY_DESC,
+
+    @SerialName("revenue.asc")
+    REVENUE_ASC,
+
+    @SerialName("revenue.desc")
+    REVENUE_DESC,
+
+    @SerialName("primary_release_date.asc")
+    PRIMARY_RELEASE_DATE_ASC,
+
+    @SerialName("primary_release_date.desc")
+    PRIMARY_RELEASE_DATE_DESC,
+
+    @SerialName("vote_average.asc")
+    VOTE_AVERAGE_ASC,
+
+    @SerialName("vote_average.desc")
+    VOTE_AVERAGE_DESC,
 }
