@@ -7,7 +7,7 @@ import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.series.domain.model.Series
 
 fun Movie.toContentDetail() = ContentDetail(
-    title = title ?: "",
+    title = title,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
     backdropPath = backDropPath,
     runtime = runtime,

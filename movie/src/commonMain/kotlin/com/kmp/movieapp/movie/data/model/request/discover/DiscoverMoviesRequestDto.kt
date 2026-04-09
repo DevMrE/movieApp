@@ -1,7 +1,6 @@
 package com.kmp.movieapp.movie.data.model.request.discover
 
 import com.kmp.movieapp.core.network.url.UrlHelper
-import com.kmp.movieapp.movie.data.model.request.discover.SortByRequestDto
 import io.ktor.resources.Resource
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

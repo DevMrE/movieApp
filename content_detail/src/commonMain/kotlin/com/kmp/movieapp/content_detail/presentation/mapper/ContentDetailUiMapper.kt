@@ -13,7 +13,7 @@ fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
     title = title,
     mediaInfo = buildAnnotatedString {
         releaseDate?.let { date ->
-            val formatedDate = formatDateLocalized(releaseDate, "yyyy")
+            val formatedDate = formatDateLocalized(dateString = date, stringFormat = "yyyy")
             append(formatedDate)
         }
 
