@@ -19,7 +19,7 @@ The application demonstrates:
 
 - Clean Architecture in a KMP environment
 - Cross-platform state handling with Flow
-- shared business logic and shared UI
+- Shared business logic and Shared UI
 - Platform abstraction (Android / iOS)
 - Hardware & permission handling via a shared module
 
