@@ -13,8 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.content.MediaItemCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
@@ -26,6 +26,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun SearchContent() {
     val searchViewModel = koinViewModel<SearchViewModel>()
     val results by searchViewModel.searchQueryState.collectAsStateWithLifecycle()
+    val focusManager = LocalFocusManager.current
 
     val navigation = rememberNavigation()
     val gridState = rememberLazyGridState()
@@ -57,9 +58,10 @@ fun SearchContent() {
                     navigation.navigateTo(
                         destination = MediaDetailDestination(
                             id = movie.id,
-                            contentDetailType = ContentDetailType.NONE
+                            contentDetailType = movie.contentDetailType
                         )
                     )
+                    focusManager.clearFocus(force = true)
                 }
             )
         }

@@ -1,9 +1,9 @@
-package com.kmp.movieapp.movie.data.model.request
+package com.kmp.movieapp.movie.data.model.request.movie_lists
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal enum class MovieListCategory(val category: String) {
+enum class MovieListCategory(val category: String) {
     POPULAR("popular"),
     TOP_RATED("top_rated"),
     UPCOMING("upcoming"),

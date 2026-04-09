@@ -1,6 +1,6 @@
 package com.kmp.movieapp.movie.data.model.mapper
 
-import com.kmp.movieapp.movie.data.model.request.DiscoverMoviesRequestDto
+import com.kmp.movieapp.movie.data.model.request.discover.DiscoverMoviesRequestDto
 import com.kmp.movieapp.movie.domain.model.Filter
 
 internal fun Filter.toDiscoverMoviesDto() = DiscoverMoviesRequestDto(

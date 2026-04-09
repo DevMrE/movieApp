@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class MovieGenreResponseDto(
+data class MovieGenreResponseDto(
     @SerialName("genres")
     val genres: List<GenreDto>? = emptyList()
 ) : Dto

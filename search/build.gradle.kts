@@ -45,8 +45,6 @@ kotlin {
 
                 implementation(libs.bundles.lifecycle)
 
-                implementation(libs.logger)
-
                 // Add KMP dependencies here
                 implementation(libs.bundles.commainMainKoin)
                 implementation(libs.bundles.commonMainKtor)

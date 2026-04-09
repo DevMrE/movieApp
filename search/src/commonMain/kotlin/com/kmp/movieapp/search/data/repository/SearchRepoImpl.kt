@@ -1,6 +1,7 @@
 package com.kmp.movieapp.search.data.repository
 
 import com.kmp.movieapp.core.network.util.onSuccess
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.search.data.mapper.mapToSearch
 import com.kmp.movieapp.search.data.service.SearchApiService
 import com.kmp.movieapp.search.domain.model.Search
@@ -15,6 +16,10 @@ internal class SearchRepoImpl(
     override fun getSearchedItems(query: String): Flow<List<Search>> = flow {
         searchApiService.fetchSearch(query)
             .onSuccess { apiResponse ->
+                apiResponse.results?.forEach {
+                    logI<SearchRepository>(message = "mediaType: ${it.mediaType}")
+                }
+
                 val movieTitle =
                     apiResponse.results
                         ?.distinctBy { it.id }

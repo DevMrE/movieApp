@@ -40,6 +40,7 @@ fun ImageLoader(
             // Optional: Fallback, Error-Icon, Logging, ...
             Image(
                 painter = painterResource(Res.drawable.media_item_not_found),
+                modifier = modifier,
                 contentDescription = null
             )
         }

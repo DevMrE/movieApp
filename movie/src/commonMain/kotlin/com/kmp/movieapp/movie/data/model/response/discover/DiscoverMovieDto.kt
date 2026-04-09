@@ -1,11 +1,11 @@
-package com.kmp.movieapp.movie.data.model.response
+package com.kmp.movieapp.movie.data.model.response.discover
 
 import com.kmp.movieapp.core.network.model.Dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class DiscoverMovieDto(
+data class DiscoverMovieDto(
     @SerialName("adult")
     val adult: Boolean? = null,
     @SerialName("backdrop_path")
@@ -34,4 +34,4 @@ internal data class DiscoverMovieDto(
     val voteAverage: Double? = null,
     @SerialName("vote_count")
     val voteCount: Int? = null
-): Dto
+) : Dto

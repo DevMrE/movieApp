@@ -1,18 +1,20 @@
 package com.kmp.movieapp.movie.data.service
 
-import co.touchlab.kermit.Logger
 import com.kmp.movieapp.core.network.http.HandleHttpStatus
 import com.kmp.movieapp.core.network.model.ApiError
 import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
+import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.try_catch.multiCatch
 import com.kmp.movieapp.movie.data.model.mapper.toDiscoverMoviesDto
-import com.kmp.movieapp.movie.data.model.request.MovieGenreRequestDto
-import com.kmp.movieapp.movie.data.model.request.MovieListCategory
-import com.kmp.movieapp.movie.data.model.request.MovieListRequestDto
-import com.kmp.movieapp.movie.data.model.response.DiscoverMovieDto
-import com.kmp.movieapp.movie.data.model.response.MovieDto
+import com.kmp.movieapp.movie.data.model.request.genre.MovieGenreRequestDto
+import com.kmp.movieapp.movie.data.model.request.movie.MovieRequestDto
+import com.kmp.movieapp.movie.data.model.request.movie_lists.MovieListCategory
+import com.kmp.movieapp.movie.data.model.request.movie_lists.MovieListRequestDto
 import com.kmp.movieapp.movie.data.model.response.MovieGenreResponseDto
+import com.kmp.movieapp.movie.data.model.response.discover.DiscoverMovieDto
+import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
+import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import com.kmp.movieapp.movie.domain.model.Filter
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
@@ -29,7 +31,7 @@ internal class MovieServiceImpl(
         language: String,
         page: Int,
         movieListCategory: MovieListCategory
-    ): Result<ApiResponseDto<MovieDto>, ApiError> = multiCatch(
+    ): Result<ApiResponseDto<MovieForCategoryDto>, ApiError> = multiCatch(
         tryBlock = {
             val response = httpClient.get(
                 resource = MovieListRequestDto(
@@ -39,7 +41,7 @@ internal class MovieServiceImpl(
                 )
             )
 
-            Result.Success(response.body<ApiResponseDto<MovieDto>>())
+            Result.Success(response.body<ApiResponseDto<MovieForCategoryDto>>())
         },
         handlers = mapOf(
             listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
@@ -47,10 +49,7 @@ internal class MovieServiceImpl(
                 HandleHttpStatus.getResultForStatus(ex.response.status)
             },
             listOf(Exception::class) to { e ->
-                Logger.e(
-                    tag = "ApiError",
-                    messageString = "Error during fetchMoviesForCategory: ${e.message}"
-                )
+                logE<MovieService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                 HandleHttpStatus.getResultForStatus(null)
             }
         )
@@ -71,7 +70,7 @@ internal class MovieServiceImpl(
                     HandleHttpStatus.getResultForStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    Logger.e(tag = "ApiError", messageString = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<MovieService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleHttpStatus.getResultForStatus(null)
                 }
             )
@@ -95,10 +94,31 @@ internal class MovieServiceImpl(
                     HandleHttpStatus.getResultForStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    Logger.e(
-                        tag = "ApiError",
-                        messageString = "Error during fetchMoviesForCategory: ${e.message}"
-                    )
+                    logE<MovieService>(message  = "Error during fetchMoviesForCategory: ${e.message}")
+                    HandleHttpStatus.getResultForStatus(null)
+                }
+            )
+        )
+
+    override suspend fun findMovieForId(
+        movieId: Int,
+        language: String
+    ): Result<MovieDto, ApiError> =
+        multiCatch(
+            tryBlock = {
+                val response = httpClient.get(
+                    resource = MovieRequestDto(movieId = movieId, language = language)
+                )
+
+                Result.Success(response.body())
+            },
+            handlers = mapOf(
+                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
+                    val ex = e as ResponseException
+                    HandleHttpStatus.getResultForStatus(ex.response.status)
+                },
+                listOf(Exception::class) to { e ->
+                    logE<MovieService>(message  = "Error during findMovieForId: ${e.message}")
                     HandleHttpStatus.getResultForStatus(null)
                 }
             )

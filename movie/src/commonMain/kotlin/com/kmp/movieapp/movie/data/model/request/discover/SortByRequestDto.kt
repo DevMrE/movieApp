@@ -1,4 +1,4 @@
-package com.kmp.movieapp.movie.data.model.request
+package com.kmp.movieapp.movie.data.model.request.discover
 
 internal enum class SortByRequestDto(val sortName: String) {
     TITLE_ASC("id.asc"),
