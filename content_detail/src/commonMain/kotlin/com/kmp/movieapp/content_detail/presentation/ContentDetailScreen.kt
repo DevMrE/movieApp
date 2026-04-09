@@ -8,9 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.kmp.movieapp.content_detail.presentation.component.description.descriptionTab
 import com.kmp.movieapp.content_detail.presentation.component.header.detailHeader
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -43,11 +46,37 @@ fun ContentDetailScreen(
 
             }
         )
+        descriptionTab(
+            overview = uiState?.description
+        )
+
     }
 }
 
-@Preview
 @Composable
+@PreviewLightDark
 private fun ContentDetailScreenPreview() {
-    ContentDetailScreen(id = "4546", ContentDetailType.MOVIE)
+    AppTheme {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+        ) {
+            detailHeader(
+                title = "Movie",
+                mediaInfo = buildAnnotatedString {
+                    append("1997")
+                    append(" \u2022 ")
+                    append("186")
+                },
+                posterPath = "",
+                onBackClicked = {
+                },
+                onDetailAction = {
+                }
+            )
+
+            descriptionTab(overview = "This is an long description text that describes the movie")
+        }
+    }
 }

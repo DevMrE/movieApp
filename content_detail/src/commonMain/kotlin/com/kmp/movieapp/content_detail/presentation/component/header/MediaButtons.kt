@@ -6,17 +6,19 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.kmp.movieapp.content_detail.presentation.action.DetailAction
 import com.kmp.movieapp.core.ui.content.MediaItemCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
+import com.kmp.movieapp.core.ui.theme.AppTheme
 
 @Composable
 private fun MediaButtons(
@@ -58,7 +60,7 @@ private fun MediaTitle(
 
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(
                 MaterialTheme.padding.six,
                 alignment = Alignment.CenterVertically
@@ -111,15 +113,23 @@ internal fun MediaInfoContent(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 fun MediaInfoContentPreview() {
-    MediaInfoContent(
-        modifier = Modifier,
-        title = "Movie Title",
-        posterPath = "",
-        mediaInfo = buildAnnotatedString {
-            append("1986")
+    AppTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.background
+        ) {
+            MediaInfoContent(
+                modifier = Modifier,
+                title = "Movie Title",
+                posterPath = "",
+                mediaInfo = buildAnnotatedString {
+                    append("1986")
+                    append(" \u2022 ")
+                    append("2h 13m")
+                }
+            ) {}
         }
-    ) {}
+    }
 }

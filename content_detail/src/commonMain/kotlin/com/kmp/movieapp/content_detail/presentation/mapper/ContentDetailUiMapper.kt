@@ -10,7 +10,7 @@ fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
     title = title,
     mediaInfo = buildAnnotatedString {
         append(releaseDate)
-        append("\u2022")
+        append(" \u2022 ")
         append(runtime.toString())
     },
     description = overview ?: "",
