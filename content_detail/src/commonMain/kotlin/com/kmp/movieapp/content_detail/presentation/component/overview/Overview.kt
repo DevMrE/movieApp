@@ -18,7 +18,7 @@ internal fun LazyListScope.overview(
     item {
         Text(
             text = overview,
-            modifier = Modifier.padding(MaterialTheme.padding.defaultContentPadding),
+            modifier = Modifier.padding(horizontal = MaterialTheme.padding.sixteen),
             style = MaterialTheme.typography.bodyMedium
         )
     }

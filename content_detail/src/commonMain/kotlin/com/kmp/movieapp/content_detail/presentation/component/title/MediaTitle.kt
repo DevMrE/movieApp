@@ -26,24 +26,10 @@ internal fun MediaTitle(
     mediaInfo: AnnotatedString?,
     onDetailAction: (DetailAction) -> Unit
 ) {
-    Column(
-        modifier = modifier.padding(MaterialTheme.padding.defaultContentPadding),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.sixteen),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        MediaInfoComponent(
-            title = title,
-            additionalInformation = mediaInfo,
-        )
-    }
-}
-
-@Composable
-private fun MediaInfoComponent(
-    title: String,
-    additionalInformation: AnnotatedString?,
-) {
     Row(
+        modifier = modifier
+            .padding(MaterialTheme.padding.defaultContentPadding)
+            .padding(MaterialTheme.padding.six),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(
             space = MaterialTheme.padding.defaultContentPadding,
@@ -64,7 +50,7 @@ private fun MediaInfoComponent(
                 style = MaterialTheme.typography.titleLarge
             )
 
-            additionalInformation?.let {
+            mediaInfo?.let {
                 Text(
                     text = it,
                     textAlign = TextAlign.Start,
@@ -74,7 +60,6 @@ private fun MediaInfoComponent(
         }
     }
 }
-
 
 @PreviewLightDark
 @Composable

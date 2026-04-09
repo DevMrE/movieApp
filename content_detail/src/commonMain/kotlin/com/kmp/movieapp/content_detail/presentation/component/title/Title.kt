@@ -48,35 +48,34 @@ private fun TitleContent(
     onDetailAction: (DetailAction) -> Unit
 
 ) {
-    val imageGradient =
-        Box {
-            // Background poster
-            ImageLoader(
-                url = posterPath,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.applyIfElse(
-                    condition = isSystemInDarkTheme(),
-                    ifTrue = {
-                        gradientOverlay(MaterialTheme.gradient.detailCardDarkMode)
-                    },
-                    ifFalse = {
-                        gradientOverlay(MaterialTheme.gradient.detailCardLightMode)
-                    }
-                )
+    Box {
+        // Background poster
+        ImageLoader(
+            url = posterPath,
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier.applyIfElse(
+                condition = isSystemInDarkTheme(),
+                ifTrue = {
+                    gradientOverlay(MaterialTheme.gradient.detailCardDarkMode)
+                },
+                ifFalse = {
+                    gradientOverlay(MaterialTheme.gradient.detailCardLightMode)
+                }
             )
+        )
 
-            BackButton(
-                modifier = Modifier.align(alignment = Alignment.TopStart),
-                onBackClicked = onBackClicked
-            )
+        BackButton(
+            modifier = Modifier.align(alignment = Alignment.TopStart),
+            onBackClicked = onBackClicked
+        )
 
-            MediaTitle(
-                modifier = Modifier.align(Alignment.BottomCenter),
-                title = title,
-                mediaInfo = mediaInfo,
-                onDetailAction = onDetailAction
-            )
-        }
+        MediaTitle(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            title = title,
+            mediaInfo = mediaInfo,
+            onDetailAction = onDetailAction
+        )
+    }
 }
 
 @Composable
