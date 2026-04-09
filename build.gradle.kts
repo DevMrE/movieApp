@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.kotlinCocoapods) apply false
     alias(libs.plugins.serialization) apply false
-    alias(libs.plugins.androidKotlinMultiplatformLibrary) apply false
+    alias(libs.plugins.androidKmpLibrary) apply false
     alias(libs.plugins.androidLint) apply false
+    alias(libs.plugins.kotlinAndroid) apply false
 }

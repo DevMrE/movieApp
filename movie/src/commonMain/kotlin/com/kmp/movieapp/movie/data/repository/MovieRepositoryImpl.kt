@@ -25,7 +25,7 @@ internal class MovieRepositoryImpl(
         language: String,
         page: Int,
         movieCategory: MovieCategory
-    ): Flow<List<Movie>> = flow {
+    ): Flow<List<Movie>?> = flow {
         movieService.fetchMoviesForCategory(
             language = language,
             page = page,
@@ -46,7 +46,7 @@ internal class MovieRepositoryImpl(
             Logger.e("Error: $it")
         }.onFailure {
             // Placeholder for loading movies from a database.
-            emit(listOf(Movie(0,"Movie", "", "")))
+            emit(null)
         }
     }
 

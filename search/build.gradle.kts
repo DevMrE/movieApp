@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.androidKmpLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
@@ -11,15 +11,19 @@ plugins {
 kotlin {
 
     compilerOptions {
-        freeCompilerArgs.add("-Xcontext-parameters")
+        freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
     }
 
-    androidLibrary {
-        namespace = "com.kmp.movieapp.search"
-        compileSdk = 36
-        minSdk = 35
+    // Android
+    android {
+        // Use a unique namespace to avoid collisions with the androidApp module
+        namespace = "${getPropertyString("app.basePackagePath")}.search"
+        compileSdk = getPropertyInt("android.compileSdk")
+        minSdk = getPropertyInt("android.mobile.minSdk")
 
-        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
+        androidResources {
+            enable = true
+        }
     }
 
     // Desktop - Windows + MacOS
@@ -71,4 +75,13 @@ kotlin {
 
 compose.resources {
     packageOfResClass = "com.kmp.movieapp.search"
+}
+
+
+fun getPropertyString(string: String): String {
+    return providers.gradleProperty(string).get()
+}
+
+fun getPropertyInt(string: String): Int {
+    return providers.gradleProperty(string).get().toInt()
 }

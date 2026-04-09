@@ -42,7 +42,10 @@ fun registerAppNavigation() {
         }
 
         screen<MediaDetailDestination> { dest ->
-            ContentDetailScreen(dest.title)
+            ContentDetailScreen(
+                id = dest.id,
+                contentType = dest.contentDetailType
+            )
         }
 
         content<SearchScreenDestination> {

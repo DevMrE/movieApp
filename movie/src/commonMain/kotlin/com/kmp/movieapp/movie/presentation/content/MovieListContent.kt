@@ -40,7 +40,7 @@ internal fun LazyListScope.movieListContent(
         } else null
 
         Column(
-            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.ten),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.defaultContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             title?.let {

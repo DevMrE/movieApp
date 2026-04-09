@@ -13,6 +13,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import com.kmp.movieapp.composeApp.Res
+import com.kmp.movieapp.composeApp.movie_tab
+import com.kmp.movieapp.composeApp.series_tab
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeTabs
 import com.kmp.movieapp.homescreen.model.UiTabState
@@ -21,9 +24,6 @@ import com.kmp.navigation.compose.NavigationTabs
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavigation
 import com.kmp.series.presentation.destination.SeriesContentDestination
-import movieapp.composeapp.generated.resources.Res
-import movieapp.composeapp.generated.resources.movie_tab
-import movieapp.composeapp.generated.resources.series_tab
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

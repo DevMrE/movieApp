@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.androidKmpLibrary)
     alias(libs.plugins.androidLint)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
@@ -10,15 +10,19 @@ plugins {
 kotlin {
 
     compilerOptions {
-        freeCompilerArgs.add("-Xcontext-parameters")
+        freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
     }
 
-    androidLibrary {
-        namespace = "com.kmp.movieapp.content_detail"
-        compileSdk = 36
-        minSdk = 24
+    android {
+        // Use a unique namespace to avoid collisions with the androidApp module
+        namespace = "${getPropertyString("app.basePackagePath")}.content_detail"
+        compileSdk = getPropertyInt("android.compileSdk")
+        minSdk = getPropertyInt("android.mobile.minSdk")
 
-        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
+        androidResources {
+            enable = true
+
+        }
     }
 
     jvm()
@@ -52,7 +56,6 @@ kotlin {
 
         androidMain {
             dependencies {
-
             }
         }
 
@@ -64,6 +67,18 @@ kotlin {
     }
 }
 
+dependencies {
+    androidRuntimeClasspath(libs.composeTooling)
+}
+
 compose.resources {
-    packageOfResClass = "com.kmp.movieapp.content_detail"
+    packageOfResClass = "${getPropertyString("app.basePackagePath")}.content_detail"
+}
+
+fun getPropertyString(string: String): String {
+    return providers.gradleProperty(string).get()
+}
+
+fun getPropertyInt(string: String): Int {
+    return providers.gradleProperty(string).get().toInt()
 }

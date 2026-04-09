@@ -24,6 +24,13 @@ import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.app_bar.bottombar.component.NavItem
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.bottombar.model.BottomBarItem
+import com.kmp.movieapp.composeApp.Res
+import com.kmp.movieapp.composeApp.discover_media_title
+import com.kmp.movieapp.composeApp.home_screen
+import com.kmp.movieapp.composeApp.ic_fire
+import com.kmp.movieapp.composeApp.ic_home
+import com.kmp.movieapp.composeApp.ic_more
+import com.kmp.movieapp.composeApp.more
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.homescreen.destination.HomeDestination
@@ -33,13 +40,6 @@ import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberIsTabsActive
 import com.kmp.navigation.compose.rememberNavDestination
 import com.kmp.navigation.compose.rememberNavigation
-import movieapp.composeapp.generated.resources.Res
-import movieapp.composeapp.generated.resources.discover_media_title
-import movieapp.composeapp.generated.resources.home_screen
-import movieapp.composeapp.generated.resources.ic_fire
-import movieapp.composeapp.generated.resources.ic_home
-import movieapp.composeapp.generated.resources.ic_more
-import movieapp.composeapp.generated.resources.more
 import org.jetbrains.compose.resources.vectorResource
 
 private val bottomBarItemList = listOf(

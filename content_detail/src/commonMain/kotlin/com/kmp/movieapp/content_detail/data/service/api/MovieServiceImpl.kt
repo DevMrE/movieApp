@@ -13,11 +13,11 @@ internal class MovieServiceImpl(
     private val httpClient: HttpClient
 ) : MovieService {
 
-    override suspend fun fetchMovieDetail(movieId: String): Result<ContentDetailDto, Unit> {
+    override suspend fun fetchMovieDetail(movieId: Int): Result<ContentDetailDto, Unit> {
         return try {
             val response = httpClient.get(
                 resource = MovieDetailRequestDto(
-                    movieId = movieId.toInt(),
+                    movieId = movieId,
                 )
             )
 

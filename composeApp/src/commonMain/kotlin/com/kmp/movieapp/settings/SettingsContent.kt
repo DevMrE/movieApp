@@ -16,15 +16,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kmp.movieapp.composeApp.Res
+import com.kmp.movieapp.composeApp.permission_camera
+import com.kmp.movieapp.composeApp.permission_image_gallery
+import com.kmp.movieapp.composeApp.permission_location
+import com.kmp.movieapp.composeApp.permission_microphone
 import com.kmp.movieapp.core.ui.imageloader.MediaImage
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.settings.model.Permission
 import com.kmp.movieapp.settings.model.PermissionDemoResult
-import movieapp.composeapp.generated.resources.Res
-import movieapp.composeapp.generated.resources.permission_camera
-import movieapp.composeapp.generated.resources.permission_image_gallery
-import movieapp.composeapp.generated.resources.permission_location
-import movieapp.composeapp.generated.resources.permission_microphone
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -43,7 +43,7 @@ private fun PermissionDemoScreen() {
         modifier = Modifier
             .fillMaxSize()
             .padding(MaterialTheme.padding.sixteen),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.ten)
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.defaultContentPadding)
     ) {
         PermissionButton(
             label = stringResource(Res.string.permission_camera),

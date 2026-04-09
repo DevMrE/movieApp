@@ -4,20 +4,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.topbar.component.TopAppBarContent
+import com.kmp.movieapp.composeApp.Res
+import com.kmp.movieapp.composeApp.app_name
+import com.kmp.movieapp.composeApp.discover_media_title
+import com.kmp.movieapp.composeApp.more
+import com.kmp.movieapp.composeApp.movie_category_list_title
+import com.kmp.movieapp.composeApp.movie_category_now_playing
+import com.kmp.movieapp.composeApp.movie_category_popular
+import com.kmp.movieapp.composeApp.movie_category_top_rated
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavDestination
-import movieapp.composeapp.generated.resources.Res
-import movieapp.composeapp.generated.resources.app_name
-import movieapp.composeapp.generated.resources.discover_media_title
-import movieapp.composeapp.generated.resources.more
-import movieapp.composeapp.generated.resources.movie_category_list_title
-import movieapp.composeapp.generated.resources.movie_category_now_playing
-import movieapp.composeapp.generated.resources.movie_category_popular
-import movieapp.composeapp.generated.resources.movie_category_top_rated
 import org.jetbrains.compose.resources.stringResource
 
 @Composable

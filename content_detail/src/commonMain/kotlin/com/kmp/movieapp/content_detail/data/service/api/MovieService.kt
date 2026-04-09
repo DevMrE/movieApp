@@ -5,5 +5,5 @@ import com.kmp.movieapp.core.network.util.Result
 
 internal interface MovieService {
 
-   suspend fun fetchMovieDetail(movieId: String): Result<ContentDetailDto, Unit>
+   suspend fun fetchMovieDetail(movieId: Int): Result<ContentDetailDto, Unit>
 }

@@ -39,7 +39,7 @@ internal fun NavIconWithShine(
         Box(
             modifier = Modifier
                 .size(52.dp)
-                .padding(vertical = MaterialTheme.padding.ten),
+                .padding(vertical = MaterialTheme.padding.defaultContentPadding),
             contentAlignment = Alignment.Center
         ) {
             Box(

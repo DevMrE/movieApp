@@ -13,11 +13,11 @@ internal class SeriesServiceImpl(
     private val httpClient: HttpClient
 ) : SeriesService {
 
-    override suspend fun fetchSeriesDetail(movieId: String): Result<ContentDetailDto, Unit> {
+    override suspend fun fetchSeriesDetail(seriesId: Int): Result<ContentDetailDto, Unit> {
         return try {
             val response = httpClient.get(
                 resource = SeriesDetailRequestDto(
-                    movieId = movieId.toInt(),
+                    seriesId = seriesId,
                 )
             )
 

@@ -12,10 +12,8 @@ class GetContentDetail(
     suspend operator fun invoke(
         contentType: ContentDetailType,
         contentId: String
-    ): Flow<ContentDetail> {
-
-        return if (contentType == ContentDetailType.MOVIE) {
+    ): Flow<ContentDetail> =
+        if (contentType == ContentDetailType.MOVIE) {
             contentDetailRepository.getMovieDetail(contentId)
         } else contentDetailRepository.getSeriesDetail(contentId)
-    }
 }

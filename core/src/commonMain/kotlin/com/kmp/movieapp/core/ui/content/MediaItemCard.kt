@@ -24,6 +24,7 @@ import com.kmp.movieapp.core.ui.imageloader.ImageLoader
 import com.kmp.movieapp.core.ui.material.gradient
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
+import com.kmp.movieapp.core.util.composable.applyIf
 import com.kmp.movieapp.core.util.composable.gradientOverlay
 import org.jetbrains.compose.resources.painterResource
 
@@ -32,8 +33,9 @@ fun MediaItemCard(
     width: Dp,
     movieTitle: String,
     moviePosterPath: String?,
+    enableGradient: Boolean = true,
     height: Dp = MaterialTheme.size.movieCardHeight,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)? = null,
 ) {
     Card(
         modifier = Modifier
@@ -48,15 +50,19 @@ fun MediaItemCard(
             modifier = Modifier
                 .fillMaxSize()
                 .clip(shape = MaterialTheme.shapes.extraLarge)
-                .clickable {
-                    onClick()
+                .clickable(enabled = onClick != null) {
+                    onClick?.let {
+                        it()
+                    }
                 }
         ) {
             if (moviePosterPath != null) {
                 ImageLoader(
                     url = moviePosterPath,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.gradientOverlay(brush = MaterialTheme.gradient.card)
+                    modifier = Modifier.applyIf(condition = enableGradient) {
+                        gradientOverlay(brush = MaterialTheme.gradient.card)
+                    }
                 )
             } else {
                 Image(

@@ -31,7 +31,7 @@ internal class MovieCategoryListViewModel(
                     movieCategory = movieCategory
                 )
             }.collectLatest { movies ->
-                _movieListState.update { movies }
+                if (movies != null) _movieListState.update { movies }
             }
         }
     }.stateInEagerly(_movieListState.value)

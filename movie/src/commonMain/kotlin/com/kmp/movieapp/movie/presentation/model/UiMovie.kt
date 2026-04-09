@@ -7,6 +7,7 @@ import androidx.compose.runtime.Stable
  */
 @Stable
 internal data class UiMovie(
+    val id: String,
     val title: String,
     val genre: String,
     val posterPath: String?,

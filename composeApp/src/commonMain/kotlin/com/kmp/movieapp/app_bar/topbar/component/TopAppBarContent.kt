@@ -16,12 +16,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.kmp.movieapp.composeApp.Res
+import com.kmp.movieapp.composeApp.ic_back_arrow
+import com.kmp.movieapp.composeApp.ic_movie
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.search.presentation.AnimatedSearchButtonWithInputField
 import com.kmp.navigation.compose.rememberNavigation
-import movieapp.composeapp.generated.resources.Res
-import movieapp.composeapp.generated.resources.ic_back_arrow
-import movieapp.composeapp.generated.resources.ic_movie
 import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -33,7 +33,7 @@ fun TopAppBarContent(
     TopAppBar(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = MaterialTheme.padding.ten)
+            .padding(horizontal = MaterialTheme.padding.defaultContentPadding)
             .animateContentSize(),
         title = {
             AnimatedSearchButtonWithInputField {

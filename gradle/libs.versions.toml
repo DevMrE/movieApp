@@ -1,33 +1,35 @@
 [versions]
 # Build
-agpVersion = "8.12.0"
+agpVersion = "9.1.0"
 # Kotlin
-kotlinVersion = "2.3.10"
+kotlinVersion = "2.3.20"
 # AndroidX Basis
-androidx-activity = "1.12.4"
-androidx-appcompat = "1.7.1"
+androidx-activity = "1.13.0"
 # Coroutines
 coroutinesVersion = "1.10.2"
-androidxCoreVersion = "1.17.0"
+androidxCoreVersion = "1.18.0"
 # Compose
-composeVersion = "1.10.1"
+composeVersion = "1.10.3"
+composeBom = "2026.03.01"
 material3Version = "1.10.0-alpha05"
-materialAdaptiveVersion = "1.3.0-alpha05"
+materialAdaptiveVersion = "1.3.0-alpha06"
 materialAdaptiveNavigationSuitVersion = "1.9.0"
 # JetBrains-AndroidX (KMP Jetpack-Ports)
-androidxLifecycleVersion = "2.9.6"
+androidxLifecycleVersion = "2.10.0"
 savedStateVersion = "1.4.0"
 slf4jSimpleVersion = "2.0.17"
 windowCoreVersion = "1.5.1"
 composeHotReload = "1.0.0"
 # other
-koinVersion = "4.1.1"
-ktorVersion = "3.4.0"
+koinVersion = "4.2.0"
+ktorVersion = "3.4.2"
 loggerVersion = "2.0.8"
 kamelVersion = "1.0.9"
 kmpNavigationVersion = "1.3.0-alpha15"
 androidConscryptVer = "2.5.3"
 playServicesLocationVersion = "21.3.0"
+appcompatVersion = "1.7.1"
+materialVersion = "1.13.0"
 
 [libraries]
 # Kotlin
@@ -37,8 +39,6 @@ coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-
 coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutinesVersion" }
 # Android Core KTX (für ContextCompat etc.)
 androidx-core-ktx-main = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCoreVersion" }
-# AndroidX / Jetpack
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 # JetBrains AndroidX Lifecycle
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycleVersion" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycleVersion" }
@@ -70,21 +70,37 @@ kamel = { module = "media.kamel:kamel-image-default", version.ref = "kamelVersio
 # KmpNavigation
 kmpNavigation = { module = "com.github.devmre:navigation", version.ref = "kmpNavigationVersion" }
 android-conscrypt = { module = "org.conscrypt:conscrypt-android", version.ref = "androidConscryptVer" }
+
+# Compose Android
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+# Compose KMP
 composeUi = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeVersion" }
 composeRuntime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeVersion" }
 composePreview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "composeVersion" }
+composeTooling = { module = "org.jetbrains.compose.ui:ui-tooling", version.ref = "composeVersion" }
 composeFoundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeVersion" }
 composeResources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "composeVersion" }
+
+# Material for compose
 material = { module = "org.jetbrains.compose.material:material", version.ref = "composeVersion" }
 material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "material3Version" }
 material3Adaptive = { module = "org.jetbrains.compose.material3.adaptive:adaptive", version.ref = "materialAdaptiveVersion" }
 material3AdaptiveNavigation = { module = "org.jetbrains.compose.material3:material3-adaptive-navigation-suite", version.ref = "materialAdaptiveNavigationSuitVersion" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocationVersion" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompatVersion" }
+google-material = { group = "com.google.android.material", name = "material", version.ref = "materialVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agpVersion" }
 androidLibrary = { id = "com.android.library", version.ref = "agpVersion" }
-androidKotlinMultiplatformLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agpVersion" }
+androidKmpLibrary = { id = "com.android.kotlin.multiplatform.library", version.ref = "agpVersion" }
 androidLint = { id = "com.android.lint", version.ref = "agpVersion" }
 # Compose Multiplatform Gradle Plugin
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "composeVersion" }
@@ -96,9 +112,11 @@ serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref 
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlinVersion" }
 # Compose Hot Reload
 composeHotReload = { id = "org.jetbrains.compose.hot-reload", version.ref = "composeHotReload" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
 
 [bundles]
 lifecycle = ["androidx-lifecycle-runtimeCompose", "androidx-lifecycle-viewmodelCompose"]
 commainMainKoin = ["koinCore", "koinCoreViewModel", "koinCoreNavigation", "koinCompose"]
 commonMainKtor = ["ktorCore", "ktorLogging", "ktorNegotiation", "ktorAuth", "ktorResource", "ktorGson", "ktorBomRemover"]
 commonMainCompose = ["composeUi", "composeRuntime", "composePreview", "composeFoundation", "composeResources", "material", "material3", "material3Adaptive", "material3AdaptiveNavigation"]
+androidCompose = ["androidx-compose-bom", "androidx-compose-ui", "androidx-compose-ui-tooling", "androidx-compose-ui-graphics", "androidx-compose-material3", "androidx-compose-ui-tooling-preview"]

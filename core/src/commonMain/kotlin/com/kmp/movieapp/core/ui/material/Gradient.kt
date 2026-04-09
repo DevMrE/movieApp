@@ -11,10 +11,22 @@ data class Gradient(
     val card: Brush = Brush.verticalGradient(
         colors = listOf(
             Color.Transparent,
+            Color.Transparent,
             Color.Black.copy(alpha = 0.4f),
             Color.Black.copy(0.9f),
         )
-    )
+    ),
+
+    val detailCard: Brush = Brush.verticalGradient(
+        colors = listOf(
+            Color.Black.copy(alpha = 0.7f),
+            Color.Black.copy(alpha = 0.7f),
+            Color.Black.copy(alpha = 0.7f),
+            Color.Black.copy(0.9f),
+        )
+    ),
+
+
 )
 
 private val LocalGradient = staticCompositionLocalOf { Gradient() }

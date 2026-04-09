@@ -15,13 +15,16 @@ internal fun LazyListScope.movieCardContent(
     onAction: (MovieAction) -> Unit
 ) {
     items(movieList) { movie ->
+
+        val bigCard = width > MaterialTheme.size.movieCardWidth
         MediaItemCard(
             width = width,
-            movieTitle = movie.title,
-            moviePosterPath = if (width > MaterialTheme.size.movieCardWidth) movie.backdropPath else movie.posterPath,
+            movieTitle = if (bigCard) movie.title else "",
+            moviePosterPath = if (bigCard) movie.backdropPath else movie.posterPath,
+            enableGradient = bigCard,
             onClick = {
-                onAction(MovieAction.OnNavigateToDetailScreen(movie.title))
-            }
+                onAction(MovieAction.OnNavigateToDetailScreen(movie.id))
+            },
         )
     }
 }

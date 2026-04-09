@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidKotlinMultiplatformLibrary)
+    alias(libs.plugins.androidKmpLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
@@ -11,23 +11,21 @@ plugins {
 kotlin {
 
     compilerOptions {
-        freeCompilerArgs.add("-Xcontext-parameters")
+        freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
     }
 
-    androidLibrary {
-        namespace = "com.kmp.movieapp.core"
-        compileSdk = 36
-        minSdk = 35
+    android {
+        // Use a unique namespace to avoid collisions with the androidApp module
+        namespace = "${getPropertyString("app.basePackagePath")}.core"
+        compileSdk = getPropertyInt("android.compileSdk")
+        minSdk = getPropertyInt("android.mobile.minSdk")
 
-        // IMPORTANT for kmp module resources
-        experimentalProperties["android.experimental.kmp.enableAndroidResources"] = true
+        androidResources {
+            enable = true
+        }
     }
 
-//    jvm {
-//        compilerOptions {
-//            jvmTarget.set(JvmTarget.JVM_21)
-//        }
-//    }
+
     jvm()
 
     // iOS -> iPhone + iPad implementation
@@ -69,4 +67,12 @@ kotlin {
 
 compose.resources {
     packageOfResClass = "com.kmp.movieapp.core"
+}
+
+fun getPropertyString(string: String): String {
+    return providers.gradleProperty(string).get()
+}
+
+fun getPropertyInt(string: String): Int {
+    return providers.gradleProperty(string).get().toInt()
 }
