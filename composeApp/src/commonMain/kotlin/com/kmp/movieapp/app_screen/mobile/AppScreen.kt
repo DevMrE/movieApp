@@ -12,10 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
-import co.touchlab.kermit.Logger
 import com.kmp.movieapp.app_bar.bottombar.BottomBarComponent
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.topbar.TopAppBarComponent
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
 import com.kmp.navigation.compose.NavigationContent
@@ -42,7 +42,7 @@ fun AppContent() {
             bottom = 0.dp
         )
 
-        Logger.i("KmpNavigation", message = { "Destination: $navDestination" })
+        logI(message = "Destination: $navDestination")
 
         Box(
             modifier = Modifier

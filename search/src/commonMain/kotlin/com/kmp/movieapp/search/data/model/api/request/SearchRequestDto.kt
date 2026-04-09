@@ -4,7 +4,7 @@ import com.kmp.movieapp.core.network.url.UrlHelper
 import io.ktor.resources.Resource
 import kotlinx.serialization.Serializable
 
-@Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.SEARCH_ENDPOINT}${UrlHelper.MOVIE_ENDPOINT}")
+@Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.SEARCH_ENDPOINT}")
 @Serializable
 data class SearchRequestDto(
     val query: String

@@ -61,7 +61,6 @@ kotlin {
             implementation(libs.window.core)
             implementation(libs.bundles.lifecycle)
             implementation(libs.bundles.commainMainKoin)
-            implementation(libs.logger)
             implementation(libs.kmpNavigation)
 
             implementation(project(":core"))

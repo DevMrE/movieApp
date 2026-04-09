@@ -6,6 +6,7 @@ import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetail
 import com.kmp.movieapp.content_detail.presentation.mapper.toUiData
 import com.kmp.movieapp.content_detail.presentation.model.ContentDetailUi
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,6 +30,7 @@ class ContentDetailViewModel(
                     contentType = contentType,
                     contentId = id
                 ).collectLatest { data ->
+                    logI<ContentDetailViewModel>("Data: ${data.posterPath}")
                     _uiState.update {
                         data.toUiData()
                     }

@@ -7,9 +7,9 @@ import kotlin.reflect.KClass
  * Safely executes a suspend block and maps exceptions to values.
  *
  * @param T The type of the successful return value.
- * @param block The suspend block to execute.
+ * @param tryBlock The suspend block to execute.
  * @param handlers A map of exception classes to lambdas that produce a fallback value for that exception.
- * @return The result of [block] if successful, otherwise the mapped value from [handlers].
+ * @return The result of [tryBlock] if successful, otherwise the mapped value from [handlers].
  */
 suspend fun <T> multiCatch(
     tryBlock: suspend () -> T,

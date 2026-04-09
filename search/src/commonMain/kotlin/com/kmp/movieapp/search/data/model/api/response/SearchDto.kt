@@ -33,5 +33,7 @@ data class SearchDto(
     @SerialName("vote_average")
     val voteAverage: Double? = null,
     @SerialName("vote_count")
-    val voteCount: Int? = null
-): Dto
+    val voteCount: Int? = null,
+    @SerialName("media_type")
+    val mediaType: MediaTypeDto? = null
+) : Dto

@@ -1,9 +1,9 @@
 package com.kmp.movieapp.search.data.service
 
-import co.touchlab.kermit.Logger
 import com.kmp.movieapp.core.network.model.ApiError
 import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.search.data.model.api.request.SearchRequestDto
 import com.kmp.movieapp.search.data.model.api.response.SearchDto
 import io.ktor.client.HttpClient
@@ -26,7 +26,7 @@ internal class SearchApiServiceImpl(
             } else Result.Failure(value = ApiError.NotFound)
 
         } catch (e: Exception) {
-            Logger.e(messageString = e.message.toString())
+            logI<SearchApiService>(message = e.message.toString())
 
             Result.Failure(e.message)
         }

@@ -1,5 +1,5 @@
 package com.kmp.movieapp.core.util
 
 object Constants {
-    const val CONTENT_DETAIL_KEY = "contentDetail"
+    const val BULLET_POINT = "\u2022"
 }

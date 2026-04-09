@@ -44,8 +44,6 @@ kotlin {
 
                 implementation(libs.bundles.lifecycle)
 
-                implementation(libs.logger)
-
                 implementation(libs.bundles.commainMainKoin)
                 implementation(libs.bundles.commonMainKtor)
 

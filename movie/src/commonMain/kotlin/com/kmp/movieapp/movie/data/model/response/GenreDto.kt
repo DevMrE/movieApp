@@ -5,9 +5,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-internal data class GenreDto(
+data class GenreDto(
     @SerialName("id")
-    val id: Long,
+    val id: Long? = null,
     @SerialName("name")
-    val name: String
-): Dto
+    val name: String? = null
+) : Dto

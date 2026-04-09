@@ -7,11 +7,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.content_detail.presentation.component.description.descriptionTab
-import com.kmp.movieapp.content_detail.presentation.component.header.detailHeader
+import com.kmp.movieapp.content_detail.presentation.component.media_buttons.mediaButtons
+import com.kmp.movieapp.content_detail.presentation.component.overview.overview
+import com.kmp.movieapp.content_detail.presentation.component.title.title
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.navigation.compose.rememberNavigation
@@ -34,8 +36,9 @@ fun ContentDetailScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        detailHeader(
+        title(
             title = uiState?.title ?: "",
             mediaInfo = uiState?.mediaInfo,
             posterPath = uiState?.posterPath ?: "",
@@ -46,10 +49,8 @@ fun ContentDetailScreen(
 
             }
         )
-        descriptionTab(
-            overview = uiState?.description
-        )
 
+        overview(uiState?.description ?: "")
     }
 }
 
@@ -62,7 +63,7 @@ private fun ContentDetailScreenPreview() {
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background),
         ) {
-            detailHeader(
+            title(
                 title = "Movie",
                 mediaInfo = buildAnnotatedString {
                     append("1997")
@@ -76,7 +77,14 @@ private fun ContentDetailScreenPreview() {
                 }
             )
 
-            descriptionTab(overview = "This is an long description text that describes the movie")
+            mediaButtons(
+                onPlayClicked = {},
+                onShareClicked = {
+
+                }
+            )
+
+            overview("Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.")
         }
     }
 }

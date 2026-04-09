@@ -2,8 +2,8 @@ package com.kmp.movieapp.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.touchlab.kermit.Logger
 import com.kmp.movieapp.core.open_settings.SettingsNavigator
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.device_operations.domain.controller.DeviceOperationsController
 import com.kmp.movieapp.device_operations.domain.result.OperationResult
 import com.kmp.movieapp.device_operations.domain.result.onCancelled
@@ -52,10 +52,7 @@ internal class SettingsScreenViewModel(
         viewModelScope.launch {
             deviceOperationsController.getCurrentLocation().collectLatest { result ->
                 result.onGranted { data ->
-                    Logger.i(
-                        tag = "Permission",
-                        messageString = "viewModel getCurrentLocation granted"
-                    )
+                    logI<SettingsScreenViewModel>(message = "viewModel getCurrentLocation granted")
 
                     _uiState.update {
                         it.copy(
@@ -66,10 +63,9 @@ internal class SettingsScreenViewModel(
                         )
                     }
                 }.onDenied {
-                    Logger.i(tag = "Permission", messageString = "viewModel onDenied")
+                    logI<SettingsScreenViewModel>(message = "viewModel onDenied")
                 }.onCancelled {
-                    Logger.i(tag = "Permission", messageString = "viewModel onCancelled")
-
+                    logI<SettingsScreenViewModel>(message = "viewModel onCancelled")
                 }
             }
         }
@@ -80,12 +76,11 @@ internal class SettingsScreenViewModel(
             deviceOperationsController.capturePhoto().collectLatest { result ->
                 when (result) {
                     is OperationResult.Success -> {
-                        Logger.i(tag = "Permission", messageString = "capture photo granted")
-
+                        logI<SettingsScreenViewModel>(message = "capture photo granted")
                     }
 
                     is OperationResult.Denied -> {
-                        Logger.i(tag = "Permission", messageString = "viewModel onDenied")
+                        logI<SettingsScreenViewModel>(message = "viewModel onDenied")
                     }
 
                     is OperationResult.Cancelled -> {
@@ -101,7 +96,7 @@ internal class SettingsScreenViewModel(
             deviceOperationsController.pickImages().collectLatest { result ->
                 when (result) {
                     is OperationResult.Success -> {
-                        Logger.i(tag = "Permission", messageString = "capture photo granted")
+                        logI<SettingsScreenViewModel>(message = "capture photo granted")
                         _uiState.update {
                             it.copy(
                                 permissionDemoResult = PermissionDemoResult.GalleryReady(mediaList = result.data)
@@ -110,7 +105,7 @@ internal class SettingsScreenViewModel(
                     }
 
                     is OperationResult.Denied -> {
-                        Logger.i(tag = "Permission", messageString = "viewModel onDenied")
+                        logI<SettingsScreenViewModel>(message = "viewModel onDenied")
                     }
 
                     is OperationResult.Cancelled -> {
