@@ -4,7 +4,7 @@ import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.movie.domain.model.MovieCategory
 import kotlinx.coroutines.flow.Flow
 
-internal interface MovieRepository {
+interface MovieRepository {
 
     suspend fun getMovies(
         language: String,
@@ -16,4 +16,6 @@ internal interface MovieRepository {
         language: String,
         page: Int
     ): Flow<List<Movie>>
+
+    suspend fun getMovieForId(movieId: Int, language: String): Flow<Movie?>
 }

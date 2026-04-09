@@ -22,6 +22,7 @@ internal class SearchRepoImpl(
 
                 val movieTitle =
                     apiResponse.results
+                        ?.filter { it.posterPath != null }
                         ?.distinctBy { it.id }
                         ?.distinctBy { it.originalTitle }
                         ?.mapToSearch()

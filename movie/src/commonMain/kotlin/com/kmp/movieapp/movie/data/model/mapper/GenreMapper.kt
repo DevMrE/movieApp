@@ -8,6 +8,6 @@ import com.kmp.movieapp.movie.domain.model.MovieGenre
  * [MovieGenre].
  */
 internal fun GenreDto.toMovieGenre(): MovieGenre = MovieGenre(
-    id = id,
-    name = name
+    id = id ?: 0,
+    name = name ?: ""
 )

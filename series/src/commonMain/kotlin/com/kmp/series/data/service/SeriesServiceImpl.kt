@@ -4,6 +4,7 @@ import com.kmp.movieapp.core.network.http.HandleHttpStatus
 import com.kmp.movieapp.core.network.model.ApiError
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.core.util.try_catch.multiCatch
 import com.kmp.series.data.model.request.SeriesRequestDto
 import com.kmp.series.data.model.response.SeriesDto
@@ -27,6 +28,8 @@ internal class SeriesServiceImpl(
                     resource = SeriesRequestDto(seriesId = seriesId, language = language)
                 )
 
+                val dto = response.body<SeriesDto>()
+                logI("SeriesDto: $dto")
                 Result.Success(response.body())
             },
             handlers = mapOf(
@@ -35,7 +38,7 @@ internal class SeriesServiceImpl(
                     HandleHttpStatus.getResultForStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    logE<SeriesService>(message  = "Error during findSeriesForId: ${e.message}")
+                    logE<SeriesService>(message  = "Error during findSeriesForId: $seriesId, message: ${e.message}")
                     HandleHttpStatus.getResultForStatus(null)
                 }
             )

@@ -53,4 +53,14 @@ internal class MovieRepositoryImpl(
     override suspend fun getAllMovies(language: String, page: Int): Flow<List<Movie>> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun getMovieForId(movieId: Int, language: String): Flow<Movie?> = flow {
+        movieService.findMovieForId(movieId, language = language).onSuccess {
+            emit(it.toMovie())
+        }.onFailure {
+            emit(null)
+        }.onError {
+            logE<MovieRepository>(message = "Error: $it")
+        }
+    }
 }

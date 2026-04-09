@@ -13,7 +13,12 @@ class GetContentDetail(
         contentType: ContentDetailType,
         contentId: String
     ): Flow<ContentDetail> =
-        if (contentType == ContentDetailType.SERIES) {
-            contentDetailRepository.getSeriesDetail(contentId)
-        } else contentDetailRepository.getMovieDetail(contentId)
+        when (contentType) {
+            ContentDetailType.MOVIE -> contentDetailRepository.getMovieDetail(contentId)
+            ContentDetailType.SERIES -> contentDetailRepository.getSeriesDetail(contentId)
+            ContentDetailType.PERSON -> {
+                // TODO: Add here the repository for person
+                contentDetailRepository.getMovieDetail(contentId)
+            }
+        }
 }

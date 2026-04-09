@@ -10,7 +10,7 @@ import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import com.kmp.movieapp.movie.domain.model.Filter
 
-interface MovieService {
+internal interface MovieService {
 
     suspend fun fetchMoviesForCategory(
         language: String,
