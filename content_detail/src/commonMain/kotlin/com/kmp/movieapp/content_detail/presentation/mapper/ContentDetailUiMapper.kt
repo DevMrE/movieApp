@@ -7,6 +7,7 @@ import com.kmp.movieapp.core.util.Constants
 import com.kmp.movieapp.core.util.boolean.isFalse
 import com.kmp.movieapp.core.util.date.formatDateLocalized
 import com.kmp.movieapp.core.util.integer.toHourMinuteString
+import com.kmp.movieapp.core.util.string.toPrefixedString
 
 fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
     isLoading = title.isNotEmpty() && posterPath.isNullOrEmpty().isFalse && backdropPath.isNullOrEmpty().isFalse && overview.isNullOrEmpty().isFalse,
@@ -21,14 +22,10 @@ fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
             append(" ${Constants.BULLET_POINT} ${runtime.toHourMinuteString()}")
         }
 
-        if (genres != null) {
-            append(" ${Constants.BULLET_POINT} ")
-            genres.joinToString(separator = " | ") {
-                it.name
-            }.forEach {
+        genres?.toPrefixedString(transform = { it.name }, separator = " | ")
+            ?.let {
                 append(it)
             }
-        }
     },
     description = overview ?: "",
     posterPath = posterPath ?: "",
