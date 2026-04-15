@@ -14,9 +14,10 @@ kotlin {
         freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
     }
 
+    // Android
     android {
         // Use a unique namespace to avoid collisions with the androidApp module
-        namespace = "${getPropertyString("app.basePackagePath")}.composeApp"
+        namespace = "${getPropertyString("app.basePackagePath")}.movie"
         compileSdk = getPropertyInt("android.compileSdk")
         minSdk = getPropertyInt("android.mobile.minSdk")
 
@@ -68,7 +69,7 @@ kotlin {
 }
 
 compose.resources {
-    packageOfResClass = "com.kmp.movieapp.series"
+    packageOfResClass = "com.kmp.movieapp.feature"
 }
 
 fun getPropertyString(string: String): String {

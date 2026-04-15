@@ -39,7 +39,6 @@ plugins {
 include(":composeApp")
 include(":core")
 include(":movie")
-include(":series")
 include(":content_detail")
 include(":search")
 include(":discover")

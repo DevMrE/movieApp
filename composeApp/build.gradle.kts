@@ -65,7 +65,6 @@ kotlin {
 
             implementation(project(":core"))
             implementation(project(":movie"))
-            implementation(project(":series"))
             implementation(project(":content_detail"))
             implementation(project(":search"))
             implementation(project(":discover"))
