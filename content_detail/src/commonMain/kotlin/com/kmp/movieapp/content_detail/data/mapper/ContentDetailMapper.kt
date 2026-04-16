@@ -3,7 +3,7 @@ package com.kmp.movieapp.content_detail.data.mapper
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
 import com.kmp.movieapp.content_detail.domain.model.Genre
 import com.kmp.movieapp.core.network.url.UrlHelper
-import com.kmp.movieapp.movie.domain.model.Movie
+import com.kmp.movieapp.features.home.domain.model.Movie
 
 fun Movie.toContentDetail() = ContentDetail(
     title = title,

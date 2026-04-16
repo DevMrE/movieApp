@@ -64,11 +64,11 @@ kotlin {
             implementation(libs.kmpNavigation)
 
             implementation(project(":core"))
-            implementation(project(":movie"))
             implementation(project(":content_detail"))
             implementation(project(":search"))
             implementation(project(":discover"))
             implementation(project(":device_operations"))
+            implementation(project(":features"))
         }
 
         androidMain.dependencies {

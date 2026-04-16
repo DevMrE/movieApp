@@ -33,8 +33,8 @@ import com.kmp.movieapp.composeApp.ic_more
 import com.kmp.movieapp.composeApp.more
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
+import com.kmp.movieapp.features.home.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.homescreen.destination.HomeDestination
-import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberIsTabsActive

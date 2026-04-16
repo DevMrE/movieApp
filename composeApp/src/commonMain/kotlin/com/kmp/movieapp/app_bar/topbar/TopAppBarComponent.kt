@@ -13,8 +13,8 @@ import com.kmp.movieapp.composeApp.movie_category_now_playing
 import com.kmp.movieapp.composeApp.movie_category_popular
 import com.kmp.movieapp.composeApp.movie_category_top_rated
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.movie.domain.model.MovieCategory
-import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
+import com.kmp.movieapp.features.home.domain.model.MovieCategory
+import com.kmp.movieapp.features.home.presentation.destination.MovieCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavDestination

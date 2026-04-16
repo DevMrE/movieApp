@@ -1,9 +1,10 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKmpLibrary)
-    alias(libs.plugins.androidLint)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.androidLint)
     alias(libs.plugins.serialization)
 }
 
@@ -13,9 +14,10 @@ kotlin {
         freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
     }
 
+    // Android
     android {
         // Use a unique namespace to avoid collisions with the androidApp module
-        namespace = "${getPropertyString("app.basePackagePath")}.content_detail"
+        namespace = "${getPropertyString("app.basePackagePath")}.features"
         compileSdk = getPropertyInt("android.compileSdk")
         minSdk = getPropertyInt("android.mobile.minSdk")
 
@@ -24,8 +26,10 @@ kotlin {
         }
     }
 
+    // Desktop - Windows + MacOS
     jvm()
 
+    // iOS -> iPhone + iPad implementation
     iosArm64()
     iosSimulatorArm64()
 
@@ -41,8 +45,6 @@ kotlin {
 
                 implementation(libs.bundles.lifecycle)
 
-                implementation(libs.logger)
-
                 implementation(libs.bundles.commainMainKoin)
                 implementation(libs.bundles.commonMainKtor)
 
@@ -50,29 +52,24 @@ kotlin {
                 implementation(libs.kmpNavigation)
 
                 implementation(project(":core"))
-                implementation(project(":features"))
             }
         }
 
         androidMain {
             dependencies {
+                implementation(libs.slf4j)
             }
         }
 
         iosMain {
             dependencies {
-
             }
         }
     }
 }
 
-dependencies {
-    androidRuntimeClasspath(libs.composeTooling)
-}
-
 compose.resources {
-    packageOfResClass = "${getPropertyString("app.basePackagePath")}.content_detail"
+    packageOfResClass = "com.kmp.movieapp.features"
 }
 
 fun getPropertyString(string: String): String {

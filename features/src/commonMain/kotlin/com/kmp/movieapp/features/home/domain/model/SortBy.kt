@@ -1,0 +1,16 @@
+package com.kmp.movieapp.features.home.domain.model
+
+enum class SortBy {
+    TITLE_ASC,
+    TITLE_DESC,
+    ORIGINAL_TITLE_ASC,
+    ORIGINAL_TITLE_DESC,
+    POPULARITY_ASC,
+    POPULARITY_DESC,
+    REVENUE_ASC,
+    REVENUE_DESC,
+    PRIMARY_RELEASE_DATE_ASC,
+    PRIMARY_RELEASE_DATE_DESC,
+    VOTE_AVERAGE_ASC,
+    VOTE_AVERAGE_DESC,
+}

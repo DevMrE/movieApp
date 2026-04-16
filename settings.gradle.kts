@@ -38,9 +38,9 @@ plugins {
 
 include(":composeApp")
 include(":core")
-include(":movie")
 include(":content_detail")
 include(":search")
 include(":discover")
 include(":device_operations")
 include(":androidApp")
+include(":features")
