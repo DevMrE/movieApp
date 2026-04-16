@@ -21,7 +21,6 @@ kotlin {
 
         androidResources {
             enable = true
-
         }
     }
 
@@ -52,7 +51,6 @@ kotlin {
 
                 implementation(project(":core"))
                 implementation(project(":movie"))
-                implementation(project(":series"))
             }
         }
 

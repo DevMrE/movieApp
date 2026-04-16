@@ -1,10 +1,10 @@
 package com.kmp.movieapp.movie.presentation
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -26,9 +26,7 @@ fun MovieContent() {
     val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
 
     PullToRefreshBox(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(vertical = MaterialTheme.padding.thirty),
+        modifier = Modifier.fillMaxSize(),
         isRefreshing = movieScreenState?.isLoading.isTrue,
         onRefresh = {viewModel.onAction(MovieAction.OnRefresh)}
     ) {
@@ -36,6 +34,7 @@ fun MovieContent() {
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
+            contentPadding = PaddingValues(vertical = MaterialTheme.padding.thirty)
         ) {
             movieScreenState?.let { screen ->
                 movieListContent(

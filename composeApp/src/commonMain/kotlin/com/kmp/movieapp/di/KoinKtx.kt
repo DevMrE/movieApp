@@ -6,7 +6,6 @@ import com.kmp.movieapp.device_operations.di.deviceModule
 import com.kmp.movieapp.movie.di.movieModule
 import com.kmp.movieapp.search.di.searchModule
 import com.kmp.navigation.di.navigationModule
-import com.kmp.series.di.seriesModule
 import org.koin.core.KoinApplication
 
 fun KoinApplication.initModules() {
@@ -16,7 +15,6 @@ fun KoinApplication.initModules() {
             navigationModule,
             coreModule,
             movieModule,
-            seriesModule,
             contentDetailModule,
             searchModule,
             deviceModule()

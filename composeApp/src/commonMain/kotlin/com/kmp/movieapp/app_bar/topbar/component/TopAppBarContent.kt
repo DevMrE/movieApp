@@ -1,5 +1,6 @@
 package com.kmp.movieapp.app_bar.topbar.component
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
@@ -20,7 +21,6 @@ import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.ic_back_arrow
 import com.kmp.movieapp.composeApp.ic_movie
 import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.search.presentation.AnimatedSearchButtonWithInputField
 import com.kmp.navigation.compose.rememberNavigation
 import org.jetbrains.compose.resources.vectorResource
 
@@ -36,13 +36,15 @@ fun TopAppBarContent(
             .padding(horizontal = MaterialTheme.padding.defaultContentPadding)
             .animateContentSize(),
         title = {
-            AnimatedSearchButtonWithInputField {
-                LogoWithTitle(title)
-            }
+            LogoWithTitle(title)
         },
         navigationIcon = {
             if (showBackButton) {
-                NavigationBackIcon()
+                AnimatedContent(
+                    targetState = showBackButton,
+                ) {
+                    NavigationBackIcon()
+                }
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -66,15 +68,24 @@ private fun NavigationBackIcon() {
 
 @Composable
 private fun LogoWithTitle(title: String, modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.five)
-    ) {
-        Icon(
-            imageVector = vectorResource(Res.drawable.ic_movie),
-            contentDescription = null
-        )
-        Text(text = title, style = MaterialTheme.typography.headlineMedium)
+    AnimatedContent(
+        targetState = title,
+    ) { animatedTitle ->
+        Row(
+            modifier = modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.five)
+        ) {
+            Icon(
+                imageVector = vectorResource(Res.drawable.ic_movie),
+                contentDescription = null
+            )
+
+            Text(
+                text = animatedTitle,
+                style = MaterialTheme.typography.headlineMedium,
+                modifier = Modifier.animateContentSize()
+            )
+        }
     }
 }

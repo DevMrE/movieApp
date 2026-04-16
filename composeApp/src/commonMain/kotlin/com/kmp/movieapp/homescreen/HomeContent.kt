@@ -1,39 +1,10 @@
 package com.kmp.movieapp.homescreen
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import com.kmp.movieapp.composeApp.Res
-import com.kmp.movieapp.composeApp.movie_tab
-import com.kmp.movieapp.composeApp.series_tab
-import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.homescreen.destination.HomeTabs
-import com.kmp.movieapp.homescreen.model.UiTabState
-import com.kmp.movieapp.movie.presentation.destination.MovieContentDestination
-import com.kmp.navigation.compose.NavigationTabs
+import com.kmp.movieapp.movie.presentation.MovieContent
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavigation
-import com.kmp.series.presentation.destination.SeriesContentDestination
-import org.jetbrains.compose.resources.stringResource
-
-
-private val homeSectionTabs = listOf(
-    UiTabState(
-        tabResource = Res.string.movie_tab,
-        destination = MovieContentDestination
-    ),
-    UiTabState(
-        tabResource = Res.string.series_tab,
-        destination = SeriesContentDestination
-    )
-)
 
 @Composable
 fun HomeContent() {
@@ -41,38 +12,7 @@ fun HomeContent() {
     val navigation = rememberNavigation()
     val navDestination = rememberActiveTabIn<HomeTabs>()
 
-    Column {
-        SingleChoiceSegmentedButtonRow(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = MaterialTheme.padding.twentyFive),
-            space = MaterialTheme.padding.thirtySix
-        ) {
 
-            homeSectionTabs.forEach { tabs ->
-                SegmentedButton(
-                    selected = navDestination == tabs.destination,
-                    onClick = {
-                        navigation.navigateTo(tabs.destination)
-                    },
-                    shape = SegmentedButtonDefaults.baseShape,
-                    icon = {},
-                    colors = SegmentedButtonDefaults.colors(
-                        activeBorderColor = MaterialTheme.colorScheme.primary,
-                        activeContainerColor = MaterialTheme.colorScheme.primary,
-                        activeContentColor = MaterialTheme.colorScheme.background,
-                        inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainer,
-                        inactiveBorderColor = MaterialTheme.colorScheme.background,
-                    ),
-                ) {
-                    Text(
-                        text = stringResource(resource = tabs.tabResource),
-                        style = MaterialTheme.typography.bodyLarge
-                    )
-                }
-            }
-        }
+    MovieContent()
 
-        NavigationTabs<HomeTabs>()
-    }
 }
