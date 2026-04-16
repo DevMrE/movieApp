@@ -28,7 +28,6 @@ internal class MovieServiceImpl(
 ) : MovieService {
 
     override suspend fun fetchMoviesForCategory(
-        language: String,
         page: Int,
         movieListCategory: MovieListCategory
     ): Result<ApiResponseDto<MovieForCategoryDto>, ApiError> = multiCatch(
@@ -36,7 +35,6 @@ internal class MovieServiceImpl(
             val response = httpClient.get(
                 resource = MovieListRequestDto(
                     page = page,
-                    language = language,
                     movieListCategory = movieListCategory.category
                 )
             )
@@ -107,7 +105,7 @@ internal class MovieServiceImpl(
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(
-                    resource = MovieRequestDto(movieId = movieId, language = language)
+                    resource = MovieRequestDto(movieId = movieId)
                 )
 
                 Result.Success(response.body())

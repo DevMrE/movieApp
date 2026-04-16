@@ -16,19 +16,19 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.util.boolean.isTrue
-import com.kmp.movieapp.features.home.presentation.action.MovieAction
-import com.kmp.movieapp.features.home.presentation.content.movieListContent
+import com.kmp.movieapp.features.home.presentation.action.HomeAction
+import com.kmp.movieapp.features.home.presentation.content.homeListContent
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeContent() {
-    val viewModel = koinViewModel<MovieScreenViewModel>()
+    val viewModel = koinViewModel<HomeScreenViewModel>()
     val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
 
     PullToRefreshBox(
         modifier = Modifier.fillMaxSize(),
         isRefreshing = movieScreenState?.isLoading.isTrue,
-        onRefresh = {viewModel.onAction(MovieAction.OnRefresh)}
+        onRefresh = {viewModel.onAction(HomeAction.OnRefresh)}
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -37,18 +37,18 @@ fun HomeContent() {
             contentPadding = PaddingValues(vertical = MaterialTheme.padding.thirty)
         ) {
             movieScreenState?.let { screen ->
-                movieListContent(
-                    uiMovieList = screen.nowPlaying,
+                homeListContent(
+                    uiHomeList = screen.nowPlaying,
                     onAction = viewModel::onAction
                 )
 
-                movieListContent(
-                    uiMovieList = screen.popularMovie,
+                homeListContent(
+                    uiHomeList = screen.popularMovie,
                     onAction = viewModel::onAction
                 )
 
-                movieListContent(
-                    uiMovieList = screen.topRatedMovies,
+                homeListContent(
+                    uiHomeList = screen.topRatedMovies,
                     onAction = viewModel::onAction
                 )
             }

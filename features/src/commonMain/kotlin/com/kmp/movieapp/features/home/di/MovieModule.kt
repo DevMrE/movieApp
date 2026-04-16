@@ -6,13 +6,13 @@ import com.kmp.movieapp.features.home.data.service.MovieServiceImpl
 import com.kmp.movieapp.features.home.domain.repository.MovieRepository
 import com.kmp.movieapp.features.home.domain.usecase.GetMoviesForCategoryUseCase
 import com.kmp.movieapp.features.home.domain.usecase.LoadNextMoviesForCategoryUseCase
-import com.kmp.movieapp.features.home.presentation.MovieScreenViewModel
-import com.kmp.movieapp.features.home.presentation.movie_list_category.MovieCategoryListViewModel
+import com.kmp.movieapp.features.home.presentation.HomeScreenViewModel
+import com.kmp.movieapp.features.home.presentation.home_list_category.MovieCategoryListViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-val movieModule = module {
+val featuresModule = module {
     single<MovieService> {
         MovieServiceImpl(get())
     }
@@ -29,12 +29,12 @@ val movieModule = module {
         LoadNextMoviesForCategoryUseCase(get())
     }
 
-    viewModelOf(::MovieScreenViewModel)
+    viewModelOf(::HomeScreenViewModel)
 
     viewModel { params ->
         MovieCategoryListViewModel(
             loadNextMoviesForCategoryUseCase = get(),
-            movieCategory = params.get()
+            homeCategory = params.get()
         )
     }
 }

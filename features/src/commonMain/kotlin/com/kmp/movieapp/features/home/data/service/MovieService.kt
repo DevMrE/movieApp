@@ -13,7 +13,6 @@ import com.kmp.movieapp.features.home.domain.model.Filter
 internal interface MovieService {
 
     suspend fun fetchMoviesForCategory(
-        language: String,
         page: Int,
         movieListCategory: MovieListCategory
     ): Result<ApiResponseDto<MovieForCategoryDto>, ApiError>

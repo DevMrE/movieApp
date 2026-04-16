@@ -1,7 +1,7 @@
 package com.kmp.movieapp.features.home.domain.repository
 
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.domain.model.Movie
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
@@ -9,7 +9,7 @@ interface MovieRepository {
     suspend fun getMovies(
         language: String,
         page: Int,
-        movieCategory: MovieCategory
+        homeCategory: HomeCategory
     ): Flow<List<Movie>?>
 
     suspend fun getAllMovies(

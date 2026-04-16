@@ -10,8 +10,6 @@ import kotlinx.serialization.Serializable
 data class MovieRequestDto(
     @SerialName("movie_id")
     val movieId: Int,
-    @SerialName("language")
-    val language: String? = "en",
     @SerialName("append_to_response")
     val appendStringResponse: List<String> = listOf("videos")
 )

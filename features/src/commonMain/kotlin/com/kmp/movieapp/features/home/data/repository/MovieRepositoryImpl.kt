@@ -7,8 +7,8 @@ import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.features.home.data.model.mapper.toMovie
 import com.kmp.movieapp.features.home.data.model.mapper.toMovieListCategory
 import com.kmp.movieapp.features.home.data.service.MovieService
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.domain.model.Movie
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
 import com.kmp.movieapp.features.home.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,29 +19,28 @@ internal class MovieRepositoryImpl(
     private val movieService: MovieService
 ) : MovieRepository {
 
-    private val _movieLists = MutableStateFlow<Map<MovieCategory, List<Movie>>>(emptyMap())
+    private val _movieLists = MutableStateFlow<Map<HomeCategory, List<Movie>>>(emptyMap())
 
     override suspend fun getMovies(
         language: String,
         page: Int,
-        movieCategory: MovieCategory
+        homeCategory: HomeCategory
     ): Flow<List<Movie>?> = flow {
         movieService.fetchMoviesForCategory(
-            language = language,
             page = page,
-            movieListCategory = movieCategory.toMovieListCategory()
+            movieListCategory = homeCategory.toMovieListCategory()
         ).onSuccess { data ->
             val movieList = data.results?.map { movieDto ->
                 movieDto.toMovie()
             } ?: emptyList()
 
             _movieLists.update { currentMap ->
-                val existingMovies = currentMap[movieCategory] ?: emptyList()
+                val existingMovies = currentMap[homeCategory] ?: emptyList()
                 val updatedMovies = (existingMovies + movieList).distinct()
-                currentMap + (movieCategory to updatedMovies)
+                currentMap + (homeCategory to updatedMovies)
             }
 
-            emit(_movieLists.value[movieCategory] ?: emptyList())
+            emit(_movieLists.value[homeCategory] ?: emptyList())
         }.onError {
             logE<MovieRepository>(message = "Error: $it")
         }.onFailure {

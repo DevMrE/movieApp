@@ -1,4 +1,4 @@
-package com.kmp.movieapp.features.home.presentation.movie_list_category
+package com.kmp.movieapp.features.home.presentation.home_list_category
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,17 +22,17 @@ import com.kmp.movieapp.core.ui.content.MediaItemCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun MovieCategoryListScreen(movieCategory: MovieCategory) {
+fun MediaCategoryListScreen(homeCategory: HomeCategory) {
 
     val viewModel = koinViewModel<MovieCategoryListViewModel>(
-        key = movieCategory.name,
-        parameters = { parametersOf(movieCategory) }
+        key = homeCategory.name,
+        parameters = { parametersOf(homeCategory) }
     )
 
     val movieList = viewModel.movieListState.collectAsStateWithLifecycle()

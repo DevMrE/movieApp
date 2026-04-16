@@ -15,22 +15,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
-import com.kmp.movieapp.features.home.presentation.action.MovieAction
-import com.kmp.movieapp.features.home.presentation.model.UiMovieList
+import com.kmp.movieapp.features.Res
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.action.HomeAction
+import com.kmp.movieapp.features.home.presentation.model.UiHomeList
+import com.kmp.movieapp.features.movie_category_list_title
+import com.kmp.movieapp.features.movie_category_popular
+import com.kmp.movieapp.features.movie_category_top_rated
+import com.kmp.movieapp.features.see_all
+import org.jetbrains.compose.resources.stringResource
 
-internal fun LazyListScope.movieListContent(
-    uiMovieList: UiMovieList?,
-    onAction: (MovieAction) -> Unit
+internal fun LazyListScope.homeListContent(
+    uiHomeList: UiHomeList?,
+    onAction: (HomeAction) -> Unit
 ) {
     item {
-        val categoryTitle = when (uiMovieList?.category) {
-            MovieCategory.POPULAR -> ""//stringResource(Res.string.movie_category_popular)
-            MovieCategory.TOP_RATED -> ""//stringResource(Res.string.movie_category_top_rated)
+        val categoryTitle = when (uiHomeList?.category) {
+            HomeCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
+            HomeCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
             else -> null
         }
         val title: String? = if (categoryTitle != null) {
-            ""//stringResource(Res.string.movie_category_list_title, categoryTitle)
+            stringResource(Res.string.movie_category_list_title, categoryTitle)
         } else null
 
         Column(
@@ -54,12 +60,10 @@ internal fun LazyListScope.movieListContent(
 
                     TextButton(
                         onClick = {
-                            onAction(MovieAction.OnSeeAllClicked(movieCategory = uiMovieList?.category))
+                            onAction(HomeAction.OnSeeAllClicked(homeCategory = uiHomeList?.category))
                         },
                     ) {
-                        Text(
-                        ""//    stringResource(Res.string.see_all)
-                        )
+                        Text(stringResource(Res.string.see_all))
                     }
                 }
             }
@@ -72,8 +76,8 @@ internal fun LazyListScope.movieListContent(
                 horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
                 contentPadding = PaddingValues(horizontal = MaterialTheme.padding.thirty)
             ) {
-                uiMovieList?.movies?.let {
-                    movieCardContent(
+                uiHomeList?.movies?.let {
+                    mediaCardContent(
                         width = cardSize,
                         movieList = it,
                         onAction = onAction

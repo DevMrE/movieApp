@@ -5,11 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.domain.usecase.GetMoviesForCategoryUseCase
-import com.kmp.movieapp.features.home.presentation.action.MovieAction
-import com.kmp.movieapp.features.home.presentation.destination.MovieCategoryListDestination
-import com.kmp.movieapp.features.home.presentation.mapper.toUiMovieList
+import com.kmp.movieapp.features.home.presentation.action.HomeAction
+import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
+import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeList
 import com.kmp.movieapp.features.home.presentation.model.UiMovieScreen
 import com.kmp.navigation.Navigation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,7 +21,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
 import kotlinx.coroutines.launch
 
-internal class MovieScreenViewModel(
+internal class HomeScreenViewModel(
     private val navigation: Navigation,
     private val getMoviesForCategoryUseCase: GetMoviesForCategoryUseCase
 ) : ViewModel() {
@@ -36,19 +36,18 @@ internal class MovieScreenViewModel(
             _movieScreenState.updateAndGet {
                 UiMovieScreen(
                     isLoading = popular == null && topRated == null && nowPlaying == null,
-                    nowPlaying = nowPlaying?.toUiMovieList(category = MovieCategory.NOW_PLAYING),
-                    popularMovie = popular?.toUiMovieList(category = MovieCategory.POPULAR),
-                    topRatedMovies = topRated?.toUiMovieList(category = MovieCategory.TOP_RATED)
+                    nowPlaying = nowPlaying?.toUiHomeList(category = HomeCategory.NOW_PLAYING),
+                    popularMovie = popular?.toUiHomeList(category = HomeCategory.POPULAR),
+                    topRatedMovies = topRated?.toUiHomeList(category = HomeCategory.TOP_RATED)
                 )
             }
         }.stateInEagerly(_movieScreenState.value)
 
-    fun onAction(action: MovieAction) {
+    fun onAction(action: HomeAction) {
         when (action) {
-            is MovieAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.id)
-            is MovieAction.OnStartTrailer -> Unit
-            is MovieAction.OnSeeAllClicked -> onSeeAll(action.movieCategory)
-            is MovieAction.OnRefresh -> onRefresh()
+            is HomeAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.id)
+            is HomeAction.OnSeeAllClicked -> onSeeAll(action.homeCategory)
+            is HomeAction.OnRefresh -> onRefresh()
         }
     }
 
@@ -61,9 +60,9 @@ internal class MovieScreenViewModel(
         )
     }
 
-    private fun onSeeAll(movieCategory: MovieCategory?) {
-        if (movieCategory == null) return
-        navigation.navigateTo(destination = MovieCategoryListDestination(movieCategory))
+    private fun onSeeAll(homeCategory: HomeCategory?) {
+        if (homeCategory == null) return
+        navigation.navigateTo(destination = HomeMediaCategoryListDestination(homeCategory))
     }
 
     private fun onRefresh() {
@@ -81,9 +80,9 @@ internal class MovieScreenViewModel(
                 _movieScreenState.update {
                     UiMovieScreen(
                         isLoading = popular == null && topRated == null && nowPlaying == null,
-                        nowPlaying = nowPlaying?.toUiMovieList(category = MovieCategory.NOW_PLAYING),
-                        popularMovie = popular?.toUiMovieList(category = MovieCategory.POPULAR),
-                        topRatedMovies = topRated?.toUiMovieList(category = MovieCategory.TOP_RATED)
+                        nowPlaying = nowPlaying?.toUiHomeList(category = HomeCategory.NOW_PLAYING),
+                        popularMovie = popular?.toUiHomeList(category = HomeCategory.POPULAR),
+                        topRatedMovies = topRated?.toUiHomeList(category = HomeCategory.TOP_RATED)
                     )
                 }
             }

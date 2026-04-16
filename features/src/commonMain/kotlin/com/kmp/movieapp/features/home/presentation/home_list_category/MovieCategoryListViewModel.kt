@@ -1,10 +1,10 @@
-package com.kmp.movieapp.features.home.presentation.movie_list_category
+package com.kmp.movieapp.features.home.presentation.home_list_category
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.domain.model.Movie
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
 import com.kmp.movieapp.features.home.domain.usecase.LoadNextMoviesForCategoryUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 internal class MovieCategoryListViewModel(
     private val loadNextMoviesForCategoryUseCase: LoadNextMoviesForCategoryUseCase,
-    private val movieCategory: MovieCategory
+    private val homeCategory: HomeCategory
 ) : ViewModel() {
     private val _currentPage = MutableStateFlow(1)
 
@@ -28,7 +28,7 @@ internal class MovieCategoryListViewModel(
             _currentPage.flatMapLatest { page ->
                 loadNextMoviesForCategoryUseCase(
                     page = page,
-                    movieCategory = movieCategory
+                    homeCategory = homeCategory
                 )
             }.collectLatest { movies ->
                 if (movies != null) _movieListState.update { movies }

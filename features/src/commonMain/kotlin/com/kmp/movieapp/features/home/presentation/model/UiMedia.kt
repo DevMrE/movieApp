@@ -6,7 +6,7 @@ import androidx.compose.runtime.Stable
  * Represents a single movie for the movie list screen
  */
 @Stable
-internal data class UiMovie(
+internal data class UiMedia(
     val id: String,
     val title: String,
     val genre: String,

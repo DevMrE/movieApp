@@ -48,7 +48,7 @@ kotlin {
             baseName = frameworkName
             binaryOption("bundleId", frameworkBundleId)
             transitiveExport = true
-            isStatic = false
+            isStatic = true
             xcf.add(this)
         }
     }

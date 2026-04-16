@@ -33,7 +33,7 @@ import com.kmp.movieapp.composeApp.ic_more
 import com.kmp.movieapp.composeApp.more
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.features.home.presentation.destination.MovieCategoryListDestination
+import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
@@ -80,7 +80,7 @@ internal fun BottomBarComponent() {
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
     AnimatedVisibility(
-        visible = isActive && (navDestination !is MovieCategoryListDestination),
+        visible = isActive && (navDestination !is HomeMediaCategoryListDestination),
         modifier = Modifier.background(Color.Transparent),
         enter = fadeIn(),
         exit = fadeOut()

@@ -8,8 +8,8 @@ import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.movieapp.discover.presentation.DiscoverMediaScreen
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.features.home.presentation.HomeContent
-import com.kmp.movieapp.features.home.presentation.destination.MovieCategoryListDestination
-import com.kmp.movieapp.features.home.presentation.movie_list_category.MovieCategoryListScreen
+import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
+import com.kmp.movieapp.features.home.presentation.home_list_category.MediaCategoryListScreen
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.search.presentation.SearchContent
 import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
@@ -21,14 +21,14 @@ fun registerAppNavigation() {
     registerNavigation(startDestination = HomeDestination) {
         content<HomeDestination> { HomeContent() }
         content<SettingsDestination> { SettingsContent() }
-        content<MovieCategoryListDestination>(
+        content<HomeMediaCategoryListDestination>(
             enterTransition = {
                 scaleIn()
             },
             exitTransition = {
                 scaleOut()
             }
-        ) { data -> MovieCategoryListScreen(data.movieCategory) }
+        ) { data -> MediaCategoryListScreen(data.homeCategory) }
 
         content<DiscoverMediaDestination> {
             DiscoverMediaScreen()

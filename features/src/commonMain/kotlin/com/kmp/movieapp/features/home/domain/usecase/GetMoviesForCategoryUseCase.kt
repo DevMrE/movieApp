@@ -1,7 +1,7 @@
 package com.kmp.movieapp.features.home.domain.usecase
 
 import com.kmp.movieapp.core.util.tuples.with
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.combine
 
@@ -10,12 +10,12 @@ internal class GetMoviesForCategoryUseCase(
 ) {
 
     suspend operator fun invoke() = combine(
-        movieRepository.getMovies(language = "", page = 1, movieCategory = MovieCategory.POPULAR),
-        movieRepository.getMovies(language = "", page = 1, movieCategory = MovieCategory.TOP_RATED),
+        movieRepository.getMovies(language = "", page = 1, homeCategory = HomeCategory.POPULAR),
+        movieRepository.getMovies(language = "", page = 1, homeCategory = HomeCategory.TOP_RATED),
         movieRepository.getMovies(
             language = "",
             page = 1,
-            movieCategory = MovieCategory.NOW_PLAYING
+            homeCategory = HomeCategory.NOW_PLAYING
         )
     ) { popular, topRated, nowPlaying ->
         popular with topRated with nowPlaying

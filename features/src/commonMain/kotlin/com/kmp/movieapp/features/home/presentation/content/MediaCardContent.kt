@@ -6,13 +6,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.unit.Dp
 import com.kmp.movieapp.core.ui.content.MediaItemCard
 import com.kmp.movieapp.core.ui.material.size
-import com.kmp.movieapp.features.home.presentation.action.MovieAction
-import com.kmp.movieapp.features.home.presentation.model.UiMovie
+import com.kmp.movieapp.features.home.presentation.action.HomeAction
+import com.kmp.movieapp.features.home.presentation.model.UiMedia
 
-internal fun LazyListScope.movieCardContent(
+internal fun LazyListScope.mediaCardContent(
     width: Dp,
-    movieList: List<UiMovie> = emptyList(),
-    onAction: (MovieAction) -> Unit
+    movieList: List<UiMedia> = emptyList(),
+    onAction: (HomeAction) -> Unit
 ) {
     items(movieList) { movie ->
 
@@ -23,7 +23,7 @@ internal fun LazyListScope.movieCardContent(
             moviePosterPath = if (bigCard) movie.backdropPath else movie.posterPath,
             enableGradient = bigCard,
             onClick = {
-                onAction(MovieAction.OnNavigateToDetailScreen(movie.id))
+                onAction(HomeAction.OnNavigateToDetailScreen(movie.id))
             },
         )
     }

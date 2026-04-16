@@ -13,8 +13,8 @@ import com.kmp.movieapp.composeApp.movie_category_now_playing
 import com.kmp.movieapp.composeApp.movie_category_popular
 import com.kmp.movieapp.composeApp.movie_category_top_rated
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.features.home.domain.model.MovieCategory
-import com.kmp.movieapp.features.home.presentation.destination.MovieCategoryListDestination
+import com.kmp.movieapp.features.home.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavDestination
@@ -26,7 +26,7 @@ fun TopAppBarComponent() {
     val navDestination = rememberNavDestination()
 
     val showBack = when (navDestination) {
-        is MovieCategoryListDestination -> true
+        is HomeMediaCategoryListDestination -> true
         else -> false
     }
 
@@ -37,11 +37,11 @@ fun TopAppBarComponent() {
     }
 
     val title = when (navDestination) {
-        is MovieCategoryListDestination -> {
-            val category = when (navDestination.movieCategory) {
-                MovieCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
-                MovieCategory.NOW_PLAYING -> stringResource(Res.string.movie_category_now_playing)
-                MovieCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
+        is HomeMediaCategoryListDestination -> {
+            val category = when (navDestination.homeCategory) {
+                HomeCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
+                HomeCategory.NOW_PLAYING -> stringResource(Res.string.movie_category_now_playing)
+                HomeCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
             }
 
             stringResource(Res.string.movie_category_list_title, category)

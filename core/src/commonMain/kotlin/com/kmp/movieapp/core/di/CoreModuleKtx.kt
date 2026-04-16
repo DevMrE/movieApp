@@ -20,8 +20,7 @@ val coreModule = module {
             installResources()
             installJson()
             installLogging()
-
-            addDefaultRequest()
+            addDefaultRequest(get())
         }
     }
 }
