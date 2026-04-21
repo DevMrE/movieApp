@@ -38,7 +38,7 @@ fun HomeContent() {
         ) {
             movieScreenState?.let { screen ->
                 homeListContent(
-                    uiHomeList = screen.nowPlaying,
+                    uiHomeList = screen.trendingList,
                     onAction = viewModel::onAction
                 )
 
@@ -47,10 +47,10 @@ fun HomeContent() {
                     onAction = viewModel::onAction
                 )
 
-                homeListContent(
-                    uiHomeList = screen.topRatedMovies,
-                    onAction = viewModel::onAction
-                )
+//                homeListContent(
+//                    uiHomeList = screen.topRatedMovies,
+//                    onAction = viewModel::onAction
+//                )
             }
 
             item {

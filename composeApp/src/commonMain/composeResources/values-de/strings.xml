@@ -6,11 +6,10 @@
     <string name="settings_screen_title">Einstellungen</string>
     <string name="more">Mehr</string>
     <string name="discover_media_title">Entdecken</string>
-    <string name="movie_category_list_title">%1$s Filme</string>
-    <string name="movie_category_popular">Beliebte</string>
-    <string name="movie_category_top_rated">Bestbewertete</string>
-    <string name="movie_category_now_playing">Aktuelle</string>
     <string name="search">Suche...</string>
+    <string name="popular_movies_title">Beliebte Filme</string>
+    <string name="popular_series_title">Beliebte Serien</string>
+    <string name="trending_title">Angesagt</string>
 
     <string name="permission_camera">Kamera Öffnen</string>
     <string name="permission_location">Standort abfragen</string>

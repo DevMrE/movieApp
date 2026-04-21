@@ -77,6 +77,11 @@ internal class SettingsScreenViewModel(
                 when (result) {
                     is OperationResult.Success -> {
                         logI<SettingsScreenViewModel>(message = "capture photo granted")
+                        _uiState.update {
+                            it.copy(
+                                permissionDemoResult = PermissionDemoResult.GalleryReady(mediaList = listOf(result.data))
+                            )
+                        }
                     }
 
                     is OperationResult.Denied -> {

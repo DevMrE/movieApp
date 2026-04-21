@@ -5,7 +5,7 @@ import androidx.compose.runtime.Stable
 @Stable
 internal data class UiMovieScreen(
     val isLoading: Boolean = true,
-    val nowPlaying: UiHomeList?,
+    val trendingList: UiHomeList?,
     val popularMovie: UiHomeList?,
-    val topRatedMovies: UiHomeList?,
+    val popularSeries: UiHomeList?
 )

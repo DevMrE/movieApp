@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MovieApp</string>
     <string name="movie_genres">Genres</string>
     <string name="movie_runtime">%d min</string>
     <string name="movie_rating">Rating: %.1f</string>
     <string name="see_all">See All</string>
-    <string name="movie_category_list_title">%1$s Movies</string>
-    <string name="movie_category_popular">Popular</string>
-    <string name="movie_category_top_rated">Top Rated</string>
-    <string name="movie_category_now_playing">Current</string>
+    <string name="home_popular_movies_title">Popular Movies</string>
+    <string name="home_popular_series_title">Popular Series</string>
+    <string name="home_trending_title">Trending</string>
+    <string name="movie">Movie</string>
+    <string name="series">Series</string>
+    <string name="actor">Actor</string>
+    <string name="content_type">%1$s: %2$s</string>
 </resources>

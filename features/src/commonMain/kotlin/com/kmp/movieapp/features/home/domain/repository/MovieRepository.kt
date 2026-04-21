@@ -1,12 +1,12 @@
 package com.kmp.movieapp.features.home.domain.repository
 
 import com.kmp.movieapp.features.home.domain.model.HomeCategory
-import com.kmp.movieapp.features.home.domain.model.Movie
+import com.kmp.movieapp.features.movie.domain.model.Movie
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
 
-    suspend fun getMovies(
+    suspend fun getPopularMovies(
         language: String,
         page: Int,
         homeCategory: HomeCategory

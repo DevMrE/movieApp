@@ -8,7 +8,7 @@ internal class LoadNextMoviesForCategoryUseCase(
 ) {
 
     suspend operator fun invoke(page: Int, homeCategory: HomeCategory) = movieRepository
-        .getMovies(
+        .getPopularMovies(
             language = "de",
             page = page,
             homeCategory = homeCategory

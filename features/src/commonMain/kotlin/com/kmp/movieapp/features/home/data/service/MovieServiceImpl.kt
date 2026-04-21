@@ -6,16 +6,16 @@ import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.try_catch.multiCatch
-import com.kmp.movieapp.features.home.data.model.mapper.toDiscoverMoviesDto
-import com.kmp.movieapp.features.home.data.model.request.genre.MovieGenreRequestDto
-import com.kmp.movieapp.features.home.data.model.request.movie.MovieRequestDto
-import com.kmp.movieapp.features.home.data.model.request.movie_lists.MovieListCategory
-import com.kmp.movieapp.features.home.data.model.request.movie_lists.MovieListRequestDto
-import com.kmp.movieapp.features.home.data.model.response.MovieGenreResponseDto
-import com.kmp.movieapp.features.home.data.model.response.discover.DiscoverMovieDto
-import com.kmp.movieapp.features.home.data.model.response.movie.MovieDto
-import com.kmp.movieapp.features.home.data.model.response.movie_for_category.MovieForCategoryDto
 import com.kmp.movieapp.features.home.domain.model.Filter
+import com.kmp.movieapp.features.movie.data.mapper.toDiscoverMoviesDto
+import com.kmp.movieapp.features.movie.data.model.request.genre.MovieGenreRequestDto
+import com.kmp.movieapp.features.movie.data.model.request.movie.MovieRequestDto
+import com.kmp.movieapp.features.movie.data.model.request.movie_lists.MovieListCategory
+import com.kmp.movieapp.features.movie.data.model.request.movie_lists.MovieListRequestDto
+import com.kmp.movieapp.features.movie.data.model.response.MovieGenreResponseDto
+import com.kmp.movieapp.features.movie.data.model.response.discover.DiscoverMovieDto
+import com.kmp.movieapp.features.movie.data.model.response.movie.MovieDto
+import com.kmp.movieapp.features.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -27,37 +27,35 @@ internal class MovieServiceImpl(
     private val httpClient: HttpClient
 ) : MovieService {
 
-    override suspend fun fetchMoviesForCategory(
-        page: Int,
-        movieListCategory: MovieListCategory
-    ): Result<ApiResponseDto<MovieForCategoryDto>, ApiError> = multiCatch(
-        tryBlock = {
-            val response = httpClient.get(
-                resource = MovieListRequestDto(
-                    page = page,
-                    movieListCategory = movieListCategory.category
+    override suspend fun fetchMoviesPopularMovies(page: Int): Result<ApiResponseDto<MovieForCategoryDto>, ApiError> =
+        multiCatch(
+            tryBlock = {
+                val response = httpClient.get(
+                    resource = MovieListRequestDto(
+                        page = page,
+                        movieListCategory = MovieListCategory.POPULAR
+                    )
                 )
-            )
 
-            Result.Success(response.body<ApiResponseDto<MovieForCategoryDto>>())
-        },
-        handlers = mapOf(
-            listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
-                val ex = e as ResponseException
-                HandleError.getResultForHttpStatus(ex.response.status)
+                Result.Success(response.body<ApiResponseDto<MovieForCategoryDto>>())
             },
-            listOf(Exception::class) to { e ->
-                logE<MovieService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                HandleError.getResultForHttpStatus(null)
-            }
+            handlers = mapOf(
+                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
+                    val ex = e as ResponseException
+                    HandleError.getResultForHttpStatus(ex.response.status)
+                },
+                listOf(Exception::class) to { e ->
+                    logE<MovieService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                    HandleError.getResultForHttpStatus(null)
+                }
+            )
         )
-    )
 
     override suspend fun fetchMovieGenres(language: String): Result<MovieGenreResponseDto?, ApiError> =
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(
-                    resource = MovieGenreRequestDto(language = language)
+                    resource = MovieGenreRequestDto
                 )
 
                 Result.Success(response.body())
@@ -92,7 +90,7 @@ internal class MovieServiceImpl(
                     HandleError.getResultForHttpStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    logE<MovieService>(message  = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<MovieService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )
@@ -116,7 +114,7 @@ internal class MovieServiceImpl(
                     HandleError.getResultForHttpStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    logE<MovieService>(message  = "Error during findMovieForId: ${e.message}")
+                    logE<MovieService>(message = "Error during findMovieForId: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )

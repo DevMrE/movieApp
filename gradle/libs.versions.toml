@@ -46,6 +46,7 @@ androidx-core-ktx-main = { group = "androidx.core", name = "core-ktx", version.r
 # JetBrains AndroidX Lifecycle
 androidx-lifecycle-viewmodelCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "androidxLifecycleVersion" }
 androidx-lifecycle-runtimeCompose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidxLifecycleVersion" }
+androidx-lifecycle-process = { group = "androidx.lifecycle", name = "lifecycle-process", version.ref = "androidxLifecycleVersion" }
 # SavedState & Window
 savedState = { module = "org.jetbrains.androidx.savedstate:savedstate", version.ref = "savedStateVersion" }
 window-core = { module = "org.jetbrains.androidx.window:window-core", version.ref = "windowCoreVersion" }

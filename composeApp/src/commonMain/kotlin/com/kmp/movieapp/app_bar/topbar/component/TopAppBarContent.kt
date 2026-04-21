@@ -21,6 +21,7 @@ import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.ic_back_arrow
 import com.kmp.movieapp.composeApp.ic_movie
 import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.search.presentation.AnimatedSearchButtonWithInputField
 import com.kmp.navigation.compose.rememberNavigation
 import org.jetbrains.compose.resources.vectorResource
 
@@ -36,7 +37,10 @@ fun TopAppBarContent(
             .padding(horizontal = MaterialTheme.padding.defaultContentPadding)
             .animateContentSize(),
         title = {
+            AnimatedSearchButtonWithInputField {
+
             LogoWithTitle(title)
+            }
         },
         navigationIcon = {
             if (showBackButton) {

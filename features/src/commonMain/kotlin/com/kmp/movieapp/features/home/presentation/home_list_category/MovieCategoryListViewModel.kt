@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.features.home.domain.model.HomeCategory
-import com.kmp.movieapp.features.home.domain.model.Movie
+import com.kmp.movieapp.features.movie.domain.model.Movie
 import com.kmp.movieapp.features.home.domain.usecase.LoadNextMoviesForCategoryUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow

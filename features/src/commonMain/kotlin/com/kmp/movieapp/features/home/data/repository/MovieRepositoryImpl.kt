@@ -4,12 +4,11 @@ import com.kmp.movieapp.core.network.util.onError
 import com.kmp.movieapp.core.network.util.onFailure
 import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.core.util.logger.logE
-import com.kmp.movieapp.features.home.data.model.mapper.toMovie
-import com.kmp.movieapp.features.home.data.model.mapper.toMovieListCategory
 import com.kmp.movieapp.features.home.data.service.MovieService
 import com.kmp.movieapp.features.home.domain.model.HomeCategory
-import com.kmp.movieapp.features.home.domain.model.Movie
 import com.kmp.movieapp.features.home.domain.repository.MovieRepository
+import com.kmp.movieapp.features.movie.data.mapper.toMovie
+import com.kmp.movieapp.features.movie.domain.model.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
@@ -21,14 +20,13 @@ internal class MovieRepositoryImpl(
 
     private val _movieLists = MutableStateFlow<Map<HomeCategory, List<Movie>>>(emptyMap())
 
-    override suspend fun getMovies(
+    override suspend fun getPopularMovies(
         language: String,
         page: Int,
         homeCategory: HomeCategory
     ): Flow<List<Movie>?> = flow {
-        movieService.fetchMoviesForCategory(
-            page = page,
-            movieListCategory = homeCategory.toMovieListCategory()
+        movieService.fetchMoviesPopularMovies(
+            page = page
         ).onSuccess { data ->
             val movieList = data.results?.map { movieDto ->
                 movieDto.toMovie()

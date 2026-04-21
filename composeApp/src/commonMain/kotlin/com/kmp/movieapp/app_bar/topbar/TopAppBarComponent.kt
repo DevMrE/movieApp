@@ -8,10 +8,9 @@ import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.app_name
 import com.kmp.movieapp.composeApp.discover_media_title
 import com.kmp.movieapp.composeApp.more
-import com.kmp.movieapp.composeApp.movie_category_list_title
-import com.kmp.movieapp.composeApp.movie_category_now_playing
-import com.kmp.movieapp.composeApp.movie_category_popular
-import com.kmp.movieapp.composeApp.movie_category_top_rated
+import com.kmp.movieapp.composeApp.popular_movies_title
+import com.kmp.movieapp.composeApp.popular_series_title
+import com.kmp.movieapp.composeApp.trending_title
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
@@ -38,13 +37,13 @@ fun TopAppBarComponent() {
 
     val title = when (navDestination) {
         is HomeMediaCategoryListDestination -> {
-            val category = when (navDestination.homeCategory) {
-                HomeCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
-                HomeCategory.NOW_PLAYING -> stringResource(Res.string.movie_category_now_playing)
-                HomeCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
+            val currentTitle = when (navDestination.homeCategory) {
+                HomeCategory.POPULAR_MOVIES -> Res.string.popular_movies_title
+                HomeCategory.POPULAR_SERIES -> Res.string.popular_series_title
+                else -> Res.string.trending_title
             }
 
-            stringResource(Res.string.movie_category_list_title, category)
+            stringResource(currentTitle)
         }
 
         else -> stringResource(screenStringResource)

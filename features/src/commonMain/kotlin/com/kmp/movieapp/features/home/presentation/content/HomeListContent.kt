@@ -19,9 +19,9 @@ import com.kmp.movieapp.features.Res
 import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.action.HomeAction
 import com.kmp.movieapp.features.home.presentation.model.UiHomeList
-import com.kmp.movieapp.features.movie_category_list_title
-import com.kmp.movieapp.features.movie_category_popular
-import com.kmp.movieapp.features.movie_category_top_rated
+import com.kmp.movieapp.features.home_popular_movies_title
+import com.kmp.movieapp.features.home_popular_series_title
+import com.kmp.movieapp.features.home_trending_title
 import com.kmp.movieapp.features.see_all
 import org.jetbrains.compose.resources.stringResource
 
@@ -30,46 +30,41 @@ internal fun LazyListScope.homeListContent(
     onAction: (HomeAction) -> Unit
 ) {
     item {
-        val categoryTitle = when (uiHomeList?.category) {
-            HomeCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
-            HomeCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
-            else -> null
+        val title = when (uiHomeList?.category) {
+            HomeCategory.POPULAR_SERIES -> Res.string.home_popular_series_title
+            HomeCategory.POPULAR_MOVIES -> Res.string.home_popular_movies_title
+            else -> Res.string.home_trending_title
         }
-        val title: String? = if (categoryTitle != null) {
-            stringResource(Res.string.movie_category_list_title, categoryTitle)
-        } else null
 
         Column(
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.defaultContentPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            title?.let {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = MaterialTheme.padding.thirty),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = MaterialTheme.padding.thirty),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+
+                Text(
+                    text = stringResource(title),
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onBackground
+                )
+
+                TextButton(
+                    onClick = {
+                        onAction(HomeAction.OnSeeAllClicked(homeCategory = uiHomeList?.category))
+                    },
                 ) {
-
-                    Text(
-                        text = it,
-                        style = MaterialTheme.typography.headlineMedium,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-
-                    TextButton(
-                        onClick = {
-                            onAction(HomeAction.OnSeeAllClicked(homeCategory = uiHomeList?.category))
-                        },
-                    ) {
-                        Text(stringResource(Res.string.see_all))
-                    }
+                    Text(stringResource(Res.string.see_all))
                 }
             }
 
             val cardSize =
-                if (title == null) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
+                if (uiHomeList?.category == HomeCategory.TRENDING) MaterialTheme.size.moviePosterWidth else MaterialTheme.size.movieCardWidth
 
             LazyRow(
                 verticalAlignment = Alignment.CenterVertically,
@@ -79,6 +74,7 @@ internal fun LazyListScope.homeListContent(
                 uiHomeList?.movies?.let {
                     mediaCardContent(
                         width = cardSize,
+                        category = uiHomeList.category,
                         movieList = it,
                         onAction = onAction
                     )
