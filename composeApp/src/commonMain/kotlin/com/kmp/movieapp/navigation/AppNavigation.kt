@@ -9,7 +9,7 @@ import com.kmp.movieapp.discover.presentation.DiscoverMediaScreen
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.features.home.presentation.HomeContent
 import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
-import com.kmp.movieapp.features.home.presentation.home_list_category.MediaCategoryListScreen
+import com.kmp.movieapp.features.media_list.presentation.MediaListScreen
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.search.presentation.SearchContent
 import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
@@ -28,7 +28,7 @@ fun registerAppNavigation() {
             exitTransition = {
                 scaleOut()
             }
-        ) { data -> MediaCategoryListScreen(data.homeCategory) }
+        ) { data -> MediaListScreen(data.homeCategory) }
 
         content<DiscoverMediaDestination> {
             DiscoverMediaScreen()

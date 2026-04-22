@@ -7,7 +7,7 @@ import com.kmp.movieapp.features.trending.domain.model.Trending
 import com.kmp.movieapp.features.trending.domain.model.TrendingType
 
 fun TrendingResultDto.toTrending() = Trending(
-    title = title ?: "",
+    title = name ?: title ?: "",
     originTitle = originalTitle ?: "",
     id = id ?: 0,
     type = when (mediaType) {

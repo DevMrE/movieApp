@@ -7,7 +7,7 @@ import com.kmp.movieapp.features.trending.domain.GetTrendingUseCase
 import com.kmp.movieapp.features.trending.domain.repository.TrendingRepository
 import org.koin.dsl.module
 
-val trendingModule = module {
+internal val trendingModule = module {
     single<TrendingApiService> {
         TrendingApiServiceImpl(get())
     }

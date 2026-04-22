@@ -1,6 +1,6 @@
 package com.kmp.movieapp.features.home.presentation.action
 
-import com.kmp.movieapp.features.home.domain.model.HomeCategory
+import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
 
 internal sealed interface HomeAction {
 

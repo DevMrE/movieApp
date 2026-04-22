@@ -1,7 +1,7 @@
 package com.kmp.movieapp.features.movie.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
-import com.kmp.movieapp.features.home.domain.model.MovieGenre
+import com.kmp.movieapp.features.movie.data.domain.model.MovieGenre
 import com.kmp.movieapp.features.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.features.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import com.kmp.movieapp.features.movie.domain.model.Movie

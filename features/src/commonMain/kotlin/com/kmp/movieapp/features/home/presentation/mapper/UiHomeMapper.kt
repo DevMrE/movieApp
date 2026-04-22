@@ -1,28 +1,31 @@
 package com.kmp.movieapp.features.home.presentation.mapper
 
 import com.kmp.movieapp.features.Res
-import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.model.UiHomeList
-import com.kmp.movieapp.features.home.presentation.model.UiMedia
+import com.kmp.movieapp.features.media_list.presentation.model.UiMediaCard
 import com.kmp.movieapp.features.home_popular_movies_title
 import com.kmp.movieapp.features.home_trending_title
+import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
 import com.kmp.movieapp.features.movie.domain.model.Movie
 import com.kmp.movieapp.features.trending.domain.model.Trending
+import com.kmp.movieapp.features.trending.domain.model.TrendingType
 
-internal fun Movie.toUiMedia() = UiMedia(
+internal fun Movie.toUiMedia() = UiMediaCard(
     id = id.toString(),
     title = title,
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backDropPath,
+    type = TrendingType.MOVIE
 )
 
-internal fun Trending.toUiMedia() = UiMedia(
+internal fun Trending.toUiMedia() = UiMediaCard(
     id = id.toString(),
     title = title,
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backdropPath,
+    type = type
 )
 
 /**

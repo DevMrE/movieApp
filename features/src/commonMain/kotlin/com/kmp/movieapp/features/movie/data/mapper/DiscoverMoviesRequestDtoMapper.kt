@@ -1,7 +1,7 @@
 package com.kmp.movieapp.features.movie.data.mapper
 
 import com.kmp.movieapp.features.movie.data.model.request.discover.DiscoverMoviesRequestDto
-import com.kmp.movieapp.features.home.domain.model.Filter
+import com.kmp.movieapp.features.movie.data.domain.model.Filter
 
 internal fun Filter.toDiscoverMoviesDto() = DiscoverMoviesRequestDto(
     sortBy = sortBy.toSortByDto(),

@@ -1,7 +1,7 @@
 package com.kmp.movieapp.features.movie.data.mapper
 
 import com.kmp.movieapp.features.movie.data.model.response.GenreDto
-import com.kmp.movieapp.features.home.domain.model.MovieGenre
+import com.kmp.movieapp.features.movie.data.domain.model.MovieGenre
 
 /**
  * Mapper for transforming an [GenreDto] into

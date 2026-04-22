@@ -16,12 +16,13 @@ import androidx.compose.ui.Modifier
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.features.Res
-import com.kmp.movieapp.features.home.domain.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.action.HomeAction
 import com.kmp.movieapp.features.home.presentation.model.UiHomeList
 import com.kmp.movieapp.features.home_popular_movies_title
 import com.kmp.movieapp.features.home_popular_series_title
 import com.kmp.movieapp.features.home_trending_title
+import com.kmp.movieapp.features.media_list.presentation.component.mediaCardContent
+import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
 import com.kmp.movieapp.features.see_all
 import org.jetbrains.compose.resources.stringResource
 
@@ -74,7 +75,6 @@ internal fun LazyListScope.homeListContent(
                 uiHomeList?.movies?.let {
                     mediaCardContent(
                         width = cardSize,
-                        category = uiHomeList.category,
                         movieList = it,
                         onAction = onAction
                     )

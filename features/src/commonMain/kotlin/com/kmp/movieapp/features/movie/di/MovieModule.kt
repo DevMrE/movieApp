@@ -1,21 +1,21 @@
 package com.kmp.movieapp.features.movie.di
 
-import com.kmp.movieapp.features.home.data.repository.MovieRepositoryImpl
-import com.kmp.movieapp.features.home.data.service.MovieService
-import com.kmp.movieapp.features.home.data.service.MovieServiceImpl
-import com.kmp.movieapp.features.home.domain.repository.MovieRepository
-import com.kmp.movieapp.features.home.domain.usecase.GetHomeDataUseCase
-import com.kmp.movieapp.features.home.domain.usecase.GetPopularMoviesUseCase
-import com.kmp.movieapp.features.home.domain.usecase.LoadNextMoviesForCategoryUseCase
 import com.kmp.movieapp.features.home.presentation.HomeScreenViewModel
-import com.kmp.movieapp.features.home.presentation.home_list_category.MovieCategoryListViewModel
+import com.kmp.movieapp.features.media_list.presentation.MediaListViewModel
+import com.kmp.movieapp.features.movie.data.domain.repository.MovieRepository
+import com.kmp.movieapp.features.movie.data.domain.usecase.GetHomeDataUseCase
+import com.kmp.movieapp.features.movie.data.domain.usecase.GetPopularMoviesUseCase
+import com.kmp.movieapp.features.movie.data.domain.usecase.LoadNextMoviesForCategoryUseCase
+import com.kmp.movieapp.features.movie.data.repository.MovieRepositoryImpl
+import com.kmp.movieapp.features.movie.data.service.MovieApiService
+import com.kmp.movieapp.features.movie.data.service.MovieApiServiceImpl
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
-val featuresModule = module {
-    single<MovieService> {
-        MovieServiceImpl(get())
+internal val movieModule = module {
+    single<MovieApiService> {
+        MovieApiServiceImpl(get())
     }
 
     single<MovieRepository> {
@@ -35,7 +35,7 @@ val featuresModule = module {
     viewModelOf(::HomeScreenViewModel)
 
     viewModel { params ->
-        MovieCategoryListViewModel(
+        MediaListViewModel(
             loadNextMoviesForCategoryUseCase = get(),
             homeCategory = params.get()
         )

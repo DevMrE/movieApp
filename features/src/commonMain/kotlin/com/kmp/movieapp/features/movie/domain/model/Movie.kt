@@ -1,6 +1,6 @@
 package com.kmp.movieapp.features.movie.domain.model
 
-import com.kmp.movieapp.features.home.domain.model.MovieGenre
+import com.kmp.movieapp.features.movie.data.domain.model.MovieGenre
 
 data class Movie(
     val id: Int,

@@ -5,7 +5,7 @@ import com.kmp.movieapp.features.trending.domain.model.TrendingType
 import com.kmp.movieapp.features.trending.domain.repository.TrendingRepository
 import kotlinx.coroutines.flow.Flow
 
-class GetTrendingUseCase(
+internal class GetTrendingUseCase(
     private val repository: TrendingRepository
 ) {
     suspend operator fun invoke(

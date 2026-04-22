@@ -11,5 +11,6 @@
     <string name="movie">Film</string>
     <string name="series">Serie</string>
     <string name="actor">Schauspieler</string>
+    <string name="unknown">Unbekannt</string>
     <string name="content_type">%1$s: %2$s</string>
 </resources>

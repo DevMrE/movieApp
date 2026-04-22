@@ -74,23 +74,21 @@ internal class SettingsScreenViewModel(
     private fun handleCameraFeature() {
         viewModelScope.launch {
             deviceOperationsController.capturePhoto().collectLatest { result ->
-                when (result) {
-                    is OperationResult.Success -> {
-                        logI<SettingsScreenViewModel>(message = "capture photo granted")
-                        _uiState.update {
-                            it.copy(
-                                permissionDemoResult = PermissionDemoResult.GalleryReady(mediaList = listOf(result.data))
+                result.onGranted { data ->
+                    logI<SettingsScreenViewModel>(message = "capture photo granted")
+                    _uiState.update {
+                        it.copy(
+                            permissionDemoResult = PermissionDemoResult.GalleryReady(
+                                mediaList = listOf(
+                                    data
+                                )
                             )
-                        }
+                        )
                     }
+                }.onDenied {
+                    logI<SettingsScreenViewModel>(message = "viewModel onDenied")
+                }.onCancelled {
 
-                    is OperationResult.Denied -> {
-                        logI<SettingsScreenViewModel>(message = "viewModel onDenied")
-                    }
-
-                    is OperationResult.Cancelled -> {
-
-                    }
                 }
             }
         }

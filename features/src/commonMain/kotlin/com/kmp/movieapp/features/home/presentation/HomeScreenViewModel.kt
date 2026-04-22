@@ -5,13 +5,13 @@ import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
-import com.kmp.movieapp.features.home.domain.model.HomeCategory
-import com.kmp.movieapp.features.home.domain.usecase.GetHomeDataUseCase
 import com.kmp.movieapp.features.home.presentation.action.HomeAction
 import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeMovieList
 import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeTrendingList
-import com.kmp.movieapp.features.home.presentation.model.UiMovieScreen
+import com.kmp.movieapp.features.home.presentation.model.UiHomeData
+import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
+import com.kmp.movieapp.features.movie.data.domain.usecase.GetHomeDataUseCase
 import com.kmp.navigation.Navigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,7 +29,7 @@ internal class HomeScreenViewModel(
     private val getHomeDataUseCase: GetHomeDataUseCase
 ) : ViewModel() {
 
-    private val _movieScreenState = MutableStateFlow<UiMovieScreen?>(null)
+    private val _movieScreenState = MutableStateFlow<UiHomeData?>(null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val movieScreenState = _movieScreenState
@@ -37,7 +37,7 @@ internal class HomeScreenViewModel(
             getHomeDataUseCase()
         }.map { (trending, popularMovies) ->
             _movieScreenState.updateAndGet {
-                UiMovieScreen(
+                UiHomeData(
                     isLoading = trending.isEmpty() && popularMovies == null,
                     trendingList = trending.toUiHomeTrendingList(),
                     popularMovie = popularMovies?.toUiHomeMovieList(),
@@ -72,7 +72,7 @@ internal class HomeScreenViewModel(
     private fun onRefresh() {
         viewModelScope.launch {
             _movieScreenState.update {
-                UiMovieScreen(
+                UiHomeData(
                     isLoading = true,
                     trendingList = _movieScreenState.value?.trendingList,
                     popularMovie = _movieScreenState.value?.popularMovie,
@@ -82,7 +82,7 @@ internal class HomeScreenViewModel(
 
             getHomeDataUseCase().collectLatest { (trendings, popularMovies) ->
                 _movieScreenState.update {
-                    UiMovieScreen(
+                    UiHomeData(
                         isLoading = trendings.isEmpty() && popularMovies == null,
                         trendingList = trendings.toUiHomeTrendingList(),
                         popularMovie = trendings.toUiHomeTrendingList(),
