@@ -12,7 +12,7 @@ import com.kmp.movieapp.composeApp.popular_movies_title
 import com.kmp.movieapp.composeApp.popular_series_title
 import com.kmp.movieapp.composeApp.trending_title
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn

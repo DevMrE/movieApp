@@ -1,6 +1,6 @@
 package com.kmp.movieapp.features.movie.data.domain.repository
 
-import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.movie.domain.model.Movie
 import kotlinx.coroutines.flow.Flow
 

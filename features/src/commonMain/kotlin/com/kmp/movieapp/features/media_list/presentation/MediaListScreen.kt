@@ -18,11 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
-import com.kmp.movieapp.core.ui.content.MediaItemCard
+import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
-import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -70,11 +70,11 @@ fun MediaListScreen(homeCategory: HomeCategory) {
         ),
     ) {
         items(items = movieList.value, contentType = { "media" }) { movie ->
-            MediaItemCard(
+            MediaCard(
                 width = MaterialTheme.size.movieCardWidth,
                 height = MaterialTheme.size.movieCardLstHeight,
-                movieTitle = movie.title,
-                moviePosterPath = movie.posterPath,
+                title = movie.title,
+                posterPath = movie.posterPath,
                 onClick = {
                     navigation.navigateTo(
                         destination = MediaDetailDestination(

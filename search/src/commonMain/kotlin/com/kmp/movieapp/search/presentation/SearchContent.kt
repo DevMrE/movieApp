@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.core.ui.content.MediaItemCard
+import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
@@ -48,12 +48,12 @@ fun SearchContent() {
         ),
     ) {
         items(items = results.searchResults, key = { it.hashCode() }) { movie ->
-            MediaItemCard(
+            MediaCard(
                 width = MaterialTheme.size.movieCardWidth,
                 height = MaterialTheme.size.movieCardLstHeight,
-                movieTitle = "",
+                title = "",
                 enableGradient = false,
-                moviePosterPath = movie.posterPath,
+                posterPath = movie.posterPath,
                 onClick = {
                     navigation.navigateTo(
                         destination = MediaDetailDestination(

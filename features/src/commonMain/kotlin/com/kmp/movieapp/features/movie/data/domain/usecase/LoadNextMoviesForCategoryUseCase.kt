@@ -1,6 +1,6 @@
 package com.kmp.movieapp.features.movie.data.domain.usecase
 
-import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.movie.data.domain.repository.MovieRepository
 
 internal class LoadNextMoviesForCategoryUseCase(

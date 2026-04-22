@@ -3,7 +3,7 @@ package com.kmp.movieapp.features.media_list.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
-import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.movie.data.domain.usecase.LoadNextMoviesForCategoryUseCase
 import com.kmp.movieapp.features.movie.domain.model.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi

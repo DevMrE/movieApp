@@ -9,8 +9,8 @@ import com.kmp.movieapp.features.home.presentation.action.HomeAction
 import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeMovieList
 import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeTrendingList
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.model.UiHomeData
-import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
 import com.kmp.movieapp.features.movie.data.domain.usecase.GetHomeDataUseCase
 import com.kmp.navigation.Navigation
 import kotlinx.coroutines.Dispatchers

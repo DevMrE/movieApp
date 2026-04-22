@@ -5,7 +5,7 @@ import com.kmp.movieapp.core.network.util.onFailure
 import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.features.movie.data.service.MovieApiService
-import com.kmp.movieapp.features.movie.data.domain.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.movie.data.domain.repository.MovieRepository
 import com.kmp.movieapp.features.movie.data.mapper.toMovie
 import com.kmp.movieapp.features.movie.domain.model.Movie

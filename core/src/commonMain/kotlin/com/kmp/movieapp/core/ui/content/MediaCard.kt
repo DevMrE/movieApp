@@ -29,10 +29,10 @@ import com.kmp.movieapp.core.util.composable.gradientOverlay
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MediaItemCard(
+fun MediaCard(
     width: Dp,
-    movieTitle: String,
-    moviePosterPath: String?,
+    title: String,
+    posterPath: String?,
     enableGradient: Boolean = true,
     height: Dp = MaterialTheme.size.movieCardHeight,
     onClick: (() -> Unit)? = null,
@@ -56,9 +56,9 @@ fun MediaItemCard(
                     }
                 }
         ) {
-            if (moviePosterPath != null) {
+            if (posterPath != null) {
                 ImageLoader(
-                    url = moviePosterPath,
+                    url = posterPath,
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.applyIf(condition = enableGradient) {
                         gradientOverlay(brush = MaterialTheme.gradient.card)
@@ -72,7 +72,7 @@ fun MediaItemCard(
             }
 
             Text(
-                text = movieTitle,
+                text = title,
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(

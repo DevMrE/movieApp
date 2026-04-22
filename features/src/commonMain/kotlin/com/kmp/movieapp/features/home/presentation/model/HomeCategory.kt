@@ -1,4 +1,4 @@
-package com.kmp.movieapp.features.movie.data.domain.model
+package com.kmp.movieapp.features.home.presentation.model
 
 enum class HomeCategory {
     TRENDING,
