@@ -5,7 +5,7 @@ import io.ktor.resources.Resource
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.SERIES_ENDPOINT}/popular}")
+@Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.SERIES_ENDPOINT}/popular")
 data class SeriesRequestDto(
     val page: Int = 1,
 )

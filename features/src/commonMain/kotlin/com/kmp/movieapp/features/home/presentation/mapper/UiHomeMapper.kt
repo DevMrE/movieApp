@@ -1,24 +1,44 @@
 package com.kmp.movieapp.features.home.presentation.mapper
 
 import com.kmp.movieapp.features.Res
-import com.kmp.movieapp.features.home.presentation.model.UiHomeList
-import com.kmp.movieapp.features.media_list.presentation.model.UiMediaCard
-import com.kmp.movieapp.features.home_popular_movies_title
-import com.kmp.movieapp.features.home_trending_title
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
+import com.kmp.movieapp.features.home.presentation.model.UiHomeList
+import com.kmp.movieapp.features.home_popular_movies_title
+import com.kmp.movieapp.features.home_popular_series_title
+import com.kmp.movieapp.features.home_trending_title
+import com.kmp.movieapp.features.media_list.presentation.model.UiMediaCard
 import com.kmp.movieapp.features.movie.domain.model.Movie
+import com.kmp.movieapp.features.series.domain.model.Series
 import com.kmp.movieapp.features.trending.domain.model.Trending
 import com.kmp.movieapp.features.trending.domain.model.TrendingType
 
+/**
+ * Mapper to map the [Movie] into [UiMediaCard].
+ */
 internal fun Movie.toUiMedia() = UiMediaCard(
     id = id.toString(),
     title = title,
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
-    backdropPath = backDropPath,
+    backdropPath = backdropPath,
     type = TrendingType.MOVIE
 )
 
+/**
+ * Mapper to map the [Series] into [UiMediaCard].
+ */
+internal fun Series.toUiMedia() = UiMediaCard(
+    id = id.toString(),
+    title = name,
+    genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
+    posterPath = posterPath,
+    backdropPath = backdropPath,
+    type = TrendingType.MOVIE
+)
+
+/**
+ * Mapper to map the [Trending] into [UiMediaCard].
+ */
 internal fun Trending.toUiMedia() = UiMediaCard(
     id = id.toString(),
     title = title,
@@ -39,6 +59,20 @@ internal fun List<Movie>.toUiHomeMovieList(): UiHomeList {
     )
 }
 
+/**
+ * Mapper to map the [List] of [Series] into [UiHomeList].
+ */
+internal fun List<Series>.toUiHomeSeriesList(): UiHomeList {
+    return UiHomeList(
+        category = HomeCategory.POPULAR_SERIES,
+        title = Res.string.home_popular_series_title,
+        movies = this.map { it.toUiMedia() }
+    )
+}
+
+/**
+ * Mapper to map the [List] of [Trending] into [UiHomeList].
+ */
 internal fun List<Trending>.toUiHomeTrendingList(): UiHomeList {
     return UiHomeList(
         category = HomeCategory.TRENDING,
@@ -46,5 +80,3 @@ internal fun List<Trending>.toUiHomeTrendingList(): UiHomeList {
         movies = this.map { it.toUiMedia() }
     )
 }
-
-

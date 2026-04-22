@@ -5,6 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 internal interface SeriesRepository {
 
-    suspend fun getPopularSeries(): Flow<List<Series>>
+    suspend fun getPopularSeries(page: Int = 1): Flow<List<Series>>
 
 }

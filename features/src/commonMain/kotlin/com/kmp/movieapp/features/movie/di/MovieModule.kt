@@ -30,7 +30,7 @@ internal val movieModule = module {
         LoadNextMoviesForCategoryUseCase(get())
     }
 
-    factory { GetHomeDataUseCase(get(), get()) }
+    factory { GetHomeDataUseCase(get(), get(), get()) }
 
     viewModelOf(::HomeScreenViewModel)
 

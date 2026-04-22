@@ -8,6 +8,7 @@ import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.features.home.presentation.action.HomeAction
 import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeMovieList
+import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeSeriesList
 import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeTrendingList
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.model.UiHomeData
@@ -35,13 +36,13 @@ internal class HomeScreenViewModel(
     val movieScreenState = _movieScreenState
         .flatMapLatest {
             getHomeDataUseCase()
-        }.map { (trending, popularMovies) ->
+        }.map { (trending, popularMovies, popularSeries) ->
             _movieScreenState.updateAndGet {
                 UiHomeData(
                     isLoading = trending.isEmpty() && popularMovies == null,
                     trendingList = trending.toUiHomeTrendingList(),
                     popularMovie = popularMovies?.toUiHomeMovieList(),
-                    popularSeries = null
+                    popularSeries = popularSeries.toUiHomeSeriesList()
                 )
             }
         }.flowOn(Dispatchers.Main.immediate)
@@ -80,7 +81,7 @@ internal class HomeScreenViewModel(
                 )
             }
 
-            getHomeDataUseCase().collectLatest { (trendings, popularMovies) ->
+            getHomeDataUseCase().collectLatest { (trendings, popularMovies, popularSeries) ->
                 _movieScreenState.update {
                     UiHomeData(
                         isLoading = trendings.isEmpty() && popularMovies == null,

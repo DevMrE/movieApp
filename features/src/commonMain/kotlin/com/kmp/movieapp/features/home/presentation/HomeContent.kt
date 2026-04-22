@@ -28,7 +28,7 @@ fun HomeContent() {
     PullToRefreshBox(
         modifier = Modifier.fillMaxSize(),
         isRefreshing = movieScreenState?.isLoading.isTrue,
-        onRefresh = {viewModel.onAction(HomeAction.OnRefresh)}
+        onRefresh = { viewModel.onAction(HomeAction.OnRefresh) }
     ) {
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -47,10 +47,10 @@ fun HomeContent() {
                     onAction = viewModel::onAction
                 )
 
-//                homeListContent(
-//                    uiHomeList = screen.topRatedMovies,
-//                    onAction = viewModel::onAction
-//                )
+                homeListContent(
+                    uiHomeList = screen.popularSeries,
+                    onAction = viewModel::onAction
+                )
             }
 
             item {

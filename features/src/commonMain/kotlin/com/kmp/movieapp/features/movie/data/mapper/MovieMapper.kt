@@ -16,7 +16,7 @@ internal fun MovieForCategoryDto.toMovie() = Movie(
     overview = overview,
     releaseDate = releaseDate,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
-    backDropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
+    backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
     genres = genreIds?.map {
         MovieGenre(
             id = it,
@@ -40,7 +40,7 @@ internal fun MovieDto.toMovie() = Movie(
         MovieGenre(it.id ?: 0, name = "")
     },
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
-    backDropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
+    backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
 )
 
 
