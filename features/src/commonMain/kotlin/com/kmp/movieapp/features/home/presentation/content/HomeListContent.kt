@@ -29,7 +29,6 @@ import com.kmp.movieapp.features.home_trending_title
 import com.kmp.movieapp.features.movie
 import com.kmp.movieapp.features.see_all
 import com.kmp.movieapp.features.series
-import com.kmp.movieapp.features.trending.domain.model.TrendingType
 import com.kmp.movieapp.features.unknown
 import org.jetbrains.compose.resources.stringResource
 
@@ -83,9 +82,9 @@ internal fun LazyListScope.homeListContent(
 
                 items(uiHomeList.movies) { movie ->
                     val contentRes = when (movie.type) {
-                        TrendingType.MOVIE -> Res.string.movie
-                        TrendingType.PEOPLE -> Res.string.actor
-                        TrendingType.SERIES -> Res.string.series
+                        HomeCategory.POPULAR_MOVIES -> Res.string.movie
+                        HomeCategory.POPULAR_PEOPLE -> Res.string.actor
+                        HomeCategory.POPULAR_SERIES -> Res.string.series
                         else -> Res.string.unknown
                     }
 
@@ -99,7 +98,12 @@ internal fun LazyListScope.homeListContent(
                         title = if (bigCard) title else "",
                         posterPath = if (bigCard) movie.backdropPath else movie.posterPath,
                         onClick = {
-                            onAction(HomeAction.OnNavigateToDetailScreen(movie.id))
+                            onAction(
+                                HomeAction.OnNavigateToDetailScreen(
+                                    id = movie.id,
+                                    homeCategory = movie.type
+                                )
+                            )
                         }
                     )
                 }

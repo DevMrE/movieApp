@@ -94,7 +94,7 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * ## Remote → Local fallback example
  *
- * Both operations must use the same [FallbackData] type before [mapOnError]
+ * Both operations must use the same [FallbackData] type before [mapOnFailure]
  * can be used in a single chain.
  *
  * ```kotlin
@@ -273,7 +273,7 @@ inline fun <SuccessData, FallbackData, MappedFallbackData> Result<SuccessData, F
  *
  * Both operations must use the same [FallbackData] type.
  */
-inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.mapOnError(
+inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.mapOnFailure(
     block: (Failure<FallbackData>) -> Result<SuccessData, FallbackData>
 ): Result<SuccessData, FallbackData> {
     return when (this) {

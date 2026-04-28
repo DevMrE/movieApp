@@ -50,13 +50,17 @@ internal class HomeScreenViewModel(
 
     fun onAction(action: HomeAction) {
         when (action) {
-            is HomeAction.OnNavigateToDetailScreen -> navigateToDetailScreen(action.id)
+            is HomeAction.OnNavigateToDetailScreen -> navigateToDetailScreen(
+                id = action.id,
+                homeCategory = action.homeCategory
+            )
+
             is HomeAction.OnSeeAllClicked -> onSeeAll(action.homeCategory)
             is HomeAction.OnRefresh -> onRefresh()
         }
     }
 
-    private fun navigateToDetailScreen(id: String) {
+    private fun navigateToDetailScreen(id: String, homeCategory: HomeCategory) {
         navigation.navigateTo(
             MediaDetailDestination(
                 id = id,
@@ -87,7 +91,7 @@ internal class HomeScreenViewModel(
                         isLoading = trendings.isEmpty() && popularMovies == null,
                         trendingList = trendings.toUiHomeTrendingList(),
                         popularMovie = trendings.toUiHomeTrendingList(),
-                        popularSeries = null
+                        popularSeries = popularSeries.toUiHomeSeriesList()
                     )
                 }
             }

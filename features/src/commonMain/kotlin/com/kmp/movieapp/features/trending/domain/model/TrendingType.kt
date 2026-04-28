@@ -5,5 +5,4 @@ enum class TrendingType {
     MOVIE,
     SERIES,
     PEOPLE,
-    UNKNOWN
 }

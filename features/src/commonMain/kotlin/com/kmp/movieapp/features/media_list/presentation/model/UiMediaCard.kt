@@ -1,7 +1,7 @@
 package com.kmp.movieapp.features.media_list.presentation.model
 
 import androidx.compose.runtime.Stable
-import com.kmp.movieapp.features.trending.domain.model.TrendingType
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 
 /**
  * Represents a single movie for the movie list screen
@@ -13,5 +13,5 @@ internal data class UiMediaCard(
     val genre: String,
     val posterPath: String?,
     val backdropPath: String?,
-    val type: TrendingType
+    val type: HomeCategory
 )

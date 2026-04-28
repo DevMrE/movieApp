@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.movie.data.domain.usecase.LoadNextMoviesForCategoryUseCase
+import com.kmp.movieapp.features.movie.domain.model.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.update
 
 internal class MediaListViewModel(
@@ -17,13 +19,15 @@ internal class MediaListViewModel(
     private val _currentPage = MutableStateFlow(1)
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val movieListState = _currentPage
+    val movieListState: StateFlow<List<Movie>> = _currentPage
         .flatMapLatest { page ->
             loadNextMoviesForCategoryUseCase(
                 page = page,
                 homeCategory = homeCategory
             )
-        }.filterNotNull()
+        }.scan(emptyList<Movie>()) { currentList, newList ->
+            currentList + (newList ?: emptyList())
+        }
         .stateInEagerly(emptyList())
 
     fun loadNextMovies() {

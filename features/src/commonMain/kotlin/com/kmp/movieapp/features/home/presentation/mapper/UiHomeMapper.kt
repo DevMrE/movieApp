@@ -21,7 +21,7 @@ internal fun Movie.toUiMedia() = UiMediaCard(
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backdropPath,
-    type = TrendingType.MOVIE
+    type = getHomeCategory(TrendingType.MOVIE)
 )
 
 /**
@@ -33,7 +33,7 @@ internal fun Series.toUiMedia() = UiMediaCard(
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backdropPath,
-    type = TrendingType.MOVIE
+    type = getHomeCategory(TrendingType.SERIES)
 )
 
 /**
@@ -45,7 +45,7 @@ internal fun Trending.toUiMedia() = UiMediaCard(
     genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backdropPath,
-    type = type
+    type = getHomeCategory(type)
 )
 
 /**
@@ -79,4 +79,13 @@ internal fun List<Trending>.toUiHomeTrendingList(): UiHomeList {
         title = Res.string.home_popular_movies_title,
         movies = this.map { it.toUiMedia() }
     )
+}
+
+private fun getHomeCategory(trendingType: TrendingType): HomeCategory {
+    return when (trendingType) {
+        TrendingType.MOVIE -> HomeCategory.POPULAR_MOVIES
+        TrendingType.SERIES -> HomeCategory.POPULAR_SERIES
+        TrendingType.PEOPLE -> HomeCategory.POPULAR_PEOPLE
+        else -> HomeCategory.TRENDING
+    }
 }

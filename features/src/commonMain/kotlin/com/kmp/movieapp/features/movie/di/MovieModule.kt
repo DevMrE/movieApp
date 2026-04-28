@@ -27,7 +27,7 @@ internal val movieModule = module {
     }
 
     factory<LoadNextMoviesForCategoryUseCase> {
-        LoadNextMoviesForCategoryUseCase(get())
+        LoadNextMoviesForCategoryUseCase(get(), get(), get())
     }
 
     factory { GetHomeDataUseCase(get(), get(), get()) }
