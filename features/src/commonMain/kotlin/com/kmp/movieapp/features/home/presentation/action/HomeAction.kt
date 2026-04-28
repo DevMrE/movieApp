@@ -1,10 +1,11 @@
 package com.kmp.movieapp.features.home.presentation.action
 
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 
 internal sealed interface HomeAction {
 
-    data class OnNavigateToDetailScreen(val id: String, val homeCategory: HomeCategory) : HomeAction
+    data class OnNavigateToDetailScreen(val id: String, val contentDetailType: ContentDetailType) : HomeAction
 
     data class OnSeeAllClicked(val homeCategory: HomeCategory?) : HomeAction
 

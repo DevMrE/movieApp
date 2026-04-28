@@ -11,7 +11,7 @@ import org.koin.dsl.module
 val contentDetailModule = module {
 
     single<ContentDetailRepository> {
-        ContentDetailRepImpl(get())
+        ContentDetailRepImpl(get(), get())
     }
 
     factory<GetContentDetail> {

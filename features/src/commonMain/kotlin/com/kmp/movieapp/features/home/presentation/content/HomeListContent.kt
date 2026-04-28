@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
@@ -29,7 +30,6 @@ import com.kmp.movieapp.features.home_trending_title
 import com.kmp.movieapp.features.movie
 import com.kmp.movieapp.features.see_all
 import com.kmp.movieapp.features.series
-import com.kmp.movieapp.features.unknown
 import org.jetbrains.compose.resources.stringResource
 
 internal fun LazyListScope.homeListContent(
@@ -82,10 +82,9 @@ internal fun LazyListScope.homeListContent(
 
                 items(uiHomeList.movies) { movie ->
                     val contentRes = when (movie.type) {
-                        HomeCategory.POPULAR_MOVIES -> Res.string.movie
-                        HomeCategory.POPULAR_PEOPLE -> Res.string.actor
-                        HomeCategory.POPULAR_SERIES -> Res.string.series
-                        else -> Res.string.unknown
+                        ContentDetailType.MOVIE -> Res.string.movie
+                        ContentDetailType.PERSON -> Res.string.actor
+                        ContentDetailType.SERIES -> Res.string.series
                     }
 
                     val typeString = stringResource(contentRes)
@@ -101,7 +100,7 @@ internal fun LazyListScope.homeListContent(
                             onAction(
                                 HomeAction.OnNavigateToDetailScreen(
                                     id = movie.id,
-                                    homeCategory = movie.type
+                                    contentDetailType = movie.type
                                 )
                             )
                         }

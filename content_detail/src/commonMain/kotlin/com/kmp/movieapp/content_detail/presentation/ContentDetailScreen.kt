@@ -23,7 +23,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun ContentDetailScreen(
     id: String,
-    contentType: ContentDetailType
+    contentType: ContentDetailType?
 ) {
     val viewModel = koinViewModel<ContentDetailViewModel>(
         parameters = { parametersOf(id, contentType) },

@@ -52,7 +52,7 @@ internal class HomeScreenViewModel(
         when (action) {
             is HomeAction.OnNavigateToDetailScreen -> navigateToDetailScreen(
                 id = action.id,
-                homeCategory = action.homeCategory
+                contentDetailType = action.contentDetailType
             )
 
             is HomeAction.OnSeeAllClicked -> onSeeAll(action.homeCategory)
@@ -60,11 +60,11 @@ internal class HomeScreenViewModel(
         }
     }
 
-    private fun navigateToDetailScreen(id: String, homeCategory: HomeCategory) {
+    private fun navigateToDetailScreen(id: String, contentDetailType: ContentDetailType) {
         navigation.navigateTo(
             MediaDetailDestination(
                 id = id,
-                contentDetailType = ContentDetailType.MOVIE
+                contentDetailType = contentDetailType
             )
         )
     }

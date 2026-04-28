@@ -1,5 +1,7 @@
 package com.kmp.movieapp.features.movie.domain.model
 
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.content_type.model.Media
 import com.kmp.movieapp.features.movie.data.domain.model.MovieGenre
 
 data class Movie(
@@ -11,4 +13,5 @@ data class Movie(
     val runtime: Int?,
     val releaseDate: String?,
     val genres: List<MovieGenre>? = emptyList(),
-)
+    val type: ContentDetailType = ContentDetailType.SERIES
+) : Media(contentDetailType = type)

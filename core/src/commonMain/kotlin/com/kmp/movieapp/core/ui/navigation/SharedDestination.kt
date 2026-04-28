@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class MediaDetailDestination(
     val id: String,
-    val contentDetailType: ContentDetailType
+    val contentDetailType: ContentDetailType?
 ) : NavDestination

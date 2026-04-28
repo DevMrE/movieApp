@@ -1,5 +1,6 @@
 package com.kmp.movieapp.features.home.presentation.mapper
 
+import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.features.Res
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.model.UiHomeList
@@ -81,11 +82,10 @@ internal fun List<Trending>.toUiHomeTrendingList(): UiHomeList {
     )
 }
 
-private fun getHomeCategory(trendingType: TrendingType): HomeCategory {
+private fun getHomeCategory(trendingType: TrendingType): ContentDetailType {
     return when (trendingType) {
-        TrendingType.MOVIE -> HomeCategory.POPULAR_MOVIES
-        TrendingType.SERIES -> HomeCategory.POPULAR_SERIES
-        TrendingType.PEOPLE -> HomeCategory.POPULAR_PEOPLE
-        else -> HomeCategory.TRENDING
+        TrendingType.SERIES -> ContentDetailType.SERIES
+        TrendingType.PEOPLE -> ContentDetailType.PERSON
+        else -> ContentDetailType.MOVIE
     }
 }
