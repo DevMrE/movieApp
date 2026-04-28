@@ -1,4 +1,4 @@
-package com.kmp.movieapp.features.series.data.model.api.request
+package com.kmp.movieapp.features.series.data.model.api.request.series_list
 
 import com.kmp.movieapp.core.network.url.UrlHelper
 import io.ktor.resources.Resource

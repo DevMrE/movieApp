@@ -10,9 +10,8 @@ interface MovieRepository {
     ): Flow<List<Movie>?>
 
     suspend fun getAllMovies(
-        language: String,
         page: Int
     ): Flow<List<Movie>>
 
-    suspend fun getMovieForId(movieId: Int, language: String): Flow<Movie?>
+    suspend fun getMovieForId(movieId: Int): Flow<Movie?>
 }

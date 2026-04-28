@@ -15,9 +15,9 @@ internal interface MovieApiService {
         page: Int,
     ): Result<ApiResponseDto<MovieForCategoryDto>, ApiError>
 
-    suspend fun fetchMovieGenres(language: String): Result<MovieGenreResponseDto?, ApiError>
+    suspend fun fetchMovieGenres(): Result<MovieGenreResponseDto?, ApiError>
 
     suspend fun fetchAllMovies(filter: Filter): Result<ApiResponseDto<DiscoverMovieDto>, ApiError>
 
-    suspend fun findMovieForId(movieId: Int, language: String): Result<MovieDto, ApiError>
+    suspend fun findMovieForId(movieId: Int): Result<MovieDto, ApiError>
 }

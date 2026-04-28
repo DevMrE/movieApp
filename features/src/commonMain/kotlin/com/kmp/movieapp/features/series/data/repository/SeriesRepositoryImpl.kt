@@ -19,4 +19,12 @@ internal class SeriesRepositoryImpl(
                 emit(series)
             }
     }
+
+    override suspend fun getSerieForId(seriesId: String): Flow<Series> = flow {
+        seriesApiService.fetchSeriesForId(seriesId.toInt())
+            .onSuccess { dto ->
+                val series =  dto.toSeries()
+                emit(series)
+            }
+    }
 }

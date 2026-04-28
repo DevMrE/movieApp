@@ -49,7 +49,7 @@ internal class MovieApiServiceImpl(
             )
         )
 
-    override suspend fun fetchMovieGenres(language: String): Result<MovieGenreResponseDto?, ApiError> =
+    override suspend fun fetchMovieGenres(): Result<MovieGenreResponseDto?, ApiError> =
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(
@@ -95,8 +95,7 @@ internal class MovieApiServiceImpl(
         )
 
     override suspend fun findMovieForId(
-        movieId: Int,
-        language: String
+        movieId: Int
     ): Result<MovieDto, ApiError> =
         multiCatch(
             tryBlock = {

@@ -1,5 +1,4 @@
-package com.kmp.movieapp.features.series.data.model.api.response
-
+package com.kmp.movieapp.features.series.data.model.api.response.series_list
 
 import com.kmp.movieapp.core.network.model.Dto
 import kotlinx.serialization.SerialName
@@ -12,13 +11,13 @@ data class SeriesResultDto(
     @SerialName("first_air_date")
     val firstAirDate: String? = null,
     @SerialName("genre_ids")
-    val genreIds: List<Int?>? = null,
+    val genreIds: List<Int>? = null,
     @SerialName("id")
     val id: Int? = null,
     @SerialName("name")
     val name: String? = null,
     @SerialName("origin_country")
-    val originCountry: List<String?>? = null,
+    val originCountry: List<String>? = null,
     @SerialName("original_language")
     val originalLanguage: String? = null,
     @SerialName("original_name")

@@ -40,12 +40,12 @@ internal class MovieRepositoryImpl(
             }
     }
 
-    override suspend fun getAllMovies(language: String, page: Int): Flow<List<Movie>> {
+    override suspend fun getAllMovies(page: Int): Flow<List<Movie>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getMovieForId(movieId: Int, language: String): Flow<Movie?> = flow {
-        movieApiService.findMovieForId(movieId, language = language)
+    override suspend fun getMovieForId(movieId: Int): Flow<Movie?> = flow {
+        movieApiService.findMovieForId(movieId)
             .onSuccess {
                 emit(it.toMovie())
             }.onFailure {
