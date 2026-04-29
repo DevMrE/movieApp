@@ -25,7 +25,7 @@ fun MediaHorizontalList(
 
             MediaCard(
                 title = item.title,
-                posterPath = item.posterPath,
+                posterPath = if (bigCard) item.backdropPath else item.posterPath,
                 bigCard = bigCard,
             ) { onItemClick(item) }
         }

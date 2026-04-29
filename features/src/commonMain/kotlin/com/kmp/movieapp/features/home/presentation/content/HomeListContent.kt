@@ -57,6 +57,7 @@ internal fun LazyListScope.homeListContent(
 
             MediaHorizontalList(
                 items = contentList,
+                bigCard = homeCategory == HomeCategory.TRENDING,
                 onItemClick = { item ->
                     onAction(
                         HomeAction.OnNavigateToDetailScreen(

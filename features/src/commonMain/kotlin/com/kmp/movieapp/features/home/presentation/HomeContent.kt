@@ -22,6 +22,7 @@ import com.kmp.movieapp.features.home.presentation.content.homeListContent
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home_popular_movies_title
 import com.kmp.movieapp.features.home_popular_series_title
+import com.kmp.movieapp.features.home_trending_title
 import com.kmp.movieapp.movie.presentation.MovieListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -47,7 +48,7 @@ fun HomeContent() {
             movieScreenState?.let { screen ->
                 screen.trendingList?.movies?.let {
                     homeListContent(
-                        title = Res.string.home_popular_series_title,
+                        title = Res.string.home_trending_title,
                         contentList = screen.trendingList.movies,
                         homeCategory = HomeCategory.TRENDING,
                         onAction = viewModel::onAction,

@@ -1,13 +1,12 @@
 package com.kmp.movieapp.movie.data.model.request.discover
 
 import com.kmp.movieapp.core.network.url.UrlHelper
-import com.kmp.movieapp.movie.data.service.MovieUrl
 import io.ktor.resources.Resource
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.DISCOVER_ENDPOINT}${MovieUrl.MOVIE_ENDPOINT}")
+@Resource("${UrlHelper.API_VERSION_PATH}/discover/movie")
 internal data class DiscoverMoviesRequestDto(
     @SerialName("sort_by")
     val sortBy: SortByRequestDto = SortByRequestDto.POPULARITY_DESC,
