@@ -1,11 +1,11 @@
-package com.kmp.movieapp.series.data.model.api.response.series_detail
+package com.kmp.movieapp.series.data.model.response.series_detail
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class NetworkDto(
+data class ProductionCompanyDto(
     @SerialName("id")
     val id: Int? = null,
     @SerialName("logo_path")

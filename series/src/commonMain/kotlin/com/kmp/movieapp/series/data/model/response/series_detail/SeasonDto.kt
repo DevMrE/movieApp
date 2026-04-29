@@ -1,4 +1,4 @@
-package com.kmp.movieapp.series.data.model.api.response.series_detail
+package com.kmp.movieapp.series.data.model.response.series_detail
 
 
 import kotlinx.serialization.SerialName

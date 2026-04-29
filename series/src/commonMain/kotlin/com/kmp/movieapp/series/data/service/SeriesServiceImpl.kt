@@ -1,4 +1,4 @@
-package com.kmp.movieapp.series.data.service.api
+package com.kmp.movieapp.series.data.service
 
 import com.kmp.movieapp.core.network.http.HandleError
 import com.kmp.movieapp.core.network.model.ApiError
@@ -6,10 +6,10 @@ import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.try_catch.multiCatch
-import com.kmp.movieapp.series.data.model.api.request.series_detail.SeriesDetailRequestDto
-import com.kmp.movieapp.series.data.model.api.request.series_list.SeriesRequestDto
-import com.kmp.movieapp.series.data.model.api.response.series_detail.SeriesDetailDto
-import com.kmp.movieapp.series.data.model.api.response.series_list.SeriesResultDto
+import com.kmp.movieapp.series.data.model.request.series_detail.SeriesDetailRequestDto
+import com.kmp.movieapp.series.data.model.request.series_list.SeriesRequestDto
+import com.kmp.movieapp.series.data.model.response.series_detail.SeriesDetailDto
+import com.kmp.movieapp.series.data.model.response.series_list.SeriesResultDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
@@ -17,9 +17,9 @@ import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.plugins.resources.get
 
-class SeriesApiServiceImpl(
+class SeriesServiceImpl(
     private val httpClient: HttpClient
-) : SeriesApiService {
+) : SeriesService {
 
     override suspend fun fetchPopularSeries(page: Int): Result<ApiResponseDto<SeriesResultDto>, ApiError> =
         multiCatch(
@@ -38,7 +38,7 @@ class SeriesApiServiceImpl(
                     HandleError.getResultForHttpStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    logE<SeriesApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<SeriesService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )
@@ -61,7 +61,7 @@ class SeriesApiServiceImpl(
                     HandleError.getResultForHttpStatus(ex.response.status)
                 },
                 listOf(Exception::class) to { e ->
-                    logE<SeriesApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<SeriesService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )

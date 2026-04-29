@@ -1,8 +1,8 @@
 package com.kmp.movieapp.series.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
-import com.kmp.movieapp.series.data.model.api.response.series_detail.SeriesDetailDto
-import com.kmp.movieapp.series.data.model.api.response.series_list.SeriesResultDto
+import com.kmp.movieapp.series.data.model.response.series_detail.SeriesDetailDto
+import com.kmp.movieapp.series.data.model.response.series_list.SeriesResultDto
 
 fun SeriesResultDto.toSeries() =
     com.kmp.movieapp.series.domain.model.Series(
