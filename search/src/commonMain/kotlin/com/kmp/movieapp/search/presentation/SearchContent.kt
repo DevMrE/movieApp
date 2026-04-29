@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
@@ -49,21 +48,18 @@ fun SearchContent() {
     ) {
         items(items = results.searchResults, key = { it.hashCode() }) { movie ->
             MediaCard(
-                width = MaterialTheme.size.movieCardWidth,
-                height = MaterialTheme.size.movieCardLstHeight,
                 title = "",
-                enableGradient = false,
                 posterPath = movie.posterPath,
-                onClick = {
-                    navigation.navigateTo(
-                        destination = MediaDetailDestination(
-                            id = movie.id,
-                            contentDetailType = movie.contentDetailType
-                        )
+                enableGradient = false
+            ) {
+                navigation.navigateTo(
+                    destination = MediaDetailDestination(
+                        id = movie.id,
+                        contentDetailType = movie.contentDetailType
                     )
-                    focusManager.clearFocus(force = true)
-                }
-            )
+                )
+                focusManager.clearFocus(force = true)
+            }
         }
     }
 }

@@ -1,10 +1,10 @@
 package com.kmp.movieapp.features.media_list.presentation.mapper
 
 import com.kmp.movieapp.features.media_list.presentation.model.UiMediaCard
-import com.kmp.movieapp.features.movie.domain.model.Movie
+import com.kmp.movieapp.movie.domain.model.Movie
 
 /**
- * Mapper to map the [List] of [Movie] into [UiMediaCard].
+ * Mapper to map the [List] of [com.kmp.movieapp.movie.domain.model.Movie] into [UiMediaCard].
  */
 internal fun List<Movie>.toMediaList(): List<UiMediaCard> {
     return map { movie ->

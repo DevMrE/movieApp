@@ -5,8 +5,8 @@ import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.media_list.presentation.mapper.toMediaList
 import com.kmp.movieapp.features.media_list.presentation.model.UiMediaCard
-import com.kmp.movieapp.features.movie.data.domain.usecase.LoadNextMoviesForCategoryUseCase
-import com.kmp.movieapp.features.movie.domain.model.Movie
+import com.kmp.movieapp.movie.data.domain.usecase.LoadNextMoviesForCategoryUseCase
+import com.kmp.movieapp.movie.domain.model.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,8 +25,7 @@ internal class MediaListViewModel(
     val movieListState: StateFlow<List<UiMediaCard>> = _currentPage
         .flatMapLatest { page ->
             loadNextMoviesForCategoryUseCase(
-                page = page,
-                homeCategory = homeCategory
+                page = page
             )
         }.scan(emptyList<Movie>()) { currentList, newList ->
             currentList + (newList ?: emptyList())

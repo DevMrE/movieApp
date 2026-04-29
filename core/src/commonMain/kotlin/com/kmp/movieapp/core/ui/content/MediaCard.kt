@@ -25,22 +25,31 @@ import com.kmp.movieapp.core.ui.material.gradient
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.util.composable.applyIf
+import com.kmp.movieapp.core.util.composable.applyIfElse
 import com.kmp.movieapp.core.util.composable.gradientOverlay
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
 fun MediaCard(
-    width: Dp,
     title: String,
     posterPath: String?,
     enableGradient: Boolean = true,
-    height: Dp = MaterialTheme.size.movieCardHeight,
+    bigCard: Boolean = false,
+    height: Dp = MaterialTheme.size.defaultCardHeight,
     onClick: (() -> Unit)? = null,
 ) {
     Card(
         modifier = Modifier
             .height(height)
-            .width(width),
+            .applyIfElse(
+                condition = bigCard,
+                ifTrue = {
+                    width(MaterialTheme.size.movieBigCardWidth)
+                },
+                ifFalse = {
+                    width(MaterialTheme.size.defaultCardWidth)
+                }
+            ),
         shape = MaterialTheme.shapes.extraLarge,
         elevation = CardDefaults.cardElevation(
             defaultElevation = 10.dp,
@@ -72,7 +81,7 @@ fun MediaCard(
             }
 
             Text(
-                text = title,
+                text = if (bigCard) title else "",
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(

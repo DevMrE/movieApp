@@ -1,7 +1,7 @@
 package com.kmp.movieapp.features.home.presentation.model
 
 import androidx.compose.runtime.Stable
-import com.kmp.movieapp.features.media_list.presentation.model.UiMediaCard
+import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import org.jetbrains.compose.resources.StringResource
 
 @Stable

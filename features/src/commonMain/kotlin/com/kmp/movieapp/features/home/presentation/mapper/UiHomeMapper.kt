@@ -1,25 +1,25 @@
 package com.kmp.movieapp.features.home.presentation.mapper
 
 import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.features.Res
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.model.UiHomeList
 import com.kmp.movieapp.features.home_popular_movies_title
 import com.kmp.movieapp.features.home_popular_series_title
 import com.kmp.movieapp.features.home_trending_title
-import com.kmp.movieapp.features.media_list.presentation.model.UiMediaCard
-import com.kmp.movieapp.features.movie.domain.model.Movie
 import com.kmp.movieapp.features.series.domain.model.Series
 import com.kmp.movieapp.features.trending.domain.model.Trending
 import com.kmp.movieapp.features.trending.domain.model.TrendingType
+import com.kmp.movieapp.movie.domain.model.Movie
 
 /**
- * Mapper to map the [Movie] into [UiMediaCard].
+ * Mapper to map the [com.kmp.movieapp.movie.domain.model.Movie] into [UiMediaCard].
  */
 internal fun Movie.toUiMedia() = UiMediaCard(
     id = id.toString(),
     title = title,
-    genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
+    bigCard = true,
     posterPath = posterPath,
     backdropPath = backdropPath,
     type = getHomeCategory(TrendingType.MOVIE)
@@ -31,7 +31,6 @@ internal fun Movie.toUiMedia() = UiMediaCard(
 internal fun Series.toUiMedia() = UiMediaCard(
     id = id.toString(),
     title = name,
-    genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backdropPath,
     type = getHomeCategory(TrendingType.SERIES)
@@ -43,14 +42,13 @@ internal fun Series.toUiMedia() = UiMediaCard(
 internal fun Trending.toUiMedia() = UiMediaCard(
     id = id.toString(),
     title = title,
-    genre = genres?.joinToString(separator = ", ") { it.name } ?: "",
     posterPath = posterPath,
     backdropPath = backdropPath,
     type = getHomeCategory(type)
 )
 
 /**
- * Mapper to map the [List] of [Movie] into [UiHomeList].
+ * Mapper to map the [List] of [com.kmp.movieapp.movie.domain.model.Movie] into [UiHomeList].
  */
 internal fun List<Movie>.toUiHomeMovieList(): UiHomeList {
     return UiHomeList(

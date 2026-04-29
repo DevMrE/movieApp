@@ -6,7 +6,6 @@ import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.try_catch.multiCatch
-import com.kmp.movieapp.features.movie.data.service.MovieApiService
 import com.kmp.movieapp.features.trending.data.model.api.request.TrendingRequestDto
 import com.kmp.movieapp.features.trending.data.model.api.request.TrendingRequestTypeDto
 import com.kmp.movieapp.features.trending.data.model.api.response.TrendingResultDto
@@ -37,7 +36,7 @@ internal class TrendingApiServiceImpl(
                     val ex = e as ResponseException
                     HandleError.getResultForHttpStatus(ex.response.status)
                 }, listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<TrendingApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )
@@ -60,7 +59,7 @@ internal class TrendingApiServiceImpl(
                     val ex = e as ResponseException
                     HandleError.getResultForHttpStatus(ex.response.status)
                 }, listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<TrendingApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )
@@ -84,7 +83,7 @@ internal class TrendingApiServiceImpl(
                     val ex = e as ResponseException
                     HandleError.getResultForHttpStatus(ex.response.status)
                 }, listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<TrendingApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )
@@ -108,7 +107,7 @@ internal class TrendingApiServiceImpl(
                     val ex = e as ResponseException
                     HandleError.getResultForHttpStatus(ex.response.status)
                 }, listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                    logE<TrendingApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
                     HandleError.getResultForHttpStatus(null)
                 }
             )

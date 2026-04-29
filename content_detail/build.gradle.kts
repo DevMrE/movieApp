@@ -51,6 +51,7 @@ kotlin {
 
                 implementation(project(":core"))
                 implementation(project(":features"))
+                implementation(project(":movie"))
             }
         }
 

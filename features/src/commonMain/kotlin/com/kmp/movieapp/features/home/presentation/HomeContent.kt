@@ -16,14 +16,21 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.util.boolean.isTrue
+import com.kmp.movieapp.features.Res
 import com.kmp.movieapp.features.home.presentation.action.HomeAction
 import com.kmp.movieapp.features.home.presentation.content.homeListContent
+import com.kmp.movieapp.features.home.presentation.model.HomeCategory
+import com.kmp.movieapp.features.home_popular_movies_title
+import com.kmp.movieapp.features.home_popular_series_title
+import com.kmp.movieapp.movie.presentation.MovieListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeContent() {
     val viewModel = koinViewModel<HomeScreenViewModel>()
+    val moviesViewModel = koinViewModel<MovieListViewModel>()
     val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
+    val popularMovies by moviesViewModel.popularMoviesState.collectAsStateWithLifecycle()
 
     PullToRefreshBox(
         modifier = Modifier.fillMaxSize(),
@@ -36,21 +43,32 @@ fun HomeContent() {
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
             contentPadding = PaddingValues(vertical = MaterialTheme.padding.thirty)
         ) {
+
             movieScreenState?.let { screen ->
+                screen.trendingList?.movies?.let {
+                    homeListContent(
+                        title = Res.string.home_popular_series_title,
+                        contentList = screen.trendingList.movies,
+                        homeCategory = HomeCategory.TRENDING,
+                        onAction = viewModel::onAction,
+                    )
+                }
+
                 homeListContent(
-                    uiHomeList = screen.trendingList,
+                    title = Res.string.home_popular_movies_title,
+                    contentList = popularMovies.movieList,
+                    homeCategory = HomeCategory.POPULAR_MOVIES,
                     onAction = viewModel::onAction
                 )
 
-                homeListContent(
-                    uiHomeList = screen.popularMovie,
-                    onAction = viewModel::onAction
-                )
-
-                homeListContent(
-                    uiHomeList = screen.popularSeries,
-                    onAction = viewModel::onAction
-                )
+                screen.popularSeries?.movies?.let {
+                    homeListContent(
+                        title = Res.string.home_popular_series_title,
+                        contentList = screen.popularSeries.movies,
+                        homeCategory = HomeCategory.POPULAR_SERIES,
+                        onAction = viewModel::onAction
+                    )
+                }
             }
 
             item {

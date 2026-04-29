@@ -17,7 +17,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
@@ -71,19 +70,17 @@ fun MediaListScreen(homeCategory: HomeCategory) {
     ) {
         items(items = movieList.value, contentType = { "media" }) { movie ->
             MediaCard(
-                width = MaterialTheme.size.movieCardWidth,
-                height = MaterialTheme.size.movieCardLstHeight,
                 title = movie.title,
                 posterPath = movie.posterPath,
-                onClick = {
-                    navigation.navigateTo(
-                        destination = MediaDetailDestination(
-                            id = movie.id,
-                            contentDetailType = movie.type
-                        )
+                height = MaterialTheme.size.defaultCardListHeight
+            ) {
+                navigation.navigateTo(
+                    destination = MediaDetailDestination(
+                        id = movie.id,
+                        contentDetailType = movie.type
                     )
-                }
-            )
+                )
+            }
         }
     }
 }

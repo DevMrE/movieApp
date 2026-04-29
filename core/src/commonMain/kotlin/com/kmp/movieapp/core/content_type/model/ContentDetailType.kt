@@ -4,4 +4,5 @@ enum class ContentDetailType {
     MOVIE,
     SERIES,
     PERSON,
+    TRENDING
 }

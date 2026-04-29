@@ -48,10 +48,13 @@ kotlin {
                 implementation(libs.bundles.commainMainKoin)
                 implementation(libs.bundles.commonMainKtor)
 
+                implementation(libs.kamel)
+
                 // kmp navigation
                 implementation(libs.kmpNavigation)
 
                 implementation(project(":core"))
+                implementation(project(":movie"))
             }
         }
 
