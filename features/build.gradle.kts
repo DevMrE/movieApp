@@ -56,6 +56,7 @@ kotlin {
                 implementation(project(":core"))
                 implementation(project(":movie"))
                 implementation(project(":series"))
+                implementation(project(":trending"))
             }
         }
 

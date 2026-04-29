@@ -1,7 +1,7 @@
 package com.kmp.movieapp.search.data.mapper
 
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
 import com.kmp.movieapp.core.network.url.UrlHelper
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.search.data.model.api.response.MediaTypeDto
 import com.kmp.movieapp.search.data.model.api.response.SearchDto
 import com.kmp.movieapp.search.domain.model.Info
@@ -14,10 +14,10 @@ import com.kmp.movieapp.search.domain.model.Search
  */
 internal fun SearchDto.toSearch() = Search(
     id = id.toString(),
-    contentDetailType = when(mediaType) {
-        MediaTypeDto.PERSON -> ContentDetailType.PERSON
-        MediaTypeDto.TV -> ContentDetailType.SERIES
-        else -> ContentDetailType.MOVIE
+    mediaCategory = when(mediaType) {
+        MediaTypeDto.PERSON -> MediaCategory.ACTOR
+        MediaTypeDto.TV -> MediaCategory.SERIES
+        else -> MediaCategory.MOVIE
     },
     titleInfo = Info(
         originalTitle = originalTitle ?: "",

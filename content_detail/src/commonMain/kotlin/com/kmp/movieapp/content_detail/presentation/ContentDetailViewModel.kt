@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetail
 import com.kmp.movieapp.content_detail.presentation.mapper.toUiData
 import com.kmp.movieapp.content_detail.presentation.model.ContentDetailUi
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.updateAndGet
 class ContentDetailViewModel(
     private val getContentDetail: GetContentDetail,
     private val id: String,
-    private val contentType: ContentDetailType
+    private val mediaCategory: MediaCategory
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<ContentDetailUi?> = MutableStateFlow(value = null)
@@ -26,7 +26,7 @@ class ContentDetailViewModel(
     val uiState: StateFlow<ContentDetailUi?> = _uiState
         .flatMapLatest {
             getContentDetail(
-                contentType = contentType,
+                contentType = mediaCategory,
                 contentId = id
             )
         }.map { data ->

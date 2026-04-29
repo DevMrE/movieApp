@@ -14,7 +14,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.kmp.movieapp.content_detail.presentation.component.media_buttons.mediaButtons
 import com.kmp.movieapp.content_detail.presentation.component.overview.overview
 import com.kmp.movieapp.content_detail.presentation.component.title.title
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.navigation.compose.rememberNavigation
 import org.koin.compose.viewmodel.koinViewModel
@@ -23,10 +23,10 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun ContentDetailScreen(
     id: String,
-    contentType: ContentDetailType?
+    mediaCategory: MediaCategory?
 ) {
     val viewModel = koinViewModel<ContentDetailViewModel>(
-        parameters = { parametersOf(id, contentType) },
+        parameters = { parametersOf(id, mediaCategory) },
         key = id
     )
     val uiState by viewModel.uiState.collectAsState()

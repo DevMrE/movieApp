@@ -43,28 +43,28 @@ fun HomeContent() {
         ) {
 
             movieScreenState?.let { screen ->
-                screen.trendingList?.movies?.let {
+                screen.trendingList?.items?.let {
                     homeListContent(
                         title = Res.string.home_trending_title,
-                        contentList = screen.trendingList.movies,
+                        contentList = screen.trendingList.items,
                         homeCategory = HomeCategory.TRENDING,
                         onAction = viewModel::onAction,
                     )
                 }
 
-                screen.popularMovie?.movies?.let {
+                screen.popularMovie?.items?.let {
                     homeListContent(
                         title = Res.string.home_popular_movies_title,
-                        contentList = screen.popularMovie.movies,
+                        contentList = screen.popularMovie.items,
                         homeCategory = HomeCategory.POPULAR_MOVIES,
                         onAction = viewModel::onAction
                     )
                 }
 
-                screen.popularSeries?.movies?.let {
+                screen.popularSeries?.items?.let {
                     homeListContent(
                         title = Res.string.home_popular_series_title,
-                        contentList = screen.popularSeries.movies,
+                        contentList = screen.popularSeries.items,
                         homeCategory = HomeCategory.POPULAR_SERIES,
                         onAction = viewModel::onAction
                     )

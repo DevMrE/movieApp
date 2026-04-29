@@ -37,7 +37,7 @@ fun registerAppNavigation() {
         screen<MediaDetailDestination> { dest ->
             ContentDetailScreen(
                 id = dest.id,
-                contentType = dest.contentDetailType
+                mediaCategory = dest.mediaCategory
             )
         }
 

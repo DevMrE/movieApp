@@ -62,7 +62,7 @@ internal fun LazyListScope.homeListContent(
                     onAction(
                         HomeAction.OnNavigateToDetailScreen(
                             id = item.id,
-                            contentDetailType = item.type
+                            mediaCategory = item.type
                         )
                     )
                 },

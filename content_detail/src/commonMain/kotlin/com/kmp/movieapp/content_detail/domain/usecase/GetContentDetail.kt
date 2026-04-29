@@ -2,7 +2,7 @@ package com.kmp.movieapp.content_detail.domain.usecase
 
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
 import com.kmp.movieapp.content_detail.domain.repository.ContentDetailRepository
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import kotlinx.coroutines.flow.Flow
 
 class GetContentDetail(
@@ -10,12 +10,12 @@ class GetContentDetail(
 ) {
 
     suspend operator fun invoke(
-        contentType: ContentDetailType,
+        contentType: MediaCategory,
         contentId: String
     ): Flow<ContentDetail> =
         when (contentType) {
-            ContentDetailType.MOVIE -> contentDetailRepository.getMovieDetail(contentId)
-            ContentDetailType.SERIES -> contentDetailRepository.getSeriesDetail(contentId)
+            MediaCategory.MOVIE -> contentDetailRepository.getMovieDetail(contentId)
+            MediaCategory.SERIES -> contentDetailRepository.getSeriesDetail(contentId)
             else -> {
                 // TODO: Add here the repository for person
                 contentDetailRepository.getMovieDetail(contentId)

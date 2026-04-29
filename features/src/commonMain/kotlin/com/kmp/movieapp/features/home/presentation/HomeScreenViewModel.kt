@@ -2,17 +2,17 @@ package com.kmp.movieapp.features.home.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.features.home.domain.usecase.GetHomeDataUseCase
 import com.kmp.movieapp.features.home.presentation.action.HomeAction
 import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
-import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeMovieList
-import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeSeriesList
-import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeTrendingList
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.model.UiHomeData
+import com.kmp.movieapp.movie.presentation.mapper.toUiHomeMovieList
+import com.kmp.movieapp.series.presentation.mapper.toUiHomeSeriesList
+import com.kmp.movieapp.trending.presentation.mapper.toUiHomeTrendingList
 import com.kmp.navigation.Navigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -52,7 +52,7 @@ internal class HomeScreenViewModel(
         when (action) {
             is HomeAction.OnNavigateToDetailScreen -> navigateToDetailScreen(
                 id = action.id,
-                contentDetailType = action.contentDetailType
+                mediaCategory = action.mediaCategory
             )
 
             is HomeAction.OnSeeAllClicked -> onSeeAll(action.homeCategory)
@@ -60,11 +60,11 @@ internal class HomeScreenViewModel(
         }
     }
 
-    private fun navigateToDetailScreen(id: String, contentDetailType: ContentDetailType) {
+    private fun navigateToDetailScreen(id: String, mediaCategory: MediaCategory) {
         navigation.navigateTo(
             destination = MediaDetailDestination(
                 id = id,
-                contentDetailType = contentDetailType
+                mediaCategory = mediaCategory
             )
         )
     }

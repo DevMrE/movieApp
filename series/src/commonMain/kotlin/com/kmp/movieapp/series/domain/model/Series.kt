@@ -1,6 +1,6 @@
 package com.kmp.movieapp.series.domain.model
 
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 
 data class Series(
     val id: Int,
@@ -9,5 +9,5 @@ data class Series(
     val posterPath: String,
     val backdropPath: String,
     val genres: List<SeriesGenre>? = null,
-    val type: ContentDetailType = ContentDetailType.SERIES
+    val type: MediaCategory = MediaCategory.SERIES
 )

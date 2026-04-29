@@ -4,7 +4,7 @@ import com.kmp.movieapp.content_detail.data.repository.api.ContentDetailRepImpl
 import com.kmp.movieapp.content_detail.domain.repository.ContentDetailRepository
 import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetail
 import com.kmp.movieapp.content_detail.presentation.ContentDetailViewModel
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -18,11 +18,11 @@ val contentDetailModule = module {
         GetContentDetail(get())
     }
 
-    viewModel<ContentDetailViewModel> { (id: String, contentType: ContentDetailType) ->
+    viewModel<ContentDetailViewModel> { (id: String, mediaCategory: MediaCategory) ->
         ContentDetailViewModel(
             getContentDetail = get(),
             id = id,
-            contentType = contentType
+            mediaCategory = mediaCategory
         )
     }
 }

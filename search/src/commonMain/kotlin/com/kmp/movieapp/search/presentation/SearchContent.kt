@@ -55,7 +55,7 @@ fun SearchContent() {
                 navigation.navigateTo(
                     destination = MediaDetailDestination(
                         id = movie.id,
-                        contentDetailType = movie.contentDetailType
+                        mediaCategory = movie.mediaCategory
                     )
                 )
                 focusManager.clearFocus(force = true)

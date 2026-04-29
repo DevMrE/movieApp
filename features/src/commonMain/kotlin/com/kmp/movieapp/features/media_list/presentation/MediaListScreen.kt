@@ -77,7 +77,7 @@ fun MediaListScreen(homeCategory: HomeCategory) {
                 navigation.navigateTo(
                     destination = MediaDetailDestination(
                         id = movie.id,
-                        contentDetailType = movie.type
+                        mediaCategory = movie.type
                     )
                 )
             }
