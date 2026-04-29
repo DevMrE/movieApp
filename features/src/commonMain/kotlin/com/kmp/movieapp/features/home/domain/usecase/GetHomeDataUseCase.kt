@@ -1,10 +1,10 @@
 package com.kmp.movieapp.features.home.domain.usecase
 
 import com.kmp.movieapp.core.util.tuples.with
-import com.kmp.movieapp.features.series.domain.usecase.GetPopularSeriesUseCase
 import com.kmp.movieapp.features.trending.domain.GetTrendingUseCase
 import com.kmp.movieapp.features.trending.domain.model.TrendingType
 import com.kmp.movieapp.movie.data.domain.usecase.GetPopularMoviesUseCase
+import com.kmp.movieapp.series.domain.usecase.GetPopularSeriesUseCase
 import kotlinx.coroutines.flow.combine
 
 internal class GetHomeDataUseCase(

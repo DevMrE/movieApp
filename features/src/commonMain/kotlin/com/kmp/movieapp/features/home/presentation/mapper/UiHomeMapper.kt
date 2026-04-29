@@ -26,7 +26,7 @@ internal fun Movie.toUiMedia() = UiMediaCard(
 )
 
 /**
- * Mapper to map the [Series] into [UiMediaCard].
+ * Mapper to map the [com.kmp.movieapp.series.domain.model.Series] into [UiMediaCard].
  */
 internal fun Series.toUiMedia() = UiMediaCard(
     id = id.toString(),
@@ -59,7 +59,7 @@ internal fun List<Movie>.toUiHomeMovieList(): UiHomeList {
 }
 
 /**
- * Mapper to map the [List] of [Series] into [UiHomeList].
+ * Mapper to map the [List] of [com.kmp.movieapp.series.domain.model.Series] into [UiHomeList].
  */
 internal fun List<Series>.toUiHomeSeriesList(): UiHomeList {
     return UiHomeList(

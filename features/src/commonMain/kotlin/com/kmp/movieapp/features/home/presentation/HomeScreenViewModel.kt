@@ -62,7 +62,7 @@ internal class HomeScreenViewModel(
 
     private fun navigateToDetailScreen(id: String, contentDetailType: ContentDetailType) {
         navigation.navigateTo(
-            MediaDetailDestination(
+            destination = MediaDetailDestination(
                 id = id,
                 contentDetailType = contentDetailType
             )
