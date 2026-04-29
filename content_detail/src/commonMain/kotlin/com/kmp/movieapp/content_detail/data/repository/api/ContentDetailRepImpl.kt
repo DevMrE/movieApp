@@ -3,8 +3,8 @@ package com.kmp.movieapp.content_detail.data.repository.api
 import com.kmp.movieapp.content_detail.domain.mapper.toContentDetail
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
 import com.kmp.movieapp.content_detail.domain.repository.ContentDetailRepository
-import com.kmp.movieapp.features.series.domain.repository.SeriesRepository
 import com.kmp.movieapp.movie.data.domain.repository.MovieRepository
+import com.kmp.movieapp.series.domain.repository.SeriesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
