@@ -13,7 +13,6 @@ import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeSeriesList
 import com.kmp.movieapp.features.home.presentation.mapper.toUiHomeTrendingList
 import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home.presentation.model.UiHomeData
-import com.kmp.movieapp.movie.data.domain.usecase.GetPopularMoviesUseCase
 import com.kmp.navigation.Navigation
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -29,7 +28,6 @@ import kotlinx.coroutines.launch
 internal class HomeScreenViewModel(
     private val navigation: Navigation,
     private val getHomeDataUseCase: GetHomeDataUseCase,
-    private val getPopularMoviesUseCase: GetPopularMoviesUseCase
 ) : ViewModel() {
 
     private val _movieScreenState = MutableStateFlow<UiHomeData?>(null)

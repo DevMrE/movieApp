@@ -23,15 +23,12 @@ import com.kmp.movieapp.features.home.presentation.model.HomeCategory
 import com.kmp.movieapp.features.home_popular_movies_title
 import com.kmp.movieapp.features.home_popular_series_title
 import com.kmp.movieapp.features.home_trending_title
-import com.kmp.movieapp.movie.presentation.MovieListViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeContent() {
     val viewModel = koinViewModel<HomeScreenViewModel>()
-    val moviesViewModel = koinViewModel<MovieListViewModel>()
     val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
-    val popularMovies by moviesViewModel.popularMoviesState.collectAsStateWithLifecycle()
 
     PullToRefreshBox(
         modifier = Modifier.fillMaxSize(),
@@ -55,12 +52,14 @@ fun HomeContent() {
                     )
                 }
 
-                homeListContent(
-                    title = Res.string.home_popular_movies_title,
-                    contentList = popularMovies.movieList,
-                    homeCategory = HomeCategory.POPULAR_MOVIES,
-                    onAction = viewModel::onAction
-                )
+                screen.popularMovie?.movies?.let {
+                    homeListContent(
+                        title = Res.string.home_popular_movies_title,
+                        contentList = screen.popularMovie.movies,
+                        homeCategory = HomeCategory.POPULAR_MOVIES,
+                        onAction = viewModel::onAction
+                    )
+                }
 
                 screen.popularSeries?.movies?.let {
                     homeListContent(

@@ -6,8 +6,6 @@ import com.kmp.movieapp.movie.data.domain.usecase.LoadNextMoviesForCategoryUseCa
 import com.kmp.movieapp.movie.data.repository.MovieRepositoryImpl
 import com.kmp.movieapp.movie.data.service.MovieApiService
 import com.kmp.movieapp.movie.data.service.MovieApiServiceImpl
-import com.kmp.movieapp.movie.presentation.MovieListViewModel
-import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val movieModule = module {
@@ -26,6 +24,4 @@ val movieModule = module {
     factory<GetPopularMoviesUseCase> {
         GetPopularMoviesUseCase(get())
     }
-
-    viewModelOf(::MovieListViewModel)
 }
