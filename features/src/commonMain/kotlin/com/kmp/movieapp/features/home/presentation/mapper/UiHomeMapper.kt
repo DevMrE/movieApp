@@ -8,10 +8,10 @@ import com.kmp.movieapp.features.home.presentation.model.UiHomeList
 import com.kmp.movieapp.features.home_popular_movies_title
 import com.kmp.movieapp.features.home_popular_series_title
 import com.kmp.movieapp.features.home_trending_title
-import com.kmp.movieapp.features.series.domain.model.Series
 import com.kmp.movieapp.features.trending.domain.model.Trending
 import com.kmp.movieapp.features.trending.domain.model.TrendingType
 import com.kmp.movieapp.movie.domain.model.Movie
+import com.kmp.movieapp.series.domain.model.Series
 
 /**
  * Mapper to map the [com.kmp.movieapp.movie.domain.model.Movie] into [UiMediaCard].
