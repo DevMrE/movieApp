@@ -16,7 +16,7 @@ import com.kmp.movieapp.app_bar.bottombar.BottomBarComponent
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.topbar.TopAppBarComponent
 import com.kmp.movieapp.core.util.logger.logI
-import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
+import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
 import com.kmp.navigation.compose.NavigationContent
 import com.kmp.navigation.compose.NavigationTabs

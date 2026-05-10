@@ -6,13 +6,10 @@ import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.try_catch.multiCatch
-import com.kmp.movieapp.movie.data.domain.model.Filter
-import com.kmp.movieapp.movie.data.mapper.toDiscoverMoviesDto
 import com.kmp.movieapp.movie.data.model.request.genre.MovieGenreRequestDto
 import com.kmp.movieapp.movie.data.model.request.movie.MovieRequestDto
 import com.kmp.movieapp.movie.data.model.request.movie_lists.MovieListRequestDto
 import com.kmp.movieapp.movie.data.model.response.MovieGenreResponseDto
-import com.kmp.movieapp.movie.data.model.response.discover.DiscoverMovieDto
 import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import io.ktor.client.HttpClient
@@ -54,28 +51,6 @@ internal class MovieApiServiceImpl(
             },
             handlers = mapOf(
                 listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
-                    val ex = e as ResponseException
-                    HandleError.getResultForHttpStatus(ex.response.status)
-                },
-                listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                    HandleError.getResultForHttpStatus(null)
-                }
-            )
-        )
-
-    override suspend fun fetchAllMovies(filter: Filter): Result<ApiResponseDto<DiscoverMovieDto>, ApiError> =
-        multiCatch(
-            tryBlock = {
-                val response = httpClient.get(resource = filter.toDiscoverMoviesDto())
-
-                Result.Success(response.body())
-            },
-            handlers = mapOf(
-                listOf(
-                    ClientRequestException::class,
-                    ServerResponseException::class
-                ) to { e ->
                     val ex = e as ResponseException
                     HandleError.getResultForHttpStatus(ex.response.status)
                 },

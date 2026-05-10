@@ -1,10 +1,10 @@
 package com.kmp.movieapp.movie.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
-import com.kmp.movieapp.movie.data.domain.model.MovieGenre
 import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import com.kmp.movieapp.movie.domain.model.Movie
+import com.kmp.movieapp.movie.domain.model.MovieGenre
 
 /**
  * Mapper for transforming an [MovieForCategoryDto] into

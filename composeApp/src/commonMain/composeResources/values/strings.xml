@@ -10,6 +10,7 @@
     <string name="popular_movies_title">Popular Movies</string>
     <string name="popular_series_title">Popular Series</string>
     <string name="trending_title">Trending</string>
+    <string name="see_all">See All</string>
 
     <string name="permission_camera">Open Camera</string>
     <string name="permission_location">Request Position</string>

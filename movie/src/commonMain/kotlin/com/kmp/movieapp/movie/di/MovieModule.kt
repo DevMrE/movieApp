@@ -1,8 +1,8 @@
 package com.kmp.movieapp.movie.di
 
-import com.kmp.movieapp.movie.data.domain.repository.MovieRepository
-import com.kmp.movieapp.movie.data.domain.usecase.GetPopularMoviesUseCase
-import com.kmp.movieapp.movie.data.domain.usecase.LoadNextMoviesForCategoryUseCase
+import com.kmp.movieapp.movie.domain.repository.MovieRepository
+import com.kmp.movieapp.movie.domain.usecase.GetPopularMoviesUseCase
+import com.kmp.movieapp.movie.domain.usecase.LoadMediaListForCategoryUseCase
 import com.kmp.movieapp.movie.data.repository.MovieRepositoryImpl
 import com.kmp.movieapp.movie.data.service.MovieApiService
 import com.kmp.movieapp.movie.data.service.MovieApiServiceImpl
@@ -17,8 +17,8 @@ val movieModule = module {
         MovieRepositoryImpl(get())
     }
 
-    factory<LoadNextMoviesForCategoryUseCase> {
-        LoadNextMoviesForCategoryUseCase(get())
+    factory<LoadMediaListForCategoryUseCase> {
+        LoadMediaListForCategoryUseCase(get())
     }
 
     factory<GetPopularMoviesUseCase> {

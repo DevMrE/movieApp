@@ -11,9 +11,9 @@ import com.kmp.movieapp.composeApp.more
 import com.kmp.movieapp.composeApp.popular_movies_title
 import com.kmp.movieapp.composeApp.popular_series_title
 import com.kmp.movieapp.composeApp.trending_title
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.features.home.presentation.model.HomeCategory
-import com.kmp.movieapp.features.home.presentation.destination.HomeMediaCategoryListDestination
+import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavDestination
@@ -37,9 +37,9 @@ fun TopAppBarComponent() {
 
     val title = when (navDestination) {
         is HomeMediaCategoryListDestination -> {
-            val currentTitle = when (navDestination.homeCategory) {
-                HomeCategory.POPULAR_MOVIES -> Res.string.popular_movies_title
-                HomeCategory.POPULAR_SERIES -> Res.string.popular_series_title
+            val currentTitle = when (navDestination.mediaCategory) {
+                MediaCategory.MOVIE -> Res.string.popular_movies_title
+                MediaCategory.SERIES -> Res.string.popular_series_title
                 else -> Res.string.trending_title
             }
 

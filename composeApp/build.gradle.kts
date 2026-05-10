@@ -69,6 +69,9 @@ kotlin {
             implementation(project(":discover"))
             implementation(project(":device_operations"))
             implementation(project(":features"))
+            implementation(project(":movie"))
+            implementation(project(":series"))
+            implementation(project(":trending"))
         }
 
         androidMain.dependencies {

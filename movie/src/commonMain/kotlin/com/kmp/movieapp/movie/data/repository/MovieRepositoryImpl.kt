@@ -7,10 +7,10 @@ import com.kmp.movieapp.core.network.util.onError
 import com.kmp.movieapp.core.network.util.onFailure
 import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.core.util.logger.logE
-import com.kmp.movieapp.movie.data.domain.repository.MovieRepository
 import com.kmp.movieapp.movie.data.mapper.toMovie
 import com.kmp.movieapp.movie.data.service.MovieApiService
 import com.kmp.movieapp.movie.domain.model.Movie
+import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

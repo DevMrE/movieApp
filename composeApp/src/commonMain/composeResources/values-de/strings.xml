@@ -10,6 +10,7 @@
     <string name="popular_movies_title">Beliebte Filme</string>
     <string name="popular_series_title">Beliebte Serien</string>
     <string name="trending_title">Angesagt</string>
+    <string name="see_all">Alle ansehen</string>
 
     <string name="permission_camera">Kamera Öffnen</string>
     <string name="permission_location">Standort abfragen</string>

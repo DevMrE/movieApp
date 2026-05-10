@@ -1,6 +1,6 @@
 package com.kmp.movieapp.movie.data.mapper
 
-import com.kmp.movieapp.movie.data.domain.model.MovieGenre
+import com.kmp.movieapp.movie.domain.model.MovieGenre
 import com.kmp.movieapp.movie.data.model.response.GenreDto
 
 /**
