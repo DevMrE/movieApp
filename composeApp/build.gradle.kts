@@ -68,10 +68,10 @@ kotlin {
             implementation(project(":search"))
             implementation(project(":discover"))
             implementation(project(":device_operations"))
-            implementation(project(":features"))
             implementation(project(":movie"))
             implementation(project(":series"))
             implementation(project(":trending"))
+            implementation(project(":overview_list"))
         }
 
         androidMain.dependencies {

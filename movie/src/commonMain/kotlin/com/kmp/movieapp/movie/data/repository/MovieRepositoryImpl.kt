@@ -19,7 +19,7 @@ internal class MovieRepositoryImpl(
 
 ) : MovieRepository {
 
-    override suspend fun getPopularMovies(page: Int): Flow<List<Movie>?> = flow {
+    override suspend fun getPopularMovies(page: Int): Flow<List<Movie>> = flow {
         movieApiService.fetchMoviesPopularMovies(page = page)
             .mapOnSuccess { data ->
                 data.results?.map { movieDto ->
@@ -37,12 +37,7 @@ internal class MovieRepositoryImpl(
                 logE<MovieRepository>(message = "Error: $it")
             }.onFailure {
                 // Placeholder for loading movies from a database.
-                emit(null)
             }
-    }
-
-    override suspend fun getAllMovies(page: Int): Flow<List<Movie>> {
-        TODO("Not yet implemented")
     }
 
     override suspend fun getMovieForId(movieId: Int): Flow<Movie?> = flow {

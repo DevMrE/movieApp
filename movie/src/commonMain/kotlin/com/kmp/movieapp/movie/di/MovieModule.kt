@@ -1,11 +1,10 @@
 package com.kmp.movieapp.movie.di
 
-import com.kmp.movieapp.movie.domain.repository.MovieRepository
-import com.kmp.movieapp.movie.domain.usecase.GetPopularMoviesUseCase
-import com.kmp.movieapp.movie.domain.usecase.LoadMediaListForCategoryUseCase
 import com.kmp.movieapp.movie.data.repository.MovieRepositoryImpl
 import com.kmp.movieapp.movie.data.service.MovieApiService
 import com.kmp.movieapp.movie.data.service.MovieApiServiceImpl
+import com.kmp.movieapp.movie.domain.repository.MovieRepository
+import com.kmp.movieapp.movie.domain.usecase.GetPopularMoviesUseCase
 import org.koin.dsl.module
 
 val movieModule = module {
@@ -15,10 +14,6 @@ val movieModule = module {
 
     single<MovieRepository> {
         MovieRepositoryImpl(get())
-    }
-
-    factory<LoadMediaListForCategoryUseCase> {
-        LoadMediaListForCategoryUseCase(get())
     }
 
     factory<GetPopularMoviesUseCase> {

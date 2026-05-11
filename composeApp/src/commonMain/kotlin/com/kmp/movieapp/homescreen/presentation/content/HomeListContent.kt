@@ -54,12 +54,14 @@ internal fun LazyListScope.homeListContent(
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
-                TextButton(
-                    onClick = {
-                        onAction(HomeAction.OnSeeAllClicked(mediaCategory))
-                    },
-                ) {
-                    Text(stringResource(Res.string.see_all))
+                if (homeCategory != HomeCategory.TRENDING) {
+                    TextButton(
+                        onClick = {
+                            onAction(HomeAction.OnSeeAllClicked(mediaCategory))
+                        },
+                    ) {
+                        Text(stringResource(Res.string.see_all))
+                    }
                 }
             }
 

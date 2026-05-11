@@ -29,7 +29,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun MediaListScreen(mediaCategory: MediaCategory) {
 
-    val viewModel = koinViewModel<MediaListViewModel>(
+    val viewModel = koinViewModel<OverviewListViewModel>(
         key = mediaCategory.name,
         parameters = { parametersOf(mediaCategory) }
     )

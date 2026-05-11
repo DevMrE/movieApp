@@ -38,9 +38,9 @@ internal class HomeScreenViewModel(
         }.map { (trending, popularMovies, popularSeries) ->
             _movieScreenState.updateAndGet {
                 UiHomeData(
-                    isLoading = trending.isEmpty() && popularMovies == null,
+                    isLoading = trending.isEmpty() && popularMovies.isEmpty(),
                     trendingList = trending.toUiHomeTrendingList(),
-                    popularMovie = popularMovies?.toUiHomeMovieList(),
+                    popularMovie = popularMovies.toUiHomeMovieList(),
                     popularSeries = popularSeries.toUiHomeSeriesList()
                 )
             }
@@ -87,7 +87,7 @@ internal class HomeScreenViewModel(
             getHomeDataUseCase().collectLatest { (trendings, popularMovies, popularSeries) ->
                 _movieScreenState.update {
                     UiHomeData(
-                        isLoading = trendings.isEmpty() && popularMovies == null,
+                        isLoading = trendings.isEmpty() && popularMovies.isEmpty(),
                         trendingList = trendings.toUiHomeTrendingList(),
                         popularMovie = trendings.toUiHomeTrendingList(),
                         popularSeries = popularSeries.toUiHomeSeriesList()

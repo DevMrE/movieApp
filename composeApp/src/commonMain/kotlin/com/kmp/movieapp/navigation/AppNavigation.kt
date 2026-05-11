@@ -10,7 +10,7 @@ import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestinati
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.homescreen.presentation.HomeContent
 import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaCategoryListDestination
-import com.kmp.movieapp.media_list.presentation.MediaListScreen
+import com.kmp.movieapp.overview_list.presentation.MediaListScreen
 import com.kmp.movieapp.search.presentation.SearchContent
 import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
 import com.kmp.movieapp.settings.SettingsContent
@@ -28,7 +28,9 @@ fun registerAppNavigation() {
             exitTransition = {
                 scaleOut()
             }
-        ) { data -> MediaListScreen(data.mediaCategory) }
+        ) { data ->
+            MediaListScreen(data.mediaCategory)
+        }
 
         content<DiscoverMediaDestination> {
             DiscoverMediaScreen()

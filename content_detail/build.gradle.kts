@@ -50,7 +50,6 @@ kotlin {
                 implementation(libs.kmpNavigation)
 
                 implementation(project(":core"))
-                implementation(project(":features"))
                 implementation(project(":movie"))
                 implementation(project(":series"))
             }
