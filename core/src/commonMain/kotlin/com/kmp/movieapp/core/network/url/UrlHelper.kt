@@ -19,4 +19,6 @@ object UrlHelper {
     const val SEARCH_ENDPOINT = "/search/multi"
 
     const val FIND_ENDPOINT = "/find"
+
+    const val TRENDING_ENDPOINT = "/trending"
 }

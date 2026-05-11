@@ -11,10 +11,10 @@ data class Size(
     val bottomBarStrokeHeight: Dp = 1.dp,
     val borderStroke: Dp = 2.dp,
     val iconSize: Dp = 18.dp,
-    val movieCardHeight: Dp = 220.dp,
-    val movieCardLstHeight: Dp = 180.dp,
-    val movieCardWidth: Dp = 150.dp,
-    val moviePosterWidth: Dp = 350.dp,
+    val defaultCardHeight: Dp = 220.dp,
+    val defaultCardListHeight: Dp = 180.dp,
+    val defaultCardWidth: Dp = 150.dp,
+    val movieBigCardWidth: Dp = 350.dp,
     val bottomBarHeight: Dp = 80.dp,
     val detailHeaderHeight: Dp = 500.dp
 )

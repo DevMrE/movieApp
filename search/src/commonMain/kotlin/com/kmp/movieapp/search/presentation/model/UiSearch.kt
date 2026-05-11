@@ -1,9 +1,9 @@
 package com.kmp.movieapp.search.presentation.model
 
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 
 internal data class UiSearch(
-    val contentDetailType: ContentDetailType,
+    val mediaCategory: MediaCategory,
     val id: String,
     val title: String,
     val posterPath: String

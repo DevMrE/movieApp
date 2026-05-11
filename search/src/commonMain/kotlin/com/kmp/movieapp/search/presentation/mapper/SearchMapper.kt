@@ -5,7 +5,7 @@ import com.kmp.movieapp.search.presentation.SearchViewModel
 import com.kmp.movieapp.search.presentation.model.UiSearch
 
 internal fun Search.toUiData() = UiSearch(
-    contentDetailType = contentDetailType,
+    mediaCategory = mediaCategory,
     id = id,
     title = titleInfo.mainTitle,
     posterPath = media.posterUrl ?: ""

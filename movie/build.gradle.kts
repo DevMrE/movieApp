@@ -1,3 +1,5 @@
+import org.jetbrains.compose.resources.ResourcesExtension
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKmpLibrary)
@@ -9,6 +11,7 @@ plugins {
 }
 
 kotlin {
+
 
     compilerOptions {
         freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
@@ -69,9 +72,9 @@ kotlin {
 }
 
 compose.resources {
-    packageOfResClass = "com.kmp.movieapp.movie"
+    packageOfResClass = "${getPropertyString("app.basePackagePath")}.movie"
+    generateResClass = ResourcesExtension.ResourceClassGeneration.Always
 }
-
 
 fun getPropertyString(string: String): String {
     return providers.gradleProperty(string).get()

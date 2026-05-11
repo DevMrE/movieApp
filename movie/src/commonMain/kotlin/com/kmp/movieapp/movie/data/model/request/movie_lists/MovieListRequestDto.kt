@@ -5,10 +5,7 @@ import io.ktor.resources.Resource
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Resource("${UrlHelper.API_VERSION_PATH}${UrlHelper.MOVIE_ENDPOINT}/{movieListCategory}")
+@Resource("${UrlHelper.API_VERSION_PATH}/movie/popular")
 internal data class MovieListRequestDto(
     val page: Int = 1,
-    val region: String? = null,
-    val language: String? = null,
-    val movieListCategory: String,
 )

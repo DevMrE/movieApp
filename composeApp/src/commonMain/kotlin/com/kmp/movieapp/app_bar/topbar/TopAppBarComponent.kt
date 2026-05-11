@@ -8,13 +8,12 @@ import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.app_name
 import com.kmp.movieapp.composeApp.discover_media_title
 import com.kmp.movieapp.composeApp.more
-import com.kmp.movieapp.composeApp.movie_category_list_title
-import com.kmp.movieapp.composeApp.movie_category_now_playing
-import com.kmp.movieapp.composeApp.movie_category_popular
-import com.kmp.movieapp.composeApp.movie_category_top_rated
+import com.kmp.movieapp.composeApp.popular_movies_title
+import com.kmp.movieapp.composeApp.popular_series_title
+import com.kmp.movieapp.composeApp.trending_title
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.movie.domain.model.MovieCategory
-import com.kmp.movieapp.movie.presentation.destination.MovieCategoryListDestination
+import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaCategoryListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavDestination
@@ -26,7 +25,7 @@ fun TopAppBarComponent() {
     val navDestination = rememberNavDestination()
 
     val showBack = when (navDestination) {
-        is MovieCategoryListDestination -> true
+        is HomeMediaCategoryListDestination -> true
         else -> false
     }
 
@@ -37,14 +36,14 @@ fun TopAppBarComponent() {
     }
 
     val title = when (navDestination) {
-        is MovieCategoryListDestination -> {
-            val category = when (navDestination.movieCategory) {
-                MovieCategory.TOP_RATED -> stringResource(Res.string.movie_category_top_rated)
-                MovieCategory.NOW_PLAYING -> stringResource(Res.string.movie_category_now_playing)
-                MovieCategory.POPULAR -> stringResource(Res.string.movie_category_popular)
+        is HomeMediaCategoryListDestination -> {
+            val currentTitle = when (navDestination.mediaCategory) {
+                MediaCategory.MOVIE -> Res.string.popular_movies_title
+                MediaCategory.SERIES -> Res.string.popular_series_title
+                else -> Res.string.trending_title
             }
 
-            stringResource(Res.string.movie_category_list_title, category)
+            stringResource(currentTitle)
         }
 
         else -> stringResource(screenStringResource)

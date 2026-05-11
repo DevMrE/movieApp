@@ -1,10 +1,11 @@
 package com.kmp.movieapp.search.domain.model
 
-import com.kmp.movieapp.core.content_type.model.ContentDetailType
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
+
 
 internal data class Search(
     val id: String,
-    val contentDetailType: ContentDetailType,
+    val mediaCategory: MediaCategory,
     val titleInfo: Info,
     val media: MediaImages,
     val releaseDate: String?,

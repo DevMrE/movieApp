@@ -53,6 +53,7 @@ kotlin {
             implementation(libs.ktorOkHttp)
             implementation(libs.android.conscrypt)
             implementation(libs.play.services.location)
+            implementation(libs.androidx.lifecycle.process)
         }
 
         iosMain.dependencies {

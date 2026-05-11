@@ -48,7 +48,7 @@ kotlin {
             baseName = frameworkName
             binaryOption("bundleId", frameworkBundleId)
             transitiveExport = true
-            isStatic = false
+            isStatic = true
             xcf.add(this)
         }
     }
@@ -64,11 +64,14 @@ kotlin {
             implementation(libs.kmpNavigation)
 
             implementation(project(":core"))
-            implementation(project(":movie"))
             implementation(project(":content_detail"))
             implementation(project(":search"))
             implementation(project(":discover"))
             implementation(project(":device_operations"))
+            implementation(project(":movie"))
+            implementation(project(":series"))
+            implementation(project(":trending"))
+            implementation(project(":overview_list"))
         }
 
         androidMain.dependencies {
