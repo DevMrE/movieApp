@@ -15,9 +15,7 @@ import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ResponseException
-import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.plugins.resources.get
 
 internal class MovieApiServiceImpl(
@@ -36,7 +34,7 @@ internal class MovieApiServiceImpl(
                 HandleError.getResultForHttpStatus(e.response.status)
             },
             handler<Exception, Result<ApiResponseDto<MovieForCategoryDto>, ApiError>> { e ->
-                logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                logE<MovieApiService>(message = "Error during fetchMoviesPopularMovies: ${e.message}")
                 HandleError.getResultForHttpStatus(null)
             }
         )
@@ -48,16 +46,14 @@ internal class MovieApiServiceImpl(
 
                 Result.Success(response.body())
             },
-            handlers = mapOf(
-                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
-                    val ex = e as ResponseException
-                    HandleError.getResultForHttpStatus(ex.response.status)
-                },
-                listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                    HandleError.getResultForHttpStatus(null)
-                }
-            )
+
+            handler<ResponseException, Result<MovieGenreResponseDto, ApiError>> { e ->
+                HandleError.getResultForHttpStatus(e.response.status)
+            },
+            handler<Exception, Result<MovieGenreResponseDto, ApiError>> { e ->
+                logE<MovieApiService>(message = "Error during fetchMovieGenres: ${e.message}")
+                HandleError.getResultForHttpStatus(null)
+            }
         )
 
     override suspend fun findMovieForId(
@@ -69,15 +65,12 @@ internal class MovieApiServiceImpl(
 
                 Result.Success(response.body())
             },
-            handlers = mapOf(
-                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
-                    val ex = e as ResponseException
-                    HandleError.getResultForHttpStatus(ex.response.status)
-                },
-                listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during findMovieForId: ${e.message}")
-                    HandleError.getResultForHttpStatus(null)
-                }
-            )
+            handler<ResponseException, Result<MovieDto, ApiError>> { e ->
+                HandleError.getResultForHttpStatus(e.response.status)
+            },
+            handler<Exception, Result<MovieDto, ApiError>> { e ->
+                logE<MovieApiService>(message = "Error during findMovieForId: ${e.message}")
+                HandleError.getResultForHttpStatus(null)
+            }
         )
 }
