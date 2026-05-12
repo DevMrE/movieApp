@@ -5,7 +5,8 @@ import androidx.compose.animation.scaleOut
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
-import com.kmp.movieapp.discover.presentation.DiscoverMediaScreen
+import com.kmp.movieapp.discover.presentation.DiscoverScreen
+import com.kmp.movieapp.discover.presentation.destination.ContentDetailDestination
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.homescreen.presentation.HomeContent
@@ -33,13 +34,20 @@ fun registerAppNavigation() {
         }
 
         content<DiscoverMediaDestination> {
-            DiscoverMediaScreen()
+            DiscoverScreen()
         }
 
         screen<MediaDetailDestination> { dest ->
             ContentDetailScreen(
                 id = dest.id,
                 mediaCategory = dest.mediaCategory
+            )
+        }
+
+        screen<ContentDetailDestination> { dest ->
+            ContentDetailScreen(
+                id = dest.id,
+                mediaCategory = dest.type
             )
         }
 
