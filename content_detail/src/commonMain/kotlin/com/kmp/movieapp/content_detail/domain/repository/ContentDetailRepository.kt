@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface ContentDetailRepository {
 
-    suspend fun getMovieDetail(contentId: String): Flow<ContentDetail>
+    suspend fun getMovieDetail(contentId: Int): Flow<ContentDetail>
 
-    suspend fun getSeriesDetail(contentId: String): Flow<ContentDetail>
+    suspend fun getSeriesDetail(contentId: Int): Flow<ContentDetail>
 }

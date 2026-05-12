@@ -30,9 +30,9 @@ class ContentDetailViewModel(
                 contentId = id
             )
         }.map { data ->
-            logI<ContentDetailViewModel>("Data: ${data.posterPath}")
+            logI<ContentDetailViewModel>("Data: ${data?.posterPath}")
             _uiState.updateAndGet {
-                data.toUiData()
+                data?.toUiData()
             }
         }.stateInEagerly(_uiState.value)
 }

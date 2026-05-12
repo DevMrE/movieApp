@@ -10,7 +10,7 @@ import com.kmp.movieapp.discover.presentation.model.UiFilterType
 import com.kmp.movieapp.discover.presentation.model.UiGenre
 
 private fun Discover.toUiData() = UiMediaCard(
-    id = "",
+    id = id.toString(),
     title = title,
     posterPath = posterPath,
     backdropPath = backdropPath,

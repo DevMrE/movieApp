@@ -11,6 +11,6 @@ class GetDiscoverUseCase(
         discoverRepository.getDiscoverMovies(page),
         discoverRepository.getDiscoverSeries(page)
     ) { movies, series ->
-        (movies + series).distinctBy { it.title }
+        (movies + series)//.distinctBy { it.title }
     }
 }

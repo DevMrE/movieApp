@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 @Resource("${UrlHelper.API_VERSION_PATH}/tv/{seriesId}")
 data class SeriesDetailRequestDto(
-    val seriesId: Int,
+    val seriesId: Int?,
 )

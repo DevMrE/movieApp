@@ -8,19 +8,19 @@ import com.kmp.movieapp.core.network.util.onFailure
 import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.movie.data.mapper.toMovie
-import com.kmp.movieapp.movie.data.service.MovieApiService
+import com.kmp.movieapp.movie.data.service.MovieService
 import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 internal class MovieRepositoryImpl(
-    private val movieApiService: MovieApiService,
+    private val movieService: MovieService,
 
-) : MovieRepository {
+    ) : MovieRepository {
 
     override suspend fun getPopularMovies(page: Int): Flow<List<Movie>> = flow {
-        movieApiService.fetchMoviesPopularMovies(page = page)
+        movieService.fetchMoviesPopularMovies(page = page)
             .mapOnSuccess { data ->
                 data.results?.map { movieDto ->
                     movieDto.toMovie()
@@ -41,7 +41,7 @@ internal class MovieRepositoryImpl(
     }
 
     override suspend fun getMovieForId(movieId: Int): Flow<Movie?> = flow {
-        movieApiService.findMovieForId(movieId)
+        movieService.findMovieForId(movieId)
             .onSuccess {
                 emit(it.toMovie())
             }.onFailure {

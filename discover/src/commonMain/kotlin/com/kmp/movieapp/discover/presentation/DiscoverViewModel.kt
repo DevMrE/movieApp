@@ -1,10 +1,10 @@
 package com.kmp.movieapp.discover.presentation
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.core.util.logger.logI
-import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
-import com.kmp.movieapp.discover.domain.model.Discover
+import com.kmp.movieapp.core.util.viewmodel.stateInLazily
 import com.kmp.movieapp.discover.domain.usecase.GetDiscoverUseCase
 import com.kmp.movieapp.discover.presentation.destination.ContentDetailDestination
 import com.kmp.movieapp.discover.presentation.mapper.toUiDiscoverList
@@ -16,31 +16,27 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.scan
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.flow.updateAndGet
+import kotlinx.coroutines.launch
 
 class DiscoverViewModel(
     private val getDiscoverUseCase: GetDiscoverUseCase,
     private val navigation: Navigation
 ) : ViewModel() {
 
-
-    private val _discoverState = MutableStateFlow(UiDiscover())
+    private val _discoverState = MutableStateFlow<UiDiscover?>(null)
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val discoverState: StateFlow<UiDiscover?> = _discoverState
-        .flatMapLatest { state ->
-            getDiscoverUseCase(page = state.page)
-        }.scan(emptyList<Discover>()) { currentList, newList ->
-            currentList + (newList)
-        }.map { list ->
-            _discoverState.updateAndGet {
-                list.toUiDiscoverList()
+        .flatMapLatest {
+            getDiscoverUseCase(page = _discoverState.value?.page ?: 1)
+        }.map { data ->
+            _discoverState.value ?: _discoverState.updateAndGet {
+                data.toUiDiscoverList()
             }
         }
-        .stateInEagerly(_discoverState.value)
-
+        .stateInLazily(_discoverState.value)
 
     fun onAction(action: DiscoverAction) {
         when (action) {
@@ -49,27 +45,33 @@ class DiscoverViewModel(
         }
     }
 
+    private fun onLoadNextPage() {
+        viewModelScope.launch {
+            _discoverState.update {
+                it?.copy(
+                    page = it.page + 1
+                )
+            }
+        }
+    }
 
     private fun onUpdateFilter(uiFilter: UiFilter) {
-        _discoverState.update { state ->
-            state.copy(
-                filter = _discoverState.value.filter.filter { currentFilter ->
-                    currentFilter == uiFilter
-                }.map {
-                    it.copy(
-                        isSeclected = !it.isSeclected
-                    )
-                }
-            )
-        }
-
-        _discoverState.value.filter.forEach {
-            logI<DiscoverViewModel>("updatedFilter: $it")
+        viewModelScope.launch {
+            _discoverState.update { state ->
+                state?.copy(
+                    filter = state.filter
+                        .filter { it == uiFilter }
+                        .map { filter ->
+                            filter.copy(isSeclected = !filter.isSeclected)
+                        }
+                )
+            }
         }
     }
 
 
     private fun navigateToContentDetail(uiMediaCard: UiMediaCard) {
+        logI(message = "Navigate with id: $uiMediaCard")
         navigation.navigateTo(
             destination = ContentDetailDestination(
                 id = uiMediaCard.id,

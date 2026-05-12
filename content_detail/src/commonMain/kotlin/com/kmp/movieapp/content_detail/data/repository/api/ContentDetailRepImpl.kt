@@ -13,14 +13,14 @@ internal class ContentDetailRepImpl(
     private val seriesRepository: SeriesRepository,
 ) : ContentDetailRepository {
 
-    override suspend fun getMovieDetail(contentId: String): Flow<ContentDetail> = flow {
-        movieRepository.getMovieForId(contentId.toInt())
+    override suspend fun getMovieDetail(contentId: Int): Flow<ContentDetail> = flow {
+        movieRepository.getMovieForId(contentId)
             .collect {
                 if (it != null) emit(it.toContentDetail())
             }
     }
 
-    override suspend fun getSeriesDetail(contentId: String): Flow<ContentDetail> = flow {
+    override suspend fun getSeriesDetail(contentId: Int): Flow<ContentDetail> = flow {
         seriesRepository.getSerieForId(contentId).collect {
             emit(it.toContentDetail())
         }

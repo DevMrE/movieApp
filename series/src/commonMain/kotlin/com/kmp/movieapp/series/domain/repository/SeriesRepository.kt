@@ -7,5 +7,5 @@ interface SeriesRepository {
 
     suspend fun getPopularSeries(page: Int = 1): Flow<List<Series>>
 
-    suspend fun getSerieForId(seriesId: String): Flow<Series>
+    suspend fun getSerieForId(seriesId: Int): Flow<Series>
 }
