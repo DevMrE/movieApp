@@ -5,7 +5,7 @@ import io.ktor.resources.Resource
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Resource("${UrlHelper.API_VERSION_PATH}/tv/{seriesId}")
+@Resource("${UrlHelper.API_V3}/tv/{seriesId}")
 data class SeriesDetailRequestDto(
     val seriesId: Int?,
 )

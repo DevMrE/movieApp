@@ -21,7 +21,7 @@ internal class DiscoverServiceImpl(
     private val httpClient: HttpClient
 ) : DiscoverService {
 
-    override suspend fun getDiscoverMovies(page: Int): Result<ApiResponseDto<DiscoverMoviesDto>, ApiError> =
+    override suspend fun fetchDiscoverMovies(page: Int): Result<ApiResponseDto<DiscoverMoviesDto>, ApiError> =
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(resource = DiscoverMoviesRequestDto(page = page))
@@ -41,7 +41,7 @@ internal class DiscoverServiceImpl(
         )
 
 
-    override suspend fun getDiscoverSeries(page: Int): Result<ApiResponseDto<DiscoverSeriesDto>, ApiError> =
+    override suspend fun fetchDiscoverSeries(page: Int): Result<ApiResponseDto<DiscoverSeriesDto>, ApiError> =
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(resource = DiscoverSeriesRequestDto(page = page))

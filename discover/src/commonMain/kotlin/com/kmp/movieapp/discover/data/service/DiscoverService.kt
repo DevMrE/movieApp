@@ -8,7 +8,7 @@ import com.kmp.movieapp.discover.data.model.response.DiscoverSeriesDto
 
 internal interface DiscoverService {
 
-    suspend fun getDiscoverMovies(page: Int = 1): Result<ApiResponseDto<DiscoverMoviesDto>, ApiError>
+    suspend fun fetchDiscoverMovies(page: Int = 1): Result<ApiResponseDto<DiscoverMoviesDto>, ApiError>
 
-    suspend fun getDiscoverSeries(page: Int = 1): Result<ApiResponseDto<DiscoverSeriesDto>, ApiError>
+    suspend fun fetchDiscoverSeries(page: Int = 1): Result<ApiResponseDto<DiscoverSeriesDto>, ApiError>
 }

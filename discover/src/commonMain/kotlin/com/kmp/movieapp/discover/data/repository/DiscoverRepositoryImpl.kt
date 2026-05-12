@@ -16,7 +16,7 @@ internal class DiscoverRepositoryImpl(
 ) : DiscoverRepository {
     override suspend fun getDiscoverMovies(page: Int): Flow<List<Discover>> =
         flow {
-            discoverService.getDiscoverMovies(page)
+            discoverService.fetchDiscoverMovies(page)
                 .onSuccess { data ->
                     emit(data.results?.map { it.toDiscoverMovies() } ?: emptyList())
                 }.onFailure {
@@ -26,7 +26,7 @@ internal class DiscoverRepositoryImpl(
 
     override suspend fun getDiscoverSeries(page: Int): Flow<List<Discover>> =
         flow {
-            discoverService.getDiscoverSeries(page)
+            discoverService.fetchDiscoverSeries(page)
                 .onSuccess { data ->
                     emit(data.results?.map { it.toDiscoverSeries() } ?: emptyList())
                 }.onFailure {

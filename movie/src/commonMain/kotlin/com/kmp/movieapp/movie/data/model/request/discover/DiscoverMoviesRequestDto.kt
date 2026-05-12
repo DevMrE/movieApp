@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Resource("${UrlHelper.API_VERSION_PATH}/discover/movie")
+@Resource("${UrlHelper.API_V3}/discover/movie")
 internal data class DiscoverMoviesRequestDto(
     @SerialName("sort_by")
     val sortBy: SortByRequestDto = SortByRequestDto.POPULARITY_DESC,

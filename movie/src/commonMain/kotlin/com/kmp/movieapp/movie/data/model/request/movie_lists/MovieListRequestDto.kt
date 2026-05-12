@@ -5,7 +5,7 @@ import io.ktor.resources.Resource
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Resource("${UrlHelper.API_VERSION_PATH}/movie/popular")
+@Resource("${UrlHelper.API_V3}/movie/popular")
 internal data class MovieListRequestDto(
     val page: Int = 1,
 )

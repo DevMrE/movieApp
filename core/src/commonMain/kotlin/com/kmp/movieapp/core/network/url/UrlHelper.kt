@@ -3,7 +3,7 @@ package com.kmp.movieapp.core.network.url
 object UrlHelper {
 
     const val BASE_URL = "api.themoviedb.org"
-    const val API_VERSION_PATH = "/3"
+    const val API_V3 = "/3"
     const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
 
     const val BEARER_TOKEN =
