@@ -5,6 +5,7 @@ import com.kmp.movieapp.core.network.model.ApiError
 import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
+import com.kmp.movieapp.core.util.try_catch.handler
 import com.kmp.movieapp.core.util.try_catch.multiCatch
 import com.kmp.movieapp.series.data.model.request.series_detail.SeriesDetailRequestDto
 import com.kmp.movieapp.series.data.model.request.series_list.SeriesRequestDto
@@ -12,9 +13,7 @@ import com.kmp.movieapp.series.data.model.response.series_detail.SeriesDetailDto
 import com.kmp.movieapp.series.data.model.response.series_list.SeriesResultDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.ResponseException
-import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.plugins.resources.get
 
 class SeriesServiceImpl(
@@ -32,16 +31,13 @@ class SeriesServiceImpl(
 
                 Result.Success(response.body<ApiResponseDto<SeriesResultDto>>())
             },
-            handlers = mapOf(
-                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
-                    val ex = e as ResponseException
-                    HandleError.getResultForHttpStatus(ex.response.status)
-                },
-                listOf(Exception::class) to { e ->
-                    logE<SeriesService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                    HandleError.getResultForHttpStatus(null)
-                }
-            )
+            handler<ResponseException, Result<ApiResponseDto<SeriesResultDto>, ApiError>> { e ->
+                HandleError.getResultForHttpStatus(e.response.status)
+            },
+            handler<Exception, Result<ApiResponseDto<SeriesResultDto>, ApiError>> { e ->
+                logE<SeriesService>(message = "Error during fetchPopularSeries: ${e.message}")
+                HandleError.getResultForHttpStatus(null)
+            }
         )
 
     override suspend fun fetchSeriesForId(seriesId: Int): Result<SeriesDetailDto, ApiError> =
@@ -55,15 +51,12 @@ class SeriesServiceImpl(
 
                 Result.Success(response.body<SeriesDetailDto>())
             },
-            handlers = mapOf(
-                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
-                    val ex = e as ResponseException
-                    HandleError.getResultForHttpStatus(ex.response.status)
-                },
-                listOf(Exception::class) to { e ->
-                    logE<SeriesService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                    HandleError.getResultForHttpStatus(null)
-                }
-            )
+            handler<ResponseException, Result<SeriesDetailDto, ApiError>> { e ->
+                HandleError.getResultForHttpStatus(e.response.status)
+            },
+            handler<Exception, Result<SeriesDetailDto, ApiError>> { e ->
+                logE<SeriesService>(message = "Error during fetchSeriesForId: ${e.message}")
+                HandleError.getResultForHttpStatus(null)
+            }
         )
 }
