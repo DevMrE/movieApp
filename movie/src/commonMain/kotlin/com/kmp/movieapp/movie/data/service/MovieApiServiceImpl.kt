@@ -5,6 +5,7 @@ import com.kmp.movieapp.core.network.model.ApiError
 import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
+import com.kmp.movieapp.core.util.try_catch.handler
 import com.kmp.movieapp.core.util.try_catch.multiCatch
 import com.kmp.movieapp.movie.data.model.request.genre.MovieGenreRequestDto
 import com.kmp.movieapp.movie.data.model.request.movie.MovieRequestDto
@@ -30,16 +31,14 @@ internal class MovieApiServiceImpl(
 
                 Result.Success(response.body<ApiResponseDto<MovieForCategoryDto>>())
             },
-            handlers = mapOf(
-                listOf(ClientRequestException::class, ServerResponseException::class) to { e ->
-                    val ex = e as ResponseException
-                    HandleError.getResultForHttpStatus(ex.response.status)
-                },
-                listOf(Exception::class) to { e ->
-                    logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
-                    HandleError.getResultForHttpStatus(null)
-                }
-            )
+
+            handler<ResponseException, Result<ApiResponseDto<MovieForCategoryDto>, ApiError>> { e ->
+                HandleError.getResultForHttpStatus(e.response.status)
+            },
+            handler<Exception, Result<ApiResponseDto<MovieForCategoryDto>, ApiError>> { e ->
+                logE<MovieApiService>(message = "Error during fetchMoviesForCategory: ${e.message}")
+                HandleError.getResultForHttpStatus(null)
+            }
         )
 
     override suspend fun fetchMovieGenres(): Result<MovieGenreResponseDto?, ApiError> =

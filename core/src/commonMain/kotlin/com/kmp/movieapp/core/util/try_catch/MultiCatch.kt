@@ -31,3 +31,19 @@ suspend fun <T> multiCatch(
         }
     }
 }
+
+suspend fun <T> multiCatch(
+    tryBlock: suspend () -> T,
+    vararg handlers: CatchHandler<T>
+): T {
+    return try {
+        tryBlock()
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Throwable) {
+        handlers.firstOrNull { it.type.isInstance(e) }
+            ?.handler
+            ?.invoke(e)
+            ?: throw e
+    }
+}
