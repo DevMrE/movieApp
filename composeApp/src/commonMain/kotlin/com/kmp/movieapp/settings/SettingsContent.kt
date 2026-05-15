@@ -36,7 +36,7 @@ fun SettingsContent() {
 
 /**
  * This screen is only for demonstrating how you could ask for a
- * device feature and show up the results immediately after we
+ * permission and show up the results immediately after we
  * received the data without blocking the ui.
  */
 @Composable
@@ -108,6 +108,9 @@ private fun PermissionDemoScreen() {
             }
 
             is PermissionDemoResult.PermissionDenied ->
+                // Usually you would show here a permission dialog, explain why we need the permission
+                // and redirect to the settings screen. In this case I'm skipping that and redirect
+                // directly over the viewModel to the settings.
                 Text(
                     text = "Permission denied: ${result.permission}",
                     color = MaterialTheme.colorScheme.onBackground
