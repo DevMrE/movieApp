@@ -63,9 +63,20 @@ internal class SettingsScreenViewModel(
                         )
                     }
                 }.onDenied {
-                    logI<SettingsScreenViewModel>(message = "viewModel onDenied")
+                    _uiState.update {
+                        it.copy(
+                            permissionDemoResult = PermissionDemoResult.PermissionDenied(
+                                Permission.LOCATION
+                            )
+                        )
+                    }
+
+                    settingsNavigator.openAppSettings()
                 }.onCancelled {
-                    logI<SettingsScreenViewModel>(message = "viewModel onCancelled")
+                    // used to track example how many times the user doesn't interact
+                    // with the permission dialog. In previous projects, it helps to
+                    // debug on unexcepted bugs.
+                    logI<SettingsScreenViewModel>(message = "user canceled the location permission dialog")
                 }
             }
         }
@@ -86,9 +97,20 @@ internal class SettingsScreenViewModel(
                         )
                     }
                 }.onDenied {
-                    logI<SettingsScreenViewModel>(message = "viewModel onDenied")
+                    // After a request was denied, we could show some dialog with an explanation
+                    // why we need this permission and redirect to the settings for granting it.
+                    _uiState.update {
+                        it.copy(
+                            permissionDemoResult = PermissionDemoResult.PermissionDenied(
+                                Permission.CAMERA
+                            )
+                        )
+                    }
                 }.onCancelled {
-
+                    // used to track example how many times the user doesn't interact
+                    // with the permission dialog. In previous projects, it helps to
+                    // debug on unexcepted bugs.
+                    logI<SettingsScreenViewModel>(message = "user canceled the camera permission dialog")
                 }
             }
         }
@@ -99,7 +121,6 @@ internal class SettingsScreenViewModel(
             deviceOperationsController.pickImages().collectLatest { result ->
                 when (result) {
                     is OperationResult.Success -> {
-                        logI<SettingsScreenViewModel>(message = "capture photo granted")
                         _uiState.update {
                             it.copy(
                                 permissionDemoResult = PermissionDemoResult.GalleryReady(mediaList = result.data)
@@ -108,11 +129,17 @@ internal class SettingsScreenViewModel(
                     }
 
                     is OperationResult.Denied -> {
-                        logI<SettingsScreenViewModel>(message = "viewModel onDenied")
+                        _uiState.update {
+                            it.copy(
+                                permissionDemoResult = PermissionDemoResult.PermissionDenied(
+                                    Permission.GALLERY
+                                )
+                            )
+                        }
                     }
 
                     is OperationResult.Cancelled -> {
-
+                        logI<SettingsScreenViewModel>(message = "user canceled the gallery permission dialog")
                     }
                 }
             }
