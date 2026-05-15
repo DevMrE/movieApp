@@ -119,7 +119,7 @@ private fun PermissionDemoScreen() {
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
-            null -> ""
+            else -> Unit
         }
     }
 }
