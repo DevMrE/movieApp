@@ -1,10 +1,9 @@
 package com.kmp.movieapp.movie.data.repository
 
 import com.kmp.movieapp.core.network.util.Result
-import com.kmp.movieapp.core.network.util.mapOnFailure
+import com.kmp.movieapp.core.network.util.mapOnError
 import com.kmp.movieapp.core.network.util.mapOnSuccess
 import com.kmp.movieapp.core.network.util.onError
-import com.kmp.movieapp.core.network.util.onFailure
 import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.movie.data.mapper.toMovie
@@ -26,7 +25,7 @@ internal class MovieRepositoryImpl(
                     movieDto.toMovie()
                 } ?: emptyList()
             }
-            .mapOnFailure {
+            .mapOnError {
                 // Do an DB call and get the data from there.
                 Result.Success(emptyList())
             }
@@ -35,8 +34,6 @@ internal class MovieRepositoryImpl(
             }
             .onError {
                 logE<MovieRepository>(message = "Error: $it")
-            }.onFailure {
-                // Placeholder for loading movies from a database.
             }
     }
 
@@ -44,10 +41,9 @@ internal class MovieRepositoryImpl(
         movieService.findMovieForId(movieId)
             .onSuccess {
                 emit(it.toMovie())
-            }.onFailure {
-                emit(null)
             }.onError {
                 logE<MovieRepository>(message = "Error: $it")
+                emit(null)
             }
     }
 }

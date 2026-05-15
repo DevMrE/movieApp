@@ -1,6 +1,6 @@
 package com.kmp.movieapp.discover.data.repository
 
-import com.kmp.movieapp.core.network.util.onFailure
+import com.kmp.movieapp.core.network.util.onError
 import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.discover.data.mapper.toDiscoverMovies
@@ -19,7 +19,7 @@ internal class DiscoverRepositoryImpl(
             discoverService.fetchDiscoverMovies(page)
                 .onSuccess { data ->
                     emit(data.results?.map { it.toDiscoverMovies() } ?: emptyList())
-                }.onFailure {
+                }.onError {
                     logI<DiscoverRepository>("something went wrong by loading discover movies")
                 }
         }
@@ -29,7 +29,7 @@ internal class DiscoverRepositoryImpl(
             discoverService.fetchDiscoverSeries(page)
                 .onSuccess { data ->
                     emit(data.results?.map { it.toDiscoverSeries() } ?: emptyList())
-                }.onFailure {
+                }.onError {
                     logI<DiscoverRepository>("something went wrong by loading discover series")
                 }
         }
