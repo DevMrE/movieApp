@@ -5,6 +5,7 @@ import androidx.compose.animation.scaleOut
 import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
 import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.discover.presentation.DiscoverScreen
 import com.kmp.movieapp.discover.presentation.destination.ContentDetailDestination
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
@@ -30,6 +31,7 @@ fun registerAppNavigation() {
                 scaleOut()
             }
         ) { data ->
+            logI("HomeMediaList?: $data")
             MediaListScreen(data.mediaCategory)
         }
 
