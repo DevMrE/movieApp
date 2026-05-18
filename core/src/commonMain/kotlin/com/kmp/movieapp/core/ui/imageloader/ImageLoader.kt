@@ -22,27 +22,29 @@ fun ImageLoader(
     loadingContent: (@Composable () -> Unit)? = null,
 ) {
 
-    KamelImage(
-        resource = { asyncPainterResource(url) },
-        contentDescription = null,
-        modifier = modifier,
-        contentScale = contentScale,
-        onLoading = { progress ->
-            if (loadingContent == null) {
-                Box(modifier = Modifier.fillMaxSize()) {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+    if (url.isNotEmpty()) {
+        KamelImage(
+            resource = { asyncPainterResource(url) },
+            contentDescription = null,
+            modifier = modifier,
+            contentScale = contentScale,
+            onLoading = { progress ->
+                if (loadingContent == null) {
+                    Box(modifier = Modifier.fillMaxSize()) {
+                        CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                    }
+                } else {
+                    loadingContent()
                 }
-            } else {
-                loadingContent()
+            },
+            onFailure = { throwable ->
+                // Optional: Fallback, Error-Icon, Logging, ...
+                Image(
+                    painter = painterResource(Res.drawable.media_item_not_found),
+                    modifier = modifier,
+                    contentDescription = null
+                )
             }
-        },
-        onFailure = { exception ->
-            // Optional: Fallback, Error-Icon, Logging, ...
-            Image(
-                painter = painterResource(Res.drawable.media_item_not_found),
-                modifier = modifier,
-                contentDescription = null
-            )
-        }
-    )
+        )
+    }
 }

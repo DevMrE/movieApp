@@ -20,9 +20,9 @@ val contentDetailModule = module {
 
     viewModel<ContentDetailViewModel> { (id: String, mediaCategory: MediaCategory) ->
         ContentDetailViewModel(
-            getContentDetailUseCase = get(),
             id = id,
-            mediaCategory = mediaCategory
+            mediaCategory = mediaCategory,
+            getContentDetailUseCase = get()
         )
     }
 }

@@ -49,3 +49,20 @@ fun logI(message: String) =
 
     }
 
+fun logE(message: String) =
+    try {
+        val logger = Logger.withTag("MovieApp")
+
+        var start = 0
+        val length = message.length
+
+        while (start < length) {
+            val end = (start + MAX_LOG_LENGTH).coerceAtMost(length)
+            logger.i(messageString = message.substring(start, end))
+            start = end
+        }
+    } catch (e: Exception) {
+
+    }
+
+

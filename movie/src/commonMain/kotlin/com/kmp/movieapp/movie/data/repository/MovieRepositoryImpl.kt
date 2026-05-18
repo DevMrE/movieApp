@@ -14,9 +14,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 internal class MovieRepositoryImpl(
-    private val movieService: MovieService,
-
-    ) : MovieRepository {
+    private val movieService: MovieService
+) : MovieRepository {
 
     override suspend fun getPopularMovies(page: Int): Flow<List<Movie>> = flow {
         movieService.fetchMoviesPopularMovies(page = page)

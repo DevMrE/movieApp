@@ -41,7 +41,7 @@ class LoadMediaListForCategoryUseCase(
                         backdropPath = series.backdropPath,
                         type = series.type
                     )
-                }
+                }.distinctBy { it.id }
             }
 
             else -> flowOf(emptyList())
