@@ -7,7 +7,7 @@ import com.kmp.movieapp.movie.data.model.response.MovieGenreResponseDto
 import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 
-internal interface MovieApiService {
+internal interface MovieService {
 
     suspend fun fetchMoviesPopularMovies(page: Int): Result<ApiResponseDto<MovieForCategoryDto>, ApiError>
 

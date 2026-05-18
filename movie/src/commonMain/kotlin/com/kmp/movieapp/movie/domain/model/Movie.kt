@@ -11,5 +11,5 @@ data class Movie(
     val runtime: Int?,
     val releaseDate: String?,
     val genres: List<MovieGenre>? = emptyList(),
-    val type: MediaCategory = MediaCategory.SERIES
+    val type: MediaCategory = MediaCategory.MOVIE
 )

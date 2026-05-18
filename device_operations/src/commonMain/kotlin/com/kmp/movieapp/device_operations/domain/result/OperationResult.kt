@@ -17,7 +17,7 @@ sealed class OperationResult<out T> {
     data object Denied : OperationResult<Nothing>()
 
     /**
-     * Operation was cancelled by the user (e.g. closing picker or camera).
+     * Operation was canceled by the user (e.g. closing picker or camera).
      */
     data object Cancelled : OperationResult<Nothing>()
 }
@@ -47,7 +47,13 @@ inline fun <T> OperationResult<T>.onDenied(
 }
 
 /**
- * Executes block if operation was cancelled by the user.
+ * Executes block if operation was canceled by the user.
+ *
+ * This feature was added because sometimes you needed
+ * to track whether the user had closed the permission dialog—for example,
+ * by pressing the back button—without entering any information.
+ * This helps, for example, in tracking whether the user has already seen
+ * the permission dialog once but did not interact with it.
  */
 inline fun <T> OperationResult<T>.onCancelled(
     block: () -> Unit

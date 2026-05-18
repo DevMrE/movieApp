@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Resource("${UrlHelper.API_VERSION_PATH}/trending/{path}/{time_window}")
+@Resource("${UrlHelper.API_V3}/trending/{path}/{time_window}")
 data class TrendingRequestDto(
     @SerialName("path")
     val trendingRequestType: TrendingRequestTypeDto,

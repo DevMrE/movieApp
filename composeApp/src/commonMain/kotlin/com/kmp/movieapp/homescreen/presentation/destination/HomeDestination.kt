@@ -5,6 +5,6 @@ import com.kmp.navigation.NavDestination
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class HomeMediaCategoryListDestination(
+data class HomeMediaListDestination(
     val mediaCategory: MediaCategory
 ) : NavDestination

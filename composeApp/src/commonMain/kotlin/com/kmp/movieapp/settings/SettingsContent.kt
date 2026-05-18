@@ -34,6 +34,11 @@ fun SettingsContent() {
 }
 
 
+/**
+ * This screen is only for demonstrating how you could ask for a
+ * permission and show up the results immediately after we
+ * received the data without blocking the ui.
+ */
 @Composable
 private fun PermissionDemoScreen() {
     val viewModel = koinViewModel<SettingsScreenViewModel>()
@@ -71,7 +76,7 @@ private fun PermissionDemoScreen() {
             }
         )
 
-        // Ergebnis anzeigen
+        // show results
         when (val result = state.permissionDemoResult) {
             is PermissionDemoResult.CameraReady -> {
                 Text("Camera active!", color = MaterialTheme.colorScheme.onBackground)
@@ -91,8 +96,6 @@ private fun PermissionDemoScreen() {
                 )
             }
 
-            is PermissionDemoResult.NotificationReady -> "Benachrichtigungen aktiviert!"
-
             is PermissionDemoResult.GalleryReady -> {
                 LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                     items(result.mediaList) { media ->
@@ -104,11 +107,16 @@ private fun PermissionDemoScreen() {
                 }
             }
 
-            is PermissionDemoResult.PermissionDenied -> "Permission verweigert: ${result.permission}"
+            is PermissionDemoResult.PermissionDenied ->
+                // Usually you would show here a permission dialog, explain why we need the permission
+                // and redirect to the settings screen. In this case I'm skipping that and redirect
+                // directly over the viewModel to the settings.
+                Text(
+                    text = "Permission denied: ${result.permission}",
+                    color = MaterialTheme.colorScheme.onBackground
+                )
 
-            is PermissionDemoResult.PermissionPermanentlyDenied -> "Bitte in Einstellungen erlauben: ${result.permission}"
-
-            null -> ""
+            else -> Unit
         }
     }
 }

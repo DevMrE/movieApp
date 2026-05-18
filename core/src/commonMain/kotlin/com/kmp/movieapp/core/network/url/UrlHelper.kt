@@ -3,7 +3,7 @@ package com.kmp.movieapp.core.network.url
 object UrlHelper {
 
     const val BASE_URL = "api.themoviedb.org"
-    const val API_VERSION_PATH = "/3"
+    const val API_V3 = "/3"
     const val IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"
 
     const val BEARER_TOKEN =
@@ -12,7 +12,8 @@ object UrlHelper {
     const val MOVIE_ENDPOINT = "/movie"
     const val MOVIE_GENRE_ENDPOINT = "/genre$MOVIE_ENDPOINT/list"
 
-    const val DISCOVER_ENDPOINT = "/discover"
+    const val DISCOVER_MOVIE_ENDPOINT = "/discover/movie"
+    const val DISCOVER_SERIES_ENDPOINT = "/discover/tv"
 
     const val SERIES_ENDPOINT = "/tv"
 
@@ -21,4 +22,5 @@ object UrlHelper {
     const val FIND_ENDPOINT = "/find"
 
     const val TRENDING_ENDPOINT = "/trending"
+
 }

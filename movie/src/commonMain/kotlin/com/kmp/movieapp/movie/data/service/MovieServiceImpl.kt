@@ -18,9 +18,9 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.resources.get
 
-internal class MovieApiServiceImpl(
+internal class MovieServiceImpl(
     private val httpClient: HttpClient
-) : MovieApiService {
+) : MovieService {
 
     override suspend fun fetchMoviesPopularMovies(page: Int): Result<ApiResponseDto<MovieForCategoryDto>, ApiError> =
         multiCatch(
@@ -34,7 +34,7 @@ internal class MovieApiServiceImpl(
                 HandleError.getResultForHttpStatus(e.response.status)
             },
             handler<Exception, Result<ApiResponseDto<MovieForCategoryDto>, ApiError>> { e ->
-                logE<MovieApiService>(message = "Error during fetchMoviesPopularMovies: ${e.message}")
+                logE<MovieService>(message = "Error during fetchMoviesPopularMovies: ${e.message}")
                 HandleError.getResultForHttpStatus(null)
             }
         )
@@ -51,7 +51,7 @@ internal class MovieApiServiceImpl(
                 HandleError.getResultForHttpStatus(e.response.status)
             },
             handler<Exception, Result<MovieGenreResponseDto, ApiError>> { e ->
-                logE<MovieApiService>(message = "Error during fetchMovieGenres: ${e.message}")
+                logE<MovieService>(message = "Error during fetchMovieGenres: ${e.message}")
                 HandleError.getResultForHttpStatus(null)
             }
         )
@@ -69,7 +69,7 @@ internal class MovieApiServiceImpl(
                 HandleError.getResultForHttpStatus(e.response.status)
             },
             handler<Exception, Result<MovieDto, ApiError>> { e ->
-                logE<MovieApiService>(message = "Error during findMovieForId: ${e.message}")
+                logE<MovieService>(message = "Error during findMovieForId: ${e.message}")
                 HandleError.getResultForHttpStatus(null)
             }
         )

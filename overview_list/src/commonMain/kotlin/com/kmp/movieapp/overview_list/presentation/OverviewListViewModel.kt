@@ -19,10 +19,11 @@ internal class OverviewListViewModel(
     private val loadMediaListForCategoryUseCase: LoadMediaListForCategoryUseCase,
     private val mediaCategory: MediaCategory
 ) : ViewModel() {
-    private val _currentPage = MutableStateFlow(1)
+    private val _currentPage = MutableStateFlow(mapOf(mediaCategory to 1))
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val movieListState: StateFlow<List<UiMediaCard>> = _currentPage
+        .map { it[mediaCategory] ?: 1 }
         .flatMapLatest { page ->
             loadMediaListForCategoryUseCase(
                 mediaCategory = mediaCategory,
@@ -32,10 +33,14 @@ internal class OverviewListViewModel(
             currentList + (newList)
         }.map { list ->
             list.toUiMediaCardList()
+                .distinctBy { it.id }
         }
         .stateInEagerly(emptyList())
 
     fun loadNextMovies() {
-        _currentPage.update { it + 1 }
+        _currentPage.update { map ->
+            val current = map[mediaCategory] ?: 1
+            map + (mediaCategory to current + 1)
+        }
     }
 }
