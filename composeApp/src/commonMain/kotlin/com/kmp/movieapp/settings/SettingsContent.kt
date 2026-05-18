@@ -116,12 +116,6 @@ private fun PermissionDemoScreen() {
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
-            is PermissionDemoResult.PermissionPermanentlyDenied ->
-                Text(
-                    text = "Please allow the permission for: ${result.permission}",
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
             else -> Unit
         }
     }

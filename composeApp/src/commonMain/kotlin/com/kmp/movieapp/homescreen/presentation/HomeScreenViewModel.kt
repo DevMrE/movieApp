@@ -7,7 +7,7 @@ import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.homescreen.domain.usecase.GetHomeDataUseCase
 import com.kmp.movieapp.homescreen.presentation.action.HomeAction
-import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaCategoryListDestination
+import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaListDestination
 import com.kmp.movieapp.homescreen.presentation.model.UiHomeData
 import com.kmp.movieapp.movie.presentation.mapper.toUiHomeMovieList
 import com.kmp.movieapp.series.presentation.mapper.toUiHomeSeriesList
@@ -70,7 +70,7 @@ internal class HomeScreenViewModel(
 
     private fun onSeeAll(mediaCategory: MediaCategory?) {
         if (mediaCategory == null) return
-        navigation.navigateTo(destination = HomeMediaCategoryListDestination(mediaCategory))
+        navigation.navigateTo(destination = HomeMediaListDestination(mediaCategory))
     }
 
     private fun onRefresh() {

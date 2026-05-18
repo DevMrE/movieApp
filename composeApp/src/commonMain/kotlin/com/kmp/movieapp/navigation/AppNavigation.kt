@@ -10,7 +10,7 @@ import com.kmp.movieapp.discover.presentation.destination.ContentDetailDestinati
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
 import com.kmp.movieapp.homescreen.destination.HomeDestination
 import com.kmp.movieapp.homescreen.presentation.HomeContent
-import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaCategoryListDestination
+import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaListDestination
 import com.kmp.movieapp.overview_list.presentation.MediaListScreen
 import com.kmp.movieapp.search.presentation.SearchContent
 import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
@@ -22,7 +22,7 @@ fun registerAppNavigation() {
     registerNavigation(startDestination = HomeDestination) {
         content<HomeDestination> { HomeContent() }
         content<SettingsDestination> { SettingsContent() }
-        content<HomeMediaCategoryListDestination>(
+        content<HomeMediaListDestination>(
             enterTransition = {
                 scaleIn()
             },

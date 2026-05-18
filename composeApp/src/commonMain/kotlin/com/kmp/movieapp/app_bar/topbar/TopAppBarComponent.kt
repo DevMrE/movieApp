@@ -13,7 +13,7 @@ import com.kmp.movieapp.composeApp.popular_series_title
 import com.kmp.movieapp.composeApp.trending_title
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaCategoryListDestination
+import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaListDestination
 import com.kmp.movieapp.settings.destination.SettingsDestination
 import com.kmp.navigation.compose.rememberActiveTabIn
 import com.kmp.navigation.compose.rememberNavDestination
@@ -25,7 +25,7 @@ fun TopAppBarComponent() {
     val navDestination = rememberNavDestination()
 
     val showBack = when (navDestination) {
-        is HomeMediaCategoryListDestination -> true
+        is HomeMediaListDestination -> true
         else -> false
     }
 
@@ -36,7 +36,7 @@ fun TopAppBarComponent() {
     }
 
     val title = when (navDestination) {
-        is HomeMediaCategoryListDestination -> {
+        is HomeMediaListDestination -> {
             val currentTitle = when (navDestination.mediaCategory) {
                 MediaCategory.MOVIE -> Res.string.popular_movies_title
                 MediaCategory.SERIES -> Res.string.popular_series_title
