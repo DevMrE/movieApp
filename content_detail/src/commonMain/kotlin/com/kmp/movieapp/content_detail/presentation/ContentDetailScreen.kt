@@ -16,7 +16,9 @@ import com.kmp.movieapp.content_detail.presentation.component.overview.overview
 import com.kmp.movieapp.content_detail.presentation.component.title.title
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
-import com.kmp.navigation.compose.rememberNavigation
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -30,7 +32,7 @@ fun ContentDetailScreen(
         key = id
     )
     val uiState by viewModel.uiState.collectAsState()
-    val navigation = rememberNavigation()
+    val navigator: Navigator<Route> = koinInject()
 
     LazyColumn(
         modifier = Modifier
@@ -43,7 +45,7 @@ fun ContentDetailScreen(
             mediaInfo = uiState?.mediaInfo,
             posterPath = uiState?.posterPath ?: "",
             onBackClicked = {
-                navigation.navigateUp()
+                navigator.navigateBack()
             },
             onDetailAction = {
 

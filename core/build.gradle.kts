@@ -47,6 +47,7 @@ kotlin {
             implementation(libs.kamel)
 
             implementation(libs.kmpNavigation)
+            implementation(libs.bundles.composeNavigation3)
         }
 
         androidMain.dependencies {

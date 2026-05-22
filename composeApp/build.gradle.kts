@@ -62,6 +62,7 @@ kotlin {
             implementation(libs.bundles.lifecycle)
             implementation(libs.bundles.commainMainKoin)
             implementation(libs.kmpNavigation)
+            implementation(libs.bundles.composeNavigation3)
 
             implementation(project(":core"))
             implementation(project(":content_detail"))
@@ -72,6 +73,7 @@ kotlin {
             implementation(project(":series"))
             implementation(project(":trending"))
             implementation(project(":overview_list"))
+            implementation(project(":navigation"))
         }
 
         androidMain.dependencies {

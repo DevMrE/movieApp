@@ -1,7 +1,7 @@
 package com.kmp.movieapp.settings.destination
 
-import com.kmp.navigation.NavDestination
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object SettingsDestination : NavDestination
+data object SettingsDestination : NavKey

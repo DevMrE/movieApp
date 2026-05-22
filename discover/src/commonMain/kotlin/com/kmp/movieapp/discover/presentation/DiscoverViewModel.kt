@@ -4,13 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.core.util.logger.logI
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
 import com.kmp.movieapp.core.util.viewmodel.stateInLazily
 import com.kmp.movieapp.discover.domain.usecase.GetDiscoverUseCase
 import com.kmp.movieapp.discover.presentation.destination.ContentDetailDestination
 import com.kmp.movieapp.discover.presentation.mapper.toUiDiscoverList
 import com.kmp.movieapp.discover.presentation.model.UiDiscover
 import com.kmp.movieapp.discover.presentation.model.UiFilter
-import com.kmp.navigation.Navigation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 
 class DiscoverViewModel(
     private val getDiscoverUseCase: GetDiscoverUseCase,
-    private val navigation: Navigation
+    private val navigator: Navigator<Route>
 ) : ViewModel() {
 
     private val _discoverState = MutableStateFlow<UiDiscover?>(null)
@@ -72,8 +73,8 @@ class DiscoverViewModel(
 
     private fun navigateToContentDetail(uiMediaCard: UiMediaCard) {
         logI(message = "Navigate with id: $uiMediaCard")
-        navigation.navigateTo(
-            destination = ContentDetailDestination(
+        navigator.navigateTo(
+            route = ContentDetailDestination(
                 id = uiMediaCard.id,
                 type = uiMediaCard.type
             )

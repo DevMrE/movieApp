@@ -1,6 +1,5 @@
 package com.kmp.movieapp.app_screen.mobile
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -13,18 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.app_bar.bottombar.BottomBarComponent
-import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.topbar.TopAppBarComponent
 import com.kmp.movieapp.core.util.logger.logI
-import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaListDestination
-import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
-import com.kmp.navigation.compose.NavigationContent
-import com.kmp.navigation.compose.NavigationTabs
+import com.kmp.movieapp.navigation.AppContent
 import com.kmp.navigation.compose.rememberNavDestination
 
 @Composable
-fun AppContent() {
+fun AppScreen() {
     val navDestination = rememberNavDestination()
+
     Scaffold(
         topBar = {
             TopAppBarComponent()
@@ -44,14 +40,10 @@ fun AppContent() {
 
         logI(message = "Destination: $navDestination")
 
-        Box(
+        AppContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingWithoutBottom)
-        ) {
-            NavigationTabs<BottomBarTabs>()
-            NavigationContent<HomeMediaListDestination>()
-            NavigationContent<SearchScreenDestination>()
-        }
+        )
     }
 }
