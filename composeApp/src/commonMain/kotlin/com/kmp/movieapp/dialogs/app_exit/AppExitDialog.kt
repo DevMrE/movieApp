@@ -8,12 +8,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.kmp.navigation.compose.rememberNavigation
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
+import org.koin.compose.koinInject
 
 @Composable
 fun AppExitDialog() {
-    val navigation = rememberNavigation()
-
+    val navigator: Navigator<Route> = koinInject()
     var showDialog by rememberSaveable { mutableStateOf(true) }
 
     if (showDialog)
@@ -24,7 +25,7 @@ fun AppExitDialog() {
             confirmButton = {
                 Button(
                     onClick = {
-                        navigation.navigateUp()
+                        navigator.navigateBack()
                     }
                 ) {
                     Text("Yes, that is an horrible App!")

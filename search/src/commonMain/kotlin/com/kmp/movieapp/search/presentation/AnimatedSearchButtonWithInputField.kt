@@ -26,14 +26,16 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.util.focus_requester.requestFocusWithRetry
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
+import com.kmp.movieapp.core.util.navigation.route.AppNavigation
 import com.kmp.movieapp.search.Res
 import com.kmp.movieapp.search.ic_search
 import com.kmp.movieapp.search.presentation.action.SearchAction
 import com.kmp.movieapp.search.presentation.component.CustomSearchField
 import com.kmp.movieapp.search.presentation.component.SearchIconButton
-import com.kmp.movieapp.search.presentation.destination.SearchScreenDestination
-import com.kmp.navigation.compose.rememberNavigation
 import org.jetbrains.compose.resources.vectorResource
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -43,7 +45,7 @@ fun AnimatedSearchButtonWithInputField(
     val viewModel = koinViewModel<SearchViewModel>()
     val uiState by viewModel.searchQueryState.collectAsStateWithLifecycle()
 
-    val navigation = rememberNavigation()
+    val navigator: Navigator<Route> = koinInject()
     val focusRequester = remember { FocusRequester() }
     val focusManager = LocalFocusManager.current
 
@@ -97,7 +99,7 @@ fun AnimatedSearchButtonWithInputField(
                     icon = vectorResource(Res.drawable.ic_search)
                 ) {
                     viewModel.onAction(SearchAction.OnSearchActiveChanged)
-                    navigation.navigateTo(SearchScreenDestination)
+                    navigator.navigateTo(AppNavigation.Search)
                 }
             }
         }
@@ -114,7 +116,7 @@ fun AnimatedSearchButtonWithInputField(
             onMicActive = {},
             onBackClick = {
                 viewModel.onAction(SearchAction.OnSearchActiveChanged)
-                navigation.navigateUp()
+                navigator.navigateBack()
             },
             focusRequester = focusRequester
         )
@@ -131,7 +133,7 @@ fun AnimatedSearchButtonWithInputField(
                     .animateContentSize()
             ) {
                 viewModel.onAction(SearchAction.OnSearchActiveChanged)
-                navigation.navigateTo(SearchScreenDestination)
+                navigator.navigateTo(AppNavigation.Search)
             }
         }
     }

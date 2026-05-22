@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.kmp.movieapp.core.ui.content.MediaHorizontalList
@@ -16,6 +15,7 @@ import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.navigation.home.presentation.action.HomeAction
+import com.kmp.movieapp.navigation.home.presentation.component.SeeAllButton
 import com.kmp.movieapp.navigation.home.presentation.model.HomeCategory
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
@@ -52,15 +52,12 @@ internal fun LazyListScope.homeListContent(
                     color = MaterialTheme.colorScheme.onBackground
                 )
 
-                if (homeCategory != HomeCategory.TRENDING) {
-                    TextButton(
-                        onClick = {
-                            onAction(HomeAction.OnSeeAllClicked(mediaCategory))
-                        },
-                    ) {
-                        //Text(stringResource(Res.string.see_all))
+                SeeAllButton(
+                    homeCategory = homeCategory,
+                    onClick = {
+                        onAction(HomeAction.OnSeeAllClicked(mediaCategory))
                     }
-                }
+                )
             }
 
             MediaHorizontalList(

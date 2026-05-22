@@ -13,13 +13,10 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.app_bar.bottombar.BottomBarComponent
 import com.kmp.movieapp.app_bar.topbar.TopAppBarComponent
-import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.navigation.AppContent
-import com.kmp.navigation.compose.rememberNavDestination
 
 @Composable
 fun AppScreen() {
-    val navDestination = rememberNavDestination()
 
     Scaffold(
         topBar = {
@@ -37,8 +34,6 @@ fun AppScreen() {
             end = paddingValues.calculateEndPadding(layoutDir),
             bottom = 0.dp
         )
-
-        logI(message = "Destination: $navDestination")
 
         AppContent(
             modifier = Modifier

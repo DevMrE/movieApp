@@ -23,7 +23,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun ContentDetailScreen(
+fun ContentDetailComponent(
     id: String,
     mediaCategory: MediaCategory?
 ) {

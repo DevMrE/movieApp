@@ -14,4 +14,7 @@ sealed interface AppNavigation: Route {
 
     @Serializable
     data object More : AppNavigation
+
+    @Serializable
+    data object Search: AppNavigation
 }

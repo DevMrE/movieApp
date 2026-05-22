@@ -48,9 +48,6 @@ kotlin {
                 implementation(libs.bundles.commainMainKoin)
                 implementation(libs.bundles.commonMainKtor)
 
-                // kmp navigation
-                implementation(libs.kmpNavigation)
-
                 implementation(libs.bundles.composeNavigation3)
 
                 implementation(project(":core"))

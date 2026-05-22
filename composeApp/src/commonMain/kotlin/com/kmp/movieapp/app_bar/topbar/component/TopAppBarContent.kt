@@ -21,9 +21,11 @@ import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.ic_back_arrow
 import com.kmp.movieapp.composeApp.ic_movie
 import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
 import com.kmp.movieapp.search.presentation.AnimatedSearchButtonWithInputField
-import com.kmp.navigation.compose.rememberNavigation
 import org.jetbrains.compose.resources.vectorResource
+import org.koin.compose.koinInject
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -60,9 +62,9 @@ fun TopAppBarContent(
 
 @Composable
 private fun NavigationBackIcon() {
-    val navigation = rememberNavigation()
+    val navigator: Navigator<Route> = koinInject()
 
-    IconButton(onClick = { navigation.navigateUp() }) {
+    IconButton(onClick = { navigator.navigateBack() }) {
         Icon(
             imageVector = vectorResource(Res.drawable.ic_back_arrow),
             contentDescription = null
