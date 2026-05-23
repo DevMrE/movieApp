@@ -10,7 +10,7 @@ import com.kmp.movieapp.navigation.home.domain.usecase.GetHomeDataUseCase
 import com.kmp.movieapp.navigation.home.presentation.HomeScreen
 import com.kmp.movieapp.navigation.home.presentation.HomeScreenViewModel
 import com.kmp.movieapp.navigation.util.NavigatorImpl
-import com.kmp.movieapp.overview_list.presentation.MediaListScreen
+import com.kmp.movieapp.overview_list.presentation.OverviewListScreen
 import com.kmp.movieapp.search.presentation.SearchContent
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.module.dsl.viewModelOf
@@ -39,7 +39,7 @@ val navigationModule = module {
     }
 
     navigation<HomeNavigation.SeeAllRoute> { data ->
-        MediaListScreen(data.mediaCategory)
+        OverviewListScreen(data.mediaCategory)
     }
 
     navigation<HomeNavigation.ContentDetail> { data ->

@@ -2,6 +2,7 @@ package com.kmp.movieapp.discover.presentation.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -9,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
@@ -23,6 +25,7 @@ fun FilterComponent(
     onFilterClicked: (UiFilter) -> Unit
 ) {
     Row(
+        modifier = Modifier.padding(horizontal = MaterialTheme.padding.defaultContentPadding),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(
             space = MaterialTheme.padding.ten,
