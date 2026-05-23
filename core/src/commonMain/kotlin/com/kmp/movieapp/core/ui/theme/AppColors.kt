@@ -9,7 +9,7 @@ val LightColorScheme = lightColorScheme(
     primary = Color(0xff72001c),
     onPrimary = Color(0xFFFFFFFF),
 
-    background = Color(0xFFFFFFFF),
+    background = Color(0xbcffffff),
     onBackground = Color(0xFF212121),
 
     surface = Color(0xFFF5F5F5),

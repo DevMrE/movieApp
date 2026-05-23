@@ -18,12 +18,13 @@ import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.navigation.Navigator
 import com.kmp.movieapp.core.util.navigation.Route
+import com.kmp.movieapp.core.util.navigation.route.AppNavigation
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun ContentDetailComponent(
+fun ContentDetailScreen(
     id: String,
     mediaCategory: MediaCategory?
 ) {
@@ -45,7 +46,7 @@ fun ContentDetailComponent(
             mediaInfo = uiState?.mediaInfo,
             posterPath = uiState?.posterPath ?: "",
             onBackClicked = {
-                navigator.navigateBack()
+                navigator.popUpTo(AppNavigation.Browse::class)
             },
             onDetailAction = {
 

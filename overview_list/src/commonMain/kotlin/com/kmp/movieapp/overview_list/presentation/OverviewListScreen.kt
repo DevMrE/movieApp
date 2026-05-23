@@ -29,7 +29,7 @@ import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
-fun MediaListComponent(mediaCategory: MediaCategory) {
+fun MediaListScreen(mediaCategory: MediaCategory) {
 
     val viewModel = koinViewModel<OverviewListViewModel>(
         key = mediaCategory.name,
@@ -61,7 +61,7 @@ fun MediaListComponent(mediaCategory: MediaCategory) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         state = gridState,
-        contentPadding = PaddingValues(horizontal = MaterialTheme.padding.five),
+        contentPadding = PaddingValues(all = MaterialTheme.padding.five),
         verticalArrangement = Arrangement.spacedBy(
             space = MaterialTheme.padding.defaultContentPadding,
             alignment = Alignment.CenterVertically
