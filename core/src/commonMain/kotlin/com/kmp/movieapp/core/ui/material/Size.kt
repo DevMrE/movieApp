@@ -16,7 +16,9 @@ data class Size(
     val defaultCardWidth: Dp = 150.dp,
     val movieBigCardWidth: Dp = 350.dp,
     val bottomBarHeight: Dp = 80.dp,
-    val detailHeaderHeight: Dp = 500.dp
+    val detailHeaderHeight: Dp = 500.dp,
+    val customShapeSize: Dp = 6.dp,
+    val shapeOffset: Dp = 4.dp
 )
 
 private val LocalSize = staticCompositionLocalOf { Size() }

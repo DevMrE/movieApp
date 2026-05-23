@@ -22,7 +22,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.app_bar.bottombar.component.NavItem
-import com.kmp.movieapp.app_bar.bottombar.destination.BottomBarTabs
 import com.kmp.movieapp.app_bar.bottombar.model.BottomBarItem
 import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.discover_media_title
@@ -32,40 +31,34 @@ import com.kmp.movieapp.composeApp.ic_home
 import com.kmp.movieapp.composeApp.ic_more
 import com.kmp.movieapp.composeApp.more
 import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.discover.presentation.destination.DiscoverMediaDestination
-import com.kmp.movieapp.homescreen.presentation.destination.HomeMediaListDestination
-import com.kmp.movieapp.homescreen.destination.HomeDestination
-import com.kmp.movieapp.settings.destination.SettingsDestination
-import com.kmp.navigation.compose.rememberActiveTabIn
-import com.kmp.navigation.compose.rememberIsTabsActive
-import com.kmp.navigation.compose.rememberNavDestination
-import com.kmp.navigation.compose.rememberNavigation
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
+import com.kmp.movieapp.core.util.navigation.route.AppNavigation
 import org.jetbrains.compose.resources.vectorResource
+import org.koin.compose.koinInject
 
 private val bottomBarItemList = listOf(
     BottomBarItem(
         icon = Res.drawable.ic_home,
         label = Res.string.home_screen,
-        navDestination = HomeDestination
+        navDestination = AppNavigation.Home
     ),
     BottomBarItem(
         icon = Res.drawable.ic_fire,
         label = Res.string.discover_media_title,
-        navDestination = DiscoverMediaDestination
+        navDestination = AppNavigation.Browse
     ),
     BottomBarItem(
         icon = Res.drawable.ic_more,
         label = Res.string.more,
-        navDestination = SettingsDestination
+        navDestination = AppNavigation.More
     )
 )
 
 @Composable
 internal fun BottomBarComponent() {
-    val navigation = rememberNavigation()
-    val navDestination = rememberNavDestination()
-    val activeTabs = rememberActiveTabIn<BottomBarTabs>()
-    val isActive = rememberIsTabsActive<BottomBarTabs>()
+    val navigator = koinInject<Navigator<Route>>()
+    val currentScreen = navigator.backStack.lastOrNull()
 
     val itemColors = NavigationSuiteDefaults.itemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
@@ -80,7 +73,7 @@ internal fun BottomBarComponent() {
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
     AnimatedVisibility(
-        visible = isActive && (navDestination !is HomeMediaListDestination),
+        visible = currentScreen is AppNavigation,
         modifier = Modifier.background(Color.Transparent),
         enter = fadeIn(),
         exit = fadeOut()
@@ -104,9 +97,9 @@ internal fun BottomBarComponent() {
 
             bottomBarItemList.forEach { navItem ->
                 NavItem(
-                    selected = activeTabs == navItem.navDestination,
+                    selected = currentScreen == navItem.navDestination,
                     onClick = {
-                        navigation.navigateTo(navItem.navDestination)
+                        navigator.switchTo(navItem.navDestination)
                     },
                     icon = vectorResource(navItem.icon),
                     labelResource = navItem.label,

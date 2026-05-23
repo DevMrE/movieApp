@@ -16,8 +16,8 @@ fun MediaHorizontalList(
     onItemClick: (UiMediaCard) -> Unit
 ) {
     LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
-        contentPadding = PaddingValues(horizontal = MaterialTheme.padding.thirty)
+        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.padding.twelfth),
+        contentPadding = PaddingValues(all = MaterialTheme.padding.ten)
     ) {
         items(
             items = items,

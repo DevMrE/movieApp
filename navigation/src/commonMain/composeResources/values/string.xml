@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="see_all">See All</string>
+    <string name="series">Series</string>
+    <string name="movies">Movie</string>
+    <string name="actors">Actor</string>
+    <string name="content_type">%1$s: %2$s</string>
+    <string name="more">More</string>
+    <string name="trending_title">Trending</string>
+    <string name="popular_movies_title">Popular Movies</string>
+    <string name="popular_series_title">Popular Series</string>
+</resources>

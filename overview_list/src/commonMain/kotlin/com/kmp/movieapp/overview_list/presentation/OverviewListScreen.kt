@@ -21,8 +21,10 @@ import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
-import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
-import com.kmp.navigation.compose.rememberNavigation
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
+import com.kmp.movieapp.core.util.navigation.route.HomeNavigation
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -35,7 +37,8 @@ fun MediaListScreen(mediaCategory: MediaCategory) {
     )
 
     val movieList = viewModel.movieListState.collectAsStateWithLifecycle()
-    val navigation = rememberNavigation()
+    val navigator = koinInject<Navigator<Route>>()
+
     val gridState = rememberLazyGridState()
 
     val shouldLoadMore by remember {
@@ -58,7 +61,7 @@ fun MediaListScreen(mediaCategory: MediaCategory) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         state = gridState,
-        contentPadding = PaddingValues(horizontal = MaterialTheme.padding.five),
+        contentPadding = PaddingValues(all = MaterialTheme.padding.five),
         verticalArrangement = Arrangement.spacedBy(
             space = MaterialTheme.padding.defaultContentPadding,
             alignment = Alignment.CenterVertically
@@ -74,8 +77,8 @@ fun MediaListScreen(mediaCategory: MediaCategory) {
                 posterPath = movie.posterPath,
                 height = MaterialTheme.size.defaultCardListHeight
             ) {
-                navigation.navigateTo(
-                    destination = MediaDetailDestination(
+                navigator.navigateTo(
+                    route = HomeNavigation.ContentDetail(
                         id = movie.id,
                         mediaCategory = movie.type
                     )

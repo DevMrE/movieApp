@@ -17,8 +17,10 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.core.ui.navigation.MediaDetailDestination
-import com.kmp.navigation.compose.rememberNavigation
+import com.kmp.movieapp.core.util.navigation.Navigator
+import com.kmp.movieapp.core.util.navigation.Route
+import com.kmp.movieapp.core.util.navigation.route.HomeNavigation
+import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -27,7 +29,7 @@ fun SearchContent() {
     val results by searchViewModel.searchQueryState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
 
-    val navigation = rememberNavigation()
+    val navigator: Navigator<Route> = koinInject()
     val gridState = rememberLazyGridState()
 
     LazyVerticalGrid(
@@ -52,8 +54,8 @@ fun SearchContent() {
                 posterPath = movie.posterPath,
                 enableGradient = false
             ) {
-                navigation.navigateTo(
-                    destination = MediaDetailDestination(
+                navigator.navigateTo(
+                    route = HomeNavigation.ContentDetail(
                         id = movie.id,
                         mediaCategory = movie.mediaCategory
                     )

@@ -50,9 +50,6 @@ kotlin {
                 implementation(libs.bundles.commainMainKoin)
                 implementation(libs.bundles.commonMainKtor)
 
-                // kmp navigation
-                implementation(libs.kmpNavigation)
-
                 implementation(project(":core"))
                 implementation(project(":movie"))
                 implementation(project(":series"))
