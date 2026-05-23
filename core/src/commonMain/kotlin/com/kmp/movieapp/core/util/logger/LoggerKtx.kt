@@ -64,5 +64,3 @@ fun logE(message: String) =
     } catch (e: Exception) {
 
     }
-
-

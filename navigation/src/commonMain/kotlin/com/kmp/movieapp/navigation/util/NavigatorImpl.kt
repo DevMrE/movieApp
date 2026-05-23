@@ -2,6 +2,7 @@ package com.kmp.movieapp.navigation.util
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.navigation3.runtime.NavKey
+import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.navigation.NavigationOptions
 import com.kmp.movieapp.core.util.navigation.Navigator
 import kotlin.reflect.KClass
@@ -17,7 +18,11 @@ internal class NavigatorImpl<T : NavKey>(
 
         // 1. Replace current screen
         if (options.replace && backStack.isNotEmpty()) {
-            backStack.removeLast()
+            runCatching {
+                backStack.removeLast()
+            }.onFailure {
+                logE<Navigator<T>>("navigateTo: replace didn't work!")
+            }
             backStack += route
             return
         }
@@ -32,7 +37,11 @@ internal class NavigatorImpl<T : NavKey>(
                 val target = if (options.inclusive) index else index + 1
 
                 while (backStack.size > target) {
-                    backStack.removeLast()
+                    runCatching {
+                        backStack.removeLast()
+                    }.onFailure {
+                        logE<Navigator<T>>("navigateTo: popUpTo didn't work!")
+                    }
                 }
             }
         }
@@ -46,7 +55,11 @@ internal class NavigatorImpl<T : NavKey>(
 
     override fun switchTo(route: T) {
         if (backStack.isNotEmpty()) {
-            backStack.removeLast()
+            runCatching {
+                backStack.removeLast()
+            }.onFailure {
+                logE<Navigator<T>>("switchTo: remove didn't work!")
+            }
         }
 
         backStack += route
@@ -54,7 +67,11 @@ internal class NavigatorImpl<T : NavKey>(
 
     override fun navigateBack() {
         if (backStack.size > 1) {
-            backStack.removeLast()
+            runCatching {
+                backStack.removeLast()
+            }.onFailure {
+                logE<Navigator<T>>("navigateBack: failed")
+            }
         }
     }
 
@@ -69,12 +86,14 @@ internal class NavigatorImpl<T : NavKey>(
 
         if (index == -1) return
 
-        val target =
-            if (inclusive) index
-            else index + 1
+        val target = if (inclusive) index else index + 1
 
         while (backStack.size > target) {
-            backStack.removeLast()
+            runCatching {
+                backStack.removeLast()
+            }.onFailure {
+                logE<Navigator<T>>("remove last item in list failed!")
+            }
         }
     }
 }

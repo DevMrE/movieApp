@@ -131,6 +131,6 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVers
 lifecycle = ["androidx-lifecycle-runtimeCompose", "androidx-lifecycle-viewmodelCompose"]
 commainMainKoin = ["koinCore", "koinCoreViewModel", "koinCoreNavigation", "koinCompose"]
 commonMainKtor = ["ktorCore", "ktorLogging", "ktorNegotiation", "ktorAuth", "ktorResource", "ktorGson", "ktorBomRemover"]
-commonMainCompose = ["composeUi", "composeRuntime", "composeTooling","composePreview", "composeFoundation", "composeResources", "material", "material3", "material3Adaptive", "material3AdaptiveNavigation"]
+commonMainCompose = ["composeUi", "composeRuntime","composePreview", "composeFoundation", "composeResources", "material", "material3", "material3Adaptive", "material3AdaptiveNavigation"]
 androidCompose = ["androidx-compose-bom", "androidx-compose-ui", "androidx-compose-ui-tooling", "androidx-compose-ui-graphics", "androidx-compose-material3", "androidx-compose-ui-tooling-preview"]
 composeNavigation3 = ["compose-navigation3", "compose-navigation3-ui", "compose-adaptiveNavigation3", "compose-viewmodelNavigation3", "koinComposeNavigation3"]
