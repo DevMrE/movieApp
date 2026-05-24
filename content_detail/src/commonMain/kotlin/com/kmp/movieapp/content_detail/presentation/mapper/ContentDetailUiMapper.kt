@@ -27,7 +27,7 @@ fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
                 append(it)
             }
     },
-    description = overview ?: "",
-    posterPath = posterPath ?: "",
-    videoThumbnail = backdropPath ?: "",
+    description = "$overview",
+    posterPath = "$posterPath",
+    videoThumbnail = "$backdropPath",
 )

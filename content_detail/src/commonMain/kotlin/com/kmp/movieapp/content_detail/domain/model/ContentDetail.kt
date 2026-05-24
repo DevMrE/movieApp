@@ -16,5 +16,5 @@ data class ContentDetail(
     val tagline: String? = null,
     val voteAverage: Double? = null,
     val voteCount: Int? = null,
-    val video: Video? = null
+    val video: Video? = null,
 )

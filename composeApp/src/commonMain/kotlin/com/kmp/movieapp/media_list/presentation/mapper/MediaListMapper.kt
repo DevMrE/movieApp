@@ -10,9 +10,9 @@ internal fun List<Movie>.toMediaList(): List<UiMediaCard> {
     return map { movie ->
         UiMediaCard(
             id = movie.id.toString(),
-            title = movie.title,
-            posterPath = movie.posterPath,
-            backdropPath = movie.backdropPath,
+            title = movie.movieInfo.title,
+            posterPath = movie.movieImage.posterPath,
+            backdropPath = movie.movieImage.backdropPath,
             type = movie.type,
         )
     }

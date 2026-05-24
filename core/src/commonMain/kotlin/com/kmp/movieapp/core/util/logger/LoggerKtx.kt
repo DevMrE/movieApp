@@ -58,9 +58,26 @@ fun logE(message: String) =
 
         while (start < length) {
             val end = (start + MAX_LOG_LENGTH).coerceAtMost(length)
-            logger.i(messageString = message.substring(start, end))
+            logger.e(messageString = message.substring(start, end))
             start = end
         }
     } catch (e: Exception) {
 
     }
+
+fun logE(message: String, throwable: Throwable) =
+    try {
+        val logger = Logger.withTag("MovieApp")
+
+        var start = 0
+        val length = message.length
+
+        while (start < length) {
+            val end = (start + MAX_LOG_LENGTH).coerceAtMost(length)
+            logger.e(messageString = message.substring(start, end), throwable)
+            start = end
+        }
+    } catch (e: Exception) {
+
+    }
+

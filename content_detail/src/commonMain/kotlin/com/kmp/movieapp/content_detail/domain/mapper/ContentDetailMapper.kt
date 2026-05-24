@@ -2,17 +2,16 @@ package com.kmp.movieapp.content_detail.domain.mapper
 
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
 import com.kmp.movieapp.content_detail.domain.model.Genre
-import com.kmp.movieapp.core.network.url.UrlHelper
 import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.series.domain.model.Series
 
 fun Movie.toContentDetail() = ContentDetail(
-    title = title,
-    posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
-    backdropPath = backdropPath,
+    title = movieInfo.title,
+    posterPath =  movieImage.posterPath,
+    backdropPath = movieImage.backdropPath,
     runtime = runtime,
     releaseDate = releaseDate,
-    overview = overview,
+    overview = movieInfo.overview,
     genres = genres?.map {
         Genre(name = it.name)
     }
@@ -20,7 +19,7 @@ fun Movie.toContentDetail() = ContentDetail(
 
 fun Series.toContentDetail() = ContentDetail(
     title = name,
-    posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
+    posterPath = posterPath,
     backdropPath = backdropPath,
     overview = overview,
     genres = genres?.map {

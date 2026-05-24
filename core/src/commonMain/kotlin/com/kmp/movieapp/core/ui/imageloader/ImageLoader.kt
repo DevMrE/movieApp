@@ -19,6 +19,7 @@ fun ImageLoader(
     url: String,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
+    loadingProgress: (Float) -> Unit,
     loadingContent: (@Composable () -> Unit)? = null,
 ) {
 
@@ -29,6 +30,7 @@ fun ImageLoader(
             modifier = modifier,
             contentScale = contentScale,
             onLoading = { progress ->
+                loadingProgress(progress)
                 if (loadingContent == null) {
                     Box(modifier = Modifier.fillMaxSize()) {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))

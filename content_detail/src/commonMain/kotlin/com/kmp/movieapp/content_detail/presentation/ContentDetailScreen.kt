@@ -1,12 +1,17 @@
 package com.kmp.movieapp.content_detail.presentation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.buildAnnotatedString
@@ -18,7 +23,6 @@ import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.navigation.Navigator
 import com.kmp.movieapp.core.util.navigation.Route
-import com.kmp.movieapp.core.util.navigation.route.AppNavigation
 import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
@@ -33,27 +37,36 @@ fun ContentDetailScreen(
         key = id
     )
     val uiState by viewModel.uiState.collectAsState()
+    var isLoading by remember { mutableStateOf(false) }
     val navigator: Navigator<Route> = koinInject()
 
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        title(
-            title = uiState?.title ?: "",
-            mediaInfo = uiState?.mediaInfo,
-            posterPath = uiState?.posterPath ?: "",
-            onBackClicked = {
-                navigator.popUpTo(AppNavigation.Browse::class)
-            },
-            onDetailAction = {
+    if (isLoading) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+        }
+    } else {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            title(
+                title = uiState?.title ?: "",
+                mediaInfo = uiState?.mediaInfo,
+                posterPath = uiState?.posterPath ?: "",
+                isLoading = {
+                    isLoading = it
+                },
+                onBackClicked = {
+                    navigator.navigateBack()
+                }
+            ) {
 
             }
-        )
 
-        overview(uiState?.description ?: "")
+            overview(uiState?.description ?: "")
+        }
     }
 }
 
@@ -74,11 +87,11 @@ private fun ContentDetailScreenPreview() {
                     append("186")
                 },
                 posterPath = "",
+                isLoading = {},
                 onBackClicked = {
-                },
-                onDetailAction = {
                 }
-            )
+            ) {
+            }
 
             mediaButtons(
                 onPlayClicked = {},
