@@ -39,7 +39,7 @@ fun ImageLoader(
                     loadingContent()
                 }
             },
-            onFailure = { throwable ->
+            onFailure = { _ ->
                 // Optional: Fallback, Error-Icon, Logging, ...
                 Image(
                     painter = painterResource(Res.drawable.media_item_not_found),
