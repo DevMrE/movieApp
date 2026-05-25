@@ -2,7 +2,7 @@ package com.kmp.movieapp
 
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import com.kmp.movieapp.presentation.app_screen.mobile.MobileAppScreen
+import com.kmp.movieapp.components.app_screen.mobile.MobileAppScreen
 import com.kmp.movieapp.di.util.initModules
 import org.koin.core.context.startKoin
 
