@@ -1,12 +1,12 @@
-package com.kmp.movieapp.overview_list.presentation
+package com.kmp.movieapp.overview
 
 import androidx.lifecycle.ViewModel
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
+import com.kmp.movieapp.overview.mapper.toUiMediaCardList
 import com.kmp.movieapp.overview_list.domain.model.OverViewMedia
 import com.kmp.movieapp.overview_list.domain.usecase.LoadMediaListForCategoryUseCase
-import com.kmp.movieapp.overview_list.presentation.mapper.toUiMediaCardList
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

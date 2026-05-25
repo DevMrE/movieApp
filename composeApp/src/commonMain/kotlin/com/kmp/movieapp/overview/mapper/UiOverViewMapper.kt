@@ -1,4 +1,4 @@
-package com.kmp.movieapp.overview_list.presentation.mapper
+package com.kmp.movieapp.overview.mapper
 
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.core.ui.content.model.UiSection

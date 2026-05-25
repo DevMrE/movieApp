@@ -56,8 +56,8 @@ internal fun LazyListScope.homeListContent(
                     onClick = {
                         onAction(
                             HomeAction.OnSeeAllClicked(
-                            mediaCategory
-                        )
+                                mediaCategory
+                            )
                         )
                     }
                 )

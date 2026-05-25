@@ -19,27 +19,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kmp.movieapp.components.app_bar.topbar.component.TopAppBarContent
 import com.kmp.movieapp.composeApp.Res
+import com.kmp.movieapp.composeApp.app_name
 import com.kmp.movieapp.composeApp.popular_movies_title
 import com.kmp.movieapp.composeApp.popular_series_title
 import com.kmp.movieapp.composeApp.trending_title
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.util.boolean.isTrue
+import com.kmp.movieapp.core.util.navigation.route.HomeNavigation
+import com.kmp.movieapp.core.util.navigation.util.koinNavigation
 import com.kmp.movieapp.home.presentation.HomeScreenViewModel
 import com.kmp.movieapp.home.presentation.action.HomeAction
 import com.kmp.movieapp.home.presentation.model.HomeCategory
 import com.kmp.movieapp.home.presentation.model.HomeCategory.TRENDING
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun HomeStartContent() {
     val viewModel = koinViewModel<HomeScreenViewModel>()
     val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
+    val navigator = koinNavigation<HomeNavigation>()
+    val backStack = navigator.getCurrentBackStack()
 
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         topBar = {
-
+            TopAppBarContent(
+                title = stringResource(Res.string.app_name),
+            )
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->

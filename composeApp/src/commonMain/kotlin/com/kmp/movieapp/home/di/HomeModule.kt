@@ -7,7 +7,7 @@ import com.kmp.movieapp.core.util.navigation.util.navigatorQualifier
 import com.kmp.movieapp.home.domain.usecase.GetHomeDataUseCase
 import com.kmp.movieapp.home.presentation.HomeScreenViewModel
 import com.kmp.movieapp.home.presentation.content.HomeStartContent
-import com.kmp.movieapp.overview_list.presentation.OverviewListScreen
+import com.kmp.movieapp.overview.OverviewListScreen
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module

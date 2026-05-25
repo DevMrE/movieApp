@@ -7,7 +7,6 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,17 +28,20 @@ import org.jetbrains.compose.resources.vectorResource
 fun TopAppBarContent(
     title: String,
     showBackButton: Boolean = false,
+    navigateBack: (() -> Unit)? = null,
 ) {
     TopAppBar(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = MaterialTheme.padding.defaultContentPadding),
+        modifier = Modifier.fillMaxWidth(),
         title = {
             LogoWithTitle(title)
         },
         navigationIcon = {
             AnimatedVisibility(showBackButton) {
-                NavigationBackIcon()
+                NavigationBackIcon(
+                    navigateBack = {
+                        navigateBack?.let { it() }
+                    }
+                )
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
@@ -50,11 +52,10 @@ fun TopAppBarContent(
 }
 
 @Composable
-private fun NavigationBackIcon() {
-    // val navigator: Navigator<Route> = koinInject()
-
-    IconButton(onClick = {// navigator.navigateBack() }
-    }) {
+private fun NavigationBackIcon(
+    navigateBack: () -> Unit
+) {
+    IconButton(onClick = navigateBack) {
         Icon(
             imageVector = vectorResource(Res.drawable.ic_back_arrow),
             contentDescription = null

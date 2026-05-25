@@ -22,6 +22,7 @@ import com.kmp.movieapp.core.ui.material.size
 
 @Composable
 fun GridContainer(
+    modifier: Modifier = Modifier,
     loadNextItems: () -> Unit,
     content: LazyGridScope.() -> Unit,
 ) {
@@ -42,7 +43,7 @@ fun GridContainer(
     }
     LazyVerticalGrid(
         columns = GridCells.Adaptive((MaterialTheme.size.defaultCardWidth.value / 1.3).dp),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         state = gridState,

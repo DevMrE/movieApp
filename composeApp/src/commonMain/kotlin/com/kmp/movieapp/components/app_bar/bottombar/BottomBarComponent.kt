@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.components.app_bar.bottombar.model.BottomBarItem
 import com.kmp.movieapp.composeApp.Res
-import com.kmp.movieapp.composeApp.discover_media_title
+import com.kmp.movieapp.composeApp.browse_media_title
 import com.kmp.movieapp.composeApp.home_screen
 import com.kmp.movieapp.composeApp.ic_fire
 import com.kmp.movieapp.composeApp.ic_home
@@ -44,7 +44,7 @@ private val bottomBarItemList = listOf(
     ),
     BottomBarItem(
         icon = Res.drawable.ic_fire,
-        label = Res.string.discover_media_title,
+        label = Res.string.browse_media_title,
         navDestination = AppNavigation.BrowseRoute
     ),
     BottomBarItem(

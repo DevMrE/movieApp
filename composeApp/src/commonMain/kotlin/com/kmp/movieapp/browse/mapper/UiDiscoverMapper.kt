@@ -33,7 +33,24 @@ internal fun List<Discover>.toUiDiscoverList(): UiDiscover = UiDiscover(
                     UiGenre(
                         id = "1",
                         name = "Thriller"
-                    )
+                    ),
+                     UiGenre(
+                        id = "2",
+                        name = "Action"
+                    ),
+                     UiGenre(
+                        id = "3",
+                        name = "Sci-Fi"
+                    ),
+                     UiGenre(
+                        id = "4",
+                        name = "Anime"
+                    ),
+                     UiGenre(
+                        id = "1",
+                        name = "Thriller"
+                    ),
+
                 )
             )
         )

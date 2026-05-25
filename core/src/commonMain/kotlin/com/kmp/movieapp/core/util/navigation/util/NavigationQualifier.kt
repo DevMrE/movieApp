@@ -1,7 +1,7 @@
 package com.kmp.movieapp.core.util.navigation.util
 
-import com.kmp.movieapp.core.util.navigation.Route
+import androidx.navigation3.runtime.NavKey
 import org.koin.core.qualifier.named
 
-inline fun <reified T : Route> navigatorQualifier() =
+inline fun <reified T : NavKey> navigatorQualifier() =
     named("navigator_${T::class.qualifiedName}")

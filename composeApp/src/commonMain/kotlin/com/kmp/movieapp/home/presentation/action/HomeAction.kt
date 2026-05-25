@@ -8,5 +8,7 @@ internal sealed interface HomeAction {
 
     data class OnSeeAllClicked(val mediaCategory: MediaCategory?) : HomeAction
 
-    data object OnRefresh :HomeAction
+    data object OnRefresh : HomeAction
+
+    data object NavigateBack : HomeAction
 }

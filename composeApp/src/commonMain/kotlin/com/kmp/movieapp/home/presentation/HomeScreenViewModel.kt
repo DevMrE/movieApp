@@ -55,6 +55,7 @@ internal class HomeScreenViewModel(
 
             is HomeAction.OnSeeAllClicked -> onSeeAll(action.mediaCategory)
             is HomeAction.OnRefresh -> onRefresh()
+            is HomeAction.NavigateBack -> navigator.navigateBack()
         }
     }
 

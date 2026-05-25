@@ -1,10 +1,10 @@
 package com.kmp.movieapp.core.util.navigation.route
 
-import com.kmp.movieapp.core.util.navigation.Route
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed interface AppNavigation : Route {
+sealed interface AppNavigation : NavKey {
 
     @Serializable
     data object HomeRoute : AppNavigation

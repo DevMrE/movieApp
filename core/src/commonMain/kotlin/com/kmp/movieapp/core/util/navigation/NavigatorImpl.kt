@@ -11,6 +11,8 @@ internal class NavigatorImpl<T : NavKey>(
 
     override val backStack = mutableStateListOf(startDestination)
 
+    override fun getCurrentBackStack(): T? = backStack.lastOrNull()
+
     override fun navigateTo(route: T, options: NavigationOptions) {
         val current = backStack.lastOrNull()
 

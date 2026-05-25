@@ -1,11 +1,11 @@
 package com.kmp.movieapp.core.util.navigation.route
 
+import androidx.navigation3.runtime.NavKey
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.util.navigation.Route
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed interface BrowseNavigation : Route {
+sealed interface BrowseNavigation : NavKey {
 
     @Serializable
     data object InitialScreenRoute : BrowseNavigation
