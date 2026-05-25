@@ -20,7 +20,7 @@ fun ImageLoader(
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
     loadingProgress: (Float) -> Unit,
-    loadingContent: (@Composable () -> Unit)? = null,
+    loadingContent: (@Composable (Modifier) -> Unit)? = null,
 ) {
 
     if (url.isNotEmpty()) {
@@ -36,7 +36,7 @@ fun ImageLoader(
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     }
                 } else {
-                    loadingContent()
+                    loadingContent(modifier)
                 }
             },
             onFailure = { _ ->

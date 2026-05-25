@@ -31,8 +31,7 @@ internal fun CustomSearchField(
     focusRequester: FocusRequester
 ) {
 
-    val borderColor =
-        if (query.isNotEmpty() || focusRequester.captureFocus()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
+    val borderColor = if (query.isNotEmpty() || focusRequester.captureFocus()) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
 
     val icon = if (query.isNotEmpty()) vectorResource(Res.drawable.ic_close)
     else vectorResource(Res.drawable.ic_mic)

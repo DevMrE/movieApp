@@ -2,7 +2,6 @@ package com.kmp.movieapp.content_detail.presentation.component.title
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -13,7 +12,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.content_detail.presentation.action.DetailAction
 import com.kmp.movieapp.core.ui.imageloader.ImageLoader
 import com.kmp.movieapp.core.ui.material.gradient
 import com.kmp.movieapp.core.ui.theme.AppTheme
@@ -27,7 +25,6 @@ internal fun LazyListScope.title(
     posterPath: String,
     onBackClicked: () -> Unit,
     isLoading: (Boolean) -> Unit,
-    onDetailAction: (DetailAction) -> Unit
 ) {
     item {
         TitleContent(
@@ -35,8 +32,7 @@ internal fun LazyListScope.title(
             mediaInfo = mediaInfo,
             posterPath = posterPath,
             onBackClicked = onBackClicked,
-            isLoading = isLoading,
-            onDetailAction = onDetailAction
+            isLoading = isLoading
         )
     }
 }
@@ -48,7 +44,6 @@ private fun TitleContent(
     posterPath: String,
     onBackClicked: () -> Unit,
     isLoading: (Boolean) -> Unit,
-    onDetailAction: (DetailAction) -> Unit
 
 ) {
     Box {
@@ -56,7 +51,6 @@ private fun TitleContent(
         ImageLoader(
             url = posterPath,
             modifier = Modifier
-                .fillMaxSize(0.8f)
                 .applyIfElse(
                     condition = isSystemInDarkTheme(),
                     ifTrue = {
@@ -81,7 +75,6 @@ private fun TitleContent(
             modifier = Modifier.align(Alignment.BottomCenter),
             title = title,
             mediaInfo = mediaInfo,
-            onDetailAction = onDetailAction
         )
     }
 }
@@ -97,14 +90,10 @@ private fun DetailHeaderPreview() {
                     append("1997 \u2022 186")
                 },
                 posterPath = "",
-                isLoading = {
-                },
                 onBackClicked = {
-                },
-                onDetailAction = {
-
                 }
-            )
+            ) {
+            }
         }
     }
 }

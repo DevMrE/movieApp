@@ -5,10 +5,10 @@ import com.kmp.movieapp.discover.data.service.DiscoverService
 import com.kmp.movieapp.discover.data.service.DiscoverServiceImpl
 import com.kmp.movieapp.discover.domain.repository.DiscoverRepository
 import com.kmp.movieapp.discover.domain.usecase.GetDiscoverUseCase
-import com.kmp.movieapp.discover.presentation.DiscoverViewModel
-import org.koin.core.module.dsl.viewModelOf
+import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.module
 
+@OptIn(KoinExperimentalAPI::class)
 val discoverModule = module {
 
     single<DiscoverService> {
@@ -22,6 +22,4 @@ val discoverModule = module {
     factory {
         GetDiscoverUseCase(get())
     }
-
-    viewModelOf(::DiscoverViewModel)
 }

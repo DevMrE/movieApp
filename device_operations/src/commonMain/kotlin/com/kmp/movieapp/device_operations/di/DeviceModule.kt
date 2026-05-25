@@ -7,4 +7,4 @@ import org.koin.core.module.Module
  *
  * Each platform is responsible for wiring its own providers and permission logic.
  */
-expect fun deviceModule(): Module
+expect val deviceModule: Module

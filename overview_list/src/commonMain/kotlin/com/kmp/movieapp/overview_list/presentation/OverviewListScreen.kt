@@ -7,10 +7,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.core.ui.container.GridContainer
 import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.util.navigation.Navigator
-import com.kmp.movieapp.core.util.navigation.Route
 import com.kmp.movieapp.core.util.navigation.route.HomeNavigation
-import org.koin.compose.koinInject
+import com.kmp.movieapp.core.util.navigation.util.koinNavigation
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -24,7 +22,7 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
     )
 
     val movieList = viewModel.movieListState.collectAsStateWithLifecycle()
-    val navigator = koinInject<Navigator<Route>>()
+    val navigator = koinNavigation<HomeNavigation>()
 
     GridContainer(
         loadNextItems = {
@@ -37,7 +35,7 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
                     posterPath = movie.posterPath,
                 ) {
                     navigator.navigateTo(
-                        route = HomeNavigation.ContentDetail(
+                        route = HomeNavigation.ContentDetailRoute(
                             id = movie.id,
                             mediaCategory = movie.type
                         )

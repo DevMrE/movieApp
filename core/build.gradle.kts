@@ -47,9 +47,6 @@ kotlin {
             implementation(libs.kamel)
 
             implementation(libs.bundles.composeNavigation3)
-
-            // Remove that for running iOS
-            // implementation(libs.composeTooling)
         }
 
         androidMain.dependencies {

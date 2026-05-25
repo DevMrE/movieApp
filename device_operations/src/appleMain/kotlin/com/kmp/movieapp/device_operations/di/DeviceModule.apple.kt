@@ -16,7 +16,7 @@ import org.koin.dsl.module
 /**
  * Provides iOS-specific dependencies for device operations.
  */
-actual fun deviceModule(): Module = module {
+actual val deviceModule: Module = module {
 
     single<IOSPermissionGateway> {
         IOSPermissionGatewayImpl()

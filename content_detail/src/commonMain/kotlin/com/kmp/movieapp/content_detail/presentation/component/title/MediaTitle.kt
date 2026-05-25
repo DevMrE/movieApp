@@ -15,16 +15,14 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.content_detail.presentation.action.DetailAction
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 
 @Composable
 internal fun MediaTitle(
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     title: String,
     mediaInfo: AnnotatedString?,
-    onDetailAction: (DetailAction) -> Unit
 ) {
     Row(
         modifier = modifier
@@ -74,7 +72,7 @@ fun MediaTitleSectionPreview() {
                 mediaInfo = buildAnnotatedString {
                     append("1986 \u2022 2h 13m")
                 }
-            ) {}
+            )
         }
     }
 }

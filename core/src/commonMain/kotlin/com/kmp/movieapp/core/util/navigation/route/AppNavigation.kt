@@ -4,17 +4,15 @@ import com.kmp.movieapp.core.util.navigation.Route
 import kotlinx.serialization.Serializable
 
 @Serializable
-sealed interface AppNavigation: Route {
+sealed interface AppNavigation : Route {
 
     @Serializable
-    data object Home : AppNavigation
+    data object HomeRoute : AppNavigation
 
     @Serializable
-    data object Browse : AppNavigation
+    data object BrowseRoute : AppNavigation
 
     @Serializable
-    data object More : AppNavigation
+    data object MoreRoute : AppNavigation
 
-    @Serializable
-    data object Search: AppNavigation
 }

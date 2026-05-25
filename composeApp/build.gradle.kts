@@ -72,15 +72,16 @@ kotlin {
             implementation(project(":series"))
             implementation(project(":trending"))
             implementation(project(":overview_list"))
-            implementation(project(":navigation"))
         }
 
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.android.conscrypt)
+            implementation(libs.composeTooling)
         }
 
         jvmMain.dependencies {
+            implementation(libs.composeTooling)
             implementation(compose.desktop.currentOs)
         }
     }
