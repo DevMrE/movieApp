@@ -1,6 +1,9 @@
 package com.kmp.movieapp.movie.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
+import com.kmp.movieapp.core.util.boolean.isTrue
+import com.kmp.movieapp.core.util.logger.logI
+import com.kmp.movieapp.genre.domain.model.Genre
 import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import com.kmp.movieapp.movie.domain.model.Movie
@@ -22,18 +25,18 @@ internal fun MovieForCategoryDto.toMovieInfo() = MovieInfo(
  * Mapper for transforming an [MovieForCategoryDto] into
  * [Movie]
  */
-internal fun MovieForCategoryDto.toMovie() =
+internal fun MovieForCategoryDto.toMovie(genre: List<Genre>) =
     Movie(
         id = id ?: 0,
         movieInfo = toMovieInfo(),
         releaseDate = releaseDate,
         movieImage = toMovieImage(),
-        genres = genreIds?.map {
-            MovieGenre(
-                id = it,
-                name = ""
-            )
-        },
+        genres = genre
+            .filter { g -> genreIds?.contains(g.id).isTrue }
+            .map { currentGenre ->
+                logI("currentGenre: $currentGenre")
+                MovieGenre(currentGenre.name)
+            },
         runtime = null,
     )
 

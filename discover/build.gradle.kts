@@ -51,6 +51,7 @@ kotlin {
                 implementation(libs.bundles.composeNavigation3)
 
                 implementation(project(":core"))
+                implementation(project(":genre"))
             }
         }
 

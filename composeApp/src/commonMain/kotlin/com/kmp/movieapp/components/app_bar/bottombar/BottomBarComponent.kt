@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteDefaults
@@ -54,6 +55,7 @@ private val bottomBarItemList = listOf(
     )
 )
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun BottomBarComponent() {
     val appNavigator = koinNavigation<AppNavigation>()
@@ -76,7 +78,7 @@ internal fun BottomBarComponent() {
 
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
-    val showBottomBar = currentHomeRoute is HomeNavigation.InitialScreenRoute || currentDiscoverRoute is BrowseNavigation.InitialScreenRoute
+    val showBottomBar = currentHomeRoute is HomeNavigation.InitialScreenRoute && currentDiscoverRoute is BrowseNavigation.InitialScreenRoute
 
     AnimatedVisibility(
         visible = showBottomBar,

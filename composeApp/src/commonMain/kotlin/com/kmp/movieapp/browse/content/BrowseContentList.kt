@@ -11,9 +11,7 @@ fun BrowseContentList(
     contentList: List<UiMediaCard>?,
     onContentClicked: (UiMediaCard) -> Unit
 ) {
-    GridContainer(
-        loadNextItems = {}
-    ) {
+    GridContainer {
         items(contentList ?: return@GridContainer) { content ->
             MediaCard(
                 title = content.title,

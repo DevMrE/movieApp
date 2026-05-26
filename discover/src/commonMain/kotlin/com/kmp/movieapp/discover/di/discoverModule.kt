@@ -16,7 +16,7 @@ val discoverModule = module {
     }
 
     single<DiscoverRepository> {
-        DiscoverRepositoryImpl(get())
+        DiscoverRepositoryImpl(get(), get())
     }
 
     factory {

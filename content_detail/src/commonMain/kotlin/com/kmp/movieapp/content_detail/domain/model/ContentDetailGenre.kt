@@ -1,5 +1,5 @@
 package com.kmp.movieapp.content_detail.domain.model
 
-data class Genre(
+data class ContentDetailGenre(
     val name: String
 )

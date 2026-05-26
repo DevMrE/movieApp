@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.MaterialTheme
@@ -23,15 +24,16 @@ import com.kmp.movieapp.core.ui.material.size
 @Composable
 fun GridContainer(
     modifier: Modifier = Modifier,
-    loadNextItems: () -> Unit,
+    lazyGridState: LazyGridState = rememberLazyGridState(),
+    loadNextItems: () -> Unit = {},
     content: LazyGridScope.() -> Unit,
 ) {
     val gridState = rememberLazyGridState()
 
     val shouldLoadMore by remember {
         derivedStateOf {
-            val totalItems = gridState.layoutInfo.totalItemsCount
-            val lastVisibleIndex = gridState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
+            val totalItems = lazyGridState.layoutInfo.totalItemsCount
+            val lastVisibleIndex = lazyGridState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
             lastVisibleIndex >= totalItems - 6 && totalItems > 0
         }
     }
@@ -46,7 +48,7 @@ fun GridContainer(
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
-        state = gridState,
+        state = lazyGridState,
         contentPadding = PaddingValues(all = MaterialTheme.padding.twelfth),
         verticalArrangement = Arrangement.spacedBy(
             space = MaterialTheme.padding.defaultContentPadding,

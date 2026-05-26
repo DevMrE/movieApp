@@ -40,7 +40,7 @@ internal fun LazyListScope.homeListContent(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = MaterialTheme.padding.thirty),
+                    .padding(start = MaterialTheme.padding.defaultContentPadding),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {

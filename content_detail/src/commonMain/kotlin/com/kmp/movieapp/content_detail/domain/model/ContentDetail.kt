@@ -4,7 +4,7 @@ data class ContentDetail(
     val title: String,
     val adult: Boolean = false,
     val backdropPath: String? = null,
-    val genres: List<Genre>? = emptyList(),
+    val contentDetailGenres: List<ContentDetailGenre>? = emptyList(),
     val imdbId: String? = null,
     val overview: String? = null,
     val popularity: Double? = null,

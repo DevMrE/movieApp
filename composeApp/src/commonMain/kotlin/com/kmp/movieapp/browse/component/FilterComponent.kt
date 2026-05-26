@@ -1,8 +1,13 @@
 package com.kmp.movieapp.browse.component
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
@@ -12,76 +17,124 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.browse.model.UiFilter
-import com.kmp.movieapp.browse.model.UiFilterType
-import com.kmp.movieapp.browse.model.UiGenre
+import com.kmp.movieapp.browse.model.filter.UiGenre
+import com.kmp.movieapp.composeApp.Res
+import com.kmp.movieapp.composeApp.filter_by_genre
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import org.jetbrains.compose.resources.StringResource
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun FilterComponent(
-    filters: List<UiFilter>?,
-    onFilterClicked: (UiFilter) -> Unit
+fun FilterGenreComponent(
+    titleRes: StringResource,
+    genres: List<UiGenre>?,
+    onGenreUpdate: (UiGenre) -> Unit
 ) {
-    Row(
-        modifier = Modifier.padding(horizontal = MaterialTheme.padding.defaultContentPadding),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(
-            space = MaterialTheme.padding.ten,
-            alignment = Alignment.CenterHorizontally
-        )
+    val verticalScrollState = rememberScrollState()
+
+    Column(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .padding(horizontal = MaterialTheme.padding.defaultContentPadding),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.six),
+        horizontalAlignment = Alignment.Start
     ) {
-        filters?.forEach { filter ->
-            FilterChip(
-                selected = filter.isSeclected,
-                onClick = {
-                    onFilterClicked(filter)
-                },
-                label = {
-                    Text(filter.name)
-                },
-                colors = FilterChipDefaults.filterChipColors(
-                    containerColor = MaterialTheme.colorScheme.background,
-                    selectedContainerColor = MaterialTheme.colorScheme.secondary
+
+        FilterTitle(titleRes = titleRes)
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .horizontalScroll(verticalScrollState),
+            horizontalArrangement = Arrangement.spacedBy(
+                space = MaterialTheme.padding.six,
+            ),
+        ) {
+            genres?.forEach { genre ->
+                FilterChip(
+                    selected = genre.selected,
+                    onClick = {
+                        onGenreUpdate(genre)
+                    },
+                    label = {
+                        Text(genre.name)
+                    },
+                    shape = MaterialTheme.shapes.extraSmall,
+                    colors = FilterChipDefaults.filterChipColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+                        labelColor = MaterialTheme.colorScheme.onBackground,
+                        selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                    )
                 )
-            )
+            }
         }
     }
 }
 
 @PreviewLightDark
 @Composable
-private fun FilterComponentPrev() {
+private fun FilterGenreComponentPrev() {
     AppTheme {
-        FilterComponent(
-            filters = listOf(
-                UiFilter(
-                    name = "Genre",
-                    filterType = UiFilterType.ByGenre(
-                        genres = listOf(
-                            UiGenre(
-                                id = "1",
-                                name = "Thriller"
-                            )
-                        )
-                    )
+        FilterGenreComponent(
+            titleRes = Res.string.filter_by_genre,
+            genres = listOf(
+                UiGenre(
+                    id = "1",
+                    name = "Thriller",
+                    selected = true
                 ),
-
-                UiFilter(
-                    name = "Genre",
-                    isSeclected = true,
-                    filterType = UiFilterType.ByGenre(
-                        genres = listOf(
-                            UiGenre(
-                                id = "2",
-                                name = "Action"
-                            )
-                        )
-                    ),
-                )
+                UiGenre(
+                    id = "1",
+                    name = "Action",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
+                UiGenre(
+                    id = "1",
+                    name = "Documentation",
+                    selected = false
+                ),
             ),
-            onFilterClicked = {}
+            onGenreUpdate = {
+
+
+            }
         )
     }
 }

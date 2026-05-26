@@ -2,6 +2,7 @@ package com.kmp.movieapp.di
 
 import com.kmp.movieapp.browse.di.browseModule
 import com.kmp.movieapp.discover.di.discoverModule
+import com.kmp.movieapp.genre.di.genreModule
 import com.kmp.movieapp.home.di.homeModule
 import com.kmp.movieapp.movie.di.movieModule
 import com.kmp.movieapp.overview.di.overviewModule
@@ -17,6 +18,7 @@ val featureModule = module {
         seriesModule,
         discoverModule,
         browseModule,
-        overviewModule
+        overviewModule,
+        genreModule
     )
 }

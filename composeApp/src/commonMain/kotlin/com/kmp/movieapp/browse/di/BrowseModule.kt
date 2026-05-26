@@ -1,5 +1,6 @@
 package com.kmp.movieapp.browse.di
 
+import com.kmp.movieapp.animation.screen_animation.NavigationScreenAnimation
 import com.kmp.movieapp.browse.BrowseViewModel
 import com.kmp.movieapp.browse.content.BrowseStartContent
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
@@ -16,7 +17,8 @@ val browseModule = module {
     viewModel {
         BrowseViewModel(
             getDiscoverUseCase = get(),
-            navigator = get(qualifier = navigatorQualifier<BrowseNavigation>())
+            navigator = get(qualifier = navigatorQualifier<BrowseNavigation>()),
+            genreRepository = get()
         )
     }
 
@@ -25,7 +27,9 @@ val browseModule = module {
         BrowseStartContent()
     }
 
-    navigation<BrowseNavigation.ContentDetailRoute> { data ->
+    navigation<BrowseNavigation.ContentDetailRoute>(
+        metadata = NavigationScreenAnimation.bottomSheetTransitions()
+    ) { data ->
         val navigation =
             get<Navigator<BrowseNavigation>>(qualifier = navigatorQualifier<BrowseNavigation>())
 

@@ -1,5 +1,6 @@
 package com.kmp.movieapp.home.di
 
+import com.kmp.movieapp.animation.screen_animation.NavigationScreenAnimation
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
 import com.kmp.movieapp.core.util.navigation.Navigator
 import com.kmp.movieapp.core.util.navigation.route.HomeNavigation
@@ -35,11 +36,15 @@ val homeModule = module {
         HomeStartContent()
     }
 
-    navigation<HomeNavigation.SeeAllRoute> { data ->
+    navigation<HomeNavigation.SeeAllRoute>(
+        metadata = NavigationScreenAnimation.slideSheetTransition()
+    ) { data ->
         OverviewListScreen(data.mediaCategory)
     }
 
-    navigation<HomeNavigation.ContentDetailRoute> { data ->
+    navigation<HomeNavigation.ContentDetailRoute>(
+        metadata = NavigationScreenAnimation.bottomSheetTransitions()
+    ) { data ->
         val navigation =
             get<Navigator<HomeNavigation>>(qualifier = navigatorQualifier<HomeNavigation>())
 

@@ -17,4 +17,8 @@
     <string name="permission_microphone">Open Microphone</string>
     <string name="permission_notification">Allow Notification</string>
     <string name="permission_image_gallery">Open Gallery</string>
+
+    <!-- Filter strings -->
+    <string name="filter_by_genre">Browse by Genre</string>
+    <string name="sort_by">Sort By</string>
 </resources>

@@ -52,6 +52,7 @@ kotlin {
                 implementation(libs.bundles.commonMainKtor)
 
                 implementation(project(":core"))
+                implementation(project(":genre"))
             }
         }
 

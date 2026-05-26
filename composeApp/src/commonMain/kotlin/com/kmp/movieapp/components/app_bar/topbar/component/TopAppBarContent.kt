@@ -6,7 +6,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -14,11 +13,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.kmp.movieapp.composeApp.Res
-import com.kmp.movieapp.composeApp.ic_back_arrow
+import com.kmp.movieapp.composeApp.ic_arrow_left
 import com.kmp.movieapp.composeApp.ic_movie
 import com.kmp.movieapp.core.ui.material.padding
 import org.jetbrains.compose.resources.vectorResource
@@ -28,13 +28,14 @@ import org.jetbrains.compose.resources.vectorResource
 fun TopAppBarContent(
     title: String,
     showBackButton: Boolean = false,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
     navigateBack: (() -> Unit)? = null,
 ) {
     TopAppBar(
-        modifier = Modifier.fillMaxWidth(),
         title = {
             LogoWithTitle(title)
         },
+        scrollBehavior = scrollBehavior,
         navigationIcon = {
             AnimatedVisibility(showBackButton) {
                 NavigationBackIcon(
@@ -57,7 +58,7 @@ private fun NavigationBackIcon(
 ) {
     IconButton(onClick = navigateBack) {
         Icon(
-            imageVector = vectorResource(Res.drawable.ic_back_arrow),
+            imageVector = vectorResource(Res.drawable.ic_arrow_left),
             contentDescription = null
         )
     }

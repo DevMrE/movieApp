@@ -5,5 +5,6 @@ data class Discover(
     val title: String,
     val posterPath: String,
     val backdropPath: String,
+    val discoverGenres: List<DiscoverGenre> = emptyList(),
     val type: DiscoverType
 )

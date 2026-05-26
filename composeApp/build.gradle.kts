@@ -72,6 +72,7 @@ kotlin {
             implementation(project(":series"))
             implementation(project(":trending"))
             implementation(project(":overview_list"))
+            implementation(project(":genre"))
         }
 
         androidMain.dependencies {
@@ -99,9 +100,10 @@ compose.desktop {
     }
 }
 
-compose.resources {
+compose.resources{
     // Explicitly set the package name for the generated Res class
     packageOfResClass = "com.kmp.movieapp.composeApp"
+    generateResClass = always
 }
 
 fun getPropertyString(string: String): String {

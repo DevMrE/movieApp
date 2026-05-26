@@ -1,104 +1,74 @@
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKmpLibrary)
+    alias(libs.plugins.composeMultiplatform)
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeHotReload)
     alias(libs.plugins.androidLint)
+    alias(libs.plugins.serialization)
 }
 
 kotlin {
 
-    // Target declarations - add or remove as needed below. These define
-    // which platforms this KMP module supports.
-    // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
+    compilerOptions {
+        freeCompilerArgs.add(getPropertyString("compiler.feature.context"))
+    }
+
+    // Android
     android {
-        namespace = "com.kmp.movieapp.genre"
-        compileSdk {
-            version = release(36) {
-                minorApiLevel = 1
-            }
-        }
-        minSdk = 35
+        // Use a unique namespace to avoid collisions with the androidApp module
+        namespace = "${getPropertyString("app.basePackagePath")}.discover"
+        compileSdk = getPropertyInt("android.compileSdk")
+        minSdk = getPropertyInt("android.mobile.minSdk")
 
-        withHostTestBuilder {
-        }
-
-        withDeviceTestBuilder {
-            sourceSetTreeName = "test"
-        }.configure {
-            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        androidResources {
+            enable = true
         }
     }
 
-    // For iOS targets, this is also where you should
-    // configure native binary output. For more information, see:
-    // https://kotlinlang.org/docs/multiplatform-build-native-binaries.html#build-xcframeworks
+    // Desktop - Windows + MacOS
+    jvm()
 
-    // A step-by-step guide on how to include this library in an XCode
-    // project can be found here:
-    // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "genreKit"
+    // iOS -> iPhone + iPad implementation
+    iosArm64()
+    iosSimulatorArm64()
 
-    iosX64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    iosSimulatorArm64 {
-        binaries.framework {
-            baseName = xcfName
-        }
-    }
-
-    // Source set declarations.
-    // Declaring a target automatically creates a source set with the same name. By default, the
-    // Kotlin Gradle Plugin creates additional source sets that depend on each other, since it is
-    // common to share sources between related targets.
-    // See: https://kotlinlang.org/docs/multiplatform-hierarchy.html
     sourceSets {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                // Add KMP dependencies here
-            }
-        }
 
-        commonTest {
-            dependencies {
-                implementation(libs.kotlin.test)
+                implementation(libs.bundles.commonMainCompose)
+
+                implementation(libs.savedState)
+                implementation(libs.window.core)
+
+                implementation(libs.bundles.lifecycle)
+
+                implementation(libs.bundles.commainMainKoin)
+                implementation(libs.bundles.commonMainKtor)
+
+                implementation(project(":core"))
             }
         }
 
         androidMain {
             dependencies {
-                // Add Android-specific dependencies here. Note that this source set depends on
-                // commonMain by default and will correctly pull the Android artifacts of any KMP
-                // dependencies declared in commonMain.
-            }
-        }
 
-        getByName("androidDeviceTest") {
-            dependencies {
-                implementation(libs.androidx.core)
-                implementation(libs.androidx.junit)
-                implementation(libs.androidx.runner)
             }
         }
 
         iosMain {
             dependencies {
-                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
-                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
-                // part of KMP’s default source set hierarchy. Note that this source set depends
-                // on common by default and will correctly pull the iOS artifacts of any
-                // KMP dependencies declared in commonMain.
             }
         }
     }
+}
 
+fun getPropertyString(string: String): String {
+    return providers.gradleProperty(string).get()
+}
+
+fun getPropertyInt(string: String): Int {
+    return providers.gradleProperty(string).get().toInt()
 }

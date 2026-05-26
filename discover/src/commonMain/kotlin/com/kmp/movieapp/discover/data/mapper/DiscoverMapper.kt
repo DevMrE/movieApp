@@ -1,24 +1,37 @@
 package com.kmp.movieapp.discover.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
+import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.discover.data.model.response.DiscoverMoviesDto
 import com.kmp.movieapp.discover.data.model.response.DiscoverSeriesDto
 import com.kmp.movieapp.discover.domain.model.Discover
+import com.kmp.movieapp.discover.domain.model.DiscoverGenre
 import com.kmp.movieapp.discover.domain.model.DiscoverType
+import com.kmp.movieapp.genre.domain.model.Genre
 
-internal fun DiscoverMoviesDto.toDiscoverMovies() = Discover(
+internal fun DiscoverMoviesDto.toDiscoverMovies(genre: List<Genre>) = Discover(
     title = title ?: "",
     id = id ?: 0,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
     backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
-    type = DiscoverType.MOVIES
+    type = DiscoverType.MOVIES,
+    discoverGenres = genre
+        .filter { g -> genreIds?.contains(g.id).isTrue }
+        .map {
+            DiscoverGenre(it.id, it.name, DiscoverType.MOVIES)
+        }
 )
 
-internal fun DiscoverSeriesDto.toDiscoverSeries() = Discover(
+internal fun DiscoverSeriesDto.toDiscoverSeries(genre: List<Genre>) = Discover(
     title = name ?: "",
     id = id ?: 0,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
     backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
-    type = DiscoverType.SERIES
+    type = DiscoverType.SERIES,
+    discoverGenres = genre
+        .filter { g -> genreIds?.contains(g.id).isTrue }
+        .map {
+            DiscoverGenre(it.id, it.name, DiscoverType.SERIES)
+        }
 )
 

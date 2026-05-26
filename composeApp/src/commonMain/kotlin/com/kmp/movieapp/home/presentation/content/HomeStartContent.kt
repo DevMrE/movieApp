@@ -9,8 +9,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -28,8 +30,6 @@ import com.kmp.movieapp.composeApp.trending_title
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 import com.kmp.movieapp.core.util.boolean.isTrue
-import com.kmp.movieapp.core.util.navigation.route.HomeNavigation
-import com.kmp.movieapp.core.util.navigation.util.koinNavigation
 import com.kmp.movieapp.home.presentation.HomeScreenViewModel
 import com.kmp.movieapp.home.presentation.action.HomeAction
 import com.kmp.movieapp.home.presentation.model.HomeCategory
@@ -37,18 +37,19 @@ import com.kmp.movieapp.home.presentation.model.HomeCategory.TRENDING
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun HomeStartContent() {
     val viewModel = koinViewModel<HomeScreenViewModel>()
     val movieScreenState by viewModel.movieScreenState.collectAsStateWithLifecycle()
-    val navigator = koinNavigation<HomeNavigation>()
-    val backStack = navigator.getCurrentBackStack()
+    val topAppBarScrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBarContent(
                 title = stringResource(Res.string.app_name),
+                scrollBehavior = topAppBarScrollBehavior
             )
         },
         containerColor = MaterialTheme.colorScheme.background
@@ -62,7 +63,8 @@ internal fun HomeStartContent() {
         )
 
         PullToRefreshBox(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
                 .padding(paddingValues = paddingWithoutBottom),
             isRefreshing = movieScreenState?.isLoading.isTrue,
             onRefresh = { viewModel.onAction(HomeAction.OnRefresh) }

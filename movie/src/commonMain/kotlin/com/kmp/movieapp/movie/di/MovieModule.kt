@@ -13,7 +13,7 @@ val movieModule = module {
     }
 
     single<MovieRepository> {
-        MovieRepositoryImpl(get())
+        MovieRepositoryImpl(get(), get())
     }
 
     factory<GetPopularMoviesUseCase> {

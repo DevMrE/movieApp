@@ -117,7 +117,7 @@ private fun MediaCardPrev() {
     }
 
     AppTheme {
-        GridContainer(loadNextItems = {}) {
+        GridContainer() {
             items(list) {
                 MediaCard(
                     title = it,

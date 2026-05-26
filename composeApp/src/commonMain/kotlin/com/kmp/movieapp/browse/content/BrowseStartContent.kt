@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -13,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.browse.BrowseAction
 import com.kmp.movieapp.browse.BrowseViewModel
-import com.kmp.movieapp.browse.component.FilterComponent
+import com.kmp.movieapp.browse.component.FilterGenreComponent
 import com.kmp.movieapp.components.app_bar.topbar.component.TopAppBarContent
 import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.browse_media_title
@@ -21,10 +23,12 @@ import com.kmp.movieapp.core.ui.material.padding
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BrowseStartContent() {
     val viewModel = koinViewModel<BrowseViewModel>()
     val discover by viewModel.browseState.collectAsStateWithLifecycle()
+    val genre by viewModel.genreState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -42,12 +46,17 @@ fun BrowseStartContent() {
                 alignment = Alignment.CenterVertically
             )
         ) {
-            FilterComponent(
-                filters = discover?.filter,
-                onFilterClicked = { uiFilter ->
-                    viewModel.onAction(BrowseAction.OnFilterClicked(uiFilter))
+            LazyColumn {
+                item {
+                    FilterGenreComponent(
+                        titleRes = genre.title,
+                        genres = genre.genres,
+                        onGenreUpdate = { genre ->
+                            viewModel.onAction(BrowseAction.OnGenreUpdated(genre))
+                        }
+                    )
                 }
-            )
+            }
 
             BrowseContentList(
                 contentList = discover?.contentList,
