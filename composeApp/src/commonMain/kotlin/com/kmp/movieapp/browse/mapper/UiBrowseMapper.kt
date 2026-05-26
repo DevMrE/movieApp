@@ -8,6 +8,7 @@ import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.discover.domain.model.Discover
 import com.kmp.movieapp.discover.domain.model.DiscoverGenre
 import com.kmp.movieapp.discover.domain.model.DiscoverType
+import com.kmp.movieapp.discover.domain.model.Filter
 import com.kmp.movieapp.genre.domain.model.Genre
 
 private fun Discover.toUiData() = UiMediaCard(
@@ -54,3 +55,8 @@ fun UiGenre.toDiscoverGenre(): DiscoverGenre = DiscoverGenre(
         UiGenreType.SERIES -> DiscoverType.SERIES
     }
 )
+
+fun UiBrowse.mapToFilter(): Filter =
+    Filter(
+        genre = genreFilter?.genres?.filter { it.selected }?.map { it.toDiscoverGenre() }
+    )

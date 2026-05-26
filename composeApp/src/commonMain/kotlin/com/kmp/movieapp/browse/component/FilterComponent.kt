@@ -22,26 +22,25 @@ import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.filter_by_genre
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
-import org.jetbrains.compose.resources.StringResource
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FilterGenreComponent(
-    titleRes: StringResource,
+    modifier: Modifier,
     genres: List<UiGenre>?,
     onGenreUpdate: (UiGenre) -> Unit
 ) {
     val verticalScrollState = rememberScrollState()
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = MaterialTheme.padding.defaultContentPadding),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.six),
         horizontalAlignment = Alignment.Start
     ) {
 
-        FilterTitle(titleRes = titleRes)
+        FilterTitle(titleRes = Res.string.filter_by_genre)
 
         Row(
             modifier = Modifier
@@ -78,7 +77,7 @@ fun FilterGenreComponent(
 private fun FilterGenreComponentPrev() {
     AppTheme {
         FilterGenreComponent(
-            titleRes = Res.string.filter_by_genre,
+            modifier = Modifier,
             genres = listOf(
                 UiGenre(
                     id = "1",
@@ -130,11 +129,10 @@ private fun FilterGenreComponentPrev() {
                     name = "Documentation",
                     selected = false
                 ),
-            ),
-            onGenreUpdate = {
+            )
+        ) {
 
 
-            }
-        )
+        }
     }
 }

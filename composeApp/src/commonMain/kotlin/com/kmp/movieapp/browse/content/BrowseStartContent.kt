@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -28,7 +27,6 @@ import org.koin.compose.viewmodel.koinViewModel
 fun BrowseStartContent() {
     val viewModel = koinViewModel<BrowseViewModel>()
     val discover by viewModel.browseState.collectAsStateWithLifecycle()
-    val genre by viewModel.genreState.collectAsStateWithLifecycle()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -46,19 +44,15 @@ fun BrowseStartContent() {
                 alignment = Alignment.CenterVertically
             )
         ) {
-            LazyColumn {
-                item {
-                    FilterGenreComponent(
-                        titleRes = genre.title,
-                        genres = genre.genres,
-                        onGenreUpdate = { genre ->
-                            viewModel.onAction(BrowseAction.OnGenreUpdated(genre))
-                        }
-                    )
-                }
+            FilterGenreComponent(
+                modifier = Modifier,
+                genres = discover?.genreFilter?.genres
+            ) { genre ->
+                viewModel.onAction(BrowseAction.OnGenreUpdated(genre))
             }
 
             BrowseContentList(
+                modifier = Modifier.weight(1f),
                 contentList = discover?.contentList,
                 onContentClicked = {
                     viewModel.onAction(BrowseAction.OnContentClicked(uiMediaCard = it))
