@@ -2,6 +2,7 @@ package com.kmp.movieapp.browse.mapper
 
 import com.kmp.movieapp.browse.model.UiBrowse
 import com.kmp.movieapp.browse.model.filter.UiGenre
+import com.kmp.movieapp.browse.model.filter.UiGenreType
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.discover.domain.model.Discover
@@ -43,3 +44,13 @@ private fun Genre.toUiGenre(): UiGenre = UiGenre(
 internal fun List<Genre>.toUiGenreList(): List<UiGenre> = map { genre ->
     genre.toUiGenre()
 }
+
+
+fun UiGenre.toDiscoverGenre(): DiscoverGenre = DiscoverGenre(
+    id = id.toLong(),
+    name = name,
+    discoverType = when (uiGenreType) {
+        UiGenreType.MOVIE -> DiscoverType.MOVIES
+        UiGenreType.SERIES -> DiscoverType.SERIES
+    }
+)

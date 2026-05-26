@@ -2,6 +2,7 @@ package com.kmp.movieapp.browse
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kmp.movieapp.browse.mapper.toDiscoverGenre
 import com.kmp.movieapp.browse.mapper.toUiBrowseList
 import com.kmp.movieapp.browse.mapper.toUiGenreList
 import com.kmp.movieapp.browse.model.UiBrowse
@@ -14,11 +15,13 @@ import com.kmp.movieapp.core.util.navigation.Navigator
 import com.kmp.movieapp.core.util.navigation.route.BrowseNavigation
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.core.util.viewmodel.stateInLazily
+import com.kmp.movieapp.discover.domain.model.Filter
 import com.kmp.movieapp.discover.domain.usecase.GetDiscoverUseCase
 import com.kmp.movieapp.genre.domain.repository.GenreRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -85,11 +88,6 @@ class BrowseViewModel(
             when (uiFilterKey) {
                 is UiGenre -> {
                     _genreState.update { state ->
-                        logI<BrowseViewModel>("state: $uiFilterKey")
-                        logI<BrowseViewModel>("genreList: ${state.genres.size}")
-                        state.genres.forEach {
-                            logI<BrowseViewModel>("genre: $it")
-                        }
                         state.copy(
                             genres = state.genres
                                 .filter { uiFilterKey.id == it.id }
@@ -120,14 +118,32 @@ class BrowseViewModel(
     }
 
     private fun onUpdateGenre(genre: UiGenre) {
-        _genreState.update { state ->
-            state.copy(
-                genres = state.genres.map {
-                    val update =
-                        if (it == genre) genre.copy(selected = !genre.selected) else it
-                    update
+        viewModelScope.launch {
+            launch {
+                _genreState.update { state ->
+                    state.copy(
+                        genres = state.genres.map {
+                            if (it == genre) genre.copy(selected = !genre.selected)
+                            else it
+                        }
+                    )
                 }
-            )
+            }
+
+            launch {
+                getDiscoverUseCase(
+                    page = 1,
+                    filter = Filter(
+                        _genreState.value.genres
+                            .filter { it.selected }
+                            .map { it.toDiscoverGenre() })
+                ).collectLatest { data ->
+                    _browseState.update {
+                        data.toUiBrowseList()
+                    }
+                }
+            }
+
         }
     }
 
