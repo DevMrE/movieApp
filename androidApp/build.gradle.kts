@@ -55,7 +55,6 @@ dependencies {
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx.main)
     debugImplementation(libs.composePreview)
 }
 
