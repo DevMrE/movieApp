@@ -29,7 +29,7 @@ class BrowseViewModel(
     genreRepository: GenreRepository
 ) : ViewModel() {
 
-    private val _browseState = MutableStateFlow<UiBrowse?>(
+    private val _browseState = MutableStateFlow(
         value = UiBrowse(
             genreFilter = UiFilterType.Genre(
                 genres = genreRepository.movieGenres.value.toUiGenreList()
@@ -38,14 +38,14 @@ class BrowseViewModel(
     )
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val browseState: StateFlow<UiBrowse?> = _browseState
+    val browseState: StateFlow<UiBrowse> = _browseState
         .onEach { data ->
             getDiscoverUseCase(
-                page = data?.page ?: 1,
-                filter = data?.mapToFilter()
+                page = data.page,
+                filter = data.mapToFilter()
             ).collectLatest { data ->
                 _browseState.update {
-                    it?.copy(
+                    it.copy(
                         contentList = data.toUiMediaCardList()
                     )
                 }
@@ -62,7 +62,7 @@ class BrowseViewModel(
     private fun onLoadNextPage() {
         viewModelScope.launch {
             _browseState.update {
-                it?.copy(
+                it.copy(
                     page = it.page + 1
                 )
             }
@@ -82,10 +82,10 @@ class BrowseViewModel(
     private fun onUpdateGenre(genre: UiGenre) {
         viewModelScope.launch {
             _browseState.update { state ->
-                state?.copy(
+                state.copy(
                     genreFilter = state.genreFilter?.copy(
                         genres = state.genreFilter.genres.map {
-                            if (it == genre) genre.copy(selected = !genre.selected)
+                            if (it == genre) it.copy(selected = !it.selected)
                             else it
                         }.sortedWith(comparator = compareByDescending { it.selected })
                     )
