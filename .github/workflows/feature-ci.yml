@@ -4,13 +4,33 @@ on:
   push:
     branches:
       - "feature/**"
+  pull_request:
+    branches:
+      - "release"
+      - "dev"
 
 jobs:
-  sanity:
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Verify runner
-        run: echo "CI is running on feature branch"
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Run Lint
+        run: ./gradlew lint
+
+      - name: Run Unit Tests
+        run: ./gradlew test
+
+      - name: Build project
+        run: ./gradlew build
