@@ -17,3 +17,5 @@ inline fun <T> Iterable<T>?.toPrefixedString(
         append(list.joinToString(separator))
     }
 }
+
+val bulletPoint : String = "\u2022"

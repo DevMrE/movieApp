@@ -1,0 +1,16 @@
+name: feature-ci
+
+on:
+  push:
+    branches:
+      - "feature/**"
+
+jobs:
+  sanity:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify runner
+        run: echo "CI is running on feature branch"

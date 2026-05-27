@@ -3,10 +3,10 @@ package com.kmp.movieapp.content_detail.presentation.mapper
 import androidx.compose.ui.text.buildAnnotatedString
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
 import com.kmp.movieapp.content_detail.presentation.model.ContentDetailUi
-import com.kmp.movieapp.core.util.Constants
 import com.kmp.movieapp.core.util.boolean.isFalse
 import com.kmp.movieapp.core.util.date.formatDateLocalized
 import com.kmp.movieapp.core.util.integer.toHourMinuteString
+import com.kmp.movieapp.core.util.string.bulletPoint
 import com.kmp.movieapp.core.util.string.toPrefixedString
 
 fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
@@ -19,7 +19,7 @@ fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
         }
 
         if (runtime != null) {
-            append(" ${Constants.BULLET_POINT} ${runtime.toHourMinuteString()}")
+            append(" $bulletPoint ${runtime.toHourMinuteString()}")
         }
 
         genres?.toPrefixedString(transform = { it.name }, separator = " | ")
