@@ -4,17 +4,13 @@ on:
   push:
     branches:
       - "feature/**"
-  pull_request:
-    branches:
-      - "release"
-      - "dev"
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -23,14 +19,24 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Grant execute permission for gradlew
+      - name: Cache Gradle
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
+
+      - name: Make gradlew executable
         run: chmod +x ./gradlew
 
       - name: Run Lint
         run: ./gradlew lint
 
-      - name: Run Unit Tests
+      - name: Run Tests
         run: ./gradlew test
 
-      - name: Build project
-        run: ./gradlew build
+      - name: Build
+        run: ./gradlew assemble
