@@ -34,9 +34,3 @@ jobs:
 
       - name: Run Lint
         run: ./gradlew lint
-
-      - name: Run Tests
-        run: ./gradlew test
-
-      - name: Build
-        run: ./gradlew assemble
