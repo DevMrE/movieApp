@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -44,79 +45,84 @@ private fun PermissionDemoScreen() {
     val viewModel = koinViewModel<SettingsScreenViewModel>()
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Column(
+    Scaffold(
         modifier = Modifier
             .fillMaxSize()
-            .padding(MaterialTheme.padding.sixteen),
-        verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.defaultContentPadding)
-    ) {
-        PermissionButton(
-            label = stringResource(Res.string.permission_camera),
-            onClick = {
-                viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.CAMERA))
-            }
-        )
-        PermissionButton(
-            label = stringResource(Res.string.permission_location),
-            onClick = {
-                viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.LOCATION))
-            }
-        )
-        PermissionButton(
-            label = stringResource(Res.string.permission_microphone),
-            onClick = {
-                viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.MICROPHONE))
-            }
-        )
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(MaterialTheme.padding.sixteen),
+            verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.defaultContentPadding)
+        ) {
+            PermissionButton(
+                label = stringResource(Res.string.permission_camera),
+                onClick = {
+                    viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.CAMERA))
+                }
+            )
+            PermissionButton(
+                label = stringResource(Res.string.permission_location),
+                onClick = {
+                    viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.LOCATION))
+                }
+            )
+            PermissionButton(
+                label = stringResource(Res.string.permission_microphone),
+                onClick = {
+                    viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.MICROPHONE))
+                }
+            )
 
-        PermissionButton(
-            label = stringResource(Res.string.permission_image_gallery),
-            onClick = {
-                viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.GALLERY))
-            }
-        )
+            PermissionButton(
+                label = stringResource(Res.string.permission_image_gallery),
+                onClick = {
+                    viewModel.onAction(SettingsAction.OnPermissionClicked(Permission.GALLERY))
+                }
+            )
 
-        // show results
-        when (val result = state.permissionDemoResult) {
-            is PermissionDemoResult.CameraReady -> {
-                Text("Camera active!", color = MaterialTheme.colorScheme.onBackground)
-            }
+            // show results
+            when (val result = state.permissionDemoResult) {
+                is PermissionDemoResult.CameraReady -> {
+                    Text("Camera active!", color = MaterialTheme.colorScheme.onBackground)
+                }
 
-            is PermissionDemoResult.LocationReady -> {
-                Text(
-                    "Location: ${result.latitude}, ${result.longitude}",
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+                is PermissionDemoResult.LocationReady -> {
+                    Text(
+                        "Location: ${result.latitude}, ${result.longitude}",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
 
-            is PermissionDemoResult.MicrophoneReady -> {
-                Text(
-                    "Mikrophone active",
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-            }
+                is PermissionDemoResult.MicrophoneReady -> {
+                    Text(
+                        "Mikrophone active",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                }
 
-            is PermissionDemoResult.GalleryReady -> {
-                LazyVerticalGrid(columns = GridCells.Fixed(2)) {
-                    items(result.mediaList) { media ->
-                        MediaImage(
-                            imageString = media.uri,
-                            contentScale = ContentScale.Crop
-                        )
+                is PermissionDemoResult.GalleryReady -> {
+                    LazyVerticalGrid(columns = GridCells.Fixed(2)) {
+                        items(result.mediaList) { media ->
+                            MediaImage(
+                                imageString = media.uri,
+                                contentScale = ContentScale.Crop
+                            )
+                        }
                     }
                 }
+
+                is PermissionDemoResult.PermissionDenied ->
+                    // Usually you would show here a permission dialog, explain why we need the permission
+                    // and redirect to the settings screen. In this case I'm skipping that and redirect
+                    // directly over the viewModel to the settings.
+                    Text(
+                        text = "Permission denied: ${result.permission}",
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+
+                else -> Unit
             }
-
-            is PermissionDemoResult.PermissionDenied ->
-                // Usually you would show here a permission dialog, explain why we need the permission
-                // and redirect to the settings screen. In this case I'm skipping that and redirect
-                // directly over the viewModel to the settings.
-                Text(
-                    text = "Permission denied: ${result.permission}",
-                    color = MaterialTheme.colorScheme.onBackground
-                )
-
-            else -> Unit
         }
     }
 }
