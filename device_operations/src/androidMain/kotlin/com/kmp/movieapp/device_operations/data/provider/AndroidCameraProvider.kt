@@ -1,8 +1,11 @@
 package com.kmp.movieapp.device_operations.data.provider
 
+import android.app.Service
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
+import android.os.IBinder
 import android.provider.MediaStore
 import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
@@ -20,7 +23,7 @@ import kotlinx.coroutines.flow.Flow
  */
 internal class AndroidCameraProvider(
     private val context: Context
-) : CameraProvider {
+) : CameraProvider, Service() {
 
     private lateinit var takePictureLauncher: ActivityResultLauncher<Uri>
 
@@ -91,5 +94,9 @@ internal class AndroidCameraProvider(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             contentValues
         )
+    }
+
+    override fun onBind(p0: Intent?): IBinder? {
+        return null
     }
 }

@@ -17,7 +17,7 @@ kotlin {
     // Android
     android {
         // Use a unique namespace to avoid collisions with the androidApp module
-        namespace = "${getPropertyString("app.basePackagePath")}.discover"
+        namespace = "${getPropertyString("app.basePackagePath")}.genre"
         compileSdk = getPropertyInt("android.compileSdk")
         minSdk = getPropertyInt("android.mobile.minSdk")
 
