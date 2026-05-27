@@ -15,7 +15,7 @@ internal data class DiscoverMoviesDto(
     @SerialName("backdrop_path")
     val backdropPath: String? = null,
     @SerialName("genre_ids")
-    val genreIds: List<Int>? = null,
+    val genreIds: List<Long>? = null,
     @SerialName("original_language")
     val originalLanguage: String? = null,
     @SerialName("original_title")

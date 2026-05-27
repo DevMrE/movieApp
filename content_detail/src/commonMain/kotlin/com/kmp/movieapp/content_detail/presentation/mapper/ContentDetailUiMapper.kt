@@ -22,12 +22,12 @@ fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
             append(" ${Constants.BULLET_POINT} ${runtime.toHourMinuteString()}")
         }
 
-        genres?.toPrefixedString(transform = { it.name }, separator = " | ")
+        contentDetailGenres?.toPrefixedString(transform = { it.name }, separator = " | ")
             ?.let {
                 append(it)
             }
     },
-    description = overview ?: "",
-    posterPath = posterPath ?: "",
-    videoThumbnail = backdropPath ?: "",
+    description = "$overview",
+    posterPath = "$posterPath",
+    videoThumbnail = "$backdropPath",
 )

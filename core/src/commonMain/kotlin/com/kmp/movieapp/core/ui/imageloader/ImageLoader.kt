@@ -19,7 +19,8 @@ fun ImageLoader(
     url: String,
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,
-    loadingContent: (@Composable () -> Unit)? = null,
+    loadingProgress: (Float) -> Unit,
+    loadingContent: (@Composable (Modifier) -> Unit)? = null,
 ) {
 
     if (url.isNotEmpty()) {
@@ -29,15 +30,16 @@ fun ImageLoader(
             modifier = modifier,
             contentScale = contentScale,
             onLoading = { progress ->
+                loadingProgress(progress)
                 if (loadingContent == null) {
                     Box(modifier = Modifier.fillMaxSize()) {
                         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                     }
                 } else {
-                    loadingContent()
+                    loadingContent(modifier)
                 }
             },
-            onFailure = { throwable ->
+            onFailure = { _ ->
                 // Optional: Fallback, Error-Icon, Logging, ...
                 Image(
                     painter = painterResource(Res.drawable.media_item_not_found),

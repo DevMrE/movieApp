@@ -5,7 +5,7 @@
     <string name="series_tab">Serien</string>
     <string name="settings_screen_title">Einstellungen</string>
     <string name="more">Mehr</string>
-    <string name="discover_media_title">Entdecken</string>
+    <string name="browse_media_title">Entdecken</string>
     <string name="search">Suche...</string>
     <string name="popular_movies_title">Beliebte Filme</string>
     <string name="popular_series_title">Beliebte Serien</string>
@@ -17,4 +17,8 @@
     <string name="permission_microphone">Mikrofon erlauben</string>
     <string name="permission_notification">Benachrichtigung erteilen</string>
     <string name="permission_image_gallery">Galerie Öffnen</string>
+
+    <!-- Filter strings -->
+    <string name="filter_by_genre">Nach Genre Stöbern</string>
+    <string name="sort_by">Sortiere Nach</string>
 </resources>

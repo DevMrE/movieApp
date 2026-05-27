@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.serialization)
-}
+    id("com.google.devtools.ksp") version "2.3.7"}
 
 kotlin {
     compilerOptions {
@@ -72,15 +72,17 @@ kotlin {
             implementation(project(":series"))
             implementation(project(":trending"))
             implementation(project(":overview_list"))
-            implementation(project(":navigation"))
+            implementation(project(":genre"))
         }
 
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.android.conscrypt)
+            implementation(libs.composeTooling)
         }
 
         jvmMain.dependencies {
+            implementation(libs.composeTooling)
             implementation(compose.desktop.currentOs)
         }
     }
@@ -98,9 +100,10 @@ compose.desktop {
     }
 }
 
-compose.resources {
+compose.resources{
     // Explicitly set the package name for the generated Res class
     packageOfResClass = "com.kmp.movieapp.composeApp"
+    generateResClass = always
 }
 
 fun getPropertyString(string: String): String {

@@ -8,6 +8,8 @@ interface Navigator<T : NavKey> {
 
     val backStack: SnapshotStateList<T>
 
+    fun getCurrentBackStack(): T?
+
     fun navigateTo(route: T, options: NavigationOptions = NavigationOptions())
 
     fun switchTo(route: T)

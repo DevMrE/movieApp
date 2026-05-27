@@ -25,9 +25,9 @@ class LoadMediaListForCategoryUseCase(
                 movieList.map { movie ->
                     OverViewMedia(
                         id = movie.id,
-                        title = movie.title,
-                        posterPath = movie.posterPath,
-                        backdropPath = movie.backdropPath,
+                        title = movie.movieInfo.title,
+                        posterPath = movie.movieImage.posterPath,
+                        backdropPath = movie.movieImage.backdropPath,
                         type = movie.type
                     )
                 }

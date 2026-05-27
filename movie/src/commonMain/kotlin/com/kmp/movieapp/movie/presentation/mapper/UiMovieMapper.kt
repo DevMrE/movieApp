@@ -10,10 +10,10 @@ import com.kmp.movieapp.movie.domain.model.Movie
  */
 internal fun Movie.toUiMedia() = UiMediaCard(
     id = id.toString(),
-    title = title,
+    title = movieInfo.title,
     bigCard = true,
-    posterPath = posterPath,
-    backdropPath = backdropPath,
+    posterPath = movieImage.posterPath,
+    backdropPath = movieImage.backdropPath,
     type = MediaCategory.MOVIE
 )
 

@@ -54,14 +54,17 @@ kotlin {
             implementation(libs.android.conscrypt)
             implementation(libs.play.services.location)
             implementation(libs.androidx.lifecycle.process)
+            implementation(libs.composeTooling)
         }
 
         iosMain.dependencies {
             implementation(libs.ktorDarwin)
+            implementation(libs.composeUi)
         }
 
         jvmMain.dependencies {
             implementation(libs.ktorOkHttp)
+            implementation(libs.composeTooling)
         }
     }
 }

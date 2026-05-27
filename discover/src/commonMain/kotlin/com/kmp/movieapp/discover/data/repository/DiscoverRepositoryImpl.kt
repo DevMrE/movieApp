@@ -7,28 +7,40 @@ import com.kmp.movieapp.discover.data.mapper.toDiscoverMovies
 import com.kmp.movieapp.discover.data.mapper.toDiscoverSeries
 import com.kmp.movieapp.discover.data.service.DiscoverService
 import com.kmp.movieapp.discover.domain.model.Discover
+import com.kmp.movieapp.discover.domain.model.Filter
 import com.kmp.movieapp.discover.domain.repository.DiscoverRepository
+import com.kmp.movieapp.genre.domain.repository.GenreRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 internal class DiscoverRepositoryImpl(
-    private val discoverService: DiscoverService
+    private val discoverService: DiscoverService,
+    private val genreRepository: GenreRepository
 ) : DiscoverRepository {
-    override suspend fun getDiscoverMovies(page: Int): Flow<List<Discover>> =
+
+    override suspend fun getDiscoverMovies(page: Int, filter: Filter?): Flow<List<Discover>> =
         flow {
-            discoverService.fetchDiscoverMovies(page)
-                .onSuccess { data ->
-                    emit(data.results?.map { it.toDiscoverMovies() } ?: emptyList())
-                }.onError {
-                    logI<DiscoverRepository>("something went wrong by loading discover movies")
+            discoverService.fetchDiscoverMovies(
+                page,
+                genreIds = filter?.genre?.map {
+                    "${it.id}"
                 }
+            ).onSuccess { data ->
+                emit(data.results?.map {
+                    it.toDiscoverMovies(genreRepository.movieGenres.value)
+                } ?: emptyList())
+            }.onError {
+                logI<DiscoverRepository>("something went wrong by loading discover movies")
+            }
         }
 
-    override suspend fun getDiscoverSeries(page: Int): Flow<List<Discover>> =
+    override suspend fun getDiscoverSeries(page: Int, filter: Filter?): Flow<List<Discover>> =
         flow {
             discoverService.fetchDiscoverSeries(page)
                 .onSuccess { data ->
-                    emit(data.results?.map { it.toDiscoverSeries() } ?: emptyList())
+                    emit(data.results?.map {
+                        it.toDiscoverSeries(genreRepository.seriesGenres.value)
+                    } ?: emptyList())
                 }.onError {
                     logI<DiscoverRepository>("something went wrong by loading discover series")
                 }

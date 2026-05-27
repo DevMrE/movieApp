@@ -12,7 +12,7 @@ internal data class DiscoverSeriesDto(
     @SerialName("first_air_date")
     val firstAirDate: String? = null,
     @SerialName("genre_ids")
-    val genreIds: List<Int?>? = null,
+    val genreIds: List<Long?>? = null,
     @SerialName("id")
     val id: Int? = null,
     @SerialName("name")

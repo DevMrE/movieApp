@@ -20,7 +20,7 @@ import org.koin.dsl.module
 /**
  * Provides Android-specific dependencies for device operations.
  */
-actual fun deviceModule(): Module = module {
+actual val deviceModule: Module = module {
 
     single {
         AndroidCameraProvider(
