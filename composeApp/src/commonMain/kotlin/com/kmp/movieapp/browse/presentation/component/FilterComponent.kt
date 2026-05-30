@@ -1,4 +1,4 @@
-package com.kmp.movieapp.browse.component
+package com.kmp.movieapp.browse.presentation.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
@@ -17,9 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.browse.model.filter.UiGenre
+import com.kmp.movieapp.browse.presentation.model.filter.UiGenre
 import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.filter_by_genre
+import com.kmp.movieapp.composeApp.filter_header
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 
@@ -39,6 +40,8 @@ fun FilterGenreComponent(
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.six),
         horizontalAlignment = Alignment.Start
     ) {
+
+        FilterHeader(headerRes = Res.string.filter_header)
 
         FilterTitle(titleRes = Res.string.filter_by_genre)
 

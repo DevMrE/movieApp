@@ -4,12 +4,12 @@ import com.kmp.movieapp.core.network.url.UrlHelper
 import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.discover.data.model.response.DiscoverMoviesDto
 import com.kmp.movieapp.discover.data.model.response.DiscoverSeriesDto
-import com.kmp.movieapp.discover.domain.model.Discover
+import com.kmp.movieapp.discover.domain.model.DiscoverContent
 import com.kmp.movieapp.discover.domain.model.DiscoverGenre
 import com.kmp.movieapp.discover.domain.model.DiscoverType
 import com.kmp.movieapp.genre.domain.model.Genre
 
-internal fun DiscoverMoviesDto.toDiscoverMovies(genre: List<Genre>) = Discover(
+internal fun DiscoverMoviesDto.toDiscoverMovies(genre: List<Genre>) = DiscoverContent(
     title = title ?: "",
     id = id ?: 0,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
@@ -22,7 +22,7 @@ internal fun DiscoverMoviesDto.toDiscoverMovies(genre: List<Genre>) = Discover(
         }
 )
 
-internal fun DiscoverSeriesDto.toDiscoverSeries(genre: List<Genre>) = Discover(
+internal fun DiscoverSeriesDto.toDiscoverSeries(genre: List<Genre>) = DiscoverContent(
     title = name ?: "",
     id = id ?: 0,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
@@ -34,4 +34,3 @@ internal fun DiscoverSeriesDto.toDiscoverSeries(genre: List<Genre>) = Discover(
             DiscoverGenre(it.id, it.name, DiscoverType.SERIES)
         }
 )
-

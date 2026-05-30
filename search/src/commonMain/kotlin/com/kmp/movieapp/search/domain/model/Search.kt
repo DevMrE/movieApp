@@ -3,7 +3,7 @@ package com.kmp.movieapp.search.domain.model
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 
 
-internal data class Search(
+data class Search(
     val id: String,
     val mediaCategory: MediaCategory,
     val titleInfo: Info,

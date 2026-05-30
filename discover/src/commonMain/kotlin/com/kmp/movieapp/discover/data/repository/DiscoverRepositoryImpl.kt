@@ -18,7 +18,7 @@ internal class DiscoverRepositoryImpl(
     private val genreRepository: GenreRepository
 ) : DiscoverRepository {
 
-    override suspend fun getDiscoverMovies(page: Int, filter: Filter?): Flow<List<Discover>> =
+    override suspend fun getDiscoverMovies(page: Int, filter: Filter?): Flow<Discover> =
         flow {
             discoverService.fetchDiscoverMovies(
                 page,
@@ -26,21 +26,25 @@ internal class DiscoverRepositoryImpl(
                     "${it.id}"
                 }
             ).onSuccess { data ->
-                emit(data.results?.map {
+                val content = data.results?.map {
                     it.toDiscoverMovies(genreRepository.movieGenres.value)
-                } ?: emptyList())
+                }
+
+                emit(Discover(discoverContent = content))
             }.onError {
                 logI<DiscoverRepository>("something went wrong by loading discover movies")
             }
         }
 
-    override suspend fun getDiscoverSeries(page: Int, filter: Filter?): Flow<List<Discover>> =
+    override suspend fun getDiscoverSeries(page: Int, filter: Filter?): Flow<Discover> =
         flow {
             discoverService.fetchDiscoverSeries(page)
                 .onSuccess { data ->
-                    emit(data.results?.map {
+                    val content = data.results?.map {
                         it.toDiscoverSeries(genreRepository.seriesGenres.value)
-                    } ?: emptyList())
+                    }
+
+                    emit(Discover(discoverContent = content))
                 }.onError {
                     logI<DiscoverRepository>("something went wrong by loading discover series")
                 }

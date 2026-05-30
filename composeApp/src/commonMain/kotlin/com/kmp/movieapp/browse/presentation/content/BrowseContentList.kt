@@ -1,4 +1,4 @@
-package com.kmp.movieapp.browse.content
+package com.kmp.movieapp.browse.presentation.content
 
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable

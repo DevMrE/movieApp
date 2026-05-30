@@ -25,7 +25,7 @@ internal class SearchViewModel(
     val searchQueryState: StateFlow<UiSearchState> = _searchQueryState
         .onEach {
             viewModelScope.launch {
-                searchUseCase(_searchQueryState.value.search).collectLatest { results ->
+                searchUseCase(query = _searchQueryState.value.search).collectLatest { results ->
                     _searchQueryState.update {
                         it.copy(
                             searchResults = results.mapToUiData()

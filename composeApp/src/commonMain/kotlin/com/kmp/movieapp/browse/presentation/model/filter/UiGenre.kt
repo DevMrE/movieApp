@@ -1,4 +1,4 @@
-package com.kmp.movieapp.browse.model.filter
+package com.kmp.movieapp.browse.presentation.model.filter
 
 data class UiGenre(
     val id: String,

@@ -1,4 +1,4 @@
-package com.kmp.movieapp.browse.component
+package com.kmp.movieapp.browse.presentation.component
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text

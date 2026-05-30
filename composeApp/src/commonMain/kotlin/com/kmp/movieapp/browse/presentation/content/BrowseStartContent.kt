@@ -1,4 +1,4 @@
-package com.kmp.movieapp.browse.content
+package com.kmp.movieapp.browse.presentation.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,10 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.movieapp.browse.BrowseAction
-import com.kmp.movieapp.browse.BrowseViewModel
-import com.kmp.movieapp.browse.component.FilterGenreComponent
+import com.kmp.movieapp.browse.presentation.BrowseAction
+import com.kmp.movieapp.browse.presentation.BrowseViewModel
+import com.kmp.movieapp.browse.presentation.component.FilterGenreComponent
+import com.kmp.movieapp.browse.presentation.component.SearchBar
 import com.kmp.movieapp.components.app_bar.topbar.component.TopAppBarContent
 import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.browse_media_title
@@ -27,6 +29,7 @@ import org.koin.compose.viewmodel.koinViewModel
 fun BrowseStartContent() {
     val viewModel = koinViewModel<BrowseViewModel>()
     val discover by viewModel.browseState.collectAsStateWithLifecycle()
+    val focusManager = LocalFocusManager.current
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -44,16 +47,26 @@ fun BrowseStartContent() {
                 alignment = Alignment.CenterVertically
             )
         ) {
+
+            SearchBar(
+                query = discover.search,
+                focusManager = focusManager,
+                onQueryUpdate = {
+                    viewModel.onAction(BrowseAction.OnSearchUpdated(it))
+                }
+            )
+
             FilterGenreComponent(
                 modifier = Modifier,
-                genres = discover?.genreFilter?.genres
+                genres = discover.genreFilter?.genres
             ) { genre ->
                 viewModel.onAction(BrowseAction.OnGenreUpdated(genre))
+                focusManager.clearFocus(force = true)
             }
 
             BrowseContentList(
                 modifier = Modifier.weight(1f),
-                contentList = discover?.contentList,
+                contentList = discover.contentList,
                 onContentClicked = {
                     viewModel.onAction(BrowseAction.OnContentClicked(uiMediaCard = it))
                 }

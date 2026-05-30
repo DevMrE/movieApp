@@ -1,4 +1,4 @@
-package com.kmp.movieapp.browse
+package com.kmp.movieapp.browse.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation3.ui.NavDisplay

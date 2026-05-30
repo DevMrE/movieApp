@@ -12,6 +12,8 @@ class GetDiscoverUseCase(
         discoverRepository.getDiscoverMovies(page, filter),
         discoverRepository.getDiscoverSeries(page)
     ) { movies, series ->
-        (movies + series).distinctBy { it.title }
+        val movieList = movies.discoverContent ?: emptyList()
+        val seriesList = series.discoverContent ?: emptyList()
+        (movieList + seriesList).distinctBy { it.title }
     }
 }

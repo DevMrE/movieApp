@@ -1,4 +1,4 @@
-package com.kmp.movieapp.browse.model.filter
+package com.kmp.movieapp.browse.presentation.model.filter
 
 import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.filter_by_genre
