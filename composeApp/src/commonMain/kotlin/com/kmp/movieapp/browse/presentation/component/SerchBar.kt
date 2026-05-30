@@ -22,6 +22,7 @@ import com.kmp.movieapp.composeApp.search
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.style.rememberStyleState
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import com.kmp.movieapp.core.util.boolean.isTrue
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
@@ -57,18 +58,20 @@ fun SearchBar(
             )
         },
         trailingIcon = {
-            IconButton(
-                onClick = {
-                    onQueryUpdate(null)
-                    focusManager.clearFocus(force = true)
-                },
-                content = {
-                    Icon(
-                        imageVector = vectorResource(Res.drawable.ic_close),
-                        contentDescription = null
-                    )
-                }
-            )
+            if (query?.isNotEmpty().isTrue) {
+                IconButton(
+                    onClick = {
+                        onQueryUpdate(null)
+                        focusManager.clearFocus(force = true)
+                    },
+                    content = {
+                        Icon(
+                            imageVector = vectorResource(Res.drawable.ic_close),
+                            contentDescription = null
+                        )
+                    }
+                )
+            }
         }
     )
 }
