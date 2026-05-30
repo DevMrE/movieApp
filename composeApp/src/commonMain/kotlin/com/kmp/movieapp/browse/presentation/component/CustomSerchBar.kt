@@ -22,16 +22,15 @@ import com.kmp.movieapp.composeApp.search
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.style.rememberStyleState
 import com.kmp.movieapp.core.ui.theme.AppTheme
-import com.kmp.movieapp.core.util.boolean.isTrue
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalFoundationStyleApi::class)
 @Composable
-fun CustomSearchBar(
+fun SearchBar(
     query: String?,
     focusManager: FocusManager,
-    onQueryUpdate: (String) -> Unit
+    onQueryUpdate: (String?) -> Unit
 ) {
     val styleState = rememberStyleState()
     val borderColor = MaterialTheme.colorScheme.onBackground.copy(0.6f)
@@ -58,20 +57,18 @@ fun CustomSearchBar(
             )
         },
         trailingIcon = {
-            if (query?.isNotEmpty().isTrue) {
-                IconButton(
-                    onClick = {
-                        onQueryUpdate("")
-                        focusManager.clearFocus(force = true)
-                    },
-                    content = {
-                        Icon(
-                            imageVector = vectorResource(Res.drawable.ic_close),
-                            contentDescription = null
-                        )
-                    }
-                )
-            }
+            IconButton(
+                onClick = {
+                    onQueryUpdate(null)
+                    focusManager.clearFocus(force = true)
+                },
+                content = {
+                    Icon(
+                        imageVector = vectorResource(Res.drawable.ic_close),
+                        contentDescription = null
+                    )
+                }
+            )
         }
     )
 }
@@ -80,9 +77,9 @@ fun CustomSearchBar(
 @PreviewLightDark
 @Preview
 @Composable
-private fun CustomSearchBarPreview() {
+private fun SearchBarPreview() {
     AppTheme {
-        CustomSearchBar(
+        SearchBar(
             query = "",
             focusManager = LocalFocusManager.current
         ) {
