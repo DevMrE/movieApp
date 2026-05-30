@@ -57,7 +57,6 @@ class BrowseViewModel(
             is BrowseAction.OnSearchUpdated -> onSearch(action.query)
             is BrowseAction.OnContentClicked -> navigateToContentDetail(action.uiMediaCard)
             is BrowseAction.OnGenreUpdated -> onUpdateGenre(action.genre)
-            is BrowseAction.OnLoadNextPage -> Unit
         }
     }
 
@@ -115,7 +114,7 @@ class BrowseViewModel(
 
             searchOrDiscoverUseCase(
                 browse = Browse(page = 1, query = query)
-            ).collectLatest { (page, _, search, _) ->
+            ).collectLatest { (page, query, search, discover) ->
                 _browseState.update {
                     it.copy(
                         page = page,
@@ -130,7 +129,7 @@ class BrowseViewModel(
         viewModelScope.launch {
             searchOrDiscoverUseCase(
                 browse = Browse(page = page, discover = Discover(filter = filter))
-            ).collectLatest { (page, _, _, discover) ->
+            ).collectLatest { (page, query, search, discover) ->
                 _browseState.update {
                     it.copy(
                         page = page,

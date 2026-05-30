@@ -6,6 +6,8 @@ import com.kmp.movieapp.search.data.service.SearchApiServiceImpl
 import com.kmp.movieapp.search.domain.repository.SearchRepository
 import com.kmp.movieapp.search.domain.usecase.SearchUseCase
 import com.kmp.movieapp.search.domain.usecase.SearchUseCaseImpl
+import com.kmp.movieapp.search.presentation.SearchViewModel
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val searchModule = module {
@@ -20,4 +22,6 @@ val searchModule = module {
     factory<SearchUseCase> {
         SearchUseCaseImpl(get())
     }
+
+    viewModelOf(::SearchViewModel)
 }
