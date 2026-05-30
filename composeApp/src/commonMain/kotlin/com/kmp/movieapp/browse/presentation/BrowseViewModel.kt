@@ -114,7 +114,7 @@ class BrowseViewModel(
 
             searchOrDiscoverUseCase(
                 browse = Browse(page = 1, query = query)
-            ).collectLatest { (page, query, search, discover) ->
+            ).collectLatest { (page, _, search, _) ->
                 _browseState.update {
                     it.copy(
                         page = page,
@@ -129,7 +129,7 @@ class BrowseViewModel(
         viewModelScope.launch {
             searchOrDiscoverUseCase(
                 browse = Browse(page = page, discover = Discover(filter = filter))
-            ).collectLatest { (page, query, search, discover) ->
+            ).collectLatest { (page, _, _, discover) ->
                 _browseState.update {
                     it.copy(
                         page = page,

@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
 import androidx.compose.foundation.style.fillWidth
 import androidx.compose.foundation.style.styleable
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -63,7 +63,10 @@ fun SearchBar(
                     focusManager.clearFocus(force = true)
                 },
                 content = {
-                    Icon(vectorResource(Res.drawable.ic_close), contentDescription = null)
+                    Icon(
+                        imageVector = vectorResource(Res.drawable.ic_close),
+                        contentDescription = null
+                    )
                 }
             )
         }
