@@ -65,12 +65,10 @@ fun BrowseStartContent() {
             }
 
             BrowseContentList(
-                modifier = Modifier.weight(1f),
-                contentList = discover.contentList,
-                onContentClicked = {
-                    viewModel.onAction(BrowseAction.OnContentClicked(uiMediaCard = it))
-                }
-            )
+                contentList = discover.contentList
+            ) {
+                viewModel.onAction(BrowseAction.OnContentClicked(uiMediaCard = it))
+            }
         }
     }
 }

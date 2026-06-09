@@ -5,9 +5,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -22,14 +22,13 @@ import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.size
 
 @Composable
-fun GridContainer(
+fun <T> ContentResultComponent(
+    items: List<T>?,
     modifier: Modifier = Modifier,
     lazyGridState: LazyGridState = rememberLazyGridState(),
     loadNextItems: () -> Unit = {},
-    content: LazyGridScope.() -> Unit,
+    content: @Composable (T) -> Unit,
 ) {
-    val gridState = rememberLazyGridState()
-
     val shouldLoadMore by remember {
         derivedStateOf {
             val totalItems = lazyGridState.layoutInfo.totalItemsCount
@@ -43,8 +42,9 @@ fun GridContainer(
             loadNextItems()
         }
     }
+
     LazyVerticalGrid(
-        columns = GridCells.Adaptive((MaterialTheme.size.defaultCardWidth.value / 1.3).dp),
+        columns = GridCells.Adaptive(minSize = (MaterialTheme.size.defaultCardWidth.value / 1.3).dp),
         modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
@@ -52,13 +52,16 @@ fun GridContainer(
         contentPadding = PaddingValues(all = MaterialTheme.padding.twelfth),
         verticalArrangement = Arrangement.spacedBy(
             space = MaterialTheme.padding.defaultContentPadding,
-            alignment = Alignment.CenterVertically
+            alignment = Alignment.Top
         ),
         horizontalArrangement = Arrangement.spacedBy(
             space = MaterialTheme.padding.defaultContentPadding,
             alignment = Alignment.CenterHorizontally
         ),
     ) {
-        content()
+        if (items == null) return@LazyVerticalGrid
+        items(items = items) {
+            content(it)
+        }
     }
 }
