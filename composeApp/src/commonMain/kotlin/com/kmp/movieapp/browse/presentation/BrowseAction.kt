@@ -11,4 +11,6 @@ sealed interface BrowseAction {
 
     data class OnGenreUpdated(val genre: UiGenre) : BrowseAction
 
+    data object OnLoadNextPage : BrowseAction
+
 }

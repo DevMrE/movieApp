@@ -1,6 +1,7 @@
 package com.kmp.movieapp.discover.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.discover.data.model.response.DiscoverMoviesDto
 import com.kmp.movieapp.discover.data.model.response.DiscoverSeriesDto
@@ -14,7 +15,7 @@ internal fun DiscoverMoviesDto.toDiscoverMovies(genre: List<Genre>) = DiscoverCo
     id = id ?: 0,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
     backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
-    type = DiscoverType.MOVIES,
+    type = MediaCategory.MOVIE,
     discoverGenres = genre
         .filter { g -> genreIds?.contains(g.id).isTrue }
         .map {
@@ -27,7 +28,7 @@ internal fun DiscoverSeriesDto.toDiscoverSeries(genre: List<Genre>) = DiscoverCo
     id = id ?: 0,
     posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
     backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath",
-    type = DiscoverType.SERIES,
+    type = MediaCategory.SERIES,
     discoverGenres = genre
         .filter { g -> genreIds?.contains(g.id).isTrue }
         .map {

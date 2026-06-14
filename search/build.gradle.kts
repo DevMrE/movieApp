@@ -67,7 +67,9 @@ kotlin {
     }
 }
 
-compose.resources {
+compose.resources(
+) {
+    generateResClass = always
     packageOfResClass = "com.kmp.movieapp.search"
 }
 
