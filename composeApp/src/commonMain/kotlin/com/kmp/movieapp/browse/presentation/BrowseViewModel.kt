@@ -57,6 +57,7 @@ class BrowseViewModel(
             is BrowseAction.OnSearchUpdated -> onSearch(action.query)
             is BrowseAction.OnContentClicked -> navigateToContentDetail(action.uiMediaCard)
             is BrowseAction.OnGenreUpdated -> onUpdateGenre(action.genre)
+            is BrowseAction.OnLoadNextPage -> Unit
         }
     }
 

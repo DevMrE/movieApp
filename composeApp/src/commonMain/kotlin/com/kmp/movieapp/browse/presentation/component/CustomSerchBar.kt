@@ -28,10 +28,10 @@ import org.jetbrains.compose.resources.vectorResource
 
 @OptIn(ExperimentalFoundationStyleApi::class)
 @Composable
-fun SearchBar(
+fun CustomSearchBar(
     query: String?,
     focusManager: FocusManager,
-    onQueryUpdate: (String?) -> Unit
+    onQueryUpdate: (String) -> Unit
 ) {
     val styleState = rememberStyleState()
     val borderColor = MaterialTheme.colorScheme.onBackground.copy(0.6f)
@@ -61,7 +61,7 @@ fun SearchBar(
             if (query?.isNotEmpty().isTrue) {
                 IconButton(
                     onClick = {
-                        onQueryUpdate(null)
+                        onQueryUpdate("")
                         focusManager.clearFocus(force = true)
                     },
                     content = {
@@ -80,9 +80,9 @@ fun SearchBar(
 @PreviewLightDark
 @Preview
 @Composable
-private fun SearchBarPreview() {
+private fun CustomSearchBarPreview() {
     AppTheme {
-        SearchBar(
+        CustomSearchBar(
             query = "",
             focusManager = LocalFocusManager.current
         ) {

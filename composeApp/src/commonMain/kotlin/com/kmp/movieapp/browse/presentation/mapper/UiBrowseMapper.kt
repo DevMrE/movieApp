@@ -3,7 +3,6 @@ package com.kmp.movieapp.browse.presentation.mapper
 import com.kmp.movieapp.browse.presentation.model.UiBrowse
 import com.kmp.movieapp.browse.presentation.model.filter.UiGenre
 import com.kmp.movieapp.browse.presentation.model.filter.UiGenreType
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.discover.domain.model.DiscoverContent
 import com.kmp.movieapp.discover.domain.model.DiscoverGenre
@@ -18,10 +17,7 @@ private fun DiscoverContent.toUiData() = UiMediaCard(
     posterPath = posterPath,
     backdropPath = backdropPath,
     bigCard = false,
-    type = when (type) {
-        DiscoverType.SERIES -> MediaCategory.SERIES
-        else -> MediaCategory.MOVIE
-    }
+    type = type
 )
 
 private fun DiscoverGenre.toUiGenre() = UiGenre(
