@@ -1,6 +1,6 @@
 package com.kmp.movieapp.di
 
-import com.kmp.movieapp.browse.BrowseNavigationScreen
+import com.kmp.movieapp.browse.presentation.BrowseNavigationScreen
 import com.kmp.movieapp.core.util.navigation.route.AppNavigation
 import com.kmp.movieapp.home.presentation.HomeNavigationScreen
 import com.kmp.movieapp.settings.SettingsContent

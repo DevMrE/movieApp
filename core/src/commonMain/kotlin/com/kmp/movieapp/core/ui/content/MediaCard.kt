@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +22,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.core.Res
 import com.kmp.movieapp.core.media_item_not_found
-import com.kmp.movieapp.core.ui.container.GridContainer
+import com.kmp.movieapp.core.ui.container.ContentResultComponent
 import com.kmp.movieapp.core.ui.imageloader.ImageLoader
 import com.kmp.movieapp.core.ui.material.gradient
 import com.kmp.movieapp.core.ui.material.padding
@@ -117,13 +116,13 @@ private fun MediaCardPrev() {
     }
 
     AppTheme {
-        GridContainer() {
-            items(list) {
-                MediaCard(
-                    title = it,
-                    posterPath = null,
-                )
-            }
+        ContentResultComponent(
+            items = list
+        ) { item ->
+            MediaCard(
+                title = item,
+                posterPath = null,
+            )
         }
     }
 }

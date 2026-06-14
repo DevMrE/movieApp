@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DiscoverRepository {
 
-    suspend fun getDiscoverMovies(page: Int, filter: Filter? = null): Flow<List<Discover>>
+    suspend fun getDiscoverMovies(page: Int, filter: Filter? = null): Flow<Discover>
 
-    suspend fun getDiscoverSeries(page: Int, filter: Filter? = null): Flow<List<Discover>>
+    suspend fun getDiscoverSeries(page: Int, filter: Filter? = null): Flow<Discover>
 }

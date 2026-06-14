@@ -2,14 +2,14 @@
 # Build
 agpVersion = "9.2.1"
 # Kotlin
-kotlinVersion = "2.3.21"
+kotlinVersion = "2.4.0"
 # AndroidX Basis
 androidx-activity = "1.13.0"
 # Coroutines
 coroutinesVersion = "1.11.0"
-androidxCoreVersion = "1.18.0"
+androidxCoreVersion = "1.19.0"
 # Compose
-composeVersion = "1.11.0"
+composeVersion = "1.11.1"
 composeBom = "2026.05.01"
 androidMaterial3Version = "1.4.0"
 material3Version = "1.10.0-alpha05"

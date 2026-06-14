@@ -3,7 +3,6 @@ package com.kmp.movieapp.overview
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.ExperimentalGridApi
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.style.ExperimentalFoundationStyleApi
 import androidx.compose.foundation.style.MutableStyleState
@@ -30,7 +29,7 @@ import com.kmp.movieapp.composeApp.Res
 import com.kmp.movieapp.composeApp.ic_arrow_up
 import com.kmp.movieapp.composeApp.popular_movies_title
 import com.kmp.movieapp.composeApp.popular_series_title
-import com.kmp.movieapp.core.ui.container.GridContainer
+import com.kmp.movieapp.core.ui.container.ContentResultComponent
 import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.style.roundFloatingIconButtonStyle
@@ -54,7 +53,7 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
         parameters = { parametersOf(mediaCategory) }
     )
 
-    val movieList = viewModel.movieListState.collectAsStateWithLifecycle()
+    val movieList by viewModel.movieListState.collectAsStateWithLifecycle()
     val navigator = koinNavigation<HomeNavigation>()
     val backStack = navigator.getCurrentBackStack()
 
@@ -104,25 +103,24 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
             }
         }
     ) { paddingValues ->
-        GridContainer(
+        ContentResultComponent(
+            items = movieList,
             modifier = Modifier.padding(paddingValues),
             lazyGridState = lazyGridState,
             loadNextItems = {
                 viewModel.loadNextMovies()
             },
-        ) {
-            items(items = movieList.value, contentType = { "media" }) { movie ->
-                MediaCard(
-                    title = movie.title,
-                    posterPath = movie.posterPath,
-                ) {
-                    navigator.navigateTo(
-                        route = HomeNavigation.ContentDetailRoute(
-                            id = movie.id,
-                            mediaCategory = movie.type
-                        )
+        ) { movie ->
+            MediaCard(
+                title = movie.title,
+                posterPath = movie.posterPath,
+            ) {
+                navigator.navigateTo(
+                    route = HomeNavigation.ContentDetailRoute(
+                        id = movie.id,
+                        mediaCategory = movie.type
                     )
-                }
+                )
             }
         }
     }

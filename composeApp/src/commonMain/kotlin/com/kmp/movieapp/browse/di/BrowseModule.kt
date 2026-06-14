@@ -1,8 +1,9 @@
 package com.kmp.movieapp.browse.di
 
 import com.kmp.movieapp.animation.screen_animation.NavigationScreenAnimation
-import com.kmp.movieapp.browse.BrowseViewModel
-import com.kmp.movieapp.browse.content.BrowseStartContent
+import com.kmp.movieapp.browse.domain.usecase.SearchOrDiscoverUseCase
+import com.kmp.movieapp.browse.presentation.BrowseViewModel
+import com.kmp.movieapp.browse.presentation.content.BrowseStartContent
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
 import com.kmp.movieapp.core.util.navigation.Navigator
 import com.kmp.movieapp.core.util.navigation.route.BrowseNavigation
@@ -14,15 +15,23 @@ import org.koin.dsl.navigation3.navigation
 
 @OptIn(KoinExperimentalAPI::class)
 val browseModule = module {
-    viewModel {
-        BrowseViewModel(
-            getDiscoverUseCase = get(),
-            navigator = get(qualifier = navigatorQualifier<BrowseNavigation>()),
-            genreRepository = get()
+
+    factory {
+        SearchOrDiscoverUseCase(
+            get(),
+            get()
         )
     }
 
-    // Screens
+    viewModel {
+        BrowseViewModel(
+            genreRepository = get(),
+            navigator = get(qualifier = navigatorQualifier<BrowseNavigation>()),
+            searchOrDiscoverUseCase = get()
+        )
+    }
+
+    // Navigations
     navigation<BrowseNavigation.InitialScreenRoute> {
         BrowseStartContent()
     }

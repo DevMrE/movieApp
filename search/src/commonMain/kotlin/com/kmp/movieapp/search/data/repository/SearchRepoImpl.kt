@@ -7,11 +7,19 @@ import com.kmp.movieapp.search.data.service.SearchApiService
 import com.kmp.movieapp.search.domain.model.Search
 import com.kmp.movieapp.search.domain.repository.SearchRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.update
 
 internal class SearchRepoImpl(
     private val searchApiService: SearchApiService
 ) : SearchRepository {
+
+    private val _searchQueryState = MutableStateFlow("")
+    private val _searchResultState = MutableStateFlow<List<Search>>(emptyList())
+    override val searchedItems: StateFlow<List<Search>> = _searchResultState
+
 
     override fun getSearchedItems(query: String): Flow<List<Search>> = flow {
         searchApiService.fetchSearch(query)
@@ -20,14 +28,24 @@ internal class SearchRepoImpl(
                     logI<SearchRepository>(message = "mediaType: ${it.mediaType}")
                 }
 
-                val movieTitle =
+                val searches =
                     apiResponse.results
                         ?.filter { it.posterPath != null }
                         ?.distinctBy { it.id }
                         ?.distinctBy { it.originalTitle }
                         ?.mapToSearch()
                         ?: emptyList()
-                emit(movieTitle)
+
+                _searchResultState.update {
+                    searches
+                }
+
+                emit(searches)
             }
     }
+
+    override fun updateSearch(query: String) {
+        _searchQueryState.update { query }
+    }
+
 }
