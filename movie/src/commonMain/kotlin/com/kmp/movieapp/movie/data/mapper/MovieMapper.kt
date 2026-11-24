@@ -37,6 +37,7 @@ internal fun MovieForCategoryDto.toMovie(genre: List<Genre>) =
             .map { currentGenre ->
                 MovieGenre(currentGenre.name)
             },
+        voteAverage = voteAverage,
         runtime = null,
     )
 
@@ -44,15 +45,15 @@ internal fun MovieForCategoryDto.toMovie(genre: List<Genre>) =
  * Mapper for transforming an [MovieDto] into
  * [Movie]
  */
-internal fun MovieDto.toMovie() =
-    Movie(
-        id = id ?: 0,
-        movieInfo = toMovieInfo(),
-        movieImage = toMovieImage(),
-        runtime = runtime,
-        releaseDate = releaseDate,
-        genres = genres?.toMovieGenres()
-    )
+internal fun MovieDto.toMovie() = Movie(
+    id = id ?: 0,
+    movieInfo = toMovieInfo(),
+    movieImage = toMovieImage(),
+    runtime = runtime,
+    releaseDate = releaseDate,
+    voteAverage = voteAverage,
+    genres = genres?.toMovieGenres()
+)
 
 
 internal fun MovieDto.toMovieImage(): MovieImage = MovieImage(

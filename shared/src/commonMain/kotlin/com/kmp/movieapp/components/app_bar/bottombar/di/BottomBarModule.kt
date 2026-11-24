@@ -3,7 +3,7 @@ package com.kmp.movieapp.components.app_bar.bottombar.di
 import com.devmre.compose.navigation3.helper.Navigator
 import com.devmre.compose.navigation3.helper.RegisterNavigationGraph
 import com.devmre.compose.navigation3.helper.navigatorQualifier
-import com.kmp.movieapp.core.util.navigation.route.BottomBarRoute
+import com.kmp.movieapp.components.app_bar.bottombar.navigation.BottomBarRoute
 import com.kmp.movieapp.discover.presentation.navigation.DiscoverScreenGraph
 import com.kmp.movieapp.more.MoreScreen
 import com.kmp.movieapp.search.presentation.navigation.SearchScreenGraph
@@ -26,7 +26,7 @@ val bottomBarNavigationModule = module {
         SearchScreenGraph()
     }
 
-    navigation<BottomBarRoute.MoreRoute> {
+    navigation<BottomBarRoute.Profile> {
         MoreScreen()
     }
 }

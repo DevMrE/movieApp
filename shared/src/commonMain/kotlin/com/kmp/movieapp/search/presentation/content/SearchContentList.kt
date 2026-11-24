@@ -6,9 +6,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.kmp.movieapp.components.mediacard.MediaCardComponent
 import com.kmp.movieapp.core.ui.container.ContentResultComponent
-import com.kmp.movieapp.core.ui.content.MediaCard
-import com.kmp.movieapp.core.ui.content.model.UiMediaCard
+import com.kmp.movieapp.model.UiMediaCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -24,8 +24,9 @@ fun SearchContentList(
             .background(Color.Transparent),
         loadNextItems = onLoadNextPage
     ) { content ->
-        MediaCard(
+        MediaCardComponent(
             title = content.title,
+            voteAverage = content.voteAverage,
             posterPath = content.posterPath,
             onClick = { onContentClicked(content) }
         )

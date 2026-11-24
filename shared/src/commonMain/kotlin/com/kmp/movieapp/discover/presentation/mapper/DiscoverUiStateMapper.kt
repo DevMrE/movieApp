@@ -1,8 +1,8 @@
 package com.kmp.movieapp.discover.presentation.mapper
 
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.discover.presentation.model.DiscoverSection
+import com.kmp.movieapp.model.UiMediaCard
 import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.series.domain.model.Series
 import com.kmp.movieapp.trending.domain.model.Trending
@@ -38,6 +38,7 @@ private fun List<Trending>.toUiMediaCard(): List<UiMediaCard> = map { trending -
         title = trending.title,
         posterPath = trending.posterPath,
         backdropPath = trending.backdropPath,
+        voteAverage = trending.voteAverage,
         type = MediaCategory.UNKNOWN
     )
 }
@@ -47,6 +48,7 @@ private fun Series.toUiMedia() = UiMediaCard(
     title = name,
     posterPath = posterPath,
     backdropPath = backdropPath,
+    voteAverage = null,
     type = MediaCategory.MOVIE
 )
 
@@ -55,5 +57,6 @@ private fun Movie.toUiMedia() = UiMediaCard(
     title = movieInfo.title,
     posterPath = movieImage.posterPath,
     backdropPath = movieImage.backdropPath,
+    voteAverage = voteAverage,
     type = MediaCategory.MOVIE
 )

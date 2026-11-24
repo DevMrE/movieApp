@@ -4,7 +4,7 @@
     <!-- BottomBar -->
     <string name="bottom_bar_discover">Discover</string>
     <string name="bottom_bar_search">Search</string>
-    <string name="bottom_bar_more">More</string>
+    <string name="bottom_bar_profile">Profile</string>
 
     <!-- Discover Screen -->
     <string name="trending_title">Trending now</string>

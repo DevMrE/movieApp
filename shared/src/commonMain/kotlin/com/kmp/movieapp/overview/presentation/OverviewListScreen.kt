@@ -1,4 +1,4 @@
-package com.kmp.movieapp.overview
+package com.kmp.movieapp.overview.presentation
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.padding
@@ -22,29 +22,29 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.NavKey
+import com.devmre.compose.navigation3.helper.Navigator
 import com.devmre.compose.navigation3.helper.koinNavigation
 import com.kmp.movieapp.components.app_bar.topbar.component.TopAppBarContent
+import com.kmp.movieapp.components.mediacard.MediaCardComponent
+import com.kmp.movieapp.components.mediacard.MovieCardPreviewData
 import com.kmp.movieapp.core.ui.container.ContentResultComponent
-import com.kmp.movieapp.core.ui.content.MediaCard
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.style.roundFloatingIconButtonStyle
 import com.kmp.movieapp.core.util.koin.koinComposableViewModel
-import com.kmp.movieapp.core.util.navigation.route.DiscoverRoute
+import com.kmp.movieapp.core.util.navigation.PreviewNavigation
+import com.kmp.movieapp.discover.presentation.navigation.DiscoverRoute
+import com.kmp.movieapp.model.UiMediaCard
+import com.kmp.movieapp.overview.presentation.mapper.UiOverviewStringMapper
 import com.kmp.movieapp.shared.Res
 import com.kmp.movieapp.shared.ic_arrow_up
-import com.kmp.movieapp.shared.popular_movies_title
-import com.kmp.movieapp.shared.popular_series_title
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.core.parameter.parametersOf
 
-@OptIn(
-    ExperimentalMaterial3Api::class,
-    ExperimentalMaterial3ExpressiveApi::class,
-    ExperimentalFoundationStyleApi::class
-)
 @Composable
 fun OverviewListScreen(mediaCategory: MediaCategory) {
 
@@ -52,9 +52,28 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
         key = mediaCategory.name,
         parameters = { parametersOf(mediaCategory) }
     )
-
-    val movieList by viewModel.movieListState.collectAsStateWithLifecycle()
     val navigator = koinNavigation<DiscoverRoute>()
+    val uiState by viewModel.overviewUiState.collectAsStateWithLifecycle()
+
+    OverviewListContent(
+        navigator = navigator,
+        mediaCategory = mediaCategory,
+        uiState = uiState,
+        loadNextItems = viewModel::loadNextItems
+    )
+}
+
+@OptIn(
+    ExperimentalMaterial3Api::class, ExperimentalFoundationStyleApi::class,
+    ExperimentalMaterial3ExpressiveApi::class
+)
+@Composable
+private fun <T: NavKey> OverviewListContent(
+    navigator: Navigator<T>,
+    mediaCategory: MediaCategory,
+    uiState: OverviewUiState,
+    loadNextItems: () -> Unit
+) {
     val backStack = navigator.getCurrentBackStack()
 
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -62,10 +81,6 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
     val scope = rememberCoroutineScope()
     val showFab by remember { derivedStateOf { lazyGridState.firstVisibleItemIndex > 0 } }
 
-    val titleRes = when (mediaCategory) {
-        MediaCategory.SERIES -> Res.string.popular_series_title
-        else -> Res.string.popular_movies_title
-    }
     val interactionSource = remember { MutableInteractionSource() }
     val styleState = remember { MutableStyleState(interactionSource) }
     val floatingActionButtonStyle = roundFloatingIconButtonStyle()
@@ -74,7 +89,7 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBarContent(
-                title = stringResource(titleRes),
+                title = UiOverviewStringMapper.toTitle(mediaCategory),
                 showBackButton = backStack is DiscoverRoute.SeeAllRoute,
                 scrollBehavior = scrollBehavior
             ) {
@@ -104,24 +119,45 @@ fun OverviewListScreen(mediaCategory: MediaCategory) {
         }
     ) { paddingValues ->
         ContentResultComponent(
-            items = movieList,
+            items = uiState.contentList,
             modifier = Modifier.padding(paddingValues),
             lazyGridState = lazyGridState,
             loadNextItems = {
-                viewModel.loadNextMovies()
+                loadNextItems()
             },
         ) { movie ->
-            MediaCard(
+            MediaCardComponent(
                 title = movie.title,
+                voteAverage = movie.voteAverage,
                 posterPath = movie.posterPath,
             ) {
-                navigator.navigateTo(
-                    route = DiscoverRoute.ContentDetailRoute(
-                        id = movie.id,
-                        mediaCategory = movie.type
+                (navigator as Navigator<DiscoverRoute>).let {
+                    navigator.navigateTo(
+                        route = DiscoverRoute.ContentDetailRoute(
+                            id = movie.id,
+                            mediaCategory = movie.type
+                        )
                     )
-                )
+                }
             }
         }
     }
+}
+
+@PreviewLightDark
+@Composable
+private fun OverviewListPreview(
+    @PreviewParameter(MovieCardPreviewData::class) contentList: List<UiMediaCard>
+) {
+
+    OverviewListContent(
+        navigator = PreviewNavigation,
+        mediaCategory = MediaCategory.MOVIE,
+        uiState = OverviewUiState(
+            contentList = contentList
+        ),
+        loadNextItems = {
+
+        }
+    )
 }

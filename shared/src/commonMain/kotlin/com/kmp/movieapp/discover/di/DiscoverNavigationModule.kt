@@ -5,9 +5,9 @@ import com.devmre.compose.navigation3.helper.RegisterNavigationGraph
 import com.devmre.compose.navigation3.helper.navigatorQualifier
 import com.kmp.movieapp.animation.screen_animation.NavigationScreenAnimation
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
-import com.kmp.movieapp.core.util.navigation.route.DiscoverRoute
 import com.kmp.movieapp.discover.presentation.DiscoverScreen
-import com.kmp.movieapp.overview.OverviewListScreen
+import com.kmp.movieapp.discover.presentation.navigation.DiscoverRoute
+import com.kmp.movieapp.overview.presentation.OverviewListScreen
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.module
 import org.koin.dsl.navigation3.navigation

@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.updateAndGet
 
-class ContentDetailViewModel(
+internal class ContentDetailViewModel(
     private val id: String,
     private val mediaCategory: MediaCategory,
     private val getContentDetailUseCase: GetContentDetailUseCase,

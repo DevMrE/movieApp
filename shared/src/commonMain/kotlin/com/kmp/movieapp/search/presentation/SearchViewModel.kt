@@ -3,10 +3,8 @@ package com.kmp.movieapp.search.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devmre.compose.navigation3.helper.Navigator
-import com.kmp.movieapp.core.ui.content.model.UiMediaCard
-import com.kmp.movieapp.core.util.logger.logI
-import com.kmp.movieapp.core.util.navigation.route.SearchScreenRoute
 import com.kmp.movieapp.genre.domain.repository.GenreRepository
+import com.kmp.movieapp.model.UiMediaCard
 import com.kmp.movieapp.search.domain.model.Browse
 import com.kmp.movieapp.search.domain.model.discover.Discover
 import com.kmp.movieapp.search.domain.model.discover.Filter
@@ -15,9 +13,10 @@ import com.kmp.movieapp.search.presentation.mapper.mapToFilter
 import com.kmp.movieapp.search.presentation.mapper.mapToUiMediaCardList
 import com.kmp.movieapp.search.presentation.mapper.toUiGenreList
 import com.kmp.movieapp.search.presentation.mapper.toUiMediaCardList
-import com.kmp.movieapp.search.presentation.model.UiBrowse
+import com.kmp.movieapp.search.presentation.model.UiSearch
 import com.kmp.movieapp.search.presentation.model.filter.UiFilterType
 import com.kmp.movieapp.search.presentation.model.filter.UiGenre
+import com.kmp.movieapp.search.presentation.navigation.SearchRoute
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -26,19 +25,19 @@ import kotlinx.coroutines.launch
 
 internal class SearchViewModel(
     genreRepository: GenreRepository,
-    private val navigator: Navigator<SearchScreenRoute>,
+    private val navigator: Navigator<SearchRoute>,
     private val searchOrDiscoverUseCase: SearchOrDiscoverUseCase
 ) : ViewModel() {
 
     private val _browseState = MutableStateFlow(
-        value = UiBrowse(
+        value = UiSearch(
             genreFilter = UiFilterType.Genre(
                 genres = genreRepository.movieGenres.value.toUiGenreList()
             )
         )
     )
 
-    val browseState: StateFlow<UiBrowse> = _browseState
+    val browseState: StateFlow<UiSearch> = _browseState
 
     init {
         viewModelScope.launch {
@@ -50,12 +49,12 @@ internal class SearchViewModel(
         }
     }
 
-    fun onAction(action: BrowseAction) {
+    fun onAction(action: SearchAction) {
         when (action) {
-            is BrowseAction.OnSearchUpdated -> onSearch(action.query)
-            is BrowseAction.OnContentClicked -> navigateToContentDetail(action.uiMediaCard)
-            is BrowseAction.OnGenreUpdated -> onUpdateGenre(action.genre)
-            is BrowseAction.OnLoadNextPage -> Unit
+            is SearchAction.OnSearchUpdated -> onSearch(action.query)
+            is SearchAction.OnContentClicked -> navigateToContentDetail(action.uiMediaCard)
+            is SearchAction.OnGenreUpdated -> onUpdateGenre(action.genre)
+            is SearchAction.OnLoadNextPage -> Unit
         }
     }
 
@@ -70,9 +69,8 @@ internal class SearchViewModel(
     }
 
     private fun navigateToContentDetail(uiMediaCard: UiMediaCard) {
-        logI(message = "Navigate with id: $uiMediaCard")
         navigator.navigateTo(
-            route = SearchScreenRoute.ContentDetailRoute(
+            route = SearchRoute.ContentDetailRoute(
                 id = uiMediaCard.id,
                 mediaCategory = uiMediaCard.type
             )

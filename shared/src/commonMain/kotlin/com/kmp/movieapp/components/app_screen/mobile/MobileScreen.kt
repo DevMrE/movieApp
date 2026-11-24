@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation3.ui.NavDisplay
 import com.devmre.compose.navigation3.helper.koinNavigation
 import com.kmp.movieapp.components.app_bar.bottombar.BottomBarComponent
-import com.kmp.movieapp.core.util.navigation.route.BottomBarRoute
+import com.kmp.movieapp.components.app_bar.bottombar.navigation.BottomBarRoute
 import org.koin.compose.navigation3.koinEntryProvider
 import org.koin.core.annotation.KoinExperimentalAPI
 

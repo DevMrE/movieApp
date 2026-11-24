@@ -52,7 +52,6 @@ fun appTypography(): Typography {
             fontWeight = FontWeight.Black,
             fontFamily = jakartaFamily,
             lineHeight = 40.sp,
-            color = MaterialTheme.colorScheme.tertiary
         ),
         bodyLarge = TextStyle(
             fontSize = 20.sp,
@@ -65,21 +64,24 @@ fun appTypography(): Typography {
             fontWeight = FontWeight.Normal,
             fontFamily = jakartaFamily,
             lineHeight = 20.sp,
-            color = MaterialTheme.colorScheme.outline
         ),
         bodySmall = TextStyle(
             fontSize = 16.sp,
             fontWeight = FontWeight.Normal,
             fontFamily = jakartaFamily,
             lineHeight = 18.sp,
-            color = MaterialTheme.colorScheme.outline
         ),
         labelSmall = TextStyle(
             fontSize = 16.sp,
             fontWeight = FontWeight.Black,
             fontFamily = jakartaFamily,
             lineHeight = 18.sp,
-            color = MaterialTheme.colorScheme.outline
-        )
+        ),
+        labelMedium = TextStyle(
+            fontSize = 12.sp,
+            fontWeight = FontWeight.ExtraBold,
+            fontFamily = jakartaFamily,
+            lineHeight = 14.sp,
+        ),
     )
 }

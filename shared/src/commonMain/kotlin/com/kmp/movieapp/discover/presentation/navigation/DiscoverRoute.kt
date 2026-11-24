@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.util.navigation.route
+package com.kmp.movieapp.discover.presentation.navigation
 
 import androidx.navigation3.runtime.NavKey
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
@@ -11,8 +11,13 @@ sealed interface DiscoverRoute : NavKey {
     data object InitialScreenRoute : DiscoverRoute
 
     @Serializable
-    data class SeeAllRoute(val mediaCategory: MediaCategory) : DiscoverRoute
+    data class SeeAllRoute(
+        val mediaCategory: MediaCategory
+    ) : DiscoverRoute
 
     @Serializable
-    data class ContentDetailRoute(val id: String, val mediaCategory: MediaCategory) : DiscoverRoute
+    data class ContentDetailRoute(
+        val id: String,
+        val mediaCategory: MediaCategory
+    ) : DiscoverRoute
 }

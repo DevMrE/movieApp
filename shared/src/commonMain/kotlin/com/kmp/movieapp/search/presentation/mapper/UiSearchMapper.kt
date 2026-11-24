@@ -1,21 +1,22 @@
 package com.kmp.movieapp.search.presentation.mapper
 
+import com.kmp.movieapp.genre.domain.model.Genre
+import com.kmp.movieapp.model.UiMediaCard
+import com.kmp.movieapp.search.domain.model.Search
 import com.kmp.movieapp.search.domain.model.discover.DiscoverContent
 import com.kmp.movieapp.search.domain.model.discover.DiscoverGenre
 import com.kmp.movieapp.search.domain.model.discover.DiscoverType
 import com.kmp.movieapp.search.domain.model.discover.Filter
-import com.kmp.movieapp.search.presentation.model.UiBrowse
+import com.kmp.movieapp.search.presentation.model.UiSearch
 import com.kmp.movieapp.search.presentation.model.filter.UiGenre
 import com.kmp.movieapp.search.presentation.model.filter.UiGenreType
-import com.kmp.movieapp.core.ui.content.model.UiMediaCard
-import com.kmp.movieapp.genre.domain.model.Genre
-import com.kmp.movieapp.search.domain.model.Search
 
 private fun DiscoverContent.toUiData() = UiMediaCard(
     id = id.toString(),
     title = title,
     posterPath = posterPath,
     backdropPath = backdropPath,
+    voteAverage = null,
     type = type
 )
 
@@ -45,7 +46,7 @@ fun UiGenre.toDiscoverGenre(): DiscoverGenre = DiscoverGenre(
     }
 )
 
-fun UiBrowse.mapToFilter(): Filter =
+fun UiSearch.mapToFilter(): Filter =
     Filter(
         genre = genreFilter?.genres?.filter { it.selected }?.map { it.toDiscoverGenre() }
     )
@@ -55,6 +56,7 @@ private fun Search.mapToUiMediaCard(): UiMediaCard = UiMediaCard(
     title = titleInfo.mainTitle,
     posterPath = media.posterUrl,
     backdropPath = media.backdropUrl,
+    voteAverage = null,
     type = mediaCategory
 )
 

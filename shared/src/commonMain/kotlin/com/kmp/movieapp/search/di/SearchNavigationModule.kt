@@ -5,8 +5,8 @@ import com.devmre.compose.navigation3.helper.RegisterNavigationGraph
 import com.devmre.compose.navigation3.helper.navigatorQualifier
 import com.kmp.movieapp.animation.screen_animation.NavigationScreenAnimation
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
-import com.kmp.movieapp.core.util.navigation.route.SearchScreenRoute
 import com.kmp.movieapp.search.presentation.content.SearchScreen
+import com.kmp.movieapp.search.presentation.navigation.SearchRoute
 import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.dsl.module
 import org.koin.dsl.navigation3.navigation
@@ -14,18 +14,18 @@ import org.koin.dsl.navigation3.navigation
 @OptIn(KoinExperimentalAPI::class)
 val searchNavigationModule = module {
     // ------- Search Screen Navigation -------
-    single<Navigator<SearchScreenRoute>>(qualifier = navigatorQualifier<SearchScreenRoute>()) {
-        RegisterNavigationGraph(startDestination = SearchScreenRoute.InitialScreenRoute)
+    single<Navigator<SearchRoute>>(qualifier = navigatorQualifier<SearchRoute>()) {
+        RegisterNavigationGraph(startDestination = SearchRoute.InitialScreenRoute)
     }
 
-    navigation<SearchScreenRoute.InitialScreenRoute> {
+    navigation<SearchRoute.InitialScreenRoute> {
         SearchScreen()
     }
 
-    navigation<SearchScreenRoute.ContentDetailRoute>(
+    navigation<SearchRoute.ContentDetailRoute>(
         metadata = NavigationScreenAnimation.bottomSheetTransitions(),
     ) { data ->
-        val navigation = get<Navigator<SearchScreenRoute>>(qualifier = navigatorQualifier<SearchScreenRoute>())
+        val navigation = get<Navigator<SearchRoute>>(qualifier = navigatorQualifier<SearchRoute>())
 
         ContentDetailScreen(
             id = data.id,

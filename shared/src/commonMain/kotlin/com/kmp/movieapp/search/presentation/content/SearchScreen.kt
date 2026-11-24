@@ -27,7 +27,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.components.app_bar.topbar.component.TopAppBarContent
 import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.search.presentation.BrowseAction
+import com.kmp.movieapp.search.presentation.SearchAction
 import com.kmp.movieapp.search.presentation.SearchViewModel
 import com.kmp.movieapp.search.presentation.component.FilterGenreComponent
 import com.kmp.movieapp.shared.Res
@@ -56,10 +56,10 @@ fun SearchScreen() {
             SearchContentList(
                 contentList = discover.contentList,
                 onLoadNextPage = {
-                    viewModel.onAction(BrowseAction.OnLoadNextPage)
+                    viewModel.onAction(SearchAction.OnLoadNextPage)
                 }
             ) {
-                viewModel.onAction(BrowseAction.OnContentClicked(uiMediaCard = it))
+                viewModel.onAction(SearchAction.OnContentClicked(uiMediaCard = it))
             }
         },
         topBar = {
@@ -70,7 +70,7 @@ fun SearchScreen() {
                 searchBarState = searchBarState,
                 query = discover.search,
                 onQueryChanged = {
-                    viewModel.onAction(BrowseAction.OnSearchUpdated(query = it))
+                    viewModel.onAction(SearchAction.OnSearchUpdated(query = it))
                 },
                 topBarAction = {
                     AnimatedVisibility(
@@ -114,7 +114,7 @@ fun SearchScreen() {
                 modifier = Modifier,
                 genres = discover.genreFilter?.genres
             ) { genre ->
-                viewModel.onAction(BrowseAction.OnGenreUpdated(genre))
+                viewModel.onAction(SearchAction.OnGenreUpdated(genre))
                 focusManager.clearFocus(force = true)
             }
 
