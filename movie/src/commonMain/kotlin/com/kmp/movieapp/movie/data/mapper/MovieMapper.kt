@@ -1,8 +1,10 @@
 package com.kmp.movieapp.movie.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.genre.domain.model.Genre
+import com.kmp.movieapp.movie.data.model.response.discover.DiscoverMovieDto
 import com.kmp.movieapp.movie.data.model.response.movie.MovieDto
 import com.kmp.movieapp.movie.data.model.response.movie_for_category.MovieForCategoryDto
 import com.kmp.movieapp.movie.domain.model.Movie
@@ -63,4 +65,18 @@ internal fun MovieDto.toMovieInfo(): MovieInfo = MovieInfo(
     overview = "$overview"
 )
 
+internal fun DiscoverMovieDto.toMovie(): Movie = Movie(
+    id = id ?: 0,
+    movieInfo = MovieInfo(
+        title = "$title",
+        overview = "$overview"
+    ),
+    movieImage = MovieImage(
+        posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
+        backdropPath = "${UrlHelper.IMAGE_BASE_URL}$backdropPath"
+    ),
+    type = MediaCategory.MOVIE,
+    releaseDate = releaseDate,
+    voteAverage = voteAverage
+)
 

@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeCompiler)
-    alias(libs.plugins.kotlinAndroid)
 }
 
 android {
@@ -25,7 +24,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
         }
     }
@@ -50,7 +49,7 @@ dependencies {
     implementation(libs.bundles.commainMainKoin)
     implementation(libs.android.conscrypt)
 
-    implementation(project(":composeApp"))
+    implementation(project(":shared"))
     implementation(project(":device_operations"))
 }
 

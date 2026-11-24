@@ -7,10 +7,10 @@ import kotlinx.serialization.Serializable
 sealed interface AppNavigation : NavKey {
 
     @Serializable
-    data object HomeRoute : AppNavigation
+    data object DiscoverRoute : AppNavigation
 
     @Serializable
-    data object BrowseRoute : AppNavigation
+    data object SearchRoute : AppNavigation
 
     @Serializable
     data object MoreRoute : AppNavigation

@@ -1,39 +1,40 @@
 [versions]
 # Build
-agpVersion = "9.2.1"
+agpVersion = "9.5.2"
 # Kotlin
-kotlinVersion = "2.4.0"
+kotlinVersion = "2.4.21"
 # AndroidX Basis
 androidx-activity = "1.13.0"
 # Coroutines
 coroutinesVersion = "1.11.0"
-androidxCoreVersion = "1.19.0"
+androidxCoreVersion = "1.19.1"
 # Compose
-composeVersion = "1.11.1"
-composeBom = "2026.05.01"
-androidMaterial3Version = "1.4.0"
+composeVersion = "1.12.2"
+composeBom = "2026.11.01"
+androidMaterial3Version = "1.5.0"
 material3Version = "1.10.0-alpha05"
-materialAdaptiveVersion = "1.3.0-beta01"
+materialAdaptiveVersion = "1.3.0"
 materialAdaptiveNavigationSuitVersion = "1.9.0"
 # JetBrains-AndroidX (KMP Jetpack-Ports)
-androidxLifecycleVersion = "2.10.0"
+androidxLifecycleVersion = "2.11.0"
 savedStateVersion = "1.4.0"
-slf4jSimpleVersion = "2.0.18"
+slf4jSimpleVersion = "2.0.20"
 windowCoreVersion = "1.5.1"
-composeHotReload = "1.1.1"
+composeHotReload = "1.3.0"
 # other
-koinVersion = "4.2.1"
-ktorVersion = "3.5.0"
-loggerVersion = "2.0.8"
+koinVersion = "4.2.2"
+ktorVersion = "3.6.1"
+loggerVersion = "2.2.0"
 kamelVersion = "1.0.9"
-androidConscryptVer = "2.5.3"
-playServicesLocationVersion = "21.3.0"
-appcompatVersion = "1.7.1"
+androidConscryptVer = "2.9.0"
+playServicesLocationVersion = "21.4.0"
+appcompatVersion = "1.8.0"
 materialVersion = "1.14.0"
-composeNav3Version = "2.9.2"
-composeNav3UiVersion = "1.1.1"
-composeKmpAdaptiveVersion = "1.3.0-beta01"
-composeKmpLifecycleVersion = "2.10.0"
+composeNav3Version = "2.10.0"
+composeNav3UiVersion = "1.2.0"
+composeNav3Helper = "1.4.0-alpha07"
+composeKmpAdaptiveVersion = "1.3.0"
+composeKmpLifecycleVersion = "2.11.0"
 
 [libraries]
 # Kotlin
@@ -98,6 +99,7 @@ compose-navigation3 = { module = "org.jetbrains.androidx.navigation:navigation-c
 compose-navigation3-ui = { module = "org.jetbrains.androidx.navigation3:navigation3-ui", version.ref = "composeNav3UiVersion" }
 compose-adaptiveNavigation3 = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3", version.ref = "composeKmpAdaptiveVersion" }
 compose-viewmodelNavigation3 = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-navigation3", version.ref = "composeKmpLifecycleVersion" }
+compose-navigation3-helper = { group = "com.github.devmre", name = "navigation3-helper", version.ref = "composeNav3Helper" }
 
 # Material for compose
 material = { module = "org.jetbrains.compose.material:material", version.ref = "composeVersion" }
@@ -134,4 +136,4 @@ commainMainKoin = ["koinCore", "koinCoreViewModel", "koinCoreNavigation", "koinC
 commonMainKtor = ["ktorCore", "ktorLogging", "ktorNegotiation", "ktorAuth", "ktorResource", "ktorGson", "ktorBomRemover"]
 commonMainCompose = ["composeUi", "composeRuntime", "composePreview", "composeFoundation", "composeResources", "material", "material3", "material3Adaptive", "material3AdaptiveNavigation"]
 androidCompose = ["androidx-compose-bom", "androidx-compose-ui", "androidx-compose-ui-tooling", "androidx-compose-ui-graphics", "androidx-compose-material3", "androidx-compose-ui-tooling-preview"]
-composeNavigation3 = ["compose-navigation3", "compose-navigation3-ui", "compose-adaptiveNavigation3", "compose-viewmodelNavigation3", "koinComposeNavigation3"]
+composeNavigation3 = ["compose-navigation3", "compose-navigation3-ui", "compose-adaptiveNavigation3", "compose-viewmodelNavigation3", "koinComposeNavigation3", "compose-navigation3-helper"]

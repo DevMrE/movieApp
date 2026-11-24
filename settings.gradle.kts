@@ -36,11 +36,10 @@ plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-include(":composeApp")
+include(":shared")
 include(":core")
 include(":content_detail")
 include(":search")
-include(":discover")
 include(":device_operations")
 include(":androidApp")
 include(":movie")

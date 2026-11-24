@@ -55,7 +55,7 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *     Result.Success(RemoteModel("raw"))
  *
  * val result: Result<DomainModel, Unit> =
- *     loadRemote().mapOnSuccess { remote ->
+ *     loadRemote().map { remote ->
  *         DomainModel(remote.raw)
  *     }
  * ```
@@ -119,9 +119,9 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * val result: Result<DomainModel, DataError> =
  *     loadRemote()
- *         .mapOnSuccess { it.toDomain() }
+ *         .map { it.toDomain() }
  *         .fallbackOnError {
- *             loadLocal().mapOnSuccess { it.toDomain() }
+ *             loadLocal().map { it.toDomain() }
  *         }
  * ```
  *
@@ -137,10 +137,10 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * suspend fun emitData(emit: suspend (RepositoryData<String>) -> Unit) {
  *     loadRemote()
- *         .mapOnSuccess { it.value }
+ *         .map { it.value }
  *         .onError { it } // optional mapping
  *         .fallbackOnError {
- *             loadLocal().mapOnSuccess { it.value }
+ *             loadLocal().map { it.value }
  *         }
  *         .onSuccess { value ->
  *             emit(RepositoryData(data = value))
@@ -207,12 +207,13 @@ fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.getOrNull(): S
  * Executes [block] only if this result is [Success].
  * Intended for side effects such as emitting data or logging.
  */
-inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.onSuccess(
-    block: (SuccessData) -> Unit
-): Result<SuccessData, FallbackData> {
-    if (this is Success) block(value)
-    return this
-}
+inline fun <SuccessData, FallbackData, MappedSuccessData> Result<SuccessData, FallbackData>.onSuccess(
+    block: (SuccessData) -> MappedSuccessData
+): Result<MappedSuccessData, FallbackData> =
+    when (this) {
+        is Success -> Success(block(value))
+        is Failure -> this
+    }
 
 /**
  * Transforms the success value if this result is [Success].

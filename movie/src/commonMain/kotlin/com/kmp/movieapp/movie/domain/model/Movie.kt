@@ -6,8 +6,9 @@ data class Movie(
     val id: Int,
     val movieInfo: MovieInfo,
     val movieImage: MovieImage,
-    val runtime: Int?,
-    val releaseDate: String?,
+    val type: MediaCategory = MediaCategory.MOVIE,
+    val runtime: Int? = null,
+    val releaseDate: String? = null,
     val genres: List<MovieGenre>? = emptyList(),
-    val type: MediaCategory = MediaCategory.MOVIE
+    val voteAverage: Double? = null,
 )
