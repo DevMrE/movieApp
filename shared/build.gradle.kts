@@ -72,7 +72,6 @@ kotlin {
             implementation(project(":movie"))
             implementation(project(":series"))
             implementation(project(":trending"))
-            implementation(project(":overview_list"))
             implementation(project(":genre"))
         }
 
