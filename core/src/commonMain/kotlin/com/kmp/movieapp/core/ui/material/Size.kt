@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 data class Size(
     val bottomBarStrokeHeight: Dp = 1.dp,
     val borderStroke: Dp = 2.dp,
-    val iconSize: Dp = 18.dp,
+    val iconSize: Dp = 32.dp,
     val defaultCardHeight: Dp = 220.dp,
     val defaultCardListHeight: Dp = 180.dp,
     val defaultCardWidth: Dp = 150.dp,

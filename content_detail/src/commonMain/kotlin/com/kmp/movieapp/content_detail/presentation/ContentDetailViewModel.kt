@@ -5,6 +5,7 @@ import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetailUseCase
 import com.kmp.movieapp.content_detail.presentation.mapper.toUiData
 import com.kmp.movieapp.content_detail.presentation.model.ContentDetailUi
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,4 +34,10 @@ class ContentDetailViewModel(
                 data?.toUiData()
             }
         }.stateInEagerly(_uiState.value)
+
+    override fun onCleared() {
+        logI<ContentDetailViewModel>("ViewModel cleared")
+        super.onCleared()
+        logI<ContentDetailViewModel>("ViewModel cleared")
+    }
 }

@@ -21,16 +21,16 @@ import com.kmp.movieapp.content_detail.presentation.component.title.title
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.boolean.isTrue
-import org.koin.compose.viewmodel.koinViewModel
+import com.kmp.movieapp.core.util.koin.koinComposableViewModel
 import org.koin.core.parameter.parametersOf
 
 @Composable
 fun ContentDetailScreen(
     id: String,
-    mediaCategory: MediaCategory?,
+    mediaCategory: MediaCategory,
     onBackClicked: () -> Unit
 ) {
-    val viewModel = koinViewModel<ContentDetailViewModel>(
+    val viewModel = koinComposableViewModel<ContentDetailViewModel>(
         parameters = { parametersOf(id, mediaCategory) },
         key = id
     )

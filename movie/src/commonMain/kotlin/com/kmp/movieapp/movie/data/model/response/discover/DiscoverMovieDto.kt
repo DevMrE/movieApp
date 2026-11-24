@@ -34,4 +34,5 @@ data class DiscoverMovieDto(
     val voteAverage: Double? = null,
     @SerialName("vote_count")
     val voteCount: Int? = null
+
 ) : Dto

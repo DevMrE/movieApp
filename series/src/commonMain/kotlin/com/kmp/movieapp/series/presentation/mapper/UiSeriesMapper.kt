@@ -1,12 +1,12 @@
 package com.kmp.movieapp.series.presentation.mapper
 
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.ui.content.model.UiSection
 import com.kmp.movieapp.core.ui.content.model.UiMediaCard
+import com.kmp.movieapp.core.ui.content.model.UiSection
 import com.kmp.movieapp.series.domain.model.Series
 
 /**
- * Mapper to map the [Series] into [UiMediaCard].
+ * Mapper to mapOnSuccess the [Series] into [UiMediaCard].
  */
 internal fun Series.toUiMedia() = UiMediaCard(
     id = id.toString(),
@@ -17,7 +17,7 @@ internal fun Series.toUiMedia() = UiMediaCard(
 )
 
 /**
- * Mapper to map the [List] of [Series] into [UiSection].
+ * Mapper to mapOnSuccess the [List] of [Series] into [UiSection].
  */
 fun List<Series>.toUiHomeSeriesList(): UiSection {
     return UiSection(

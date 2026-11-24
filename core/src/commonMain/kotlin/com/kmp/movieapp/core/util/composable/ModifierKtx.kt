@@ -87,3 +87,7 @@ inline fun Modifier.applyIfElse(
         then(ifFalse(Modifier))
     }
 }
+
+fun Modifier.animate() {
+
+}
