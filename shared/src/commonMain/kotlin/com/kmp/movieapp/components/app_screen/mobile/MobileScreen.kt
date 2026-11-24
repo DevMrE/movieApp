@@ -9,15 +9,15 @@ import androidx.compose.runtime.Composable
 import androidx.navigation3.ui.NavDisplay
 import com.devmre.compose.navigation3.helper.koinNavigation
 import com.kmp.movieapp.components.app_bar.bottombar.BottomBarComponent
-import com.kmp.movieapp.core.util.navigation.route.AppNavigation
+import com.kmp.movieapp.core.util.navigation.route.BottomBarRoute
 import org.koin.compose.navigation3.koinEntryProvider
 import org.koin.core.annotation.KoinExperimentalAPI
 
 @OptIn(KoinExperimentalAPI::class)
 @Composable
 fun MobileScreen() {
-    val navigator = koinNavigation<AppNavigation>()
-    val entryProvider = koinEntryProvider<AppNavigation>()
+    val navigator = koinNavigation<BottomBarRoute>()
+    val entryProvider = koinEntryProvider<BottomBarRoute>()
 
     Scaffold(
         bottomBar = {

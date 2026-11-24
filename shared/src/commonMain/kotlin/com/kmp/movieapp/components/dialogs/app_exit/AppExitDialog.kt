@@ -10,11 +10,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import com.devmre.compose.navigation3.helper.Navigator
 import com.devmre.compose.navigation3.helper.koinNavigation
-import com.kmp.movieapp.core.util.navigation.route.AppNavigation
+import com.kmp.movieapp.core.util.navigation.route.BottomBarRoute
 
 @Composable
 fun AppExitDialog() {
-    val navigator: Navigator<AppNavigation> = koinNavigation()
+    val navigator: Navigator<BottomBarRoute> = koinNavigation()
     var showDialog by rememberSaveable { mutableStateOf(true) }
 
     if (showDialog)
