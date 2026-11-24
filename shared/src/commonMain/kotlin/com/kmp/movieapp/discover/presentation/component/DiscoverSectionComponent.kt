@@ -126,7 +126,7 @@ private fun LazyListScope.discoverSection(
                     onAction(
                         DiscoverAction.OnNavigateToDetailScreen(
                             id = item.id,
-                            mediaCategory = mediaCategory
+                            mediaCategory = item.type
                         )
                     )
                 }

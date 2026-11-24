@@ -5,6 +5,7 @@ import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkHorizontally
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,7 +24,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.boolean.isFalse
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.search.presentation.SearchTextField
@@ -50,6 +54,11 @@ fun TopAppBarContent(
     val scope = rememberCoroutineScope()
 
     TopAppBar(
+        modifier = Modifier
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.surfaceContainer
+            ),
         title = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -89,7 +98,7 @@ fun TopAppBarContent(
         },
         scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.background,
+            containerColor = MaterialTheme.colorScheme.surface,
             subtitleContentColor = MaterialTheme.colorScheme.primary,
         ),
         actions = {
@@ -136,5 +145,25 @@ private fun LogoWithTitle(
                 )
             }
         }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@PreviewLightDark
+@Composable
+private fun TopAppBarPreview() {
+    AppTheme {
+        TopAppBarContent(
+            title = "Discover",
+            showTitle = true,
+            showBackButton = false,
+            query = null,
+            focusRequester = null,
+            searchBarState = null,
+            scrollBehavior = null,
+            onQueryChanged = {},
+            topBarAction = {},
+            navigateBack = null
+        )
     }
 }

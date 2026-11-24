@@ -6,6 +6,7 @@ import com.kmp.movieapp.model.UiMediaCard
 import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.series.domain.model.Series
 import com.kmp.movieapp.trending.domain.model.Trending
+import com.kmp.movieapp.trending.domain.model.TrendingType
 
 internal fun initDiscoverSection(
     trendingList: List<Trending>,
@@ -39,7 +40,12 @@ private fun List<Trending>.toUiMediaCard(): List<UiMediaCard> = map { trending -
         posterPath = trending.posterPath,
         backdropPath = trending.backdropPath,
         voteAverage = trending.voteAverage,
-        type = MediaCategory.UNKNOWN
+        type = when (trending.type) {
+            TrendingType.MOVIE -> MediaCategory.MOVIE
+            TrendingType.SERIES -> MediaCategory.SERIES
+            TrendingType.PEOPLE -> MediaCategory.ACTOR
+            else -> MediaCategory.UNKNOWN
+        }
     )
 }
 
@@ -48,8 +54,8 @@ private fun Series.toUiMedia() = UiMediaCard(
     title = name,
     posterPath = posterPath,
     backdropPath = backdropPath,
-    voteAverage = null,
-    type = MediaCategory.MOVIE
+    voteAverage = voteAverage,
+    type = MediaCategory.SERIES
 )
 
 private fun Movie.toUiMedia() = UiMediaCard(

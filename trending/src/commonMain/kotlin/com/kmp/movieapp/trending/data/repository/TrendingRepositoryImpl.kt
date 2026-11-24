@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.flow
 internal class TrendingRepositoryImpl(
     private val trendingApiService: TrendingApiService
 ) : TrendingRepository {
+
     override suspend fun getAll(): Flow<List<Trending>> = flow {
         trendingApiService.fetchAll()
             .mapOnSuccess { dto ->
