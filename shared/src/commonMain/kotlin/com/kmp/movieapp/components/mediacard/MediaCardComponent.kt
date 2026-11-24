@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.ui.content
+package com.kmp.movieapp.components.mediacard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -19,9 +19,7 @@ import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.kmp.movieapp.core.Res
-import com.kmp.movieapp.core.media_item_not_found
-import com.kmp.movieapp.core.ui.container.ContentResultComponent
+import com.kmp.movieapp.components.vote.VoteAverageComponent
 import com.kmp.movieapp.core.ui.imageloader.ImageLoader
 import com.kmp.movieapp.core.ui.material.gradient
 import com.kmp.movieapp.core.ui.material.padding
@@ -30,11 +28,14 @@ import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.composable.applyIf
 import com.kmp.movieapp.core.util.composable.applyIfElse
 import com.kmp.movieapp.core.util.composable.gradientOverlay
+import com.kmp.movieapp.shared.Res
+import com.kmp.movieapp.shared.img_media_item_not_found
 import org.jetbrains.compose.resources.painterResource
 
 @Composable
-fun MediaCard(
+fun MediaCardComponent(
     title: String,
+    voteAverage: Double?,
     posterPath: String?,
     enableGradient: Boolean = true,
     bigCard: Boolean = false,
@@ -85,7 +86,7 @@ fun MediaCard(
                 )
             } else {
                 Image(
-                    painter = painterResource(Res.drawable.media_item_not_found),
+                    painter = painterResource(Res.drawable.img_media_item_not_found),
                     contentDescription = null
                 )
             }
@@ -100,7 +101,26 @@ fun MediaCard(
                     ),
                 maxLines = 2,
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.tertiary,
+                color = MaterialTheme.colorScheme.primaryFixed,
+            )
+
+            VoteAverageComponent(
+                voteAverage = voteAverage,
+                modifier = Modifier
+                    .applyIfElse(
+                        condition = bigCard,
+                        ifTrue = {
+                            align(Alignment.TopEnd)
+                                .padding(top = MaterialTheme.padding.sixteen)
+                        },
+                        ifFalse = {
+                            align(Alignment.BottomEnd)
+                                .padding(bottom = MaterialTheme.padding.sixteen)
+                        }
+                    )
+                    .padding(
+                        end = MaterialTheme.padding.twenty
+                    )
             )
         }
     }
@@ -108,19 +128,13 @@ fun MediaCard(
 
 @PreviewLightDark
 @Composable
-private fun MediaCardPrev() {
-    val list = (0..50).map {
-        "Movie $it"
-    }
-
+private fun MediaCardPreview() {
     AppTheme {
-        ContentResultComponent(
-            items = list
-        ) { item ->
-            MediaCard(
-                title = item,
-                posterPath = null,
-            )
-        }
+        MediaCardComponent(
+            title = "Movie Title",
+            voteAverage = 8.5,
+            posterPath = null,
+        )
+
     }
 }

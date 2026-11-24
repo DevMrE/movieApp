@@ -1,12 +1,11 @@
-package com.kmp.movieapp.overview
+package com.kmp.movieapp.overview.presentation
 
 import androidx.lifecycle.ViewModel
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.ui.content.model.UiMediaCard
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.overview.domain.model.OverViewMedia
 import com.kmp.movieapp.overview.domain.usecase.LoadOverviewMediaList
-import com.kmp.movieapp.overview.mapper.toUiMediaCardList
+import com.kmp.movieapp.overview.presentation.mapper.toUiState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +21,7 @@ internal class OverviewListViewModel(
     private val _currentPage = MutableStateFlow(mapOf(mediaCategory to 1))
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val movieListState: StateFlow<List<UiMediaCard>> = _currentPage
+    val overviewUiState: StateFlow<OverviewUiState> = _currentPage
         .map { it[mediaCategory] ?: 1 }
         .flatMapLatest { page ->
             loadOverviewMediaList(
@@ -32,12 +31,12 @@ internal class OverviewListViewModel(
         }.scan(emptyList<OverViewMedia>()) { currentList, newList ->
             currentList + newList
         }.map { list ->
-            list.toUiMediaCardList()
-                .distinctBy { it.id }
+            list.toUiState()
         }
-        .stateInEagerly(emptyList())
+        .stateInEagerly(OverviewUiState())
 
-    fun loadNextMovies() {
+
+    fun loadNextItems() {
         _currentPage.update { map ->
             val current = map[mediaCategory] ?: 1
             map + (mediaCategory to current + 1)

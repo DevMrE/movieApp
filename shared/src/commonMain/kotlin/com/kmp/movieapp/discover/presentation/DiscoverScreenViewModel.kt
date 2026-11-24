@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devmre.compose.navigation3.helper.Navigator
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.util.navigation.route.DiscoverRoute
 import com.kmp.movieapp.core.util.viewmodel.stateInSubscribed
 import com.kmp.movieapp.discover.domain.GetDiscoverDataUseCase
 import com.kmp.movieapp.discover.presentation.mapper.initDiscoverSection
 import com.kmp.movieapp.discover.presentation.model.DiscoverUiState
+import com.kmp.movieapp.discover.presentation.navigation.DiscoverRoute
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -24,6 +24,7 @@ internal class DiscoverScreenViewModel(
 ) : ViewModel() {
 
     private val _movieScreenState = MutableStateFlow(DiscoverUiState())
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val movieScreenState = _movieScreenState
         .flatMapLatest {
@@ -39,18 +40,18 @@ internal class DiscoverScreenViewModel(
                     )
                 )
             }
-        }.stateInSubscribed(_movieScreenState.value)
+        }.stateInSubscribed(initialData = _movieScreenState.value)
 
-    fun onAction(action: HomeAction) {
+    fun onAction(action: DiscoverAction) {
         when (action) {
-            is HomeAction.OnNavigateToDetailScreen -> navigateToDetailScreen(
+            is DiscoverAction.OnNavigateToDetailScreen -> navigateToDetailScreen(
                 id = action.id,
                 mediaCategory = action.mediaCategory
             )
 
-            is HomeAction.OnSeeAllClicked -> onSeeAll(action.mediaCategory)
-            is HomeAction.OnRefresh -> onRefresh()
-            is HomeAction.NavigateBack -> navigator.navigateBack()
+            is DiscoverAction.OnSeeAllClicked -> onSeeAll(action.mediaCategory)
+            is DiscoverAction.OnRefresh -> onRefresh()
+            is DiscoverAction.NavigateBack -> navigator.navigateBack()
         }
     }
 

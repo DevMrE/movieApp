@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
@@ -17,14 +16,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.search.presentation.model.filter.UiGenre
 import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import com.kmp.movieapp.search.presentation.model.filter.UiGenre
 import com.kmp.movieapp.shared.Res
 import com.kmp.movieapp.shared.filter_by_genre
 import com.kmp.movieapp.shared.filter_header
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FilterGenreComponent(
     modifier: Modifier,
@@ -64,10 +62,10 @@ fun FilterGenreComponent(
                     },
                     shape = MaterialTheme.shapes.extraSmall,
                     colors = FilterChipDefaults.filterChipColors(
-                        containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-                        labelColor = MaterialTheme.colorScheme.onBackground,
-                        selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
-                        selectedLabelColor = MaterialTheme.colorScheme.onPrimary,
+                        containerColor = MaterialTheme.colorScheme.primaryFixed,
+                        selectedContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                        labelColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                        selectedLabelColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     )
                 )
             }

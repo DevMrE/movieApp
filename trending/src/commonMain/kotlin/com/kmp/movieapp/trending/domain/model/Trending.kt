@@ -7,5 +7,6 @@ data class Trending(
     val type: TrendingType,
     val posterPath: String,
     val backdropPath: String,
+    val voteAverage: Double,
     val genres: List<TrendingGenre>? = null,
 )

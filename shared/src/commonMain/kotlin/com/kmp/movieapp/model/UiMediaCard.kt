@@ -1,6 +1,7 @@
-package com.kmp.movieapp.core.ui.content.model
+package com.kmp.movieapp.model
 
 import androidx.compose.runtime.Stable
+import com.kmp.movieapp.core.ui.content.model.MediaCategory
 
 @Stable
 data class UiMediaCard(
@@ -8,5 +9,6 @@ data class UiMediaCard(
     val title: String,
     val posterPath: String?,
     val backdropPath: String?,
+    val voteAverage: Double?,
     val type: MediaCategory
 )

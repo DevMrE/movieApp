@@ -1,6 +1,6 @@
 package com.kmp.movieapp.discover.presentation.model
 
-import com.kmp.movieapp.core.ui.content.model.UiMediaCard
+import com.kmp.movieapp.model.UiMediaCard
 
 internal interface DiscoverSection {
 

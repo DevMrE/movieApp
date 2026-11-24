@@ -1,6 +1,6 @@
 package com.kmp.movieapp.components.app_bar.bottombar.model
 
-import com.kmp.movieapp.core.util.navigation.route.BottomBarRoute
+import com.kmp.movieapp.components.app_bar.bottombar.navigation.BottomBarRoute
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 

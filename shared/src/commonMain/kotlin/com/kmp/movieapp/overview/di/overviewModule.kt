@@ -1,7 +1,7 @@
 package com.kmp.movieapp.overview.di
 
-import com.kmp.movieapp.overview.OverviewListViewModel
 import com.kmp.movieapp.overview.domain.usecase.LoadOverviewMediaList
+import com.kmp.movieapp.overview.presentation.OverviewListViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 

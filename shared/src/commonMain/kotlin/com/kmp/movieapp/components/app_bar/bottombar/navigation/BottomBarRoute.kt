@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.util.navigation.route
+package com.kmp.movieapp.components.app_bar.bottombar.navigation
 
 import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
@@ -13,6 +13,6 @@ sealed interface BottomBarRoute : NavKey {
     data object SearchRoute : BottomBarRoute
 
     @Serializable
-    data object MoreRoute : BottomBarRoute
+    data object Profile : BottomBarRoute
 
 }
