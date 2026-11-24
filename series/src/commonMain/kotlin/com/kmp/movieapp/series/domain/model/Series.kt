@@ -9,5 +9,6 @@ data class Series(
     val posterPath: String,
     val backdropPath: String,
     val genres: List<SeriesGenre>? = null,
+    val voteAverage: Double,
     val type: MediaCategory = MediaCategory.SERIES
 )

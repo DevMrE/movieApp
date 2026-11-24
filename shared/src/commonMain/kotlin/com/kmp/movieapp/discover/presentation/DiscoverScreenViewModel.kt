@@ -73,7 +73,7 @@ internal class DiscoverScreenViewModel(
             getDiscoverDataUseCase().collectLatest { (trendings, popularMovies, popularSeries) ->
                 _movieScreenState.update {
                     DiscoverUiState(
-                        isLoading = trendings.isEmpty() && popularMovies.isEmpty()
+                        isLoading = trendings.isEmpty() || popularMovies.isEmpty() || popularSeries.isEmpty()
                     )
                 }
             }
