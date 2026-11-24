@@ -8,7 +8,7 @@ import com.kmp.movieapp.search.domain.usecase.SearchUseCase
 import com.kmp.movieapp.search.domain.usecase.SearchUseCaseImpl
 import org.koin.dsl.module
 
-val searchModule = module {
+val searchTextFieldModule = module {
     single<SearchApiService> {
         SearchApiServiceImpl(get())
     }

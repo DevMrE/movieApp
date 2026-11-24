@@ -6,26 +6,24 @@
     <string name="bottom_bar_search">Suche</string>
     <string name="bottom_bar_more">Mehr</string>
 
-    <string name="discover_screen">Entdecken</string>
-    <string name="movie_tab">Filme</string>
-    <string name="series_tab">Serien</string>
-    <string name="settings_screen_title">Einstellungen</string>
-    <string name="browse_media_title">Entdecken</string>
-    <string name="search">Suche nach Filme, Serien oder Schauspieler...</string>
+    <!-- Discover Screen -->
+    <string name="trending_title">Im Trend</string>
     <string name="popular_movies_title">Beliebte Filme</string>
     <string name="popular_series_title">Beliebte Serien</string>
-    <string name="trending_title">Angesagt</string>
     <string name="see_all">Alle ansehen</string>
 
+    <!-- Search Screen -->
+    <string name="search_title">Suchen</string>
+    <string name="search_searchbar_placeholder">Suche nach Filme, Serien oder Schauspieler...</string>
+    <!-- Filter strings in Search Screen -->
+    <string name="filter_header">Oder Stöbere nach...</string>
+    <string name="filter_by_genre">Genre</string>
+    <string name="sort_by">Sortiere Nach</string>
+
+    <!-- Permissions -->
     <string name="permission_camera">Kamera Öffnen</string>
     <string name="permission_location">Standort abfragen</string>
     <string name="permission_microphone">Mikrofon erlauben</string>
     <string name="permission_notification">Benachrichtigung erteilen</string>
     <string name="permission_image_gallery">Galerie Öffnen</string>
-
-    <!-- Filter strings -->
-    <string name="filter_header">Oder Stöbere nach...</string>
-    <string name="filter_by_genre">Genre</string>
-    <string name="sort_by">Sortiere Nach</string>
-    <string name="search_placeholder">Such nach Filmen, Serien oder Schauspielern...</string>
 </resources>

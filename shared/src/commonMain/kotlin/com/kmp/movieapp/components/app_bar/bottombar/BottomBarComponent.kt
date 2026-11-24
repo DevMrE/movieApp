@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import com.devmre.compose.navigation3.helper.koinNavigation
 import com.kmp.movieapp.components.app_bar.bottombar.model.BottomBarItem
 import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.core.util.navigation.route.AppNavigation
-import com.kmp.movieapp.core.util.navigation.route.BrowseNavigation
+import com.kmp.movieapp.core.util.navigation.route.BottomBarRoute
 import com.kmp.movieapp.core.util.navigation.route.DiscoverRoute
+import com.kmp.movieapp.core.util.navigation.route.SearchScreenRoute
 import com.kmp.movieapp.shared.Res
 import com.kmp.movieapp.shared.bottom_bar_discover
 import com.kmp.movieapp.shared.bottom_bar_more
@@ -40,29 +40,29 @@ private val bottomBarItemList = listOf(
     BottomBarItem(
         icon = Res.drawable.ic_movie,
         label = Res.string.bottom_bar_discover,
-        navDestination = AppNavigation.DiscoverRoute
+        navDestination = BottomBarRoute.DiscoverRoute
     ),
     BottomBarItem(
         icon = Res.drawable.ic_search,
         label = Res.string.bottom_bar_search,
-        navDestination = AppNavigation.SearchRoute
+        navDestination = BottomBarRoute.SearchRoute
     ),
     BottomBarItem(
         icon = Res.drawable.ic_more,
         label = Res.string.bottom_bar_more,
-        navDestination = AppNavigation.MoreRoute
+        navDestination = BottomBarRoute.MoreRoute
     )
 )
 
 @Composable
 internal fun BottomBarComponent() {
-    val appNavigator = koinNavigation<AppNavigation>()
+    val appNavigator = koinNavigation<BottomBarRoute>()
     val homeNavigator = koinNavigation<DiscoverRoute>()
-    val browseNavigation = koinNavigation<BrowseNavigation>()
+    val searchScreenRoute = koinNavigation<SearchScreenRoute>()
 
     val currentAppRoute = appNavigator.backStack.lastOrNull()
     val currentHomeRoute = homeNavigator.backStack.lastOrNull()
-    val currentDiscoverRoute = browseNavigation.backStack.lastOrNull()
+    val currentDiscoverRoute = searchScreenRoute.backStack.lastOrNull()
 
     val itemColors = NavigationSuiteDefaults.itemColors(
         navigationBarItemColors = NavigationBarItemDefaults.colors(
@@ -76,7 +76,7 @@ internal fun BottomBarComponent() {
 
     val borderColor = if (isSystemInDarkTheme()) Color.DarkGray else Color.LightGray
 
-    val showBottomBar = currentHomeRoute is DiscoverRoute.InitialScreenRoute && currentDiscoverRoute is BrowseNavigation.InitialScreenRoute
+    val showBottomBar = currentHomeRoute is DiscoverRoute.InitialScreenRoute && currentDiscoverRoute is SearchScreenRoute.InitialScreenRoute
 
     AnimatedVisibility(
         visible = showBottomBar,
