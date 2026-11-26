@@ -1,6 +1,7 @@
 package com.kmp.movieapp.trending.data.repository
 
-import com.kmp.movieapp.core.network.util.mapOnSuccess
+import com.kmp.movieapp.core.network.util.onCompletion
+import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.trending.data.mapper.toTrending
 import com.kmp.movieapp.trending.data.service.TrendingApiService
 import com.kmp.movieapp.trending.domain.model.Trending
@@ -14,8 +15,11 @@ internal class TrendingRepositoryImpl(
 
     override suspend fun getAll(): Flow<List<Trending>> = flow {
         trendingApiService.fetchAll()
-            .mapOnSuccess { dto ->
-                emit(dto.results?.map { it.toTrending() } ?: emptyList())
+            .onSuccess { dto ->
+                dto.results?.map { it.toTrending() } ?: emptyList()
+            }
+            .onCompletion { contentList ->
+                emit(contentList)
             }
     }
 }

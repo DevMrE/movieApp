@@ -26,8 +26,8 @@ internal class MovieApiServiceImpl(
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(resource = MovieListRequest(page = page))
-
-                Result.Success(response.body<ApiResponseDto<MovieForCategoryDto>>())
+                val data = checkNotNull(response.body<ApiResponseDto<MovieForCategoryDto>>())
+                Result.Success(data)
             },
 
             handler<ResponseException, Result<ApiResponseDto<MovieForCategoryDto>, ApiError>> { e ->

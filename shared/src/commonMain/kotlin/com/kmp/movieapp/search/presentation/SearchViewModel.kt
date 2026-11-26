@@ -5,12 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.devmre.compose.navigation3.helper.Navigator
 import com.kmp.movieapp.genre.domain.repository.GenreRepository
 import com.kmp.movieapp.model.UiMediaCard
-import com.kmp.movieapp.search.domain.model.Browse
-import com.kmp.movieapp.search.domain.model.discover.Discover
-import com.kmp.movieapp.search.domain.model.discover.Filter
+import com.kmp.movieapp.search.domain.model.Filter
 import com.kmp.movieapp.search.domain.usecase.SearchOrDiscoverUseCase
 import com.kmp.movieapp.search.presentation.mapper.mapToFilter
-import com.kmp.movieapp.search.presentation.mapper.mapToUiMediaCardList
 import com.kmp.movieapp.search.presentation.mapper.toUiGenreList
 import com.kmp.movieapp.search.presentation.mapper.toUiMediaCardList
 import com.kmp.movieapp.search.presentation.model.UiSearch
@@ -29,7 +26,7 @@ internal class SearchViewModel(
     private val searchOrDiscoverUseCase: SearchOrDiscoverUseCase
 ) : ViewModel() {
 
-    private val _browseState = MutableStateFlow(
+    private val _searchState = MutableStateFlow(
         value = UiSearch(
             genreFilter = UiFilterType.Genre(
                 genres = genreRepository.movieGenres.value.toUiGenreList()
@@ -37,15 +34,12 @@ internal class SearchViewModel(
         )
     )
 
-    val browseState: StateFlow<UiSearch> = _browseState
+    val uiState: StateFlow<UiSearch> = _searchState
 
     init {
         viewModelScope.launch {
             // Load initial browse list
-            updateDiscover(
-                page = _browseState.value.page,
-                filter = _browseState.value.mapToFilter()
-            )
+            updateSearchResult()
         }
     }
 
@@ -60,7 +54,7 @@ internal class SearchViewModel(
 
     private fun onLoadNextPage() {
         viewModelScope.launch {
-            _browseState.update {
+            _searchState.update {
                 it.copy(
                     page = it.page + 1
                 )
@@ -79,9 +73,8 @@ internal class SearchViewModel(
 
     private fun onUpdateGenre(genre: UiGenre) {
         viewModelScope.launch {
-            _browseState.update { state ->
+            _searchState.update { state ->
                 state.copy(
-                    search = null,
                     genreFilter = state.genreFilter?.copy(
                         genres = state.genreFilter.genres.map {
                             if (it == genre) it.copy(selected = !it.selected)
@@ -91,46 +84,34 @@ internal class SearchViewModel(
                 )
             }
 
-            updateDiscover(
-                page = _browseState.value.page,
-                filter = _browseState.value.mapToFilter()
-            )
+            updateSearchResult()
         }
     }
 
     private fun onSearch(query: String?) {
         viewModelScope.launch {
-            _browseState.update { state ->
+            _searchState.update { state ->
                 state.copy(
-                    search = query,
-                    genreFilter = state.genreFilter?.copy(
-                        genres = state.genreFilter.genres.map { it.copy(selected = false) }
-                    )
+                    search = query
                 )
             }
 
-            searchOrDiscoverUseCase(
-                browse = Browse(page = 1, query = query)
-            ).collectLatest { (page, _, search, _) ->
-                _browseState.update {
-                    it.copy(
-                        page = page,
-                        contentList = search?.mapToUiMediaCardList() ?: it.contentList,
-                    )
-                }
-            }
+            updateSearchResult()
         }
     }
 
-    private fun updateDiscover(page: Int = 1, filter: Filter? = null) {
+    private fun updateSearchResult() {
         viewModelScope.launch {
             searchOrDiscoverUseCase(
-                browse = Browse(page = page, discover = Discover(filter = filter))
-            ).collectLatest { (page, _, _, discover) ->
-                _browseState.update {
+                filter = Filter(
+                    page = _searchState.value.page,
+                    filterType = _searchState.value.mapToFilter()
+                )
+            ).collectLatest { (page, _, _, searchResult) ->
+                _searchState.update {
                     it.copy(
                         page = page,
-                        contentList = discover?.discoverContent?.toUiMediaCardList() ?: emptyList(),
+                        contentList = searchResult?.toUiMediaCardList() ?: emptyList(),
                     )
                 }
             }

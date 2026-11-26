@@ -13,7 +13,7 @@
     <string name="see_all">See All</string>
 
     <!-- Search Screen -->
-    <string name="search_title">Discover</string>
+    <string name="search_title">Search</string>
     <string name="search_searchbar_placeholder">Search for movies, series or actors...</string>
     <!-- Filter strings -->
     <string name="filter_header">Or browse by...</string>

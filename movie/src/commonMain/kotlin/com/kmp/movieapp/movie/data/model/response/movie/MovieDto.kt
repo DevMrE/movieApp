@@ -43,7 +43,7 @@ data class MovieDto(
     @SerialName("release_date")
     val releaseDate: String? = null,
     @SerialName("revenue")
-    val revenue: Int? = null,
+    val revenue: Long? = null,
     @SerialName("runtime")
     val runtime: Int? = null,
     @SerialName("spoken_languages")

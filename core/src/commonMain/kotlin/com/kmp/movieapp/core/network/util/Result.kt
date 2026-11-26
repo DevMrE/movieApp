@@ -11,7 +11,7 @@ import com.kmp.movieapp.core.network.util.Result.Success
  * - explicit success handling
  * - transformation of fallback data into a shared model
  * - fallback chaining without explicit branching (`when`)
- * - resolving the result into concrete values using [onSuccess] and [onFailure]
+ * - resolving the result into concrete values using [onCompletion] and [onFailure]
  *
  * [Success] contains the resulting value.
  * [Failure] contains optional metadata such as a message, throwable, nested cause,
@@ -55,7 +55,7 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *     Result.Success(RemoteModel("raw"))
  *
  * val result: Result<DomainModel, Unit> =
- *     loadRemote().map { remote ->
+ *     loadRemote().onSuccess { remote ->
  *         DomainModel(remote.raw)
  *     }
  * ```
@@ -94,7 +94,7 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * ## Remote → Local fallback example
  *
- * Both operations must use the same [FallbackData] type before [mapOnError]
+ * Both operations must use the same [FallbackData] type before [transformOnError]
  * can be used in a single chain.
  *
  * ```kotlin
@@ -119,9 +119,9 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * val result: Result<DomainModel, DataError> =
  *     loadRemote()
- *         .map { it.toDomain() }
+ *         .onSuccess { it.toDomain() }
  *         .fallbackOnError {
- *             loadLocal().map { it.toDomain() }
+ *             loadLocal().onSuccess { it.toDomain() }
  *         }
  * ```
  *
@@ -137,10 +137,10 @@ import com.kmp.movieapp.core.network.util.Result.Success
  *
  * suspend fun emitData(emit: suspend (RepositoryData<String>) -> Unit) {
  *     loadRemote()
- *         .map { it.value }
+ *         .onSuccess { it.value }
  *         .onError { it } // optional mapping
  *         .fallbackOnError {
- *             loadLocal().map { it.value }
+ *             loadLocal().onSuccess { it.value }
  *         }
  *         .onSuccess { value ->
  *             emit(RepositoryData(data = value))
@@ -207,18 +207,17 @@ fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.getOrNull(): S
  * Executes [block] only if this result is [Success].
  * Intended for side effects such as emitting data or logging.
  */
-inline fun <SuccessData, FallbackData, MappedSuccessData> Result<SuccessData, FallbackData>.onSuccess(
-    block: (SuccessData) -> MappedSuccessData
-): Result<MappedSuccessData, FallbackData> =
-    when (this) {
-        is Success -> Success(block(value))
-        is Failure -> this
-    }
+inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.onCompletion(
+    block: (SuccessData) -> Unit
+): Unit {
+    if (this is Success) block(value)
+    return
+}
 
 /**
  * Transforms the success value if this result is [Success].
  */
-inline fun <SuccessData, FallbackData, MappedSuccessData> Result<SuccessData, FallbackData>.mapOnSuccess(
+inline fun <SuccessData, FallbackData, MappedSuccessData> Result<SuccessData, FallbackData>.onSuccess(
     block: (SuccessData) -> MappedSuccessData
 ): Result<MappedSuccessData, FallbackData> {
     return when (this) {
@@ -243,17 +242,12 @@ inline fun <SuccessData, FallbackData, MappedSuccessData> Result<SuccessData, Fa
  * Transforms the fallback value if this result is [Failure].
  * Intended for mapping source-specific fallback data into a shared model.
  */
-inline fun <SuccessData, FallbackData, MappedFallbackData> Result<SuccessData, FallbackData>.onError(
-    block: (FallbackData) -> MappedFallbackData
-): Result<SuccessData, MappedFallbackData> {
+inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.onError(
+    block: (Failure<FallbackData>) -> SuccessData
+): Result<SuccessData, Nothing> {
     return when (this) {
-        is Success -> Success(value)
-        is Failure -> Failure(
-            message = message,
-            throwable = throwable,
-            cause = cause,
-            value = value?.let(block)
-        )
+        is Success -> this
+        is Failure -> Success(block(this))
     }
 }
 
@@ -263,7 +257,7 @@ inline fun <SuccessData, FallbackData, MappedFallbackData> Result<SuccessData, F
  *
  * Both operations must use the same [FallbackData] type.
  */
-inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.mapOnError(
+inline fun <SuccessData, FallbackData> Result<SuccessData, FallbackData>.transformOnError(
     block: (Failure<FallbackData>) -> Result<SuccessData, FallbackData>
 ): Result<SuccessData, FallbackData> {
     return when (this) {

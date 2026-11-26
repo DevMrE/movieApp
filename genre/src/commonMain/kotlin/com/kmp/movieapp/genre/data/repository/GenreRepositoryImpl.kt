@@ -1,6 +1,6 @@
 package com.kmp.movieapp.genre.data.repository
 
-import com.kmp.movieapp.core.network.util.onSuccess
+import com.kmp.movieapp.core.network.util.onCompletion
 import com.kmp.movieapp.genre.data.model.mapper.toGenreList
 import com.kmp.movieapp.genre.data.service.GenreService
 import com.kmp.movieapp.genre.domain.model.Genre
@@ -26,7 +26,7 @@ internal class GenreRepositoryImpl(
     override val movieGenres: StateFlow<List<Genre>> = _movieGenres
         .onStart {
             genreService.fetchGenres(GenreContentType.MOVIE)
-                .onSuccess { dtoList ->
+                .onCompletion { dtoList ->
                     _movieGenres.update { dtoList.toGenreList() }
                 }
         }.stateIn(
@@ -38,7 +38,7 @@ internal class GenreRepositoryImpl(
     override val seriesGenres: StateFlow<List<Genre>> = _seriesGenres
         .onStart {
             genreService.fetchGenres(GenreContentType.SERIES)
-                .onSuccess { dtoList ->
+                .onCompletion { dtoList ->
                     _seriesGenres.update { dtoList.toGenreList() }
                 }
         }.stateIn(

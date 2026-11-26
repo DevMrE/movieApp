@@ -32,6 +32,7 @@ fun appTypography(): Typography {
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
             fontFamily = jakartaFamily,
+            lineHeight = 26.sp
         ),
         headlineSmall = TextStyle(
             fontFamily = jakartaFamily,
@@ -72,16 +73,22 @@ fun appTypography(): Typography {
             lineHeight = 18.sp,
         ),
         labelSmall = TextStyle(
-            fontSize = 16.sp,
+            fontSize = 12.sp,
             fontWeight = FontWeight.Black,
             fontFamily = jakartaFamily,
-            lineHeight = 18.sp,
+            lineHeight = 14.sp,
         ),
         labelMedium = TextStyle(
-            fontSize = 12.sp,
+            fontSize = 14.sp,
             fontWeight = FontWeight.ExtraBold,
             fontFamily = jakartaFamily,
-            lineHeight = 14.sp,
+            lineHeight = 16.sp,
+        ),
+        labelLarge = TextStyle(
+            fontSize = 16.sp,
+            fontWeight = FontWeight.ExtraBold,
+            fontFamily = jakartaFamily,
+            lineHeight = 18.sp,
         ),
     )
 }

@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
  * Provides access to search results from the domain layer.
  * Abstracts data sources (remote, cache, local) and exposes unified search data.
  */
-internal interface SearchRepository {
+interface SearchRepository {
 
     val searchedItems: StateFlow<List<Search>>
 

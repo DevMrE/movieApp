@@ -2,7 +2,6 @@ package com.kmp.movieapp.search.domain.model
 
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 
-
 data class Search(
     val id: String,
     val mediaCategory: MediaCategory,
