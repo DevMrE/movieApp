@@ -5,7 +5,7 @@ import com.devmre.compose.navigation3.helper.RegisterNavigationGraph
 import com.devmre.compose.navigation3.helper.koinNavigation
 import com.devmre.compose.navigation3.helper.navigatorQualifier
 import com.kmp.movieapp.animation.screen_animation.NavigationScreenAnimation
-import com.kmp.movieapp.components.topbar.mapper.titleRes
+import com.kmp.movieapp.components.topbar.mapper.toTopBarTitle
 import com.kmp.movieapp.components.topbar.util.TopBarConfig
 import com.kmp.movieapp.components.topbar.util.TopBarMetadata
 import com.kmp.movieapp.content_detail.presentation.ContentDetailScreen
@@ -38,7 +38,7 @@ val discoverNavigationModule = module {
                         get<Navigator<DiscoverRoute>>(qualifier = navigatorQualifier<DiscoverRoute>())
 
                     TopBarConfig(
-                        title = route.mediaCategory.titleRes(),
+                        title = route.mediaCategory.toTopBarTitle(),
                         onBackClick = { navigator.navigateBack() },
                     )
                 }

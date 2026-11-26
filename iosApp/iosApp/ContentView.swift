@@ -7,7 +7,7 @@
 
 import UIKit
 import SwiftUI
-import ComposeApp
+import Shared
 
 struct ContentView: View {
     var body: some View {

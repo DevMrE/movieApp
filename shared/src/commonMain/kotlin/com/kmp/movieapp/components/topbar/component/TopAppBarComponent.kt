@@ -43,7 +43,6 @@ import org.jetbrains.compose.resources.vectorResource
 @Composable
 internal fun TopAppBarComponent(
     title: String?,
-    showBackNavigation: Boolean = false,
     onBackClick: (() -> Unit)? = null
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
@@ -57,7 +56,7 @@ internal fun TopAppBarComponent(
             },
             navigationIcon = {
                 AnimatedVisibility(
-                    visible = showBackNavigation,
+                    visible = onBackClick != null,
                     enter = fadeIn() + expandHorizontally(expandFrom = Alignment.Start),
                     exit = fadeOut() + shrinkHorizontally(shrinkTowards = Alignment.Start)
                 ) {
@@ -158,8 +157,7 @@ private fun RowScope.PageTitle(title: String?) {
 private fun TopAppBarComponentPreview() {
     AppTheme {
         TopAppBarComponent(
-            title = "Discover",
-            onBackClick = {}
-        )
+            title = "Discover"
+        ) {}
     }
 }

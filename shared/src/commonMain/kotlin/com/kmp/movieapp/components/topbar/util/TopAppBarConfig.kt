@@ -11,12 +11,7 @@ import org.koin.core.Koin
 data class TopBarConfig(
     val title: StringResource? = null,
     val onBackClick: (() -> Unit)? = null,
-) {
-
-    companion object {
-        val Default = TopBarConfig()
-    }
-}
+)
 
 fun interface TopBarResolver {
     fun resolve(key: Any, koin: Koin): TopBarConfig
