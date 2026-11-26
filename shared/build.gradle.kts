@@ -10,7 +10,8 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     alias(libs.plugins.serialization)
-    id("com.google.devtools.ksp") version "2.3.14"}
+    id("com.google.devtools.ksp") version "2.3.14"
+}
 
 kotlin {
     compilerOptions {

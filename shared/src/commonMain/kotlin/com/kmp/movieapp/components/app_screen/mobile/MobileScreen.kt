@@ -13,14 +13,13 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation3.ui.NavDisplay
 import com.devmre.compose.navigation3.helper.koinNavigation
+import com.kmp.movieapp.components.bottombar.BottomBarComponent
 import com.kmp.movieapp.components.bottombar.navigation.BottomBarRoute
 import com.kmp.movieapp.components.topbar.component.TopAppBarComponent
 import com.kmp.movieapp.components.topbar.util.TopBarConfig
 import com.kmp.movieapp.components.topbar.util.rememberTopBarConfig
 import com.kmp.movieapp.discover.presentation.navigation.DiscoverRoute
 import com.kmp.movieapp.search.presentation.navigation.SearchRoute
-import com.kmp.movieapp.shared.Res
-import com.kmp.movieapp.shared.app_name
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.getKoin
 import org.koin.compose.navigation3.koinEntryProvider
@@ -65,10 +64,13 @@ fun MobileScreen() {
         topBar = {
             topBarConfig.title?.let {
                 TopAppBarComponent(
-                    title = stringResource(Res.string.app_name),
+                    title = stringResource(it),
                     onBackClick = topBarConfig.onBackClick
                 )
             }
+        },
+        bottomBar = {
+            BottomBarComponent()
         },
         containerColor = MaterialTheme.colorScheme.background
     ) { paddingValues ->

@@ -8,7 +8,7 @@ import org.jetbrains.compose.resources.StringResource
 import org.koin.core.module.Module
 
 context(_: Module)
-fun MediaCategory.titleRes(): StringResource? =
+fun MediaCategory.toTopBarTitle(): StringResource? =
     when (this) {
         MediaCategory.SERIES -> Res.string.popular_series_title
         MediaCategory.MOVIE -> Res.string.popular_movies_title

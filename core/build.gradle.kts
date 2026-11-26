@@ -35,17 +35,11 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlin.stdlib)
-
             implementation(libs.bundles.commonMainCompose)
-
             implementation(libs.logger)
-
             implementation(libs.bundles.commainMainKoin)
-
             implementation(libs.bundles.commonMainKtor)
-
             implementation(libs.kamel)
-
             implementation(libs.bundles.composeNavigation3)
         }
 

@@ -7,7 +7,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-data class Size(
+data class MobileSize(
     val bottomBarStrokeHeight: Dp = 1.dp,
     val borderStroke: Dp = 2.dp,
     val voteAverageIconSize: Dp = 20.dp,
@@ -22,9 +22,9 @@ data class Size(
     val shapeOffset: Dp = 4.dp
 )
 
-private val LocalSize = staticCompositionLocalOf { Size() }
+private val LocalMobileSize = staticCompositionLocalOf { MobileSize() }
 
-val MaterialTheme.size: Size
+val MaterialTheme.mobileSize: MobileSize
     @Composable
     @ReadOnlyComposable
-    get() = LocalSize.current
+    get() = LocalMobileSize.current

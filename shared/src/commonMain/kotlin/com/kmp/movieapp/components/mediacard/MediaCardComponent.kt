@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
@@ -23,7 +24,7 @@ import com.kmp.movieapp.components.vote.VoteAverageComponent
 import com.kmp.movieapp.core.ui.imageloader.ImageLoader
 import com.kmp.movieapp.core.ui.material.gradient
 import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.core.ui.material.size
+import com.kmp.movieapp.core.ui.material.mobileSize
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.composable.applyIf
 import com.kmp.movieapp.core.util.composable.applyIfElse
@@ -39,19 +40,20 @@ fun MediaCardComponent(
     posterPath: String?,
     enableGradient: Boolean = true,
     bigCard: Boolean = false,
-    height: Dp = MaterialTheme.size.defaultCardHeight,
+    height: Dp = MaterialTheme.mobileSize.defaultCardHeight,
     onClick: (() -> Unit)? = null,
 ) {
     Card(
         modifier = Modifier
             .height(height)
+            .heightIn(height, )
             .applyIfElse(
                 condition = bigCard,
                 ifTrue = {
-                    width(MaterialTheme.size.movieBigCardWidth)
+                    width(MaterialTheme.mobileSize.movieBigCardWidth)
                 },
                 ifFalse = {
-                    width(MaterialTheme.size.defaultCardWidth)
+                    width(MaterialTheme.mobileSize.defaultCardWidth)
                 }
             )
             .dropShadow(

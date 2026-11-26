@@ -1,6 +1,6 @@
 [versions]
 # Build
-agpVersion = "9.5.2"
+agpVersion = "9.5.3"
 # Kotlin
 kotlinVersion = "2.4.21"
 # AndroidX Basis
