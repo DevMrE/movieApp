@@ -1,4 +1,4 @@
-package com.kmp.movieapp.profile
+package com.kmp.movieapp.permission
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,28 +9,27 @@ import com.kmp.movieapp.device_operations.domain.result.OperationResult
 import com.kmp.movieapp.device_operations.domain.result.onCancelled
 import com.kmp.movieapp.device_operations.domain.result.onDenied
 import com.kmp.movieapp.device_operations.domain.result.onGranted
-import com.kmp.movieapp.profile.model.Permission
-import com.kmp.movieapp.profile.model.PermissionDemoResult
-import com.kmp.movieapp.profile.model.UiSettingsData
+import com.kmp.movieapp.permission.model.Permission
+import com.kmp.movieapp.permission.model.PermissionDemoResult
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-internal class ProfileViewModel(
+internal class PermissionDemoViewModel(
     private val deviceOperationsController: DeviceOperationsController,
     private val settingsNavigator: SettingsNavigator
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(UiSettingsData())
+    private val _uiState = MutableStateFlow(UiPermissionState())
 
-    val uiState: StateFlow<UiSettingsData> = _uiState
+    val uiState: StateFlow<UiPermissionState> = _uiState
 
 
-    fun onAction(action: ProfileAction) {
+    fun onAction(action: PermissionDemoAction) {
         when (action) {
-            is ProfileAction.OnPermissionClicked -> checkPermission(action.permission)
+            is PermissionDemoAction.OnPermissionClicked -> checkPermission(action.permission)
         }
     }
 
@@ -49,7 +48,7 @@ internal class ProfileViewModel(
         viewModelScope.launch {
             deviceOperationsController.getCurrentLocation().collectLatest { result ->
                 result.onGranted { data ->
-                    logI<ProfileViewModel>(message = "viewModel getCurrentLocation granted")
+                    logI<PermissionDemoViewModel>(message = "viewModel getCurrentLocation granted")
 
                     _uiState.update {
                         it.copy(
@@ -73,7 +72,7 @@ internal class ProfileViewModel(
                     // used to track example how many times the user doesn't interact
                     // with the permission dialog. In previous projects, it helps to
                     // debug on unexcepted bugs.
-                    logI<ProfileViewModel>(message = "user canceled the location permission dialog")
+                    logI<PermissionDemoViewModel>(message = "user canceled the location permission dialog")
                 }
             }
         }
@@ -83,7 +82,7 @@ internal class ProfileViewModel(
         viewModelScope.launch {
             deviceOperationsController.capturePhoto().collectLatest { result ->
                 result.onGranted { data ->
-                    logI<ProfileViewModel>(message = "capture photo granted")
+                    logI<PermissionDemoViewModel>(message = "capture photo granted")
                     _uiState.update {
                         it.copy(
                             permissionDemoResult = PermissionDemoResult.GalleryReady(
@@ -107,7 +106,7 @@ internal class ProfileViewModel(
                     // used to track example how many times the user doesn't interact
                     // with the permission dialog. In previous projects, it helps to
                     // debug on unexcepted bugs.
-                    logI<ProfileViewModel>(message = "user canceled the camera permission dialog")
+                    logI<PermissionDemoViewModel>(message = "user canceled the camera permission dialog")
                 }
             }
         }
@@ -136,7 +135,7 @@ internal class ProfileViewModel(
                     }
 
                     is OperationResult.Cancelled -> {
-                        logI<ProfileViewModel>(message = "user canceled the gallery permission dialog")
+                        logI<PermissionDemoViewModel>(message = "user canceled the gallery permission dialog")
                     }
                 }
             }

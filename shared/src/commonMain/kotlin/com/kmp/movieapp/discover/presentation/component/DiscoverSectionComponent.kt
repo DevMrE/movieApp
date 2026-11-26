@@ -43,15 +43,12 @@ internal fun DiscoverSectionComponent(
     PullToRefreshBox(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-        //.padding(paddingValues = paddingWithoutBottom)
-        ,
+            .background(MaterialTheme.colorScheme.background),
         isRefreshing = refresh,
         onRefresh = { onAction(DiscoverAction.OnRefresh) }
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface),
+            modifier = Modifier,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
             contentPadding = PaddingValues(vertical = MaterialTheme.padding.thirty)

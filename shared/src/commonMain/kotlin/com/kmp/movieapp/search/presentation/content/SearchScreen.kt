@@ -1,5 +1,6 @@
 package com.kmp.movieapp.search.presentation.content
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -50,6 +51,7 @@ private fun SearchScreenContent(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .padding(horizontal = MaterialTheme.padding.ten)
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },

@@ -5,6 +5,7 @@ import com.kmp.movieapp.discover.di.discoverModule
 import com.kmp.movieapp.genre.di.genreModule
 import com.kmp.movieapp.movie.di.movieModule
 import com.kmp.movieapp.overview.di.overviewModule
+import com.kmp.movieapp.profile.di.profileModule
 import com.kmp.movieapp.search.di.searchModule
 import com.kmp.movieapp.series.di.seriesModule
 import com.kmp.movieapp.trending.di.trendingModule
@@ -19,6 +20,7 @@ val featureModule = module {
         seriesModule,
         overviewModule,
         genreModule,
-        contentDetailModule
+        contentDetailModule,
+        profileModule,
     )
 }

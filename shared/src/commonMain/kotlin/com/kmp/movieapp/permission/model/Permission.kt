@@ -1,4 +1,4 @@
-package com.kmp.movieapp.profile.model
+package com.kmp.movieapp.permission.model
 
 enum class Permission {
     GALLERY,
