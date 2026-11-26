@@ -53,7 +53,7 @@ kotlin {
             binaryOption("bundleId", frameworkBundleId)
             @OptIn(ExperimentalKotlinGradlePluginApi::class)
             transitiveExport = true
-            isStatic = true
+            isStatic = false
             xcf.add(this)
         }
     }
