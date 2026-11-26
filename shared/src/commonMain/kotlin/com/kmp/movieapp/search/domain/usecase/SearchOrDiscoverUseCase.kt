@@ -1,7 +1,6 @@
 package com.kmp.movieapp.search.domain.usecase
 
-import com.kmp.movieapp.search.domain.model.Browse
-import com.kmp.movieapp.search.domain.model.discover.Discover
+import com.kmp.movieapp.search.domain.model.Filter
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -10,23 +9,21 @@ class SearchOrDiscoverUseCase(
     private val getSearchedMediaUseCase: GetSearchedMediaUseCase
 ) {
 
-    suspend operator fun invoke(browse: Browse): Flow<Browse> {
-        val query = browse.query?.takeIf { it.isNotBlank() }
+    suspend operator fun invoke(filter: Filter): Flow<Filter> {
+        val query = filter.query?.takeIf { it.isNotBlank() }
 
         return if (query != null) {
             searchUseCase(query).map {
-                browse.copy(search = it)
+                filter.copy(query = "")
             }
         } else {
             getSearchedMediaUseCase(
-                browse.page,
-                browse.discover?.filter
+                filter.page,
+                filter.filterType
             ).map {
-                browse.copy(
-                    discover = Discover(
-                        filter = browse.discover?.filter,
-                        discoverContent = it
-                    )
+                filter.copy(
+                    filterType = filter.filterType,
+                    searchResult = it
                 )
             }
         }

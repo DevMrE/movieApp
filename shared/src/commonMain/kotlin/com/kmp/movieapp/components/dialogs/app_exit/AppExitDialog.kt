@@ -10,7 +10,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import com.devmre.compose.navigation3.helper.Navigator
 import com.devmre.compose.navigation3.helper.koinNavigation
-import com.kmp.movieapp.components.app_bar.bottombar.navigation.BottomBarRoute
+import com.kmp.movieapp.components.bottombar.navigation.BottomBarRoute
 
 @Composable
 fun AppExitDialog() {

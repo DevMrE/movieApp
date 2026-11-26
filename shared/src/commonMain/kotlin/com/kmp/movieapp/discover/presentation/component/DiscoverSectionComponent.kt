@@ -37,13 +37,14 @@ import org.jetbrains.compose.resources.stringResource
 internal fun DiscoverSectionComponent(
     refresh: Boolean,
     contentList: Set<DiscoverSection>?,
-    paddingWithoutBottom: PaddingValues,
+    //paddingWithoutBottom: PaddingValues,
     onAction: (DiscoverAction) -> Unit
 ) {
     PullToRefreshBox(
         modifier = Modifier
             .fillMaxSize()
-            .padding(paddingValues = paddingWithoutBottom),
+            //.padding(paddingValues = paddingWithoutBottom)
+        ,
         isRefreshing = refresh,
         onRefresh = { onAction(DiscoverAction.OnRefresh) }
     ) {
@@ -182,7 +183,7 @@ private fun DiscoverScreenPreview() {
             DiscoverSectionComponent(
                 refresh = false,
                 contentList = contentList,
-                paddingWithoutBottom = PaddingValues(),
+                // paddingWithoutBottom = PaddingValues(),
                 onAction = {}
             )
         }

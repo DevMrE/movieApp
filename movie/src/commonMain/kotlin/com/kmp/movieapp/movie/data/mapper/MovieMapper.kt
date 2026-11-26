@@ -19,7 +19,7 @@ internal fun MovieForCategoryDto.toMovieImage() = MovieImage(
 
 internal fun MovieForCategoryDto.toMovieInfo() = MovieInfo(
     title = "$title",
-    overview = "$overview"
+    overview = "$overview",
 )
 
 /**
@@ -37,7 +37,7 @@ internal fun MovieForCategoryDto.toMovie(genre: List<Genre>) =
             .map { currentGenre ->
                 MovieGenre(currentGenre.name)
             },
-        voteAverage = voteAverage,
+        voteAverage = voteAverage ?: 0.0,
         runtime = null,
     )
 
@@ -51,7 +51,7 @@ internal fun MovieDto.toMovie() = Movie(
     movieImage = toMovieImage(),
     runtime = runtime,
     releaseDate = releaseDate,
-    voteAverage = voteAverage,
+    voteAverage = voteAverage ?: 0.0,
     genres = genres?.toMovieGenres()
 )
 
@@ -63,14 +63,14 @@ internal fun MovieDto.toMovieImage(): MovieImage = MovieImage(
 
 internal fun MovieDto.toMovieInfo(): MovieInfo = MovieInfo(
     title = "$title",
-    overview = "$overview"
+    overview = "$overview",
 )
 
 internal fun DiscoverMovieDto.toMovie(): Movie = Movie(
     id = id ?: 0,
     movieInfo = MovieInfo(
         title = "$title",
-        overview = "$overview"
+        overview = "$overview",
     ),
     movieImage = MovieImage(
         posterPath = "${UrlHelper.IMAGE_BASE_URL}$posterPath",
@@ -78,6 +78,6 @@ internal fun DiscoverMovieDto.toMovie(): Movie = Movie(
     ),
     type = MediaCategory.MOVIE,
     releaseDate = releaseDate,
-    voteAverage = voteAverage
+    voteAverage = voteAverage ?: 0.0
 )
 

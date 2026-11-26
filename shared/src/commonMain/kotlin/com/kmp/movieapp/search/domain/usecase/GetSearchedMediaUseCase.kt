@@ -1,9 +1,9 @@
 package com.kmp.movieapp.search.domain.usecase
 
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
-import com.kmp.movieapp.search.data.mapper.toDiscoverMovies
-import com.kmp.movieapp.search.data.mapper.toDiscoverSeries
-import com.kmp.movieapp.search.domain.model.discover.Filter
+import com.kmp.movieapp.search.data.mapper.toFilteredMovies
+import com.kmp.movieapp.search.data.mapper.toFilteredSeries
+import com.kmp.movieapp.search.domain.model.FilterType
 import com.kmp.movieapp.series.domain.repository.SeriesRepository
 import kotlinx.coroutines.flow.combine
 
@@ -12,12 +12,12 @@ class GetSearchedMediaUseCase(
     private val seriesRepository: SeriesRepository
 ) {
 
-    suspend operator fun invoke(page: Int, filter: Filter? = null) = combine(
+    suspend operator fun invoke(page: Int, filterType: FilterType? = null) = combine(
         movieRepository.getDiscoveredMovies(page),
         seriesRepository.getPopularSeries(page)
     ) { movies, series ->
-        val movieList = movies.map { movie -> movie.toDiscoverMovies() }
-        val seriesList = series.map { series -> series.toDiscoverSeries() }
+        val movieList = movies.map { movie -> movie.toFilteredMovies() }
+        val seriesList = series.map { series -> series.toFilteredSeries() }
 
         buildList {
             addAll(movieList)
