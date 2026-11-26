@@ -1,5 +1,6 @@
 package com.kmp.movieapp.permission
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -40,6 +41,7 @@ internal fun PermissionDemoScreen() {
 
     Column(
         modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
             .padding(MaterialTheme.padding.sixteen),
         verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.defaultContentPadding)
     ) {
