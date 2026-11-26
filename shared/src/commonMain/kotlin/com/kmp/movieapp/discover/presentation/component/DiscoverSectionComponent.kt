@@ -1,5 +1,6 @@
 package com.kmp.movieapp.discover.presentation.component
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,8 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.material.mobileSize
+import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.discover.presentation.DiscoverAction
 import com.kmp.movieapp.discover.presentation.model.DiscoverSection
@@ -37,19 +38,20 @@ import org.jetbrains.compose.resources.stringResource
 internal fun DiscoverSectionComponent(
     refresh: Boolean,
     contentList: Set<DiscoverSection>?,
-    //paddingWithoutBottom: PaddingValues,
     onAction: (DiscoverAction) -> Unit
 ) {
     PullToRefreshBox(
         modifier = Modifier
             .fillMaxSize()
-            //.padding(paddingValues = paddingWithoutBottom)
+            .background(MaterialTheme.colorScheme.background)
+        //.padding(paddingValues = paddingWithoutBottom)
         ,
         isRefreshing = refresh,
         onRefresh = { onAction(DiscoverAction.OnRefresh) }
     ) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier.fillMaxSize()
+                .background(MaterialTheme.colorScheme.surface),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
             contentPadding = PaddingValues(vertical = MaterialTheme.padding.thirty)
