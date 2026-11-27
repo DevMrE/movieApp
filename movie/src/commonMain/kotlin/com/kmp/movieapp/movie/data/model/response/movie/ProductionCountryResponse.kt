@@ -1,11 +1,11 @@
-package com.kmp.movieapp.content_detail.data.model.api.response
+package com.kmp.movieapp.movie.data.model.response.movie
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ProductionCountryDto(
+internal data class ProductionCountryResponse(
     @SerialName("iso_3166_1")
     val iso31661: String? = null,
     @SerialName("name")

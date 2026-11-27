@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class VideoListDto(
+internal data class VideoListResponse(
     @SerialName("results")
-    val results: List<VideoResultDto?>? = null
+    val results: List<VideoResultResponse?>? = null
 )

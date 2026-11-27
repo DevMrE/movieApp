@@ -7,13 +7,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieDto(
+internal data class MovieResponse(
     @SerialName("adult")
     val adult: Boolean? = null,
     @SerialName("backdrop_path")
     val backdropPath: String? = null,
     @SerialName("belongs_to_collection")
-    val belongsToCollection: MovieCollection? = null,
+    val belongsToCollection: MovieCollectionResponse? = null,
     @SerialName("budget")
     val budget: Int? = null,
     @SerialName("genres")
@@ -37,9 +37,9 @@ data class MovieDto(
     @SerialName("poster_path")
     val posterPath: String? = null,
     @SerialName("production_companies")
-    val productionCompanies: List<ProductionCompanyDto>? = null,
+    val productionCompanies: List<ProductionCompanyResponse>? = null,
     @SerialName("production_countries")
-    val productionCountries: List<ProductionCountryDto>? = null,
+    val productionCountries: List<ProductionCountryResponse>? = null,
     @SerialName("release_date")
     val releaseDate: String? = null,
     @SerialName("revenue")
@@ -47,7 +47,7 @@ data class MovieDto(
     @SerialName("runtime")
     val runtime: Int? = null,
     @SerialName("spoken_languages")
-    val spokenLanguages: List<SpokenLanguage>? = null,
+    val spokenLanguageResponses: List<SpokenLanguageResponse>? = null,
     @SerialName("status")
     val status: String? = null,
     @SerialName("tagline")
@@ -57,9 +57,9 @@ data class MovieDto(
     @SerialName("video")
     val video: Boolean? = null,
     @SerialName("videos")
-    val videos: VideoListDto? = null,
+    val videos: VideoListResponse? = null,
     @SerialName("vote_average")
     val voteAverage: Double? = null,
     @SerialName("vote_count")
-    val voteCount: Int? = null
+    val voteCount: Int? = null,
 ) : Dto

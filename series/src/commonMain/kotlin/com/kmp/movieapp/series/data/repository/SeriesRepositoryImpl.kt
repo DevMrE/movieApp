@@ -1,7 +1,10 @@
 package com.kmp.movieapp.series.data.repository
 
 import com.kmp.movieapp.core.network.util.onCompletion
+import com.kmp.movieapp.core.network.util.onError
+import com.kmp.movieapp.core.network.util.onSuccess
 import com.kmp.movieapp.series.data.mapper.toSeries
+import com.kmp.movieapp.series.data.mapper.toSeriesList
 import com.kmp.movieapp.series.data.service.SeriesService
 import com.kmp.movieapp.series.domain.model.Series
 import com.kmp.movieapp.series.domain.repository.SeriesRepository
@@ -14,16 +17,24 @@ internal class SeriesRepositoryImpl(
 
     override suspend fun getPopularSeries(page: Int): Flow<List<Series>> = flow {
         seriesService.fetchPopularSeries(page)
-            .onCompletion { dto ->
-                val series = dto.results?.map { it.toSeries() } ?: emptyList()
-                emit(series)
+            .onSuccess { seriesResponses ->
+                seriesResponses.toSeriesList()
+            }.onError {
+                emptyList()
+            }
+            .onCompletion { result ->
+                emit(result)
             }
     }
 
-    override suspend fun getSerieForId(seriesId: Int): Flow<Series> = flow {
+    override suspend fun getSerieForId(seriesId: Int): Flow<Series?> = flow {
         seriesService.fetchSeriesForId(seriesId)
-            .onCompletion { dto ->
-                val series =  dto.toSeries()
+            .onSuccess { response ->
+                response.toSeries()
+            }.onError {
+                null
+            }
+            .onCompletion { series ->
                 emit(series)
             }
     }

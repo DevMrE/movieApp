@@ -1,20 +1,9 @@
 package com.kmp.movieapp.content_detail.domain.model
 
-data class ContentDetail(
-    val title: String,
-    val adult: Boolean = false,
-    val backdropPath: String? = null,
-    val contentDetailGenres: List<ContentDetailGenre>? = emptyList(),
-    val imdbId: String? = null,
-    val overview: String? = null,
-    val popularity: Double? = null,
-    val posterPath: String? = null,
-    val releaseDate: String? = null,
-    val revenue: Int? = null,
-    val runtime: Int? = null,
-    val status: String? = null,
-    val tagline: String? = null,
-    val voteAverage: Double? = null,
-    val voteCount: Int? = null,
+internal data class ContentDetail(
+    val info: ContentInfo,
+    val images: ContentImages? = null,
+    val metadata: ContentMetaData? = null,
+    val statistics: ContentStatistics = ContentStatistics(),
     val video: Video? = null,
 )

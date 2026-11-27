@@ -1,11 +1,12 @@
-package com.kmp.movieapp.content_detail.data.model.api.response
+package com.kmp.movieapp.movie.data.model.response.movie
 
 
+import com.kmp.movieapp.core.network.model.Dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ProductionCompanyDto(
+internal data class ProductionCompanyResponse(
     @SerialName("id")
     val id: Int? = null,
     @SerialName("logo_path")
@@ -14,4 +15,4 @@ data class ProductionCompanyDto(
     val name: String? = null,
     @SerialName("origin_country")
     val originCountry: String? = null
-)
+) : Dto

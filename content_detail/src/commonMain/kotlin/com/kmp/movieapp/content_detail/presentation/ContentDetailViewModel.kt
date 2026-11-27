@@ -3,7 +3,7 @@ package com.kmp.movieapp.content_detail.presentation
 import androidx.lifecycle.ViewModel
 import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetailUseCase
 import com.kmp.movieapp.content_detail.presentation.mapper.toUiData
-import com.kmp.movieapp.content_detail.presentation.model.ContentDetailUi
+import com.kmp.movieapp.content_detail.presentation.model.UiContentDetailState
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
@@ -20,10 +20,11 @@ internal class ContentDetailViewModel(
     private val getContentDetailUseCase: GetContentDetailUseCase,
 ) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<ContentDetailUi?> = MutableStateFlow(value = null)
+    private val _uiState: MutableStateFlow<UiContentDetailState?> =
+        MutableStateFlow(value = UiContentDetailState(isLoading = true))
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val uiState: StateFlow<ContentDetailUi?> = _uiState
+    val uiState: StateFlow<UiContentDetailState?> = _uiState
         .flatMapLatest {
             getContentDetailUseCase(
                 contentType = mediaCategory,

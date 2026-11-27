@@ -6,7 +6,7 @@ import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class GetContentDetailUseCase(
+internal class GetContentDetailUseCase(
     private val contentDetailRepository: ContentDetailRepository
 ) {
 

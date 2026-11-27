@@ -60,9 +60,9 @@ private fun Series.toUiMedia() = UiMediaCard(
 
 private fun Movie.toUiMedia() = UiMediaCard(
     id = id.toString(),
-    title = movieInfo.title,
-    posterPath = movieImage.posterPath,
-    backdropPath = movieImage.backdropPath,
+    title = info.title,
+    posterPath = image.posterPath,
+    backdropPath = image.backdropPath,
     voteAverage = voteAverage,
     type = MediaCategory.MOVIE
 )

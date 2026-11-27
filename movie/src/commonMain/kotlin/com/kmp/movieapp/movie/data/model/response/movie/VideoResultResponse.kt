@@ -1,11 +1,11 @@
-package com.kmp.movieapp.content_detail.data.model.api.response
+package com.kmp.movieapp.movie.data.model.response.movie
 
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class VideoResultDto(
+internal data class VideoResultResponse(
     @SerialName("id")
     val id: String? = null,
     @SerialName("iso_3166_1")
@@ -17,7 +17,7 @@ data class VideoResultDto(
     @SerialName("name")
     val name: String? = null,
     @SerialName("official")
-    val official: Boolean? = null,
+    val official: Boolean? = false,
     @SerialName("published_at")
     val publishedAt: String? = null,
     @SerialName("site")

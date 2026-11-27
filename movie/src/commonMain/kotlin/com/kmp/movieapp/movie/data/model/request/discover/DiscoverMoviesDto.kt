@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Resource("${UrlHelper.API_V3}/discover/movie")
-internal data class DiscoverMoviesRequest(
+internal data class FilterMoviesRequest(
     @SerialName("page")
     val page: Int = 1,
     @SerialName("language")

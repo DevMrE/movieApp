@@ -1,33 +1,25 @@
 package com.kmp.movieapp.content_detail.presentation.mapper
 
-import androidx.compose.ui.text.buildAnnotatedString
 import com.kmp.movieapp.content_detail.domain.model.ContentDetail
-import com.kmp.movieapp.content_detail.presentation.model.ContentDetailUi
-import com.kmp.movieapp.core.util.Constants
+import com.kmp.movieapp.content_detail.presentation.model.UiContentDetail
+import com.kmp.movieapp.content_detail.presentation.model.UiContentDetailState
 import com.kmp.movieapp.core.util.boolean.isFalse
-import com.kmp.movieapp.core.util.date.formatDateLocalized
-import com.kmp.movieapp.core.util.integer.toHourMinuteString
-import com.kmp.movieapp.core.util.string.toPrefixedString
 
-fun ContentDetail.toUiData(): ContentDetailUi = ContentDetailUi(
-    isLoading = title.isNotEmpty() && posterPath.isNullOrEmpty().isFalse && backdropPath.isNullOrEmpty().isFalse && overview.isNullOrEmpty().isFalse,
-    title = title,
-    mediaInfo = buildAnnotatedString {
-        releaseDate?.let { date ->
-            val formatedDate = formatDateLocalized(dateString = date, stringFormat = "yyyy")
-            append(formatedDate)
-        }
-
-        if (runtime != null) {
-            append(" ${Constants.BULLET_POINT} ${runtime.toHourMinuteString()}")
-        }
-
-        contentDetailGenres?.toPrefixedString(transform = { it.name }, separator = " | ")
-            ?.let {
-                append(it)
-            }
-    },
-    description = "$overview",
-    posterPath = "$posterPath",
-    videoThumbnail = "$backdropPath",
-)
+internal fun ContentDetail?.toUiData(): UiContentDetailState {
+    return if (this == null) UiContentDetailState()
+    else UiContentDetailState(
+        isLoading = info.title.localized.isNotEmpty()
+                && info.synopsis.isNullOrEmpty().isFalse
+                && images != null
+                && metadata != null,
+        uiContentDetail = UiContentDetail(
+            title = info.title.localized,
+            releaseDate = metadata?.releaseDate,
+            runtime = metadata?.runtime,
+            genres = metadata?.genres,
+            description = "${info.synopsis}",
+            posterPath = "${images?.posterPath}",
+            videoThumbnail = "${images?.backdropPath}",
+        )
+    )
+}

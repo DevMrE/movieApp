@@ -6,22 +6,21 @@ import com.kmp.movieapp.content_detail.domain.repository.ContentDetailRepository
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import com.kmp.movieapp.series.domain.repository.SeriesRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.mapNotNull
+import kotlinx.coroutines.flow.map
 
 internal class ContentDetailRepImpl(
     private val movieRepository: MovieRepository,
     private val seriesRepository: SeriesRepository,
 ) : ContentDetailRepository {
 
-    override suspend fun getMovieDetail(contentId: Int): Flow<ContentDetail> =
+    override suspend fun getMovieDetail(contentId: Int): Flow<ContentDetail?> =
         movieRepository.getMovieForId(contentId)
-            .mapNotNull {
-                it?.toContentDetail()
+            .map { movie ->
+                movie?.toContentDetail()
             }
 
-
-    override suspend fun getSeriesDetail(contentId: Int): Flow<ContentDetail> =
-        seriesRepository.getSerieForId(contentId).mapNotNull {
-            it.toContentDetail()
+    override suspend fun getSeriesDetail(contentId: Int): Flow<ContentDetail?> =
+        seriesRepository.getSerieForId(contentId).map {
+            it?.toContentDetail()
         }
 }

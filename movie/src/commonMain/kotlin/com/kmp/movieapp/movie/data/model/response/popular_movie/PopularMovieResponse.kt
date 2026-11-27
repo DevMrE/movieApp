@@ -1,35 +1,37 @@
-package com.kmp.movieapp.series.data.model.response.series_list
+package com.kmp.movieapp.movie.data.model.response.popular_movie
 
 import com.kmp.movieapp.core.network.model.Dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class SeriesResultDto(
+internal data class PopularMovieResponse(
+    @SerialName("adult")
+    val adult: Boolean? = null,
     @SerialName("backdrop_path")
     val backdropPath: String? = null,
-    @SerialName("first_air_date")
-    val firstAirDate: String? = null,
     @SerialName("genre_ids")
-    val genreIds: List<Int>? = null,
+    val genreIds: List<Long>? = emptyList(),
     @SerialName("id")
     val id: Int? = null,
-    @SerialName("name")
-    val name: String? = null,
-    @SerialName("origin_country")
-    val originCountry: List<String>? = null,
     @SerialName("original_language")
     val originalLanguage: String? = null,
-    @SerialName("original_name")
-    val originalName: String? = null,
+    @SerialName("original_title")
+    val originalTitle: String? = null,
     @SerialName("overview")
     val overview: String? = null,
     @SerialName("popularity")
     val popularity: Double? = null,
     @SerialName("poster_path")
     val posterPath: String? = null,
+    @SerialName("releaseDate")
+    val releaseDate: String? = null,
+    @SerialName("title")
+    val title: String? = null,
+    @SerialName("video")
+    val video: Boolean? = null,
     @SerialName("vote_average")
     val voteAverage: Double? = null,
     @SerialName("vote_count")
     val voteCount: Int? = null
-): Dto
+) : Dto

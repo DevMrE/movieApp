@@ -2,15 +2,13 @@ package com.kmp.movieapp.series.data.service
 
 import com.kmp.movieapp.core.network.http.HandleError
 import com.kmp.movieapp.core.network.model.ApiError
-import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.try_catch.handler
 import com.kmp.movieapp.core.util.try_catch.multiCatch
 import com.kmp.movieapp.series.data.model.request.series_detail.SeriesDetailRequestDto
 import com.kmp.movieapp.series.data.model.request.series_list.SeriesRequestDto
-import com.kmp.movieapp.series.data.model.response.series_detail.SeriesDetailDto
-import com.kmp.movieapp.series.data.model.response.series_list.SeriesResultDto
+import com.kmp.movieapp.series.data.model.response.series_detail.SeriesResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ResponseException
@@ -20,7 +18,7 @@ class SeriesServiceImpl(
     private val httpClient: HttpClient
 ) : SeriesService {
 
-    override suspend fun fetchPopularSeries(page: Int): Result<ApiResponseDto<SeriesResultDto>, ApiError> =
+    override suspend fun fetchPopularSeries(page: Int): Result<List<SeriesResponse>, ApiError> =
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(
@@ -29,18 +27,18 @@ class SeriesServiceImpl(
                     )
                 )
 
-                Result.Success(response.body<ApiResponseDto<SeriesResultDto>>())
+                Result.Success(response.body<List<SeriesResponse>>())
             },
-            handler<ResponseException, Result<ApiResponseDto<SeriesResultDto>, ApiError>> { e ->
+            handler<ResponseException, Result<List<SeriesResponse>, ApiError>> { e ->
                 HandleError.getResultForHttpStatus(e.response.status)
             },
-            handler<Exception, Result<ApiResponseDto<SeriesResultDto>, ApiError>> { e ->
+            handler<Exception, Result<List<SeriesResponse>, ApiError>> { e ->
                 logE<SeriesService>(message = "Error during fetchPopularSeries: ${e.message}")
                 HandleError.getResultForHttpStatus(null)
             }
         )
 
-    override suspend fun fetchSeriesForId(seriesId: Int): Result<SeriesDetailDto, ApiError> =
+    override suspend fun fetchSeriesForId(seriesId: Int): Result<SeriesResponse, ApiError> =
         multiCatch(
             tryBlock = {
                 val response = httpClient.get(
@@ -49,12 +47,12 @@ class SeriesServiceImpl(
                     )
                 )
 
-                Result.Success(response.body<SeriesDetailDto>())
+                Result.Success(response.body<SeriesResponse>())
             },
-            handler<ResponseException, Result<SeriesDetailDto, ApiError>> { e ->
+            handler<ResponseException, Result<SeriesResponse, ApiError>> { e ->
                 HandleError.getResultForHttpStatus(e.response.status)
             },
-            handler<Exception, Result<SeriesDetailDto, ApiError>> { e ->
+            handler<Exception, Result<SeriesResponse, ApiError>> { e ->
                 logE<SeriesService>(message = "Error during fetchSeriesForId: ${e.message}")
                 HandleError.getResultForHttpStatus(null)
             }

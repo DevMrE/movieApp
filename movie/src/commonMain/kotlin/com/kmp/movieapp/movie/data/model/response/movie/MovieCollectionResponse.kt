@@ -1,10 +1,10 @@
-package com.kmp.movieapp.content_detail.data.model.api.response
+package com.kmp.movieapp.movie.data.model.response.movie
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MovieCollection(
+data class MovieCollectionResponse(
     @SerialName("id")
     val id: Long? = null,
     @SerialName("name")

@@ -19,10 +19,10 @@ internal class MovieRepositoryImpl(
 
     override suspend fun getPopularMovies(page: Int): Flow<List<Movie>> = flow {
         movieApiService.fetchPopularMovies(page = page)
-            .onSuccess { data ->
-                data.results?.map { movieDto ->
+            .onSuccess { movieDtoList ->
+                movieDtoList.map { movieDto ->
                     movieDto.toMovie(genreRepository.movieGenres.value)
-                } ?: emptyList()
+                }
             }
             .onError { error ->
                 when (error.value) {
@@ -40,8 +40,8 @@ internal class MovieRepositoryImpl(
 
     override suspend fun getMovieForId(movieId: Int): Flow<Movie?> = flow {
         movieApiService.findMovieForId(movieId)
-            .onSuccess {
-                it.toMovie()
+            .onSuccess { movieDto ->
+                movieDto.toMovie()
             }
             .onError { error ->
                 when (error.value) {
@@ -59,10 +59,10 @@ internal class MovieRepositoryImpl(
 
     override suspend fun getDiscoveredMovies(page: Int): Flow<List<Movie>> = flow {
         movieApiService.fetchDiscoveredMovies(page = page)
-            .onSuccess { data ->
-                data.results?.map { movieDto ->
+            .onSuccess { movieResponseList ->
+                movieResponseList.map { movieDto ->
                     movieDto.toMovie()
-                } ?: emptyList()
+                }
             }
             .onError { error ->
                 when (error.value) {

@@ -2,6 +2,9 @@ package com.kmp.movieapp.content_detail.presentation.component.title
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -9,27 +12,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.kmp.movieapp.core.ui.imageloader.ImageLoader
 import com.kmp.movieapp.core.ui.material.gradient
+import com.kmp.movieapp.core.ui.material.mobileSize
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.boolean.isGreaterThan
 import com.kmp.movieapp.core.util.composable.applyIfElse
 import com.kmp.movieapp.core.util.composable.gradientOverlay
 
-internal fun LazyListScope.title(
-    title: String,
-    mediaInfo: AnnotatedString?,
+internal fun LazyListScope.contentImage(
     posterPath: String,
     onBackClicked: () -> Unit,
     isLoading: (Boolean) -> Unit,
 ) {
     item {
-        TitleContent(
-            title = title,
-            mediaInfo = mediaInfo,
+        ContentImage(
             posterPath = posterPath,
             onBackClicked = onBackClicked,
             isLoading = isLoading
@@ -38,19 +36,22 @@ internal fun LazyListScope.title(
 }
 
 @Composable
-private fun TitleContent(
-    title: String,
-    mediaInfo: AnnotatedString?,
+private fun ContentImage(
     posterPath: String,
     onBackClicked: () -> Unit,
-    isLoading: (Boolean) -> Unit,
+    isLoading: (Boolean) -> Unit
 
 ) {
-    Box {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(MaterialTheme.mobileSize.detailHeaderHeight)
+    ) {
         // Background poster
         ImageLoader(
             url = posterPath,
             modifier = Modifier
+                .heightIn(MaterialTheme.mobileSize.detailHeaderHeight)
                 .applyIfElse(
                     condition = isSystemInDarkTheme(),
                     ifTrue = {
@@ -60,7 +61,7 @@ private fun TitleContent(
                         gradientOverlay(MaterialTheme.gradient.detailCardLightMode)
                     }
                 ),
-            contentScale = ContentScale.FillWidth,
+            contentScale = ContentScale.Crop,
             loadingProgress = {
                 isLoading(it.isGreaterThan(0.0f))
             }
@@ -70,12 +71,6 @@ private fun TitleContent(
             modifier = Modifier.align(alignment = Alignment.TopStart),
             onBackClicked = onBackClicked
         )
-
-        MediaTitle(
-            modifier = Modifier.align(Alignment.BottomCenter),
-            title = title,
-            mediaInfo = mediaInfo,
-        )
     }
 }
 
@@ -84,11 +79,7 @@ private fun TitleContent(
 private fun DetailHeaderPreview() {
     AppTheme {
         Surface {
-            TitleContent(
-                title = "Movie",
-                mediaInfo = buildAnnotatedString {
-                    append("1997 \u2022 186")
-                },
+            ContentImage(
                 posterPath = "",
                 onBackClicked = {
                 }

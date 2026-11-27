@@ -6,10 +6,10 @@ import com.kmp.movieapp.search.domain.model.FilteredContent
 import com.kmp.movieapp.series.domain.model.Series
 
 internal fun Movie.toFilteredMovies() = FilteredContent(
-    title = movieInfo.title,
+    title = info.title,
     id = id,
-    posterPath = movieImage.posterPath,
-    backdropPath = movieImage.backdropPath,
+    posterPath = image.posterPath,
+    backdropPath = image.backdropPath,
     voteAverage = voteAverage ?: 0.0,
     type = MediaCategory.MOVIE,
 )

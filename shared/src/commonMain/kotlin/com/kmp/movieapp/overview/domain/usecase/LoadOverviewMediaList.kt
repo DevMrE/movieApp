@@ -22,9 +22,9 @@ internal class LoadOverviewMediaList(
             movieList.map { movie ->
                 OverViewMedia(
                     id = movie.id,
-                    title = movie.movieInfo.title,
-                    posterPath = movie.movieImage.posterPath,
-                    backdropPath = movie.movieImage.backdropPath,
+                    title = movie.info.title,
+                    posterPath = movie.image.posterPath,
+                    backdropPath = movie.image.backdropPath,
                     type = movie.type
                 )
             }

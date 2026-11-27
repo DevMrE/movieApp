@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Resource("${UrlHelper.API_V3}/movie/popular")
-internal data class MovieListRequest(
+internal data class PopularMovieRequest(
     val page: Int = 1,
 )
