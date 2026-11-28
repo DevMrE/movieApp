@@ -5,4 +5,6 @@
     <string name="movies">Film</string>
     <string name="actors">Schauspieler</string>
     <string name="content_type">%1$s: %2$s</string>
+    <string name="expand_text">Mehr anzeigen</string>
+    <string name="shrink_text">Weniger anzeigen</string>
 </resources>

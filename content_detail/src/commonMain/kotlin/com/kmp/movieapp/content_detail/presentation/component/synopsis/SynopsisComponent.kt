@@ -14,14 +14,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import com.kmp.movieapp.content_detail.Res
 import com.kmp.movieapp.content_detail.content_plot_title
-import com.kmp.movieapp.core.ui.theme.material.padding
+import com.kmp.movieapp.core.ui.component.text.ExpandableText
 import com.kmp.movieapp.core.ui.style.cardStyle
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.theme.vynoraColors
 import org.jetbrains.compose.resources.stringResource
 
@@ -36,9 +36,7 @@ internal fun Synopsis(
         modifier = Modifier.padding(MaterialTheme.padding.defaultContentPadding)
     ) {
         Card(
-            modifier = modifier.styleable(
-                style = cardStyle()
-            )
+            modifier = modifier.styleable(style = cardStyle())
         ) {
             Column(
                 modifier = Modifier.padding(MaterialTheme.padding.defaultContentPadding),
@@ -51,9 +49,8 @@ internal fun Synopsis(
                     style = MaterialTheme.typography.titleSmall
                 )
 
-                Text(
+                ExpandableText(
                     text = overview,
-                    textAlign = TextAlign.Justify,
                     color = MaterialTheme.vynoraColors.textSecondary,
                     style = MaterialTheme.typography.bodyMedium
                 )
