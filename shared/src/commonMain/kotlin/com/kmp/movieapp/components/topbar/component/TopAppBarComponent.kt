@@ -33,7 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.shared.Res
 import com.kmp.movieapp.shared.ic_arrow_left

@@ -8,8 +8,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.kmp.movieapp.components.mediacard.MediaCardComponent
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.model.UiMediaCard
 

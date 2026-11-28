@@ -3,7 +3,7 @@ package com.kmp.movieapp.discover.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devmre.compose.navigation3.helper.Navigator
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.core.util.viewmodel.stateInSubscribed
 import com.kmp.movieapp.discover.domain.GetDiscoverDataUseCase
 import com.kmp.movieapp.discover.presentation.mapper.initDiscoverSection

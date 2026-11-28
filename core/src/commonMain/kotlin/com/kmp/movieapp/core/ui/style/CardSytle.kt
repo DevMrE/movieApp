@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.ui.theme.vynoraColors
 

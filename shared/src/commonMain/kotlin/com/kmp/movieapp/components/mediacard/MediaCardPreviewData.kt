@@ -1,7 +1,7 @@
 package com.kmp.movieapp.components.mediacard
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.model.UiMediaCard
 
 class MovieCardPreviewData : PreviewParameterProvider<List<UiMediaCard>> {

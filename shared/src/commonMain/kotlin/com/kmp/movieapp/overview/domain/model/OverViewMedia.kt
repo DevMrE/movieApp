@@ -1,6 +1,6 @@
 package com.kmp.movieapp.overview.domain.model
 
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 
 internal data class OverViewMedia(
     val id: Int,

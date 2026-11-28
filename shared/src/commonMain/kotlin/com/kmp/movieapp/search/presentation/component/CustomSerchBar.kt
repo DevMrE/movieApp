@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.style.rememberStyleState
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.boolean.isTrue

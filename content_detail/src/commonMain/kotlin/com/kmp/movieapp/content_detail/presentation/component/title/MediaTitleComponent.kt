@@ -15,7 +15,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.ui.theme.vynoraColors
 

@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.ui.content.model
+package com.kmp.movieapp.core.util.mediaCategory
 
 enum class MediaCategory {
     UNKNOWN,

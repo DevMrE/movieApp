@@ -1,6 +1,6 @@
 package com.kmp.movieapp.movie.domain.model
 
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 
 data class Movie(
     val id: Int,

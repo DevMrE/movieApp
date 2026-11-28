@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.kmp.movieapp.content_detail.domain.usecase.GetContentDetailUseCase
 import com.kmp.movieapp.content_detail.presentation.mapper.toUiData
 import com.kmp.movieapp.content_detail.presentation.model.UiContentDetailState
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import kotlinx.coroutines.ExperimentalCoroutinesApi

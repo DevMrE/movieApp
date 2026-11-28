@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.ui.material
+package com.kmp.movieapp.core.ui.theme.material
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -8,12 +8,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 data class Padding(
-    val two: Dp = 2.dp,
-    val five: Dp = 5.dp,
+    val veryTiny: Dp = 2.dp,
+    val tiny: Dp = 5.dp,
     val six: Dp = 6.dp,
     val ten: Dp = 10.dp,
     val twelfth: Dp = 12.dp,
-    val fifteen: Dp = 15.dp,
     val sixteen: Dp = 16.dp,
     val twenty: Dp = 20.dp,
     val twentyFive: Dp = 25.dp,

@@ -1,6 +1,6 @@
 package com.kmp.movieapp.components.topbar.mapper
 
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.shared.Res
 import com.kmp.movieapp.shared.popular_movies_title
 import com.kmp.movieapp.shared.popular_series_title

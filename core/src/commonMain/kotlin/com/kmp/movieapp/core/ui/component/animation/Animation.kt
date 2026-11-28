@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.util.composable.animation
+package com.kmp.movieapp.core.ui.component.animation
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.FiniteAnimationSpec

@@ -15,8 +15,8 @@ import com.kmp.movieapp.components.mediacard.MediaCardComponent
 import com.kmp.movieapp.components.mediacard.MovieCardPreviewData
 import com.kmp.movieapp.components.topbar.component.TopAppBarComponent
 import com.kmp.movieapp.components.topbar.util.rememberTopBarConfig
-import com.kmp.movieapp.core.ui.container.ContentResultComponent
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.ui.component.container.ContentResultComponent
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.koin.koinComposableViewModel
 import com.kmp.movieapp.core.util.navigation.PreviewNavigation

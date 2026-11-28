@@ -27,8 +27,8 @@ import com.kmp.movieapp.content_detail.presentation.component.synopsis.Synopsis
 import com.kmp.movieapp.content_detail.presentation.component.title.ContentImage
 import com.kmp.movieapp.content_detail.presentation.component.title.TitleWithMetaInfos
 import com.kmp.movieapp.content_detail.presentation.formatter.toMetaInfoString
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.ui.theme.vynoraColors
 import com.kmp.movieapp.core.util.koin.koinComposableViewModel

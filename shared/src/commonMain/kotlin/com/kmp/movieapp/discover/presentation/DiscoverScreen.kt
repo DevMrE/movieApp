@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.kmp.movieapp.components.topbar.component.TopAppBarComponent
 import com.kmp.movieapp.components.topbar.util.rememberTopBarConfig
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.discover.presentation.component.DiscoverSectionComponent

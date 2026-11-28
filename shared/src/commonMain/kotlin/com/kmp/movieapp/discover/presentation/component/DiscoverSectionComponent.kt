@@ -21,10 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
-import com.kmp.movieapp.core.ui.material.mobileSize
-import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import com.kmp.movieapp.core.ui.theme.material.padding
+import com.kmp.movieapp.core.ui.theme.material.size.size
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.discover.presentation.DiscoverAction
 import com.kmp.movieapp.discover.presentation.model.DiscoverSection
 import com.kmp.movieapp.model.UiMediaCard
@@ -93,7 +93,7 @@ internal fun DiscoverSectionComponent(
             }
 
             item {
-                Spacer(Modifier.height(MaterialTheme.mobileSize.bottomBarHeight))
+                Spacer(Modifier.height(MaterialTheme.size.bottomBarHeight))
             }
         }
     }

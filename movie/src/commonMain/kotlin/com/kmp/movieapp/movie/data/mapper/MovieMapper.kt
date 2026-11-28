@@ -1,7 +1,7 @@
 package com.kmp.movieapp.movie.data.mapper
 
 import com.kmp.movieapp.core.network.url.UrlHelper
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.genre.domain.model.Genre
 import com.kmp.movieapp.movie.data.model.response.discover.FilterMovieResponse

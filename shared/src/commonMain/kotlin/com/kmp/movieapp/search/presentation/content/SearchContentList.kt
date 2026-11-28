@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.kmp.movieapp.components.mediacard.MediaCardComponent
-import com.kmp.movieapp.core.ui.container.ContentResultComponent
+import com.kmp.movieapp.core.ui.component.container.ContentResultComponent
 import com.kmp.movieapp.model.UiMediaCard
 
 @OptIn(ExperimentalMaterial3Api::class)

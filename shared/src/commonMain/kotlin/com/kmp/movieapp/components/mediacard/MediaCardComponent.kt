@@ -22,10 +22,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.kmp.movieapp.components.vote.VoteAverageComponent
 import com.kmp.movieapp.core.ui.imageloader.ImageLoader
-import com.kmp.movieapp.core.ui.material.gradient
-import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.core.ui.material.mobileSize
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import com.kmp.movieapp.core.ui.theme.material.gradient
+import com.kmp.movieapp.core.ui.theme.material.padding
+import com.kmp.movieapp.core.ui.theme.material.size.size
 import com.kmp.movieapp.core.util.composable.applyIf
 import com.kmp.movieapp.core.util.composable.applyIfElse
 import com.kmp.movieapp.core.util.composable.gradientOverlay
@@ -40,7 +40,7 @@ fun MediaCardComponent(
     posterPath: String?,
     enableGradient: Boolean = true,
     bigCard: Boolean = false,
-    height: Dp = MaterialTheme.mobileSize.defaultCardHeight,
+    height: Dp = MaterialTheme.size.defaultCardHeight,
     onClick: (() -> Unit)? = null,
 ) {
     Card(
@@ -50,10 +50,10 @@ fun MediaCardComponent(
             .applyIfElse(
                 condition = bigCard,
                 ifTrue = {
-                    width(MaterialTheme.mobileSize.movieBigCardWidth)
+                    width(MaterialTheme.size.movieBigCardWidth)
                 },
                 ifFalse = {
-                    width(MaterialTheme.mobileSize.defaultCardWidth)
+                    width(MaterialTheme.size.defaultCardWidth)
                 }
             )
             .dropShadow(
@@ -98,7 +98,7 @@ fun MediaCardComponent(
                 modifier = Modifier
                     .align(Alignment.BottomStart)
                     .padding(
-                        horizontal = MaterialTheme.padding.fifteen,
+                        horizontal = MaterialTheme.padding.sixteen,
                         vertical = MaterialTheme.padding.twentyFive
                     ),
                 maxLines = 2,

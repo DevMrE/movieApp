@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import com.kmp.movieapp.content_detail.Res
 import com.kmp.movieapp.content_detail.ic_play_button
 import com.kmp.movieapp.content_detail.play_button
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 

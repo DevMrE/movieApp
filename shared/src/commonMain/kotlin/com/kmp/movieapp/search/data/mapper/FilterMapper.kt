@@ -1,6 +1,6 @@
 package com.kmp.movieapp.search.data.mapper
 
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.movie.domain.model.Movie
 import com.kmp.movieapp.search.domain.model.FilteredContent
 import com.kmp.movieapp.series.domain.model.Series

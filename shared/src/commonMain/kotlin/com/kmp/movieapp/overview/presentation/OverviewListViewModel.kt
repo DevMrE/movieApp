@@ -1,7 +1,7 @@
 package com.kmp.movieapp.overview.presentation
 
 import androidx.lifecycle.ViewModel
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.core.util.viewmodel.stateInEagerly
 import com.kmp.movieapp.overview.domain.model.OverViewMedia
 import com.kmp.movieapp.overview.domain.usecase.LoadOverviewMediaList

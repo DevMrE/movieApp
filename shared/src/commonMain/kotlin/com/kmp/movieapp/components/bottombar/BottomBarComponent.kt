@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.devmre.compose.navigation3.helper.koinNavigation
 import com.kmp.movieapp.components.bottombar.model.BottomBarItem
 import com.kmp.movieapp.components.bottombar.navigation.BottomBarRoute
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.discover.presentation.navigation.DiscoverRoute
 import com.kmp.movieapp.search.presentation.navigation.SearchRoute

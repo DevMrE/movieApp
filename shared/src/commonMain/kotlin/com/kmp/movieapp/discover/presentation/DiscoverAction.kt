@@ -1,6 +1,6 @@
 package com.kmp.movieapp.discover.presentation
 
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 
 internal sealed interface DiscoverAction {
 

@@ -9,9 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material.Scaffold
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,7 +22,7 @@ import com.kmp.movieapp.components.bottombar.navigation.BottomBarRoute
 import com.kmp.movieapp.components.topbar.component.TopAppBarComponent
 import com.kmp.movieapp.components.topbar.util.rememberTopBarConfig
 import com.kmp.movieapp.core.ui.imageloader.MediaImage
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.permission.model.Permission
 import com.kmp.movieapp.permission.model.PermissionDemoResult
 import com.kmp.movieapp.shared.Res

@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.ui.container
+package com.kmp.movieapp.core.ui.component.container
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,7 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 
 @Composable
 fun <T> ContentResultComponent(

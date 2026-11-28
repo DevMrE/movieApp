@@ -19,7 +19,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import com.kmp.movieapp.content_detail.Res
 import com.kmp.movieapp.content_detail.content_plot_title
-import com.kmp.movieapp.core.ui.material.padding
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.ui.style.cardStyle
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.ui.theme.vynoraColors

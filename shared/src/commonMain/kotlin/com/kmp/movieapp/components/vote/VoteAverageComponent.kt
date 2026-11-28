@@ -16,9 +16,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.core.ui.material.padding
-import com.kmp.movieapp.core.ui.material.mobileSize
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import com.kmp.movieapp.core.ui.theme.material.padding
+import com.kmp.movieapp.core.ui.theme.material.size.size
 import com.kmp.movieapp.core.util.double.roundTo
 import com.kmp.movieapp.shared.Res
 import com.kmp.movieapp.shared.ic_star
@@ -47,7 +47,7 @@ fun VoteAverageComponent(
         Icon(
             imageVector = vectorResource(Res.drawable.ic_star),
             contentDescription = null,
-            modifier = Modifier.size(MaterialTheme.mobileSize.voteAverageIconSize),
+            modifier = Modifier.size(MaterialTheme.size.voteAverageIconSize),
             tint = MaterialTheme.colorScheme.primary
         )
 

@@ -1,6 +1,6 @@
 package com.kmp.movieapp.overview.domain.usecase
 
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import com.kmp.movieapp.core.util.logger.logI
 import com.kmp.movieapp.movie.domain.repository.MovieRepository
 import com.kmp.movieapp.overview.domain.model.OverViewMedia

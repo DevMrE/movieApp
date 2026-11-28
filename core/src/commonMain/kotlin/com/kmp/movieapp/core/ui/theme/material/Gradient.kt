@@ -1,4 +1,4 @@
-package com.kmp.movieapp.core.ui.material
+package com.kmp.movieapp.core.ui.theme.material
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

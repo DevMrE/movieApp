@@ -1,7 +1,7 @@
 package com.kmp.movieapp.discover.presentation.navigation
 
 import androidx.navigation3.runtime.NavKey
-import com.kmp.movieapp.core.ui.content.model.MediaCategory
+import com.kmp.movieapp.core.util.mediaCategory.MediaCategory
 import kotlinx.serialization.Serializable
 
 @Serializable

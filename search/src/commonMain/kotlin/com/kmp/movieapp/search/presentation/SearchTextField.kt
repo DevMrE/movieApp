@@ -16,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.kmp.movieapp.core.ui.material.padding
 import com.kmp.movieapp.core.ui.theme.AppTheme
+import com.kmp.movieapp.core.ui.theme.material.padding
 import com.kmp.movieapp.core.util.boolean.isFalse
 import com.kmp.movieapp.search.Res
 import com.kmp.movieapp.search.ic_close
@@ -86,7 +86,7 @@ private fun SearchTextFieldPreview() {
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.background)
                 .padding(
-                    horizontal = MaterialTheme.padding.ten,
+                    horizontal = MaterialTheme.padding.twelfth,
                     vertical = MaterialTheme.padding.eighty
                 )
         ) {
