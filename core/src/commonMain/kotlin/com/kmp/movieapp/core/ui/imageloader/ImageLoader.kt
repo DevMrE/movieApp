@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalInspectionMode
 import com.kmp.movieapp.core.Res
 import com.kmp.movieapp.core.media_item_not_found
 import io.kamel.image.KamelImage
@@ -22,6 +23,16 @@ fun ImageLoader(
     loadingProgress: (Float) -> Unit,
     loadingContent: (@Composable (Modifier) -> Unit)? = null,
 ) {
+    val isPreview = LocalInspectionMode.current
+
+    if (isPreview) {
+        return Image(
+            painter = painterResource(Res.drawable.media_item_not_found),
+            contentDescription = null,
+            modifier = modifier,
+            contentScale = contentScale
+        )
+    }
 
     if (url.isNotEmpty()) {
         KamelImage(

@@ -1,5 +1,12 @@
 package com.kmp.movieapp.discover.di
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.animation.togetherWith
+import androidx.navigation3.ui.NavDisplay
 import com.devmre.compose.navigation3.helper.Navigator
 import com.devmre.compose.navigation3.helper.RegisterNavigationGraph
 import com.devmre.compose.navigation3.helper.koinNavigation
@@ -52,7 +59,17 @@ val discoverNavigationModule = module {
     }
 
     navigation<DiscoverRoute.ContentDetailRoute>(
-        metadata = NavigationScreenAnimation.bottomSheetTransitions()
+        metadata = NavDisplay.transitionSpec {
+            slideInVertically(
+                initialOffsetY = { it },
+                animationSpec = tween(400),
+            ) togetherWith ExitTransition.KeepUntilTransitionsFinished
+        } + NavDisplay.popTransitionSpec {
+            EnterTransition.None togetherWith slideOutVertically(
+                targetOffsetY = { it },
+                animationSpec = tween(400),
+            )
+        }
     ) { data ->
         val navigation =
             get<Navigator<DiscoverRoute>>(qualifier = navigatorQualifier<DiscoverRoute>())

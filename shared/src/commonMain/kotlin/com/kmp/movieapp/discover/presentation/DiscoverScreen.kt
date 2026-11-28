@@ -1,39 +1,49 @@
 package com.kmp.movieapp.discover.presentation
 
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.kmp.movieapp.components.topbar.component.TopAppBarComponent
+import com.kmp.movieapp.components.topbar.util.rememberTopBarConfig
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
 import com.kmp.movieapp.core.util.boolean.isTrue
 import com.kmp.movieapp.discover.presentation.component.DiscoverSectionComponent
 import com.kmp.movieapp.discover.presentation.model.DiscoverSection
 import com.kmp.movieapp.discover.presentation.model.DiscoverUiState
+import com.kmp.movieapp.discover.presentation.navigation.DiscoverRoute
 import com.kmp.movieapp.model.UiMediaCard
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 internal fun DiscoverScreen() {
     val viewModel: DiscoverScreenViewModel = koinViewModel()
     val uiState by viewModel.movieScreenState.collectAsStateWithLifecycle()
+    val topBarConfig = rememberTopBarConfig<DiscoverRoute>()
 
-    DiscoverScreenContent(
-        uiState = uiState,
-        onAction = viewModel::onAction
-    )
-}
+    Scaffold(
+        topBar = {
+            topBarConfig.title?.let {
+                TopAppBarComponent(
+                    title = stringResource(it),
+                    onBackClick = topBarConfig.onBackClick
+                )
+            }
+        }
+    ) { paddingValues ->
 
-@Composable
-private fun DiscoverScreenContent(
-    uiState: DiscoverUiState,
-    onAction: (DiscoverAction) -> Unit
-) {
-    DiscoverSectionComponent(
-        refresh = uiState.isLoading.isTrue,
-        contentList = uiState.contentSections,
-        onAction = onAction
-    )
+        DiscoverSectionComponent(
+            refresh = uiState.isLoading.isTrue,
+            contentList = uiState.contentSections,
+            modifier = Modifier.padding(paddingValues),
+            onAction = viewModel::onAction
+        )
+    }
 }
 
 @PreviewLightDark
@@ -82,10 +92,9 @@ private fun DiscoverScreenPreview() {
     )
 
     AppTheme {
-        DiscoverScreenContent(
-            uiState = uiState
-        ) {
-
-        }
+        DiscoverSectionComponent(
+            refresh = false,
+            contentList = uiState.contentSections
+        ) {}
     }
 }

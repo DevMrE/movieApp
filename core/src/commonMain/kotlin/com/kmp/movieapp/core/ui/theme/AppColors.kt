@@ -1,9 +1,62 @@
 package com.kmp.movieapp.core.ui.theme
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
+@Immutable
+data class VynoraColors(
+    val background: Color,
+    val surface: Color,
+    val surfaceElevated: Color,
+    val accent: Color,
+    val accentContainer: Color,
+    val textPrimary: Color,
+    val textSecondary: Color,
+    val posterScrim: Color,
+    val border: Color,
+    val textAccent: Color,
+)
+
+val LightColors = VynoraColors(
+    background = Color(0xFFFAF8FF),
+    surface = Color(0xFFFFFFFF),
+    surfaceElevated = Color(0xFFF1F5F9),
+    accent = Color(0xFF855300),
+    accentContainer = Color(0xFFF59E0B),
+    textPrimary = Color(0xFF191625),
+    textSecondary = Color(0xFF625E70),
+    textAccent = Color(0xFFFFC174),
+    posterScrim = Color(0x66000000),
+    border = Color(0xFF625E70).copy(alpha = 0.3f),
+)
+
+val DarkColors = VynoraColors(
+    background = Color(0xFF0F131C),
+    surface = Color(0xFF1C2028),
+    surfaceElevated = Color(0xFF262A33),
+    accent = Color(0xFFFFC174),
+    accentContainer = Color(0xFFF59E0B),
+    textPrimary = Color(0xFFDFE2EE),
+    textSecondary = Color(0xFFD8C3AD),
+    textAccent = Color(0x99000000),
+    posterScrim = Color(0x66000000),
+    border = Color(0xFFD8C3AD).copy(alpha = 0.3f),
+)
+
+val LocalVynoraColors = staticCompositionLocalOf {
+    DarkColors
+}
+
+val MaterialTheme.vynoraColors: VynoraColors
+    @Composable
+    @ReadOnlyComposable
+    get() = LocalVynoraColors.current
 
 val LightColorScheme = lightColorScheme(
     primary = Color(0xFF855300),
@@ -21,7 +74,7 @@ val LightColorScheme = lightColorScheme(
     tertiaryContainer = Color(0xFFFF9837),
     onTertiaryContainer = Color(0xFF6A3700),
 
-    background = Color(0xFFFAF8FF),
+    background = Color(0xFFF8FAFC),
     onBackground = Color(0xFF0F172A),
 
     surface = Color(0xFFFFFFFF),
@@ -86,7 +139,7 @@ val DarkColorScheme = darkColorScheme(
     background = Color(0xFF0F131C),
     onBackground = Color(0xFFDFE2EE),
 
-    surface = Color(0xFF0F131C),
+    surface = Color(0xFF1C2028),
     onSurface = Color(0xFFDFE2EE),
     surfaceVariant = Color(0xFF31353E),
     onSurfaceVariant = Color(0xFFD8C3AD),

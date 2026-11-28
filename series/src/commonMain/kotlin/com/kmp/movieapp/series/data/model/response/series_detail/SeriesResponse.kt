@@ -1,6 +1,7 @@
 package com.kmp.movieapp.series.data.model.response.series_detail
 
 
+import com.kmp.movieapp.core.network.model.Dto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -70,4 +71,4 @@ data class SeriesResponse(
     val voteAverage: Double? = null,
     @SerialName("vote_count")
     val voteCount: Int? = null
-)
+): Dto

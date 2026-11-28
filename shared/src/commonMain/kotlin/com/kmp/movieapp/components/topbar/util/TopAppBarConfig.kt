@@ -4,9 +4,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.NavKey
-import com.devmre.compose.navigation3.helper.Navigator
+import com.devmre.compose.navigation3.helper.koinNavigation
 import org.jetbrains.compose.resources.StringResource
+import org.koin.compose.getKoin
+import org.koin.compose.navigation3.koinEntryProvider
 import org.koin.core.Koin
+import org.koin.core.annotation.KoinExperimentalAPI
 
 data class TopBarConfig(
     val title: StringResource? = null,
@@ -34,12 +37,12 @@ fun NavEntry<*>.topBarConfig(key: Any?, koin: Koin): TopBarConfig =
         ?.let { resolver -> key?.let { resolver.resolve(it, koin) } }
         ?: TopBarConfig()
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
-fun <T : NavKey> rememberTopBarConfig(
-    navigator: Navigator<T>,
-    entryProvider: (T) -> NavEntry<T>,
-    koin: Koin,
-): TopBarConfig {
+inline fun <reified T : NavKey> rememberTopBarConfig(): TopBarConfig {
+    val koin = getKoin()
+    val navigator = koinNavigation<T>()
+    val entryProvider = koinEntryProvider<T>()
     val key = navigator.backStack.lastOrNull()
 
     return remember(key) {

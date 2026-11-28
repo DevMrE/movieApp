@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -38,21 +39,31 @@ import org.jetbrains.compose.resources.stringResource
 internal fun DiscoverSectionComponent(
     refresh: Boolean,
     contentList: Set<DiscoverSection>?,
+    modifier: Modifier = Modifier,
     onAction: (DiscoverAction) -> Unit
 ) {
     PullToRefreshBox(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background),
         isRefreshing = refresh,
         onRefresh = { onAction(DiscoverAction.OnRefresh) }
     ) {
         LazyColumn(
-            modifier = Modifier,
+            modifier = Modifier
+                .captionBarPadding(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.thirty),
             contentPadding = PaddingValues(vertical = MaterialTheme.padding.thirty)
         ) {
+//            item {
+//                Spacer(
+//                    Modifier//.systemBarsPadding()
+//                        .captionBarPadding()
+//                        .height(MaterialTheme.padding.defaultContentPadding)
+//                )
+//            }
+
             contentList?.forEach { section ->
                 when (section) {
                     is DiscoverSection.Trending ->

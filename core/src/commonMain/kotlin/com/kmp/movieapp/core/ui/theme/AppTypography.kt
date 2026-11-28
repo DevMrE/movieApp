@@ -42,17 +42,23 @@ fun appTypography(): Typography {
             hyphens = Hyphens.Auto,
             color = MaterialTheme.colorScheme.surface
         ),
-        titleMedium = TextStyle(
-            fontSize = 18.sp,
-            fontWeight = FontWeight.SemiBold,
-            fontFamily = jakartaFamily,
-            lineHeight = 24.sp,
-        ),
         titleLarge = TextStyle(
             fontSize = 38.sp,
             fontWeight = FontWeight.Black,
             fontFamily = jakartaFamily,
             lineHeight = 40.sp,
+        ),
+        titleMedium = TextStyle(
+            fontSize = 32.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = jakartaFamily,
+            lineHeight = 34.sp,
+        ),
+        titleSmall = TextStyle(
+            fontSize = 28.sp,
+            fontWeight = FontWeight.SemiBold,
+            fontFamily = jakartaFamily,
+            lineHeight = 30.sp,
         ),
         bodyLarge = TextStyle(
             fontSize = 20.sp,

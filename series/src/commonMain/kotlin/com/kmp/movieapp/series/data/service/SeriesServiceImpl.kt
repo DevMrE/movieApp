@@ -2,6 +2,7 @@ package com.kmp.movieapp.series.data.service
 
 import com.kmp.movieapp.core.network.http.HandleError
 import com.kmp.movieapp.core.network.model.ApiError
+import com.kmp.movieapp.core.network.model.ApiResponseDto
 import com.kmp.movieapp.core.network.util.Result
 import com.kmp.movieapp.core.util.logger.logE
 import com.kmp.movieapp.core.util.try_catch.handler
@@ -21,13 +22,11 @@ class SeriesServiceImpl(
     override suspend fun fetchPopularSeries(page: Int): Result<List<SeriesResponse>, ApiError> =
         multiCatch(
             tryBlock = {
-                val response = httpClient.get(
-                    resource = SeriesRequestDto(
-                        page = page
-                    )
-                )
+                val response = httpClient.get(resource = SeriesRequestDto(page = page))
+                val bodyData = checkNotNull(response.body<ApiResponseDto<SeriesResponse>>())
+                val seriesList = checkNotNull(bodyData.results)
 
-                Result.Success(response.body<List<SeriesResponse>>())
+                Result.Success(seriesList)
             },
             handler<ResponseException, Result<List<SeriesResponse>, ApiError>> { e ->
                 HandleError.getResultForHttpStatus(e.response.status)

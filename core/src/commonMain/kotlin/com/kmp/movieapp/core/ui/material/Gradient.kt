@@ -43,8 +43,35 @@ data class Gradient(
             LightColorScheme.background.copy(alpha = 1f),
         ),
         tileMode = TileMode.Decal
-    ),
+    )
 )
+
+fun dynamicColorBrushFromDownToUp(color: Color): Brush {
+    return Brush.verticalGradient(
+        colors = listOf(
+            color.copy(alpha = 0.5f),
+            color.copy(alpha = 0.3f),
+            color.copy(alpha = 0.0f),
+            color.copy(alpha = 0.0f),
+            color.copy(alpha = 0.0f),
+        ),
+        tileMode = TileMode.Decal
+    )
+}
+
+fun dynamicColorBrushFromUpToDown(color: Color): Brush {
+    return Brush.verticalGradient(
+        colors = listOf(
+            color.copy(alpha = 1f),
+            color.copy(alpha = 0.8f),
+            color.copy(alpha = 0.5f),
+            color.copy(alpha = 0.3f),
+            color.copy(alpha = 0.1f),
+        ),
+        tileMode = TileMode.Decal
+    )
+}
+
 
 private val LocalGradient = staticCompositionLocalOf { Gradient() }
 

@@ -29,7 +29,7 @@ val searchNavigationModule = module {
     }
 
     navigation<SearchRoute.ContentDetailRoute>(
-        metadata = NavigationScreenAnimation.bottomSheetTransitions(),
+        metadata = NavigationScreenAnimation.slidInAndOutTransition(),
     ) { data ->
         val navigation = get<Navigator<SearchRoute>>(qualifier = navigatorQualifier<SearchRoute>())
 

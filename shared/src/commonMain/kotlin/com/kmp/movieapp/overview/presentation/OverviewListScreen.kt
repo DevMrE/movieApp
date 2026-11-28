@@ -1,8 +1,11 @@
 package com.kmp.movieapp.overview.presentation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -10,6 +13,8 @@ import androidx.navigation3.runtime.NavKey
 import com.devmre.compose.navigation3.helper.Navigator
 import com.kmp.movieapp.components.mediacard.MediaCardComponent
 import com.kmp.movieapp.components.mediacard.MovieCardPreviewData
+import com.kmp.movieapp.components.topbar.component.TopAppBarComponent
+import com.kmp.movieapp.components.topbar.util.rememberTopBarConfig
 import com.kmp.movieapp.core.ui.container.ContentResultComponent
 import com.kmp.movieapp.core.ui.content.model.MediaCategory
 import com.kmp.movieapp.core.ui.theme.AppTheme
@@ -17,8 +22,11 @@ import com.kmp.movieapp.core.util.koin.koinComposableViewModel
 import com.kmp.movieapp.core.util.navigation.PreviewNavigation
 import com.kmp.movieapp.discover.presentation.navigation.DiscoverRoute
 import com.kmp.movieapp.model.UiMediaCard
+import org.jetbrains.compose.resources.stringResource
+import org.koin.core.annotation.KoinExperimentalAPI
 import org.koin.core.parameter.parametersOf
 
+@OptIn(KoinExperimentalAPI::class)
 @Composable
 fun OverviewListScreen(
     mediaCategory: MediaCategory,
@@ -30,17 +38,33 @@ fun OverviewListScreen(
     )
     val uiState by viewModel.overviewUiState.collectAsStateWithLifecycle()
 
-    OverviewListContent(
-        navigator = navigator,
-        uiState = uiState,
-        loadNextItems = viewModel::loadNextItems
-    )
+    val topBarConfig = rememberTopBarConfig<DiscoverRoute>()
+
+    Scaffold(
+        topBar = {
+            topBarConfig.title?.let {
+                TopAppBarComponent(
+                    title = stringResource(it),
+                    onBackClick = topBarConfig.onBackClick
+                )
+            }
+        }
+    ) { paddingValues ->
+
+        OverviewListContent(
+            navigator = navigator,
+            uiState = uiState,
+            modifier = Modifier.padding(paddingValues),
+            loadNextItems = viewModel::loadNextItems
+        )
+    }
 }
 
 @Composable
 private fun <T : NavKey> OverviewListContent(
     navigator: Navigator<T>,
     uiState: OverviewUiState,
+    modifier: Modifier = Modifier,
     loadNextItems: () -> Unit
 ) {
     val lazyGridState = rememberLazyGridState()
@@ -48,6 +72,7 @@ private fun <T : NavKey> OverviewListContent(
     ContentResultComponent(
         items = uiState.contentList,
         lazyGridState = lazyGridState,
+        modifier = modifier,
         loadNextItems = {
             loadNextItems()
         },
